@@ -1,12 +1,22 @@
 @import url('./cairo.css');
-@import url('./amiri.css');
+@import url('./Ruqaa.css');
 
 
 body {
 	direction: rtl;
+	font-family: 'Aref Ruqaa', sans-serif;
+	font-weight: 700px;
+	font-size: 17px;
 }
 
 #admin_nav {
-	font: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif;
+	font-weight: 700px;
+	font-size: 16px;
+}
+
+#admin_content {
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 16px;
 	font-weight: bold;
 }

@@ -1,6 +1,9 @@
 @extends('layouts/adminPanel')
 
-@section('content')
+@section('heading')
 الرئيسية
+@endsection
 
+@section('content')
+مرحبا بك فى لوحة التحكم.
 @endsection

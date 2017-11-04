@@ -22,7 +22,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-inverse navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
 
@@ -77,11 +77,14 @@
                 <div class="col-md-4">
                     @include('admin/adminNav')
                 </div>
-                <div class="col-md-8">
+                <div id="admin_content" class="col-md-8">
                     <div class="panel panel-default">
-                      <div class="panel-body">
+                        <div class="panel-heading">
+                            @yield('heading')
+                        </div>
+                        <div class="panel-body">
                             @yield('content')
-                      </div>
+                        </div>
                     </div>
                     
                 </div>
