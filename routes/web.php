@@ -18,3 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+route::group(['prefix' => 'admincp', ['middleware' => 'auth']], function(){
+
+route::view('/', 'admin/adminIndex');
+
+});

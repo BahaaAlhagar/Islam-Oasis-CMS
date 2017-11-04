@@ -1,0 +1,12 @@
+@import url('./cairo.css');
+@import url('./amiri.css');
+
+
+body {
+	direction: rtl;
+}
+
+#admin_nav {
+	font: 'Cairo', sans-serif;
+	font-weight: bold;
+}
