@@ -1,0 +1,216 @@
+@import url('./cairo.css');
+@import url('./amiri.css');
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin top by navbar height */
+  margin-top: 70px;
+  /* Margin bottom by footer height */
+  margin-bottom: 30px;
+  /* right to left addon */
+  direction: rtl;
+  font-size: 16px;
+  font-family: sans-serif, arial;
+}
+
+.footer {
+  position: absolute;
+  float: left;
+  text-align: center;
+  direction: ltr;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 30px;
+  padding-top: 5px;
+  background-color: black;
+  color: white;
+  margin-top: 150px;
+}
+
+.spacer {
+height: 60px;
+background: transparent;
+}
+
+#navigation-menu {
+	font-weight: 700;
+  font-family: 'Cairo', sans-serif;
+  font-size: 14px;
+}
+
+
+table {
+  text-align: center;
+  width: 100%;
+  margin:0 auto;
+  font-weight: bold;
+  table-layout: fixed;
+  word-wrap: break-word;
+  overflow: auto;
+}
+
+table caption {
+  text-align: center;
+  color: brown;
+}
+
+table th {
+  text-align: center;
+  max-width: 350px;
+}
+
+table td {
+  text-align: center;
+  max-width: 350px;
+}
+
+table a {
+  color: black;
+}
+
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.blue {
+  color: blue;
+}
+
+.brown {
+  color: brown;
+}
+
+textarea {
+  resize: none;
+}
+
+
+td ul li {
+  list-style-type:none;
+  margin: 25px;
+}
+
+
+.btn {
+  font-weight: bold;
+  margin: 0 5px;
+}
+
+.heading {
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Amiri', sans-serif, arial;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.modal {
+  font-weight: bold;
+}
+
+/**
+ * Panels
+ */
+/*** General styles ***/
+.card {
+  box-shadow: none;
+  margin-bottom: 15px;
+}
+.card-header {
+  border-bottom: 0;
+}
+.panel-body *:first-child {
+  margin-top: 0;
+}
+.card-footer {
+  border-top: 0;
+}
+
+.modal-header{
+  direction: ltr !important;
+}
+
+
+#seach_panel {
+  margin: 15px auto;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+
+/*about developer modal*/
+#aboutDeveloperModal{
+  color: black;
+  background-color: transparent;
+  font-size: 10px;
+  direction: rtl;
+}
+
+.social-icons {
+  font-size: 30px;
+  margin-top: 10px;
+}
+.social-icons .git {
+  color: black;
+  cursor: pointer;
+  margin: 0 10px;
+}
+.social-icons .twitter {
+  color: #19C4FF;
+  cursor: pointer;
+  margin: 0 10px;
+}
+.social-icons .facebook {
+  color: #49649F;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.social-icons a:hover {
+  color: transparent;
+}
+
+
+#biography {
+  font-family: 'cairo', sans-serif;
+  font-size: 12px;
+}
+
+
+@media print {
+
+  .spacer {
+    display: none !important;
+  }
+
+  table td, table th {
+    font-size: 14px !important; 
+  }
+
+  .heading {
+    font-size: 12px !important;
+  }
+
+  .card-title {
+    font-size: 14px !important;
+  }
+
+  .print-hidden {
+    display: none !important;
+  }
+
+  .btn {
+    display: none !important;
+  }
+}
