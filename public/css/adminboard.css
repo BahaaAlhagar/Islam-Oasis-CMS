@@ -20,3 +20,56 @@ body {
 	font-size: 16px;
 	font-weight: bold;
 }
+
+.footer {
+  position: absolute;
+  float: left;
+  text-align: center;
+  direction: ltr;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 30px;
+  padding-top: 5px;
+  background-color: black;
+  color: white;
+  margin-top: 150px;
+}
+
+/*about developer modal*/
+#aboutDeveloperModal{
+  color: black;
+  background-color: transparent;
+  font-size: 10px;
+  direction: rtl;
+}
+
+.social-icons {
+  font-size: 30px;
+  margin-top: 10px;
+}
+.social-icons .git {
+  color: black;
+  cursor: pointer;
+  margin: 0 10px;
+}
+.social-icons .twitter {
+  color: #19C4FF;
+  cursor: pointer;
+  margin: 0 10px;
+}
+.social-icons .facebook {
+  color: #49649F;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.social-icons a:hover {
+  color: transparent;
+}
+
+
+#biography {
+  font-family: 'cairo', sans-serif;
+  font-size: 12px;
+}

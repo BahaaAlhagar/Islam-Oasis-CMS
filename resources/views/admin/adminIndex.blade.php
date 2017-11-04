@@ -1,5 +1,7 @@
 @extends('layouts/adminPanel')
 
+@section('title', 'الرئيسية')
+
 @section('heading')
 الرئيسية
 @endsection

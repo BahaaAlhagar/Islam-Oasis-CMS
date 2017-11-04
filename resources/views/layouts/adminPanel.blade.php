@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }} - لوحة التحكم</title>
+    <title>{{ config('app.name', 'Laravel') }} - لوحة التحكم - @yield('title')</title>
 
     <!-- Styles -->
     <!-- font awesome -->
@@ -114,5 +114,55 @@
     <script src="{{ URL::asset('js/vendor.js') }}"></script> -->
 
     @yield('js')
+
+
+    <div id="footer_container">
+    @yield('footer')
+        <footer class="footer print-hidden">
+          <b>&copy; Copyright 2017 by <a href="#aboutModal" data-toggle="modal" data-target="#aboutDeveloperModal">Bahaa Alhagar</a>.</b>
+
+              <!-- about developer modal -->
+              <div class="modal fade" id="aboutDeveloperModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title" id="myModalLabel">عن المبرمج</h4>
+                            </div>
+                        <div class="modal-body">
+                            <center>
+                            <img src="{{ Storage::url('pic.jpg') }}" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
+                            <h3 class="media-heading"><b>Bahaa Alhagar</b></h3>
+                            <span class="social-icons">
+                            <a href="https://github.com/BahaaAlhagar" target="_blank">
+                                <li class="fa fa-github-alt git"></li>
+                            </a>
+                            <a href="https://twitter.com/bahaa_alhagar" target="_blank">
+                              <li class="twitter fa fa-twitter"></li>
+                            </a>
+                            <a href="https://www.facebook.com/BahaaAlhagar14" target="_blank">
+                              <li class="facebook fa fa-facebook"></li>
+                            </a>
+                            </span>
+                              
+                            </center>
+                            <hr>
+                            <center>
+                            <p id="biography" class="text-right"><strong>السيرة الذاتية: </strong><br>
+                                بهاء الحجر, من مصر, مطور تطبيقات ويب.<br>
+                                مهتم بتطوير مواقع الانترنت و كل ما يخص الحاسوب.
+                                </p>
+                            </center>
+                        </div>
+                        <div class="modal-footer">
+                            <center>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">اغلاق</button>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>
