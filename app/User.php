@@ -32,4 +32,9 @@ class User extends Authenticatable
     {
         return $this->group_id == 5;
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

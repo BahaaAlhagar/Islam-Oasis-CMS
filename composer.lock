@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1c4b3385988e0e9c86dff85b613301fb",
-    "content-hash": "9d2b741bf7b55108624612da04e158f7",
+    "hash": "7e34a3737b6571f4e93488db4a997095",
+    "content-hash": "014b538fcea009382623b0dc9e6b6e88",
     "packages": [
         {
             "name": "dimsav/laravel-translatable",
@@ -1311,6 +1311,55 @@
                 "uuid"
             ],
             "time": "2017-09-22 20:46:04"
+        },
+        {
+            "name": "spatie/laravel-sluggable",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-sluggable.git",
+                "reference": "2d907c0e1d43b75e97968cdcd2f77d76cff543a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-sluggable/zipball/2d907c0e1d43b75e97968cdcd2f77d76cff543a2",
+                "reference": "2d907c0e1d43b75e97968cdcd2f77d76cff543a2",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "~5.5.0",
+                "illuminate/support": "~5.5.0",
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~3.5.0",
+                "phpunit/phpunit": "^6.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Sluggable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Generate slugs when saving Eloquent models",
+            "homepage": "https://github.com/spatie/laravel-sluggable",
+            "keywords": [
+                "laravel-sluggable",
+                "spatie"
+            ],
+            "time": "2017-09-13 16:56:50"
         },
         {
             "name": "swiftmailer/swiftmailer",
