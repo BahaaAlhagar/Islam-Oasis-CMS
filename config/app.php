@@ -172,6 +172,8 @@ return [
         // Dimsav Translation Package
         Dimsav\Translatable\TranslatableServiceProvider::class,
 
+        // Mcamara Laravel Localization
+        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -230,6 +232,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+
+        // Mcamara Localization Facade
+        'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
 
     ],
 

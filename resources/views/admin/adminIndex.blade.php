@@ -8,4 +8,8 @@
 
 @section('content')
 مرحبا بك فى لوحة التحكم.
+
+@foreach($supportedLocales as locale)
+{{ $locale }}<br>
+@end
 @endsection
