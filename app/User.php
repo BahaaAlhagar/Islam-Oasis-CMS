@@ -15,6 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        // temporary for now
         'name', 'email', 'password',
     ];
 
@@ -26,4 +27,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function isAdmin()
+    {
+        return $this->group_id == 5;
+    }
 }
