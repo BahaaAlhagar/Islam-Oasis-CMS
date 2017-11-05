@@ -15,6 +15,16 @@ class CreatePostTranslationsTable extends Migration
     {
         Schema::create('post_translations', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('post_id')->unsigned()->index();
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->string('locale')->index();
+
+            // The actual fields to store the content of your entity. You can add whatever you need.
+            $table->string('title');
+            $table->string('slug')->unique()->index();
+            $table->text('content');
+
+            $table->unique(['post_id', 'locale']);
             $table->timestamps();
         });
     }
