@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\PostTranslation;
+use App\Tag;
 use Illuminate\Http\Request;
 
-class PostTranslationController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class PostTranslationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\PostTranslation  $postTranslation
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function show(PostTranslation $postTranslation)
+    public function show(Tag $tag)
     {
         //
     }
@@ -52,10 +52,10 @@ class PostTranslationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\PostTranslation  $postTranslation
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit(PostTranslation $postTranslation)
+    public function edit(Tag $tag)
     {
         //
     }
@@ -64,10 +64,10 @@ class PostTranslationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\PostTranslation  $postTranslation
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PostTranslation $postTranslation)
+    public function update(Request $request, Tag $tag)
     {
         //
     }
@@ -75,10 +75,10 @@ class PostTranslationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\PostTranslation  $postTranslation
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PostTranslation $postTranslation)
+    public function destroy(Tag $tag)
     {
         //
     }
