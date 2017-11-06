@@ -4,9 +4,16 @@
 	  </div>
 	  <div class="panel-body">
 	  		<ul class="list-group">
-				<li class="list-group-item">
+				<a href="{{ route('tags.index') }}" class="list-group-item">
 					المنشورات
-				</li>
+				</a>
+
+
+				<a href="{{ route('tags.index') }}" class="list-group-item">
+					التصنيفات
+				</a>
+
+
 			</ul>
 	  </div>
 </div>

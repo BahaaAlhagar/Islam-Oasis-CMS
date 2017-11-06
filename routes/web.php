@@ -20,8 +20,13 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+
 route::group(['prefix' => 'admincp', 'middleware' => ['auth', 'admin']], function(){
 
 route::view('/', 'admin/adminIndex');
+
+
+// tags Route
+route::resource('tags', 'TagController')->except('create', 'edit', 'show');
 
 });
