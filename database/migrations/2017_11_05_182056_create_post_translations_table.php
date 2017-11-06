@@ -21,7 +21,7 @@ class CreatePostTranslationsTable extends Migration
 
             // The actual fields to store the content of your entity. You can add whatever you need.
             $table->string('title');
-            $table->string('slug')->unique()->index();
+            $table->string('slug')->index();
             $table->text('content');
 
             $table->unique(['post_id', 'locale']);
