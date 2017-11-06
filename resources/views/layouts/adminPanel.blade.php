@@ -113,8 +113,16 @@
 <!--     <script src="{{ URL::asset('js/manifest.js') }}"></script>
     <script src="{{ URL::asset('js/vendor.js') }}"></script> -->
 
-    @yield('js')
-
+    <script type="text/javascript">
+        jQuery(function($) {
+         var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+         $('ul a').each(function() {
+          if (this.href === path) {
+           $(this).addClass('active');
+          }
+         });
+        });
+    </script>
 
     <div id="footer_container">
     @yield('footer')

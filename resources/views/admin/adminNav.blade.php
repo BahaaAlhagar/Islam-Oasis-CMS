@@ -4,9 +4,24 @@
 	  </div>
 	  <div class="panel-body">
 	  		<ul class="list-group">
-				<a href="{{ route('tags.index') }}" class="list-group-item">
-					المنشورات
-				</a>
+
+	  			@if(config('CMS.SHOW_NEWS'))
+					<a href="{{ route('posts.index', ['type' => 1]) }}" class="list-group-item">
+						الاخبار
+					</a>
+				@endif
+
+				@if(config('CMS.SHOW_LESSONS'))
+					<a href="{{ route('posts.index', ['type' => 2]) }}" class="list-group-item">
+						الدروس - المحاضرات
+					</a>
+				@endif
+
+				@if(config('CMS.SHOW_STORIES'))
+					<a href="{{ route('posts.index', ['type' => 1]) }}" class="list-group-item">
+						قصص مشاهير اسلموا
+					</a>
+				@endif
 
 
 				<a href="{{ route('tags.index') }}" class="list-group-item">

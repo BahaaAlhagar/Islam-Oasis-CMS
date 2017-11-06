@@ -26,7 +26,11 @@ route::group(['prefix' => 'admincp', 'middleware' => ['auth', 'admin']], functio
 route::view('/', 'admin/adminIndex');
 
 
-// tags Route
+// posts routes
+route::get('posts?type={type?}', 'PostController@index')->name('posts.index');
+route::resource('posts', 'PostController')->only('store', 'update', 'destroy');
+
+// tags routes
 route::resource('tags', 'TagController')->except('create', 'edit', 'show');
 
 });

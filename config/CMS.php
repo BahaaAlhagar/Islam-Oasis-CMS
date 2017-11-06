@@ -10,10 +10,10 @@ return [
     */
 
     
-    // عرض المنشورات
-    'SHOW_POSTS' => true,
     // عرض الاخبار
     'SHOW_NEWS' => true,
+    // عرض الدروس والمحاضرات
+    'SHOW_LESSONS' => true,
     // عرض عرض القصص
     'SHOW_STORIES' => true,
 
