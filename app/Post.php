@@ -28,6 +28,11 @@ class Post extends Model
     	return $this->belongsTo(User::class);
     }
 
+    public function translations()
+    {
+        return $this->hasMany(PostTranslation::class);
+    }
+    
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggables');

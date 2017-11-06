@@ -22,4 +22,9 @@ class TagTranslation extends Model
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }
+
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class);
+    }
 }

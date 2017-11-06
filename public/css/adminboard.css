@@ -73,3 +73,7 @@ body {
   font-family: 'cairo', sans-serif;
   font-size: 12px;
 }
+
+table th {
+  text-align: center;
+}

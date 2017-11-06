@@ -14,7 +14,9 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::latest()->paginate(10);
+        $tags = Tag::with(['translations' => function($query){
+            $query->orderBy('locale');
+        }])->latest()->paginate(10);
 
         return $this->makeResponse('admin/tags/manageTags', compact('tags'));
     }

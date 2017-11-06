@@ -10,9 +10,10 @@ return [
     | Contains an array with the applications available locales.
     |
     */
+    // order locale by code ascending to deal with it in the admin control panel tables
     'locales' => [
-        'en',
-        'ar'
+        'ar',
+        'en'
     ],
 
     /*

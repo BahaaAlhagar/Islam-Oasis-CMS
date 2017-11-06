@@ -22,4 +22,9 @@ class PostTranslation extends Model
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
     }
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
 }
