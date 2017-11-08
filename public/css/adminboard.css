@@ -34,6 +34,7 @@ body {
   background-color: black;
   color: white;
   margin-top: 150px;
+  z-index: 3;
 }
 
 /*about developer modal*/
@@ -76,4 +77,9 @@ body {
 
 table th {
   text-align: center;
+}
+
+.btn {
+  font-weight: bold;
+  padding: 5px;
 }

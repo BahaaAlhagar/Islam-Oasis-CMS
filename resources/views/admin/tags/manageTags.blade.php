@@ -6,6 +6,7 @@
 
 @section('heading')
 	ادارة التصنيفات
+	<button class="btn btn-success pull-left" data-toggle="modal" data-target="#addTagModal">اضافة تصنيف</button>
 @endsection
 
 
@@ -32,4 +33,8 @@
 			</tbody>
 		</table>
 	</div>
+@endsection
+
+@section('js')
+	<script src="{{ mix('js/admin/manageTags.js') }}"></script>
 @endsection

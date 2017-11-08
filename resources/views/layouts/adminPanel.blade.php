@@ -124,6 +124,8 @@
         });
     </script>
 
+    @yield('js')
+
     <div id="footer_container">
     @yield('footer')
         <footer class="footer print-hidden">
