@@ -10,19 +10,26 @@
             </thead>
             <tbody>
                 <tr v-for="tag in tags" :key="tag.id">
-                    <td v-for="translation in tags.translations" :key="translation.id">
+                    <td v-for="translation in tag.translations" :key="translation.id">
                         {{ translation.name }}
                     </td>
                 </tr>
             </tbody>
         </table>
+        <add-tag :locales="locales"></add-tag>
     </div>
 </template>
 
 
 <script>
+
+    import addTag from './addTag';
+
 	export default {
         name: 'tagsTable',
-        props: ['tags', 'locales']
+        props: ['tags', 'locales'],
+        components: {
+            addTag
+        }
     }
 </script>

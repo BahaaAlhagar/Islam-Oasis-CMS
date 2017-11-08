@@ -8,7 +8,7 @@ const manageTags = new Vue({
     },
     methods: {
     	assignData(response){
-    		this.tags = response.data.tags;
+    		this.tags = response.data.tags.data;
     	}
     },
     components: {
