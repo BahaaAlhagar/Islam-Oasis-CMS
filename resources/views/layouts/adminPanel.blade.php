@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ URL::asset('css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap_rtl.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/toastr.min.css') }}">
 
     <link rel="stylesheet" href="{{ URL::asset('css/adminboard.css') }}">
 

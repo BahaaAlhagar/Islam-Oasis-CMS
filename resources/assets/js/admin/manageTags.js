@@ -3,6 +3,8 @@ require('../bootstrap');
 import tagsTable from './components/tags/tagsTable';
 import VuePaginator from 'vuejs-paginator';
 
+window.toastr = require('toastr');
+
 
 window.eventBus = new Vue();
 
@@ -31,6 +33,14 @@ const manageTags = new Vue({
       reloadData(){
         this.$refs.VP.fetchData(this.resource_url + '?page=' + this.$refs.VP.current_page);
       },
+      refetchData(response){
+        $('.modal.in').modal('hide')
+        toastr.success(response.message);
+        this.reloadData();
+      },
+      showAddTag(){
+        $('#addTagModal').modal('show');
+      }
     },
     components: {
     	tagsTable,
@@ -40,6 +50,11 @@ const manageTags = new Vue({
     	axios.get(window.location.pathname)
     		.then(response => this.assignData(response));
 
-      this.$on('refetchData', this.fetchData());
+      eventBus.$on('tagAdded', response => this.refetchData(response));
     }
 });
+
+
+toastr.options = {
+  "positionClass": "toast-bottom-right",
+}

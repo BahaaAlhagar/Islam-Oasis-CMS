@@ -507,12 +507,6 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_resource__["a" /* default */]);
 
 window.Form = __WEBPACK_IMPORTED_MODULE_1__partials_Form__["a" /* default */];
 
-window.toastr = __webpack_require__(54);
-
-toastr.options = {
-    "positionClass": "toast-bottom-right"
-};
-
 /***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -10950,6 +10944,8 @@ __webpack_require__(2);
 
 
 
+window.toastr = __webpack_require__(54);
+
 window.eventBus = new Vue();
 
 var manageTags = new Vue({
@@ -10976,6 +10972,14 @@ var manageTags = new Vue({
     },
     reloadData: function reloadData() {
       this.$refs.VP.fetchData(this.resource_url + '?page=' + this.$refs.VP.current_page);
+    },
+    refetchData: function refetchData(response) {
+      $('.modal.in').modal('hide');
+      toastr.success(response.message);
+      this.reloadData();
+    },
+    showAddTag: function showAddTag() {
+      $('#addTagModal').modal('show');
     }
   },
   components: {
@@ -10989,9 +10993,15 @@ var manageTags = new Vue({
       return _this.assignData(response);
     });
 
-    this.$on('refetchData', this.fetchData());
+    eventBus.$on('tagAdded', function (response) {
+      return _this.refetchData(response);
+    });
   }
 });
+
+toastr.options = {
+  "positionClass": "toast-bottom-right"
+};
 
 /***/ }),
 /* 14 */
@@ -27959,6 +27969,7 @@ var render = function() {
       staticClass: "modal fade",
       attrs: {
         id: "addTagModal",
+        tabindex: "-1",
         role: "dialog",
         "aria-labelledby": "myModalLabel"
       }
@@ -28399,6 +28410,7 @@ var render = function() {
       staticClass: "modal fade",
       attrs: {
         id: "addTagTranslation",
+        tabindex: "-1",
         role: "dialog",
         "aria-labelledby": "myModalLabel"
       }

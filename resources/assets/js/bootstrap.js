@@ -27,10 +27,3 @@ Vue.use(VueResource);
 
 import Form from './partials/Form';
 window.Form = Form;
-
-
-window.toastr = require('toastr');
-
-toastr.options = {
-  "positionClass": "toast-bottom-right",
-}
