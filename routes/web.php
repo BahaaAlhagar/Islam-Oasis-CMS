@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 
-route::group(['prefix' => 'admincp', 'middleware' => ['auth', 'admin']], function(){
+route::group(['prefix' => 'admincp', 'middleware' => ['auth', 'admin', 'adminDefaultLocale']], function(){
 
 route::view('/', 'admin/adminIndex');
 

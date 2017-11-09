@@ -57,7 +57,9 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        // admin panel middlewares
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'adminDefaultLocale' => \App\Http\Middleware\adminPanelDefaultLocale::class,
 
         // Laravel Localization MiddleWares
         'localize' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
