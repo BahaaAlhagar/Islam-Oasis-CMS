@@ -22,14 +22,14 @@
                             <label for="locale" class="label">اللغة:</label>
 
                             <select id="locale" name="locale" class="form-control" v-model="form.locale">
-                                <option v-for="locale in locales" value="locale">{{ locale.native }}</option>
+                                <option v-for="(locale, key) in locales" :value="key">{{ locale.native }}</option>
                             </select>
 
                             <span class="alert-danger" v-if="form.errors.has('locale')" v-text="form.errors.get('locale')"></span>
                         </div>
                         
                         <div class="form-group">
-                            <label for="name" class="label">العمل الادارى:</label>
+                            <label for="name" class="label">التصنيف:</label>
                             
                             <input type="text" id="name" name="name" class="form-control" v-model="form.name"> 
 

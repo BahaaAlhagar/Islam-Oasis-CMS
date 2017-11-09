@@ -27768,6 +27768,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -27775,6 +27780,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'tagsTable',
     props: ['tags', 'locales'],
+    methods: {},
     components: {
         addTag: __WEBPACK_IMPORTED_MODULE_0__addTag___default.a
     }
@@ -27988,8 +27994,8 @@ var render = function() {
                         }
                       }
                     },
-                    _vm._l(_vm.locales, function(locale) {
-                      return _c("option", { attrs: { value: "locale" } }, [
+                    _vm._l(_vm.locales, function(locale, key) {
+                      return _c("option", { domProps: { value: key } }, [
                         _vm._v(_vm._s(locale.native))
                       ])
                     })
@@ -28009,7 +28015,7 @@ var render = function() {
                   _c(
                     "label",
                     { staticClass: "label", attrs: { for: "name" } },
-                    [_vm._v("العمل الادارى:")]
+                    [_vm._v("التصنيف:")]
                   ),
                   _vm._v(" "),
                   _c("input", {
@@ -28139,14 +28145,30 @@ var render = function() {
                   return _c(
                     "tr",
                     { key: tag.id },
-                    _vm._l(tag.translations, function(translation) {
-                      return _c("td", { key: translation.id }, [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(translation.name) +
-                            "\n                    "
-                        )
-                      ])
+                    _vm._l(_vm.locales, function(locale, key) {
+                      return _c(
+                        "td",
+                        _vm._l(tag.translations, function(translation) {
+                          return translation.locale == key
+                            ? _c("span", [
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(translation.name) +
+                                    " "
+                                ),
+                                _c("button", { staticClass: "btn btn-info" }, [
+                                  _vm._v("تعديل")
+                                ])
+                              ])
+                            : _c("span", [
+                                _c(
+                                  "button",
+                                  { staticClass: "btn btn-success" },
+                                  [_vm._v("اضافة ترجمة")]
+                                )
+                              ])
+                        })
+                      )
                     })
                   )
                 })

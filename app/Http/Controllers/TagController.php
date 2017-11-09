@@ -30,7 +30,9 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tag = Tag::create([$request->locale => ['name' => $request->name]]);
+
+        return ['message' => 'تم اضافة التصنيف بنجاح'];
     }
 
     /**

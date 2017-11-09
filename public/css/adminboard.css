@@ -83,3 +83,8 @@ table th {
   font-weight: bold;
   padding: 5px;
 }
+
+.label {
+  color:black;
+  font-size: 15px;
+}
