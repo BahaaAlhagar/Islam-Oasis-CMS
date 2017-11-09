@@ -27,7 +27,6 @@ body {
 
 .footer {
   position: absolute;
-  float: left;
   text-align: center;
   direction: ltr;
   bottom: 0;
@@ -37,7 +36,6 @@ body {
   padding-top: 5px;
   background-color: black;
   color: white;
-  margin-top: 150px;
 }
 
 /*about developer modal*/

@@ -38,6 +38,10 @@ const manageTags = new Vue({
         toastr.success(response.message);
         this.reloadData();
       },
+      afterTagDelete(response){
+        toastr.warning(response.data.message);
+        this.reloadData();
+      },
       showAddTag(){
         $('#addTagModal').modal('show');
       }
@@ -51,6 +55,7 @@ const manageTags = new Vue({
     		.then(response => this.assignData(response));
 
       eventBus.$on('tagAdded', response => this.refetchData(response));
+      eventBus.$on('tagDeleted', response => this.afterTagDelete(response));
     }
 });
 

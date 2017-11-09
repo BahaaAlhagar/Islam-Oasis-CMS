@@ -32,7 +32,8 @@ route::resource('posts', 'PostController')->only('store', 'update', 'destroy');
 
 // tags routes
 route::post('tags/{tag?}', 'TagController@store')->name('tags.store');
+route::delete('tagtranslation/{translation}', 'TagController@deleteTranslation');
 route::patch('tags/{tag}', 'TagController@update')->name('tags.update');
-route::resource('tags', 'TagController')->only('index', 'delete');
+route::resource('tags', 'TagController')->only('index', 'destroy');
 
 });

@@ -68,6 +68,21 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+
+        return ['message' => 'تم حذف التصنيف!'];
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Tag  $tag
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteTranslation(TagTranslation $translation)
+    {
+        $translation->delete();
+
+        return ['message' => 'تم حذف ترجمة التصنيف!'];
     }
 }

@@ -10978,6 +10978,10 @@ var manageTags = new Vue({
       toastr.success(response.message);
       this.reloadData();
     },
+    afterTagDelete: function afterTagDelete(response) {
+      toastr.warning(response.data.message);
+      this.reloadData();
+    },
     showAddTag: function showAddTag() {
       $('#addTagModal').modal('show');
     }
@@ -10995,6 +10999,9 @@ var manageTags = new Vue({
 
     eventBus.$on('tagAdded', function (response) {
       return _this.refetchData(response);
+    });
+    eventBus.$on('tagDeleted', function (response) {
+      return _this.afterTagDelete(response);
     });
   }
 });
@@ -27841,6 +27848,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         editTranslation: function editTranslation(translation) {
             eventBus.$emit('editTagTranslation', translation);
+        },
+        deleteTranslation: function deleteTranslation(translation) {
+            if (confirm('هل انت متأكد من حذف هذه الترجمة؟')) {
+                axios.delete('/admincp/tagtranslation/' + translation.id).then(function (response) {
+                    return eventBus.$emit('tagDeleted', response);
+                });
+            }
+        },
+        deleteTag: function deleteTag(tag) {
+            if (confirm('هل انت متأكد من حذف هذا التصنيف؟')) {
+                axios.delete(window.location.pathname + '/' + tag.id).then(function (response) {
+                    return eventBus.$emit('tagDeleted', response);
+                });
+            }
         }
     },
     components: {
@@ -28254,7 +28275,7 @@ var render = function() {
                                           staticClass: "btn btn-danger",
                                           on: {
                                             click: function($event) {
-                                              _vm.editTranslation(translation)
+                                              _vm.deleteTranslation(translation)
                                             }
                                           }
                                         },

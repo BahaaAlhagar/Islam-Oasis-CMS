@@ -18,7 +18,7 @@
                             {{ translation.name }}
                             <div class="pull-left">
                             <button @click="editTranslation(translation)" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                            <button @click="editTranslation(translation)" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                            <button @click="deleteTranslation(translation)" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                             </div>
                         </span>
                         <span v-if="!localeCheck(key, tag)">
@@ -61,6 +61,18 @@
             },
             editTranslation(translation){
                 eventBus.$emit('editTagTranslation', translation);
+            },
+            deleteTranslation(translation){
+                if(confirm('هل انت متأكد من حذف هذه الترجمة؟')){
+                    axios.delete('/admincp/tagtranslation/' + translation.id)
+                        .then(response => eventBus.$emit('tagDeleted', response));
+                }
+            },
+            deleteTag(tag){
+                if(confirm('هل انت متأكد من حذف هذا التصنيف؟')){
+                    axios.delete(window.location.pathname + '/' + tag.id)
+                        .then(response => eventBus.$emit('tagDeleted', response));
+                }
             }
         },
         components: {
