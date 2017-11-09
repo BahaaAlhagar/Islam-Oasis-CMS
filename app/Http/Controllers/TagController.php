@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tag;
+use App\TagTranslation;
 use App\Http\Requests\storeTagRequest;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class TagController extends Controller
     {
         $tags = Tag::with(['translations' => function($query){
             $query->orderBy('locale');
-        }])->latest()->paginate(2);
+        }])->latest()->paginate(10);
 
         return $this->makeResponse('admin/tags/manageTags', compact('tags'));
     }
@@ -44,16 +45,6 @@ class TagController extends Controller
         return ['message' => 'تم اضافة التصنيف بنجاح'];
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Tag  $tag
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Tag $tag)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -62,9 +53,11 @@ class TagController extends Controller
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(storeTagRequest $request, TagTranslation $tag)
     {
-        //
+        $tag->update($request->all());
+
+        return ['message' => 'تم تحديث ترجمة التصنيف'];
     }
 
     /**

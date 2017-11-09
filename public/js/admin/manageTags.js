@@ -27805,6 +27805,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -28174,15 +28184,20 @@ var render = function() {
               _c("thead", [
                 _c(
                   "tr",
-                  _vm._l(_vm.locales, function(locale) {
-                    return _c("th", [
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(locale.native) +
-                          "\n                    "
-                      )
-                    ])
-                  })
+                  [
+                    _vm._l(_vm.locales, function(locale) {
+                      return _c("th", [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(locale.native) +
+                            "\n                    "
+                        )
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _c("th")
+                  ],
+                  2
                 )
               ]),
               _vm._v(" "),
@@ -28192,47 +28207,98 @@ var render = function() {
                   return _c(
                     "tr",
                     { key: tag.id },
-                    _vm._l(_vm.locales, function(locale, key) {
-                      return _c(
-                        "td",
-                        [
-                          _vm._l(tag.translations, function(translation) {
-                            return translation.locale == key
+                    [
+                      _vm._l(_vm.locales, function(locale, key) {
+                        return _c(
+                          "td",
+                          [
+                            _vm._l(tag.translations, function(translation) {
+                              return translation.locale == key
+                                ? _c("span", [
+                                    _vm._v(
+                                      "\n                            " +
+                                        _vm._s(translation.name) +
+                                        "\n                            "
+                                    ),
+                                    _c("div", { staticClass: "pull-left" }, [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-primary",
+                                          on: {
+                                            click: function($event) {
+                                              _vm.editTranslation(translation)
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "fa fa-pencil-square-o",
+                                            attrs: { "aria-hidden": "true" }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-danger",
+                                          on: {
+                                            click: function($event) {
+                                              _vm.editTranslation(translation)
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fa fa-trash-o",
+                                            attrs: { "aria-hidden": "true" }
+                                          })
+                                        ]
+                                      )
+                                    ])
+                                  ])
+                                : _vm._e()
+                            }),
+                            _vm._v(" "),
+                            !_vm.localeCheck(key, tag)
                               ? _c("span", [
-                                  _vm._v(
-                                    "\n                            " +
-                                      _vm._s(translation.name) +
-                                      " "
-                                  ),
                                   _c(
                                     "button",
-                                    { staticClass: "btn btn-info" },
-                                    [_vm._v("تعديل")]
+                                    {
+                                      staticClass: "btn btn-success",
+                                      on: {
+                                        click: function($event) {
+                                          _vm.addTranslation(tag, key, locale)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("اضافة ترجمة")]
                                   )
                                 ])
                               : _vm._e()
-                          }),
-                          _vm._v(" "),
-                          !_vm.localeCheck(key, tag)
-                            ? _c("span", [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-success",
-                                    on: {
-                                      click: function($event) {
-                                        _vm.addTranslation(tag, key, locale)
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("اضافة ترجمة")]
-                                )
-                              ])
-                            : _vm._e()
-                        ],
-                        2
-                      )
-                    })
+                          ],
+                          2
+                        )
+                      }),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            on: {
+                              click: function($event) {
+                                _vm.deleteTag(tag)
+                              }
+                            }
+                          },
+                          [_vm._v("حذف التصنيف")]
+                        )
+                      ])
+                    ],
+                    2
                   )
                 })
               )

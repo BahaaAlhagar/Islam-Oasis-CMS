@@ -1,6 +1,10 @@
 @import url('./cairo.css');
 @import url('./Ruqaa.css');
 
+html {
+  position: relative;
+  min-height: 100%;
+}
 
 body {
 	direction: rtl;
@@ -34,7 +38,6 @@ body {
   background-color: black;
   color: white;
   margin-top: 150px;
-  z-index: 3;
 }
 
 /*about developer modal*/
@@ -75,9 +78,6 @@ body {
   font-size: 12px;
 }
 
-table th {
-  text-align: center;
-}
 
 .btn {
   font-weight: bold;
@@ -87,4 +87,26 @@ table th {
 .label {
   color:black;
   font-size: 15px;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  margin:0 auto;
+  font-weight: bold;
+}
+
+.table th {
+  max-width: 350px;
+}
+
+.table td {
+  max-width: 350px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+table a {
+  color: black;
 }

@@ -6,17 +6,27 @@
                     <th v-for="locale in locales">
                         {{ locale.native }}
                     </th>
+                    <th>
+                        
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="tag in tags" :key="tag.id">
                     <td v-for="(locale, key) in locales">
                         <span v-for="translation in tag.translations" v-if="translation.locale == key">
-                            {{ translation.name }} <button class="btn btn-info">تعديل</button>
+                            {{ translation.name }}
+                            <div class="pull-left">
+                            <button @click="editTranslation(translation)" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                            <button @click="editTranslation(translation)" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                            </div>
                         </span>
                         <span v-if="!localeCheck(key, tag)">
                              <button @click="addTranslation(tag, key, locale)" class="btn btn-success">اضافة ترجمة</button>
                         </span>
+                    </td>
+                    <td>
+                        <button @click="deleteTag(tag)" class="btn btn-danger">حذف التصنيف</button>
                     </td>
                 </tr>
             </tbody>
