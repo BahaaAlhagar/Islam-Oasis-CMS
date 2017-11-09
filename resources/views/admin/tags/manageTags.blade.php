@@ -13,7 +13,10 @@
 @section('content')
 	<div id="manageTags">
 		<tags-table :tags="tags" :locales="{{ json_encode(LaravelLocalization::getSupportedLocales()) }}"></tags-table>
+
+        <v-paginator class="text-center" v-show="tags.length" :options="options" ref="VP" :resource_url="resource_url" @update="updateResource"></v-paginator>
 	</div>
+
 @endsection
 
 @section('js')

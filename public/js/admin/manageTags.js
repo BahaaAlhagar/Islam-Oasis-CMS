@@ -480,9 +480,7 @@ module.exports = defaults;
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_resource__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_paginator__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_paginator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuejs_paginator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__partials_Form__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__partials_Form__ = __webpack_require__(52);
 try {
     window.$ = window.jQuery = __webpack_require__(3);
 
@@ -501,17 +499,13 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
-__webpack_require__(2);
-
 window.Vue = __webpack_require__(46);
-
-
 
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_resource__["a" /* default */]);
 
 
-window.Form = __WEBPACK_IMPORTED_MODULE_2__partials_Form__["a" /* default */];
+window.Form = __WEBPACK_IMPORTED_MODULE_1__partials_Form__["a" /* default */];
 
 window.toastr = __webpack_require__(54);
 
@@ -10949,31 +10943,54 @@ module.exports = __webpack_require__(13);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_tags_tagsTable__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_tags_tagsTable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_tags_tagsTable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_paginator__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_paginator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuejs_paginator__);
 __webpack_require__(2);
+
+
 
 
 window.eventBus = new Vue();
 
 var manageTags = new Vue({
-    el: '#manageTags',
-    data: {
-        tags: []
-    },
-    methods: {
-        assignData: function assignData(response) {
-            this.tags = response.data.tags.data;
-        }
-    },
-    components: {
-        tagsTable: __WEBPACK_IMPORTED_MODULE_0__components_tags_tagsTable___default.a
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        axios.get(window.location.pathname).then(function (response) {
-            return _this.assignData(response);
-        });
+  el: '#manageTags',
+  data: {
+    tags: [],
+    resource_url: window.location.pathname,
+    options: {
+      remote_data: 'tags.data',
+      remote_current_page: 'tags.current_page',
+      remote_last_page: 'tags.last_page',
+      remote_next_page_url: 'tags.next_page_url',
+      remote_prev_page_url: 'tags.prev_page_url',
+      next_button_text: 'التالى',
+      previous_button_text: 'السابق'
     }
+  },
+  methods: {
+    updateResource: function updateResource(data) {
+      this.tags = data;
+    },
+    assignData: function assignData(response) {
+      this.tags = response.data.tags.data;
+    },
+    reloadData: function reloadData() {
+      this.$refs.VP.fetchData(this.resource_url + '?page=' + this.$refs.VP.current_page);
+    }
+  },
+  components: {
+    tagsTable: __WEBPACK_IMPORTED_MODULE_0__components_tags_tagsTable___default.a,
+    VPaginator: __WEBPACK_IMPORTED_MODULE_1_vuejs_paginator___default.a
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get(window.location.pathname).then(function (response) {
+      return _this.assignData(response);
+    });
+
+    this.$on('refetchData', this.fetchData());
+  }
 });
 
 /***/ }),
