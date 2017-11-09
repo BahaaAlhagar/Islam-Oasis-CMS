@@ -33,6 +33,7 @@
         </table>
         <add-tag :locales="locales"></add-tag>
         <add-tag-translation :locales="locales"></add-tag-translation>
+        <edit-tag-translation :locales="locales"></edit-tag-translation>
     </div>
 </template>
 
@@ -41,6 +42,7 @@
 
     import addTag from './addTag';
     import addTagTranslation from './addTagTranslation';
+    import editTagTranslation from './editTagTranslation';
 
 	export default {
         name: 'tagsTable',
@@ -56,11 +58,15 @@
             },
             addTranslation(tag, key){
                 eventBus.$emit('addTagTranslation', tag, key);
+            },
+            editTranslation(translation){
+                eventBus.$emit('editTagTranslation', translation);
             }
         },
         components: {
             addTag,
-            addTagTranslation
+            addTagTranslation,
+            editTagTranslation
         }
     }
 </script>

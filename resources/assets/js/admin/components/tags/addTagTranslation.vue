@@ -8,7 +8,7 @@
               <div class="modal-header">
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <span class="form-control-static pull-left">
+                <span class="form-control-static text-center">
                     <h4 class="modal-title" id="myModalLabel"> اضافة ترجمة لتصنيف </h4>
                 </span>
               </div>
@@ -36,7 +36,7 @@
                             <span class="alert-danger" v-if="addTagTranslationForm.errors.has('name')" v-text="addTagTranslationForm.errors.get('name')"></span>
                         </div>
 
-                        <div class="form-group heading">
+                        <div class="form-group text-center">
                             <button class="button btn-lg btn-success" :disabled="addTagTranslationForm.errors.any()">اضافة</button>
                         </div>
                     </form>
