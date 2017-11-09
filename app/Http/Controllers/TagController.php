@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tag;
+use App\Http\Requests\storeTagRequest;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -28,7 +29,7 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storeTagRequest $request)
     {
         $tag = Tag::create([$request->locale => ['name' => $request->name]]);
 
