@@ -31,6 +31,7 @@ route::get('posts?type={type?}', 'PostController@index')->name('posts.index');
 route::resource('posts', 'PostController')->only('store', 'update', 'destroy');
 
 // tags routes
-route::resource('tags', 'TagController')->except('create', 'edit', 'show');
+route::post('tags/{tag?}', 'TagController@store')->name('tags.store');
+route::resource('tags', 'TagController')->only('index', 'delete');
 
 });

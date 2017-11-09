@@ -29,8 +29,16 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(storeTagRequest $request)
+    public function store(storeTagRequest $request, Tag $tag = null)
     {
+        if($tag)
+        {
+            $tag->translations()
+                    ->create($request->all());
+
+            return ['message' => 'تم اضافة التصنيف بنجاح'];
+        }
+
         $tag = Tag::create([$request->locale => ['name' => $request->name]]);
 
         return ['message' => 'تم اضافة التصنيف بنجاح'];
