@@ -10952,6 +10952,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __webpack_require__(2);
 
 
+window.eventBus = new Vue();
+
 var manageTags = new Vue({
     el: '#manageTags',
     data: {
@@ -27745,6 +27747,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addTag__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addTag___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__addTag__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addTagTranslation__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addTagTranslation___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__addTagTranslation__);
 //
 //
 //
@@ -27773,6 +27777,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 
@@ -27780,9 +27786,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'tagsTable',
     props: ['tags', 'locales'],
-    methods: {},
+    methods: {
+        localeCheck: function localeCheck(key, tag) {
+            var trans = tag.translations;
+            for (var i = 0; i < trans.length; i++) {
+                if (trans[i].locale == key) {
+                    return true;
+                }
+            }
+        },
+        addTranslation: function addTranslation(tag, key) {
+            eventBus.$emit('addTagTranslation', tag, key);
+        }
+    },
     components: {
-        addTag: __WEBPACK_IMPORTED_MODULE_0__addTag___default.a
+        addTag: __WEBPACK_IMPORTED_MODULE_0__addTag___default.a,
+        addTagTranslation: __WEBPACK_IMPORTED_MODULE_1__addTagTranslation___default.a
     }
 });
 
@@ -28148,26 +28167,42 @@ var render = function() {
                     _vm._l(_vm.locales, function(locale, key) {
                       return _c(
                         "td",
-                        _vm._l(tag.translations, function(translation) {
-                          return translation.locale == key
-                            ? _c("span", [
-                                _vm._v(
-                                  "\n                            " +
-                                    _vm._s(translation.name) +
-                                    " "
-                                ),
-                                _c("button", { staticClass: "btn btn-info" }, [
-                                  _vm._v("تعديل")
+                        [
+                          _vm._l(tag.translations, function(translation) {
+                            return translation.locale == key
+                              ? _c("span", [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(translation.name) +
+                                      " "
+                                  ),
+                                  _c(
+                                    "button",
+                                    { staticClass: "btn btn-info" },
+                                    [_vm._v("تعديل")]
+                                  )
                                 ])
-                              ])
-                            : _c("span", [
+                              : _vm._e()
+                          }),
+                          _vm._v(" "),
+                          !_vm.localeCheck(key, tag)
+                            ? _c("span", [
                                 _c(
                                   "button",
-                                  { staticClass: "btn btn-success" },
+                                  {
+                                    staticClass: "btn btn-success",
+                                    on: {
+                                      click: function($event) {
+                                        _vm.addTranslation(tag, key, locale)
+                                      }
+                                    }
+                                  },
                                   [_vm._v("اضافة ترجمة")]
                                 )
                               ])
-                        })
+                            : _vm._e()
+                        ],
+                        2
                       )
                     })
                   )
@@ -28177,7 +28212,9 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c("add-tag", { attrs: { locales: _vm.locales } })
+      _c("add-tag", { attrs: { locales: _vm.locales } }),
+      _vm._v(" "),
+      _c("add-tag-translation", { attrs: { locales: _vm.locales } })
     ],
     1
   )
@@ -28189,6 +28226,352 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-220fea88", module.exports)
+  }
+}
+
+/***/ }),
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(11)
+/* script */
+var __vue_script__ = __webpack_require__(66)
+/* template */
+var __vue_template__ = __webpack_require__(67)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\admin\\components\\tags\\addTagTranslation.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6dbd80bf", Component.options)
+  } else {
+    hotAPI.reload("data-v-6dbd80bf", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 66 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['locales'],
+    data: function data() {
+        return {
+            addTagTranslationForm: new Form({
+                locale: '',
+                name: ''
+            }),
+            tag: ''
+        };
+    },
+
+    methods: {
+        onTranslationCreate: function onTranslationCreate() {
+            this.addTagTranslationForm.post(window.location.pathname + '/' + this.tag).then(function (response) {
+                return eventBus.$emit('tagAdded', response);
+            });
+        },
+        prepareModal: function prepareModal(tag, key) {
+            this.addTagTranslationForm.locale = key;
+            this.tag = tag.id;
+            $('#addTagTranslation').modal('show');
+        }
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        eventBus.$on('addTagTranslation', function (tag, key) {
+            return _this.prepareModal(tag, key, locale);
+        });
+    }
+});
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "addTagTranslation",
+        role: "dialog",
+        "aria-labelledby": "myModalLabel"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
+            _c(
+              "form",
+              {
+                attrs: { method: "POST", action: "/" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    _vm.onTranslationCreate($event)
+                  },
+                  keydown: function($event) {
+                    _vm.addTagTranslationForm.errors.clear($event.target.name)
+                  },
+                  change: function($event) {
+                    _vm.addTagTranslationForm.errors.clear($event.target.name)
+                  },
+                  input: function($event) {
+                    _vm.addTagTranslationForm.errors.clear($event.target.name)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "locale" } },
+                    [_vm._v("اللغة:")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.addTagTranslationForm.locale,
+                          expression: "addTagTranslationForm.locale"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "locale", name: "locale", disabled: "" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.addTagTranslationForm,
+                            "locale",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    _vm._l(_vm.locales, function(locale, key) {
+                      return _c("option", { domProps: { value: key } }, [
+                        _vm._v(_vm._s(locale.native))
+                      ])
+                    })
+                  ),
+                  _vm._v(" "),
+                  _vm.addTagTranslationForm.errors.has("locale")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.addTagTranslationForm.errors.get("locale")
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "name" } },
+                    [_vm._v("التصنيف:")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.addTagTranslationForm.name,
+                        expression: "addTagTranslationForm.name"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "name", name: "name" },
+                    domProps: { value: _vm.addTagTranslationForm.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.addTagTranslationForm,
+                          "name",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.addTagTranslationForm.errors.has("name")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.addTagTranslationForm.errors.get("name")
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group heading" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "button btn-lg btn-success",
+                      attrs: {
+                        disabled: _vm.addTagTranslationForm.errors.any()
+                      }
+                    },
+                    [_vm._v("اضافة")]
+                  )
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("span", { staticClass: "form-control-static pull-left" }, [
+        _c(
+          "h4",
+          { staticClass: "modal-title", attrs: { id: "myModalLabel" } },
+          [_vm._v(" اضافة ترجمة لتصنيف ")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6dbd80bf", module.exports)
   }
 }
 

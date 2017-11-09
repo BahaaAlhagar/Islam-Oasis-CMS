@@ -1,6 +1,8 @@
 require('../bootstrap');
 import tagsTable from './components/tags/tagsTable';
 
+window.eventBus = new Vue();
+
 const manageTags = new Vue({
     el: '#manageTags',
     data: {
