@@ -96,6 +96,7 @@ table {
 
 .table th {
   max-width: 350px;
+  text-align: center;
 }
 
 .table td {

@@ -12,7 +12,7 @@ $factory->define(App\PostTranslation::class, function (Faker $faker) {
     		$key = array_rand($langs);
     		return $langs[$key];
     	},
-    	'title' => $faker->title,
+    	'title' => $faker->sentence,
     	'content' => $faker->paragraph,
         'published' => $faker->boolean,
         'post_id' => factory('App\Post')->create()->id

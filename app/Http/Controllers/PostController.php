@@ -21,16 +21,16 @@ class PostController extends Controller
      */
     public function index($type, $locale = null)
     {
-
-        $posts = Post::where('type', $type)
+        if(!$locale)
+        {
+            $posts = Post::where('type', $type)
                     ->with('translations', 'photo')
                     ->latest()->paginate(10);
-
-        if($locale)
-        {
-            $posts->whereHas('translation', function($query) use($locale){
-                $query->where('locale', $locale);
-            })->paginate(10);
+        } else {
+            $posts = Post::translatedIn($locale)
+                    ->where('type', $type)
+                    ->with('translations', 'photo')
+                    ->latest()->paginate(10);
         }
 
         return $this->makeResponse('admin/posts/managePosts', compact('posts', 'type'));

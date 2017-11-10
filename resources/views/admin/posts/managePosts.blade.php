@@ -29,10 +29,10 @@
 		
 		<span class="col-md-10 text-center">
 			عرض 
-			<select v-model="current_view" @change="fetchPostsData()">
-				<option value="all" selected>كل اللغات</option>
+			<select v-model="current_view" @change="refetchData()">
+				<option value='' >الكل</option>
 			    @foreach(LaravelLocalization::getSupportedLocales() as $key => $locale)
-			    	<option value="{{$key}}">{{ $locale['native'] }}</option>
+			    	<option value="{{ $key }}">المترجم الى {{ $locale['native'] }}</option>
 			    @endforeach
 			</select>
 		</span>
@@ -51,6 +51,10 @@
 				<button @click="addStory()" class="btn btn-success pull-left">اضافة قصة</button>
 			</span>
 		@endif	
+
+		<posts-table :type="{{ $type }}" :posts="posts" :locales="{{ json_encode(LaravelLocalization::getSupportedLocales()) }}"></posts-table>
+
+        <v-paginator class="text-center" v-show="posts.length" :options="options" ref="VP" :resource_url="resource_url" @update="updateResource"></v-paginator>
 
 	</div>
 
