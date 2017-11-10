@@ -31,7 +31,7 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="title" class="label">العموان:</label>
+                            <label for="title" class="label">العنوان:</label>
                             
                             <input type="text" id="name" name="title" class="form-control" v-model="addPostForm.title"> 
 
@@ -49,14 +49,25 @@
                         <div class="form-group">
                             <label for="published" class="label">حالة النشر:</label>
                             
-                            <input type="radio" id="published" value="1" v-model="addPostForm.published">
+                            <input type="radio" id="published" value="1" v-model.number="addPostForm.published">
                             <label>نعم</label>
-                            
-                            <input type="radio" id="published" value="0" v-model="addPostForm.published">
+
+                            <input type="radio" id="published" value="0" v-model.number="addPostForm.published">
                             <label>لا</label>
                             <br>
 
                             <span class="alert-danger" v-if="addPostForm.errors.has('published')" v-text="addPostForm.errors.get('published')"></span>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="tags" class="label">التصنيفات: <span style="color: green">اختر التصنيف باى لغة لاضافته</span></label>
+                            
+                            <v-select style="display: block;" id="tags" name="tags[]" v-model="addPostForm.tags" multiple placeholder="اختر التصنيفات" search>
+                                <v-option v-for="tag in tags" :key="tag.id" :value="tag.tag_id">{{ tag.name }}</v-option>
+                            </v-select>
+
+                            <span class="alert-danger" v-if="addPostForm.errors.has('tags')" v-text="addPostForm.errors.get('tags')"></span>
                         </div>
 
 
@@ -75,8 +86,11 @@
     import trumbowyg from 'vue-trumbowyg';
     import 'trumbowyg/dist/ui/trumbowyg.css';
 
+    import { select } from 'vue-strap';
+    import { option } from 'vue-strap';
+
 	export default {
-        props: ['locales', 'type'],
+        props: ['locales', 'type', 'tags'],
         data() {
         return {
             addPostForm: new Form({
@@ -84,7 +98,8 @@
                 locale: '',
                 title: '',
                 content: '',
-                published: 1
+                published: 1,
+                tags: []
                 }),
             config: {
 
@@ -98,7 +113,9 @@
             }
         },
         components: {
-            trumbowyg
+            trumbowyg,
+            'v-select': select,
+            'v-option': option
         }
     }
 </script>

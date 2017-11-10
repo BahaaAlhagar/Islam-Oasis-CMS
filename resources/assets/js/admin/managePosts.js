@@ -15,6 +15,7 @@ const managePosts = new Vue({
     data: {
         current_view: '',
         posts: [],
+        tags: [],
         resource_url: window.location.pathname,
             options: {
                   remote_data: 'posts.data',
@@ -44,7 +45,8 @@ const managePosts = new Vue({
         }
       },
     	assignData(response){
-    		this.posts = response.data.posts.data;
+        this.posts = response.data.posts.data;
+    		this.tags = response.data.tags;
     	},
       reloadData(){
         this.$refs.VP.fetchData(this.resource_url + '?page=' + this.$refs.VP.current_page);

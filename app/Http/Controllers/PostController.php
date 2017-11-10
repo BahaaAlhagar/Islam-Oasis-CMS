@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Tag;
 use App\Post;
+use App\TagTranslation;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -33,7 +34,10 @@ class PostController extends Controller
                     ->latest()->paginate(10);
         }
 
-        return $this->makeResponse('admin/posts/managePosts', compact('posts', 'type'));
+        $tags = TagTranslation::orderBy('locale', 'asc')
+                                        ->get();
+
+        return $this->makeResponse('admin/posts/managePosts', compact('posts', 'type', 'tags'));
     }
 
 

@@ -52,7 +52,7 @@
 			</span>
 		@endif	
 
-		<posts-table :type="{{ $type }}" :posts="posts" :locales="{{ json_encode(LaravelLocalization::getSupportedLocales()) }}"></posts-table>
+		<posts-table :type="{{ $type }}" :posts="posts" :tags="tags" :locales="{{ json_encode(LaravelLocalization::getSupportedLocales()) }}"></posts-table>
 
         <v-paginator class="text-center" v-show="posts.length" :options="options" ref="VP" :resource_url="resource_url" @update="updateResource"></v-paginator>
 

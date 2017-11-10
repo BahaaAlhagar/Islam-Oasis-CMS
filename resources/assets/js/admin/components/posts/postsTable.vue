@@ -33,7 +33,7 @@
                 </tr>
             </tbody>
         </table>
-        <add-post :type="type" :locales="locales"></add-post>
+        <add-post :type="type" :tags="tags" :locales="locales"></add-post>
         <!-- <add-tag-translation :locales="locales"></add-tag-translation>
         <edit-tag-translation :locales="locales"></edit-tag-translation> -->
     </div>
@@ -47,7 +47,7 @@
     import editTagTranslation from './editTagTranslation';*/
 
 	export default {
-        props: ['posts', 'locales', 'type'],
+        props: ['posts', 'locales', 'type', 'tags'],
         methods: {
             localeCheck(key, tag){
                 let trans = tag.translations;
