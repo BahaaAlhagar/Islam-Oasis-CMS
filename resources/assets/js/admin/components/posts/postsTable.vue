@@ -33,8 +33,8 @@
                 </tr>
             </tbody>
         </table>
-        <!-- <add-tag :locales="locales"></add-tag>
-        <add-tag-translation :locales="locales"></add-tag-translation>
+        <add-post :type="type" :locales="locales"></add-post>
+        <!-- <add-tag-translation :locales="locales"></add-tag-translation>
         <edit-tag-translation :locales="locales"></edit-tag-translation> -->
     </div>
 </template>
@@ -42,8 +42,8 @@
 
 <script>
 
-/*    import addTag from './addTag';
-    import addTagTranslation from './addTagTranslation';
+    import addPost from './addPost';
+/*    import addTagTranslation from './addTagTranslation';
     import editTagTranslation from './editTagTranslation';*/
 
 	export default {
@@ -76,10 +76,11 @@
                 }
             }*/
         },
-/*        components: {
-            addTag,
+        components: {
+            addPost
+            /*
             addTagTranslation,
-            editTagTranslation
-        }*/
+            editTagTranslation*/
+        }
     }
 </script>

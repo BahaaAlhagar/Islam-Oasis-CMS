@@ -40,15 +40,15 @@
 
 		@if($type == 1)
 			<span class="col-md-2 text-center">
-				<button @click="addNews()" class="btn btn-success pull-left">اضافة خبر</button>
+				<button @click="addPost()" class="btn btn-success pull-left">اضافة خبر</button>
 			</span>
 		@elseif($type == 2)
 			<span class="col-md-2 text-center">
-				<button @click="addLesson()" class="btn btn-success pull-left">اضافة درس</button>
+				<button @click="addPost()" class="btn btn-success pull-left">اضافة درس</button>
 			</span>
 		@elseif($type == 3)
 			<span class="col-md-2 text-center">
-				<button @click="addStory()" class="btn btn-success pull-left">اضافة قصة</button>
+				<button @click="addPost()" class="btn btn-success pull-left">اضافة قصة</button>
 			</span>
 		@endif	
 

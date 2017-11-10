@@ -58,8 +58,8 @@ const managePosts = new Vue({
         toastr.warning(response.data.message);
         this.reloadData();
       },
-      showAddTag(){
-        $('#addTagModal').modal('show');
+      addPost(){
+        $('#addPostForm').modal('show');
       }
     },
     components: {
