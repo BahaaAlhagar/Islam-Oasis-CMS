@@ -22,7 +22,9 @@ class PostController extends Controller
     public function index($type, $locale = null)
     {
 
-        $posts = Post::where('type', $type)->with('translations')->latest()->paginate(10);
+        $posts = Post::where('type', $type)
+                    ->with('translations', 'photo')
+                    ->latest()->paginate(10);
 
         if($locale)
         {

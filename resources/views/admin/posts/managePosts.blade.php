@@ -12,13 +12,13 @@
 
 @section('heading')
 
-@if($type == 1)
-	ادارة الاخبار
-@elseif($type == 2)
-	ادارة الدروس والمحاضرات
-@elseif($type == 3)
-	ادارة قصص الاسلام
-@endif
+	@if($type == 1)
+		ادارة الاخبار
+	@elseif($type == 2)
+		ادارة الدروس والمحاضرات
+	@elseif($type == 3)
+		ادارة قصص الاسلام
+	@endif
 
 @endsection
 
