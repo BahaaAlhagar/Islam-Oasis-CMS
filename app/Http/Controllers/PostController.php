@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -18,9 +19,19 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($type, $locale = null)
     {
-        //
+
+        $posts = Post::where('type', $type)->with('translations')->latest()->paginate(10);
+
+        if($locale)
+        {
+            $posts->whereHas('translation', function($query) use($locale){
+                $query->where('locale', $locale);
+            })->paginate(10);
+        }
+
+        return $this->makeResponse('admin/posts/managePosts', compact('posts'));
     }
 
 

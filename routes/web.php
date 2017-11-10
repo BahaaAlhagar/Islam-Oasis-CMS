@@ -27,7 +27,7 @@ route::view('/', 'admin/adminIndex');
 
 
 // posts routes
-route::get('posts?type={type?}', 'PostController@index')->name('posts.index');
+route::get('posts?type={type}&locale={locale?}', 'PostController@index')->name('posts.index');
 route::resource('posts', 'PostController')->only('store', 'update', 'destroy');
 
 // tags routes
