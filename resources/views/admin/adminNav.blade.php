@@ -18,8 +18,8 @@
 				@endif
 
 				@if(config('CMS.SHOW_STORIES'))
-					<a href="{{ route('posts.index', ['type' => 1]) }}" class="list-group-item">
-						قصص مشاهير اسلموا
+					<a href="{{ route('posts.index', ['type' => 3]) }}" class="list-group-item">
+						قصص الاسلام
 					</a>
 				@endif
 

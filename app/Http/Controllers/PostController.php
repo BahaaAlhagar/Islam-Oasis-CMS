@@ -31,7 +31,7 @@ class PostController extends Controller
             })->paginate(10);
         }
 
-        return $this->makeResponse('admin/posts/managePosts', compact('posts'));
+        return $this->makeResponse('admin/posts/managePosts', compact('posts', 'type'));
     }
 
 
