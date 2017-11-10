@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Tag;
 use App\Post;
 use App\TagTranslation;
+use App\PostTranslation;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -34,8 +35,7 @@ class PostController extends Controller
                     ->latest()->paginate(10);
         }
 
-        $tags = TagTranslation::orderBy('locale', 'asc')
-                                        ->get();
+        $tags = TagTranslation::orderBy('locale', 'asc')->get();
 
         return $this->makeResponse('admin/posts/managePosts', compact('posts', 'type', 'tags'));
     }
@@ -49,7 +49,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = auth()->user();
+        $post = $user->posts()->create($request->only('type'));
+        $post->translations()->create($request->except('type', 'tags'));
+        $post->tags()->attach($request->tags);
+
+        return ['message' => 'تمت الاضافة بنجاح'];
     }
 
     /**

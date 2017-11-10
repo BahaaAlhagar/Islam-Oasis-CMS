@@ -15,8 +15,6 @@ class Post extends Model
     // dimsav translateble options
     use Translatable;
 
-    public $translationModel = 'App\PostTranslations';
-
     public $translatedAttributes = ['locale', 'title', 'slug', 'content', 'published'];
 
 
@@ -35,7 +33,7 @@ class Post extends Model
     
     public function tags()
     {
-        return $this->morphToMany(Tag::class, 'taggables');
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 
     public function photo()

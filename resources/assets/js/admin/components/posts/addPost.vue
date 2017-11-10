@@ -16,7 +16,7 @@
               </div>
 
               <div class="modal-body">
-                    <form method="POST" action="/" @submit.prevent="onTagCreate" @keydown="addPostForm.errors.clear($event.target.name)"
+                    <form method="POST" action="/" @submit.prevent="onPostCreate" @keydown="addPostForm.errors.clear($event.target.name)"
                     @change="addPostForm.errors.clear($event.target.name)"
                     @input="addPostForm.errors.clear($event.target.name)"
                     >
@@ -107,9 +107,10 @@
             };
         },
         methods: {
-            onTagCreate() {
-                this.addPostForm.post(window.location.pathname)
-                    .then(response => eventBus.$emit('tagAdded', response));
+            onPostCreate() {
+                this.addPostForm.post('/admincp/posts')
+                    .then(response => eventBus.$emit('postAdded', response));
+                this.addPostForm.type = this.type;
             }
         },
         components: {
