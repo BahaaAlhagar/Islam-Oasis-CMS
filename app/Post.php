@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    // use SoftDeletes;
+    use SoftDeletes;
     protected $dates = ['deleted_at'];
 
 
@@ -17,7 +17,7 @@ class Post extends Model
 
     public $translationModel = 'App\PostTranslations';
 
-    public $translatedAttributes = ['locale', 'title', 'slug', 'content'];
+    public $translatedAttributes = ['locale', 'title', 'slug', 'content', 'published'];
 
 
 
@@ -36,5 +36,10 @@ class Post extends Model
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggables');
+    }
+
+    public function photo()
+    {
+        return $this->morphOne(Photo::class, 'photoable');
     }
 }

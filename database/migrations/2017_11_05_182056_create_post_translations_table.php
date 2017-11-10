@@ -23,7 +23,9 @@ class CreatePostTranslationsTable extends Migration
             $table->string('title');
             $table->string('slug')->index();
             $table->text('content');
+            $table->tinyInteger('published')->default(1);
 
+            
             $table->unique(['post_id', 'locale']);
             $table->timestamps();
         });

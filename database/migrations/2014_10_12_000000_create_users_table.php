@@ -20,7 +20,6 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->tinyInteger('group_id')->default(1);
             $table->text('biography')->nullable();
-            $table->string('avatar')->nullable();
             $table->string('facebook_url')->nullable();
             $table->string('google_url')->nullable();
             $table->string('twitter_url')->nullable();

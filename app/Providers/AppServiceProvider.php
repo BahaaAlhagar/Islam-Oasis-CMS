@@ -18,7 +18,8 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         Relation::morphMap([
-            'posts' => 'App\Post'
+            'post' => 'App\Post',
+            'user' => 'App\User'
         ]);
     }
 
