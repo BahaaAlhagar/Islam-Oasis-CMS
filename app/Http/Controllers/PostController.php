@@ -35,7 +35,8 @@ class PostController extends Controller
                     ->latest()->paginate(10);
         }
 
-        $tags = TagTranslation::orderBy('locale', 'asc')->get();
+        $tags = TagTranslation::where('locale', config('translatable.locale'))
+                                ->orderBy('name')->get();
 
         return $this->makeResponse('admin/posts/managePosts', compact('posts', 'type', 'tags'));
     }
@@ -52,7 +53,9 @@ class PostController extends Controller
         $user = auth()->user();
         $post = $user->posts()->create($request->only('type'));
         $post->translations()->create($request->except('type', 'tags'));
-        $post->tags()->attach($request->tags);
+
+        $tags = array_column($request->tags, 'tag_id');
+        $post->tags()->attach($tags);
 
         return ['message' => 'تمت الاضافة بنجاح'];
     }

@@ -63,9 +63,7 @@
                         <div class="form-group">
                             <label for="tags" class="label">التصنيفات: <span style="color: green">اختر التصنيف باى لغة لاضافته</span></label>
                             
-                            <v-select style="display: block;" id="tags" name="tags[]" v-model="addPostForm.tags" multiple placeholder="اختر التصنيفات" search>
-                                <v-option v-for="tag in tags" :key="tag.id" :value="tag.tag_id">{{ tag.name }}</v-option>
-                            </v-select>
+                            <v-select label="name" :options="tags" multiple id="tags" name="tags[]" v-model="addPostForm.tags" ></v-select>
 
                             <span class="alert-danger" v-if="addPostForm.errors.has('tags')" v-text="addPostForm.errors.get('tags')"></span>
                         </div>
@@ -86,8 +84,7 @@
     import trumbowyg from 'vue-trumbowyg';
     import 'trumbowyg/dist/ui/trumbowyg.css';
 
-    import { select } from 'vue-strap';
-    import { option } from 'vue-strap';
+    import vSelect from "vue-select"
 
 	export default {
         props: ['locales', 'type', 'tags'],
@@ -110,13 +107,19 @@
             onPostCreate() {
                 this.addPostForm.post('/admincp/posts')
                     .then(response => eventBus.$emit('postAdded', response));
-                this.addPostForm.type = this.type;
+            },
+            addPostModal(){
+                this.addPostForm.type = this.$props.type;
+                this.addPostForm.published = 1;
+                $('#addPostForm').modal('show');
             }
         },
         components: {
             trumbowyg,
-            'v-select': select,
-            'v-option': option
+            vSelect
+        },
+        mounted(){
+            eventBus.$on('addPost', event => this.addPostModal());
         }
     }
 </script>

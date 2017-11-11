@@ -61,7 +61,7 @@ const managePosts = new Vue({
         this.reloadData();
       },
       addPost(){
-        $('#addPostForm').modal('show');
+        eventBus.$emit('addPost');
       }
     },
     components: {
@@ -71,7 +71,7 @@ const managePosts = new Vue({
     mounted(){
     	this.fetchData();
 
-      // eventBus.$on('tagAdded', response => this.refetchData(response));
+      eventBus.$on('postAdded', response => this.afterPostAdded(response));
       // eventBus.$on('tagDeleted', response => this.afterTagDelete(response));
     }
 });
