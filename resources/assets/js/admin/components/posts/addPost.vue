@@ -63,7 +63,8 @@
                         <div class="form-group">
                             <label for="tags" class="label">التصنيفات: <span style="color: green">اختر التصنيف باى لغة لاضافته</span></label>
                             
-                            <v-select label="name" :options="tags" multiple id="tags" name="tags[]" v-model="addPostForm.tags" ></v-select>
+                            <v-select label="name" 
+                            @input="addPostForm.errors.clear('tags')" :options="tags" multiple id="tags" name="tags[]" v-model="addPostForm.tags" ></v-select>
 
                             <span class="alert-danger" v-if="addPostForm.errors.has('tags')" v-text="addPostForm.errors.get('tags')"></span>
                         </div>

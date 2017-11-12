@@ -28463,6 +28463,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -31067,6 +31068,11 @@ var render = function() {
                           multiple: "",
                           id: "tags",
                           name: "tags[]"
+                        },
+                        on: {
+                          input: function($event) {
+                            _vm.addPostForm.errors.clear("tags")
+                          }
                         },
                         model: {
                           value: _vm.addPostForm.tags,

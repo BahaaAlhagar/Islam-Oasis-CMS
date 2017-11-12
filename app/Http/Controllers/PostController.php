@@ -6,6 +6,7 @@ use App\Tag;
 use App\Post;
 use App\TagTranslation;
 use App\PostTranslation;
+use App\Http\Requests\storePostRequest;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -48,8 +49,9 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storePostRequest $request)
     {
+        return request();
         $user = auth()->user();
         $post = $user->posts()->create($request->only('type'));
         $post->translations()->create($request->except('type', 'tags'));
