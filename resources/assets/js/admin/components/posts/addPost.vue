@@ -41,7 +41,7 @@
                         <div class="form-group">
                             <label for="content" class="label">المحتوى:</label>
                             
-                            <trumbowyg v-model="addPostForm.content" :config="config" class="form-control"></trumbowyg>
+                            <trumbowyg name="addPostForm.content" v-model="addPostForm.content"></trumbowyg>
 
                             <span class="alert-danger" v-if="addPostForm.errors.has('content')" v-text="addPostForm.errors.get('content')"></span>
                         </div>
@@ -98,9 +98,6 @@
                 published: 1,
                 tags: []
                 }),
-            config: {
-
-                }
             };
         },
         methods: {

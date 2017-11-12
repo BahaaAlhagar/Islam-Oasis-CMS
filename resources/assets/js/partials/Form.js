@@ -38,7 +38,7 @@ class Form {
      */
     reset() {
         for (let field in this.originalData) {
-            this[field] = null;
+            this[field] = '';
         }
 
         this.errors.clear();
