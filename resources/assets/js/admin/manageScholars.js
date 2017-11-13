@@ -42,8 +42,8 @@ const manageScholars = new Vue({
         toastr.warning(response.data.message);
         this.reloadData();
       },
-      showAddTag(){
-        $('#addTagModal').modal('show');
+      showAddScholar(){
+        $('#addScholarModal').modal('show');
       }
     },
     components: {
@@ -54,7 +54,7 @@ const manageScholars = new Vue({
     	axios.get(window.location.pathname)
     		.then(response => this.assignData(response));
 
-      // eventBus.$on('tagAdded', response => this.refetchData(response));
+      eventBus.$on('scholarAdded', response => this.refetchData(response));
       // eventBus.$on('tagDeleted', response => this.afterTagDelete(response));
     }
 });

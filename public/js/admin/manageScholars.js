@@ -27734,8 +27734,8 @@ var manageScholars = new Vue({
       toastr.warning(response.data.message);
       this.reloadData();
     },
-    showAddTag: function showAddTag() {
-      $('#addTagModal').modal('show');
+    showAddScholar: function showAddScholar() {
+      $('#addScholarModal').modal('show');
     }
   },
   components: {
@@ -27749,7 +27749,9 @@ var manageScholars = new Vue({
       return _this.assignData(response);
     });
 
-    // eventBus.$on('tagAdded', response => this.refetchData(response));
+    eventBus.$on('scholarAdded', function (response) {
+      return _this.refetchData(response);
+    });
     // eventBus.$on('tagDeleted', response => this.afterTagDelete(response));
   }
 });
@@ -27812,6 +27814,14 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addScholar__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addScholar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__addScholar__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -27854,7 +27864,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-// import addScholar from './addScholar';
+
 // import addScholarTranslation from './addScholarTranslation';
 // import editScholarTranslation from './editScholarTranslation';
 
@@ -27889,12 +27899,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             }
         }
+    },
+    components: {
+        addScholar: __WEBPACK_IMPORTED_MODULE_0__addScholar___default.a
+        /*addScholarTranslation,
+        editScholarTranslation*/
     }
-    /*        components: {
-                addScholar,
-                addScholarTranslation,
-                editScholarTranslation
-            }*/
 });
 
 /***/ }),
@@ -27905,136 +27915,165 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.scholars.length
-      ? _c(
-          "table",
-          { staticClass: "table table-responsive table-bordered text-center" },
-          [
-            _c("thead", [
-              _c(
-                "tr",
-                [
-                  _vm._l(_vm.locales, function(locale) {
-                    return _c("th", [
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(locale.native) +
-                          "\n                    "
-                      )
-                    ])
-                  }),
-                  _vm._v(" "),
-                  _c("th")
-                ],
-                2
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.scholars, function(scholar) {
-                return _c(
+  return _c(
+    "div",
+    [
+      _vm.scholars.length
+        ? _c(
+            "table",
+            {
+              staticClass: "table table-responsive table-bordered text-center"
+            },
+            [
+              _c("thead", [
+                _c(
                   "tr",
-                  { key: scholar.id },
                   [
-                    _vm._l(_vm.locales, function(locale, key) {
-                      return _c(
-                        "td",
-                        [
-                          _vm._l(scholar.translations, function(translation) {
-                            return translation.locale == key
-                              ? _c("span", [
-                                  _vm._v(
-                                    "\n                            " +
-                                      _vm._s(translation.name) +
-                                      "\n                            "
-                                  ),
-                                  _c("div", { staticClass: "pull-left" }, [
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-primary",
-                                        on: {
-                                          click: function($event) {
-                                            _vm.editTranslation(translation)
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass: "fa fa-pencil-square-o",
-                                          attrs: { "aria-hidden": "true" }
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-danger",
-                                        on: {
-                                          click: function($event) {
-                                            _vm.deleteTranslation(translation)
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass: "fa fa-trash-o",
-                                          attrs: { "aria-hidden": "true" }
-                                        })
-                                      ]
-                                    )
-                                  ])
-                                ])
-                              : _vm._e()
-                          }),
-                          _vm._v(" "),
-                          !_vm.localeCheck(key, scholar)
-                            ? _c("span", [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-success",
-                                    on: {
-                                      click: function($event) {
-                                        _vm.addTranslation(scholar, key, locale)
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("اضافة ترجمة")]
-                                )
-                              ])
-                            : _vm._e()
-                        ],
-                        2
-                      )
+                    _vm._l(_vm.locales, function(locale) {
+                      return _c("th", [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(locale.native) +
+                            "\n                    "
+                        )
+                      ])
                     }),
                     _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger",
-                          on: {
-                            click: function($event) {
-                              _vm.deleteScholar(scholar)
-                            }
-                          }
-                        },
-                        [_vm._v("حذف التصنيف")]
-                      )
-                    ])
+                    _c("th")
                   ],
                   2
                 )
-              })
-            )
-          ]
-        )
-      : _vm._e()
-  ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.scholars, function(scholar) {
+                  return _c(
+                    "tr",
+                    { key: scholar.id },
+                    [
+                      _vm._l(_vm.locales, function(locale, key) {
+                        return _c(
+                          "td",
+                          [
+                            _vm._l(scholar.translations, function(translation) {
+                              return translation.locale == key
+                                ? _c("span", [
+                                    _vm._v(
+                                      "\n                            " +
+                                        _vm._s(translation.name) +
+                                        "\n                            "
+                                    ),
+                                    _c("div", { staticClass: "pull-left" }, [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-primary",
+                                          on: {
+                                            click: function($event) {
+                                              _vm.editTranslation(translation)
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "fa fa-pencil-square-o",
+                                            attrs: { "aria-hidden": "true" }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-danger",
+                                          on: {
+                                            click: function($event) {
+                                              _vm.deleteTranslation(translation)
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fa fa-trash-o",
+                                            attrs: { "aria-hidden": "true" }
+                                          })
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", [
+                                      !translation.published
+                                        ? _c("i", {
+                                            staticClass: "fa fa-close red",
+                                            attrs: { "aria-hidden": "true" }
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      translation.published
+                                        ? _c("i", {
+                                            staticClass: "fa fa-check green",
+                                            attrs: { "aria-hidden": "true" }
+                                          })
+                                        : _vm._e()
+                                    ])
+                                  ])
+                                : _vm._e()
+                            }),
+                            _vm._v(" "),
+                            !_vm.localeCheck(key, scholar)
+                              ? _c("span", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-success",
+                                      on: {
+                                        click: function($event) {
+                                          _vm.addTranslation(
+                                            scholar,
+                                            key,
+                                            locale
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("اضافة ترجمة")]
+                                  )
+                                ])
+                              : _vm._e()
+                          ],
+                          2
+                        )
+                      }),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            on: {
+                              click: function($event) {
+                                _vm.deleteScholar(scholar)
+                              }
+                            }
+                          },
+                          [_vm._v("حذف التصنيف")]
+                        )
+                      ])
+                    ],
+                    2
+                  )
+                })
+              )
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c("add-scholar", { attrs: { locales: _vm.locales } })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -28043,6 +28082,499 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-511587bc", module.exports)
+  }
+}
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(97)
+/* template */
+var __vue_template__ = __webpack_require__(98)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\admin\\components\\scholars\\addScholar.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-118491da", Component.options)
+  } else {
+    hotAPI.reload("data-v-118491da", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 97 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['locales'],
+    data: function data() {
+        return {
+            addScholarForm: new Form({
+                locale: '',
+                name: '',
+                biography: '',
+                published: ''
+            })
+        };
+    },
+
+    methods: {
+        onScholarCreate: function onScholarCreate() {
+            this.addScholarForm.post(window.location.pathname).then(function (response) {
+                return eventBus.$emit('scholarAdded', response);
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 98 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "addScholarModal",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "myModalLabel"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
+            _c(
+              "form",
+              {
+                attrs: { method: "POST", action: "/" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    _vm.onScholarCreate($event)
+                  },
+                  keydown: function($event) {
+                    _vm.addScholarForm.errors.clear($event.target.name)
+                  },
+                  change: function($event) {
+                    _vm.addScholarForm.errors.clear($event.target.name)
+                  },
+                  input: function($event) {
+                    _vm.addScholarForm.errors.clear($event.target.name)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "locale" } },
+                    [_vm._v("اللغة:")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.addScholarForm.locale,
+                          expression: "addScholarForm.locale"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "locale", name: "locale" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.addScholarForm,
+                            "locale",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    _vm._l(_vm.locales, function(locale, key) {
+                      return _c("option", { domProps: { value: key } }, [
+                        _vm._v(_vm._s(locale.native))
+                      ])
+                    })
+                  ),
+                  _vm._v(" "),
+                  _vm.addScholarForm.errors.has("locale")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.addScholarForm.errors.get("locale")
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "name" } },
+                    [_vm._v("اسم العالم او القارئ:")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.addScholarForm.name,
+                        expression: "addScholarForm.name"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "name", name: "name" },
+                    domProps: { value: _vm.addScholarForm.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.addScholarForm,
+                          "name",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.addScholarForm.errors.has("name")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.addScholarForm.errors.get("name")
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "biography" } },
+                    [_vm._v("السيرة الذاتية:")]
+                  ),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.addScholarForm.biography,
+                        expression: "addScholarForm.biography"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "biography",
+                      name: "biography",
+                      rows: "5"
+                    },
+                    domProps: { value: _vm.addScholarForm.biography },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.addScholarForm,
+                          "biography",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.addScholarForm.errors.has("biography")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.addScholarForm.errors.get("biography")
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "published" } },
+                    [_vm._v("حالة النشر:")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.addScholarForm.published,
+                        expression: "addScholarForm.published",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    attrs: { type: "radio", id: "published", value: "1" },
+                    domProps: {
+                      checked: _vm._q(_vm.addScholarForm.published, _vm._n("1"))
+                    },
+                    on: {
+                      change: function($event) {
+                        _vm.$set(_vm.addScholarForm, "published", _vm._n("1"))
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.addScholarForm.published,
+                        expression: "addScholarForm.published",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    attrs: { type: "radio", id: "published", value: "0" },
+                    domProps: {
+                      checked: _vm._q(_vm.addScholarForm.published, _vm._n("0"))
+                    },
+                    on: {
+                      change: function($event) {
+                        _vm.$set(_vm.addScholarForm, "published", _vm._n("0"))
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm.addScholarForm.errors.has("published")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.addScholarForm.errors.get("published")
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group text-center" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "button btn-lg btn-success",
+                      attrs: { disabled: _vm.addScholarForm.errors.any() }
+                    },
+                    [_vm._v("اضافة")]
+                  )
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("span", { staticClass: "form-control-static text-center" }, [
+        _c(
+          "h4",
+          { staticClass: "modal-title", attrs: { id: "myModalLabel" } },
+          [_vm._v(" اضافة عالم او قارئ ")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _vm._v("نعم "),
+      _c("i", {
+        staticClass: "fa fa-check green",
+        attrs: { "aria-hidden": "true" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _vm._v("لا "),
+      _c("i", {
+        staticClass: "fa fa-close red",
+        attrs: { "aria-hidden": "true" }
+      })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-118491da", module.exports)
   }
 }
 

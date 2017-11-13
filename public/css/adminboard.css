@@ -117,3 +117,7 @@ table a {
 .green {
   color: green;
 }
+
+textarea {
+  resize: none;
+}

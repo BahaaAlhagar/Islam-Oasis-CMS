@@ -16,7 +16,7 @@
 		من الافضل اضافة العالم بكل اللغات
 		</span>
 		<span class="col-md-2 text-center">
-			<button @click="showAddTag" class="btn btn-success pull-left">اضافة عالم</button>
+			<button @click="showAddScholar()" class="btn btn-success pull-left">اضافة عالم</button>
 		</span>
 		
 		<scholars-table :scholars="scholars" :locales="{{ json_encode(LaravelLocalization::getSupportedLocales()) }}"></scholars-table>
