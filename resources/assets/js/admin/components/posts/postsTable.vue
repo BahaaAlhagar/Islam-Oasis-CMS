@@ -24,7 +24,7 @@
                             </div>
                         </span>
                         <span v-if="!localeCheck(key, post)">
-                             <button @click="" class="btn btn-success">اضافة ترجمة</button>
+                             <button @click="addTranslation(post, key)" class="btn btn-success">اضافة ترجمة</button>
                         </span>
                     </td>
                     <td>
@@ -34,8 +34,8 @@
             </tbody>
         </table>
         <add-post :type="type" :tags="tags" :locales="locales"></add-post>
-        <!-- <add-tag-translation :locales="locales"></add-tag-translation>
-        <edit-tag-translation :locales="locales"></edit-tag-translation> -->
+        <add-post-translation :type="type" :tags="tags" :locales="locales"></add-post-translation>
+        <!-- <edit-post-translation :locales="locales"></edit-post-translation> -->
     </div>
 </template>
 
@@ -43,24 +43,24 @@
 <script>
 
     import addPost from './addPost';
-/*    import addTagTranslation from './addTagTranslation';
-    import editTagTranslation from './editTagTranslation';*/
+    import addPostTranslation from './addPostTranslation';
+/*    import editTagTranslation from './editTagTranslation';*/
 
 	export default {
         props: ['posts', 'locales', 'type', 'tags'],
         methods: {
-            localeCheck(key, tag){
-                let trans = tag.translations;
+            localeCheck(key, post){
+                let trans = post.translations;
                 for (var i = 0; i < trans.length; i++) {
                     if(trans[i].locale == key){
                         return true;
                     }
                 }
             },
-/*            addTranslation(tag, key){
-                eventBus.$emit('addTagTranslation', tag, key);
+            addTranslation(post, key){
+                eventBus.$emit('addPostTranslation', post, key);
             },
-            editTranslation(translation){
+/*            editTranslation(translation){
                 eventBus.$emit('editTagTranslation', translation);
             },
             deleteTranslation(translation){
@@ -77,10 +77,9 @@
             }*/
         },
         components: {
-            addPost
-            /*
-            addTagTranslation,
-            editTagTranslation*/
+            addPost,
+            addPostTranslation
+            /*editTagTranslation*/
         }
     }
 </script>

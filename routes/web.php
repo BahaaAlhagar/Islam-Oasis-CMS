@@ -28,7 +28,8 @@ route::view('/', 'admin/adminIndex');
 
 // posts routes
 route::get('posts/{type}/{locale?}', 'PostController@index')->name('posts.index');
-route::resource('posts', 'PostController')->only('store', 'update', 'destroy');
+route::post('posts/{post?}', 'PostController@store')->name('posts.store');
+route::resource('posts', 'PostController')->only('update', 'destroy');
 
 // tags routes
 route::post('tags/{tag?}', 'TagController@store')->name('tags.store');

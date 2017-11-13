@@ -27,12 +27,12 @@ class PostController extends Controller
         if(!$locale)
         {
             $posts = Post::where('type', $type)
-                    ->with('translations', 'photo')
+                    ->with('translations', 'photo', 'tags')
                     ->latest()->paginate(10);
         } else {
             $posts = Post::translatedIn($locale)
                     ->where('type', $type)
-                    ->with('translations', 'photo')
+                    ->with('translations', 'photo', 'tags')
                     ->latest()->paginate(10);
         }
 
@@ -49,14 +49,21 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(storePostRequest $request)
+    public function store(storePostRequest $request, Post $post = null)
     {
-        return request();
+        $tags = array_column($request->tags, 'tag_id');
+
+        if($post)
+        {
+            $post->translations()->create($request->except('type', 'tags'));
+            $post->tags()->sync($tags);
+
+            return ['message' => 'تم اضافة الترجمة بنجاح'];
+        }
+
         $user = auth()->user();
         $post = $user->posts()->create($request->only('type'));
         $post->translations()->create($request->except('type', 'tags'));
-
-        $tags = array_column($request->tags, 'tag_id');
         $post->tags()->attach($tags);
 
         return ['message' => 'تمت الاضافة بنجاح'];

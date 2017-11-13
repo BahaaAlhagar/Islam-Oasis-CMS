@@ -36,7 +36,8 @@ return [
     | As a default locale, Translatable takes the locale of Laravel's
     | translator. If for some reason you want to override this,
     | you can specify what default should be used here.
-    |
+    | do not set the default language here to null or to set it to language
+    | that isnt used by the application
     */
     'locale' => 'ar',
 
