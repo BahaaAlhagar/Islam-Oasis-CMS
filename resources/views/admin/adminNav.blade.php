@@ -28,6 +28,10 @@
 					التصنيفات
 				</a>
 
+				<a href="{{ route('scholars.index') }}" class="list-group-item">
+					العلماء و القراء
+				</a>
+
 
 			</ul>
 	  </div>

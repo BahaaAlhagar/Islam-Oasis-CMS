@@ -15,7 +15,7 @@ class ScholarController extends Controller
      */
     public function index()
     {
-        $scholars = Scholar::with('translations')->latest()->paginate(10);
+        $scholars = Scholar::with('translations', 'photo')->latest()->paginate(10);
 
         return $this->makeResponse('admin/scholars/manageScholars', compact('scholars'));
     }

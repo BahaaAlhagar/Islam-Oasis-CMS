@@ -35,13 +35,11 @@ route::resource('posts', 'PostController')->only('update', 'destroy');
 // tags routes
 route::post('tags/{tag?}', 'TagController@store')->name('tags.store');
 route::delete('tagtranslation/{translation}', 'TagController@deleteTranslation');
-route::patch('tags/{tag}', 'TagController@update')->name('tags.update');
-route::resource('tags', 'TagController')->only('index', 'destroy');
+route::resource('tags', 'TagController')->only('index', 'update', 'destroy');
 
 // scholars routes
 route::post('scholars/{scholar?}', 'ScholarController@store')->name('scholars.store');
 route::delete('scholartranslation/{translation}', 'ScholarController@deleteTranslation');
-route::patch('scholars/{scholar}', 'ScholarController@update')->name('scholars.update');
-route::resource('scholars', 'ScholarController')->only('index', 'destroy');
+route::resource('scholars', 'ScholarController')->only('index', 'update', 'destroy');
 
 });
