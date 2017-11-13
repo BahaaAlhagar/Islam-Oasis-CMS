@@ -374,7 +374,115 @@ module.exports = {
 
 
 /***/ }),
-/* 1 */,
+/* 1 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file.
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27579,11 +27687,13 @@ module.exports = __webpack_require__(92);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_paginator__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_paginator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuejs_paginator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_scholars_scholarsTable__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_scholars_scholarsTable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_scholars_scholarsTable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_paginator__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_paginator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuejs_paginator__);
 __webpack_require__(11);
 
-// import scholarsTable from './components/scholars/scholarsTable';
+
 
 
 window.toastr = __webpack_require__(52);
@@ -27629,8 +27739,8 @@ var manageScholars = new Vue({
     }
   },
   components: {
-    // scholarsTable,
-    VPaginator: __WEBPACK_IMPORTED_MODULE_0_vuejs_paginator___default.a
+    scholarsTable: __WEBPACK_IMPORTED_MODULE_0__components_scholars_scholarsTable___default.a,
+    VPaginator: __WEBPACK_IMPORTED_MODULE_1_vuejs_paginator___default.a
   },
   mounted: function mounted() {
     var _this = this;
@@ -27647,6 +27757,294 @@ var manageScholars = new Vue({
 toastr.options = {
   "positionClass": "toast-bottom-right"
 };
+
+/***/ }),
+/* 93 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(94)
+/* template */
+var __vue_template__ = __webpack_require__(95)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\admin\\components\\scholars\\scholarsTable.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-511587bc", Component.options)
+  } else {
+    hotAPI.reload("data-v-511587bc", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 94 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+// import addScholar from './addScholar';
+// import addScholarTranslation from './addScholarTranslation';
+// import editScholarTranslation from './editScholarTranslation';
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['scholars', 'locales'],
+    methods: {
+        localeCheck: function localeCheck(key, scholar) {
+            var trans = scholar.translations;
+            for (var i = 0; i < trans.length; i++) {
+                if (trans[i].locale == key) {
+                    return true;
+                }
+            }
+        },
+        addTranslation: function addTranslation(scholar, key) {
+            eventBus.$emit('addScholarTranslation', scholar, key);
+        },
+        editTranslation: function editTranslation(translation) {
+            eventBus.$emit('editScholarTranslation', translation);
+        },
+        deleteTranslation: function deleteTranslation(translation) {
+            if (confirm('هل انت متأكد من حذف هذه الترجمة؟')) {
+                axios.delete('/admincp/scholartranslation/' + translation.id).then(function (response) {
+                    return eventBus.$emit('scholarDeleted', response);
+                });
+            }
+        },
+        deleteScholar: function deleteScholar(scholar) {
+            if (confirm('هل انت متأكد من حذف هذا التصنيف؟')) {
+                axios.delete(window.location.pathname + '/' + scholar.id).then(function (response) {
+                    return eventBus.$emit('scholarDeleted', response);
+                });
+            }
+        }
+    }
+    /*        components: {
+                addScholar,
+                addScholarTranslation,
+                editScholarTranslation
+            }*/
+});
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.scholars.length
+      ? _c(
+          "table",
+          { staticClass: "table table-responsive table-bordered text-center" },
+          [
+            _c("thead", [
+              _c(
+                "tr",
+                [
+                  _vm._l(_vm.locales, function(locale) {
+                    return _c("th", [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(locale.native) +
+                          "\n                    "
+                      )
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("th")
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.scholars, function(scholar) {
+                return _c(
+                  "tr",
+                  { key: scholar.id },
+                  [
+                    _vm._l(_vm.locales, function(locale, key) {
+                      return _c(
+                        "td",
+                        [
+                          _vm._l(scholar.translations, function(translation) {
+                            return translation.locale == key
+                              ? _c("span", [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(translation.name) +
+                                      "\n                            "
+                                  ),
+                                  _c("div", { staticClass: "pull-left" }, [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-primary",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.editTranslation(translation)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fa fa-pencil-square-o",
+                                          attrs: { "aria-hidden": "true" }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-danger",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.deleteTranslation(translation)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fa fa-trash-o",
+                                          attrs: { "aria-hidden": "true" }
+                                        })
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              : _vm._e()
+                          }),
+                          _vm._v(" "),
+                          !_vm.localeCheck(key, scholar)
+                            ? _c("span", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-success",
+                                    on: {
+                                      click: function($event) {
+                                        _vm.addTranslation(scholar, key, locale)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("اضافة ترجمة")]
+                                )
+                              ])
+                            : _vm._e()
+                        ],
+                        2
+                      )
+                    }),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          on: {
+                            click: function($event) {
+                              _vm.deleteScholar(scholar)
+                            }
+                          }
+                        },
+                        [_vm._v("حذف التصنيف")]
+                      )
+                    ])
+                  ],
+                  2
+                )
+              })
+            )
+          ]
+        )
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-511587bc", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

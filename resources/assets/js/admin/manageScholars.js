@@ -1,6 +1,6 @@
 require('../bootstrap');
 
-// import scholarsTable from './components/scholars/scholarsTable';
+import scholarsTable from './components/scholars/scholarsTable';
 import VuePaginator from 'vuejs-paginator';
 
 window.toastr = require('toastr');
@@ -47,7 +47,7 @@ const manageScholars = new Vue({
       }
     },
     components: {
-    	// scholarsTable,
+    	scholarsTable,
         VPaginator: VuePaginator
     },
     mounted(){

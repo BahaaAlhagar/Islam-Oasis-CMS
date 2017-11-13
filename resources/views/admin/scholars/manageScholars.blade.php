@@ -19,7 +19,7 @@
 			<button @click="showAddTag" class="btn btn-success pull-left">اضافة عالم</button>
 		</span>
 		
-		<!-- <scholars-table :scholars="scholars" :locales="{{ json_encode(LaravelLocalization::getSupportedLocales()) }}"></scholars-table> -->
+		<scholars-table :scholars="scholars" :locales="{{ json_encode(LaravelLocalization::getSupportedLocales()) }}"></scholars-table>
 
         <v-paginator class="text-center" v-show="scholars.length" :options="options" ref="VP" :resource_url="resource_url" @update="updateResource"></v-paginator>
 	</div>
