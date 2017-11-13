@@ -77,8 +77,8 @@
             },
             deleteTranslation(translation){
                 if(confirm('هل انت متأكد من حذف هذه الترجمة؟')){
-                    axios.delete('/admincp/tagtranslation/' + translation.id)
-                        .then(response => eventBus.$emit('tagDeleted', response));
+                    axios.delete('/admincp/posttranslation/' + translation.id)
+                        .then(response => eventBus.$emit('postDeleted', response));
                 }
             },
             deletePost(post){

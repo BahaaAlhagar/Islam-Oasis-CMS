@@ -27896,8 +27896,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         deleteTranslation: function deleteTranslation(translation) {
             if (confirm('هل انت متأكد من حذف هذه الترجمة؟')) {
-                axios.delete('/admincp/tagtranslation/' + translation.id).then(function (response) {
-                    return eventBus.$emit('tagDeleted', response);
+                axios.delete('/admincp/posttranslation/' + translation.id).then(function (response) {
+                    return eventBus.$emit('postDeleted', response);
                 });
             }
         },

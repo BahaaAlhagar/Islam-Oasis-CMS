@@ -112,4 +112,18 @@ class PostController extends Controller
 
         return ['message' => 'تم حذف المنشور'];
     }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteTranslation(PostTranslation $translation)
+    {
+        $translation->delete();
+
+        return ['message' => 'تم حذف ترجمة المنشور'];
+    }
 }

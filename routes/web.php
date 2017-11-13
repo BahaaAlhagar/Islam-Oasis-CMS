@@ -29,6 +29,7 @@ route::view('/', 'admin/adminIndex');
 // posts routes
 route::get('posts/{type}/{locale?}', 'PostController@index')->name('posts.index');
 route::post('posts/{post?}', 'PostController@store')->name('posts.store');
+route::delete('posttranslation/{translation}', 'PostController@deleteTranslation');
 route::resource('posts', 'PostController')->only('update', 'destroy');
 
 // tags routes
