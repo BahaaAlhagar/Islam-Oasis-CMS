@@ -50,10 +50,10 @@
                             <label for="published" class="label">حالة النشر:</label>
                             
                             <input type="radio" id="published" value="1" v-model.number="addPostForm.published">
-                            <label>نعم</label>
+                            <label>نعم <i class="fa fa-check green" aria-hidden="true"></i></label>
 
                             <input type="radio" id="published" value="0" v-model.number="addPostForm.published">
-                            <label>لا</label>
+                            <label>لا <i class="fa fa-close red" aria-hidden="true"></i></label>
                             <br>
 
                             <span class="alert-danger" v-if="addPostForm.errors.has('published')" v-text="addPostForm.errors.get('published')"></span>

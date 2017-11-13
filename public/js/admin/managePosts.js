@@ -27813,6 +27813,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addPost___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__addPost__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addPostTranslation__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addPostTranslation___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__addPostTranslation__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__editPost__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__editPost___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__editPost__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -27859,7 +27871,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-/*    import editTagTranslation from './editTagTranslation';*/
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['posts', 'locales', 'type', 'tags'],
@@ -27874,12 +27886,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         addTranslation: function addTranslation(post, key) {
             eventBus.$emit('addPostTranslation', post, key);
+        },
+        editPost: function editPost(post, translation) {
+            eventBus.$emit('editPost', post, translation);
         }
     },
     components: {
         addPost: __WEBPACK_IMPORTED_MODULE_0__addPost___default.a,
-        addPostTranslation: __WEBPACK_IMPORTED_MODULE_1__addPostTranslation___default.a
-        /*editTagTranslation*/
+        addPostTranslation: __WEBPACK_IMPORTED_MODULE_1__addPostTranslation___default.a,
+        editPost: __WEBPACK_IMPORTED_MODULE_2__editPost___default.a
     }
 });
 
@@ -31019,7 +31034,7 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _c("label", [_vm._v("نعم")]),
+                    _vm._m(1),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -31042,7 +31057,7 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _c("label", [_vm._v("لا")]),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c("br"),
                     _vm._v(" "),
@@ -31062,7 +31077,7 @@ var render = function() {
                     "div",
                     { staticClass: "form-group" },
                     [
-                      _vm._m(1),
+                      _vm._m(3),
                       _vm._v(" "),
                       _c("v-select", {
                         attrs: {
@@ -31136,6 +31151,30 @@ var staticRenderFns = [
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _vm._v("نعم "),
+      _c("i", {
+        staticClass: "fa fa-check green",
+        attrs: { "aria-hidden": "true" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _vm._v("لا "),
+      _c("i", {
+        staticClass: "fa fa-close red",
+        attrs: { "aria-hidden": "true" }
+      })
+    ])
   },
   function() {
     var _vm = this
@@ -31222,7 +31261,7 @@ var render = function() {
                                           staticClass: "btn btn-primary",
                                           on: {
                                             click: function($event) {
-                                              _vm.editTranslation(translation)
+                                              _vm.editPost(post, translation)
                                             }
                                           }
                                         },
@@ -31252,6 +31291,22 @@ var render = function() {
                                           })
                                         ]
                                       )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", [
+                                      !translation.published
+                                        ? _c("i", {
+                                            staticClass: "fa fa-close red",
+                                            attrs: { "aria-hidden": "true" }
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      translation.published
+                                        ? _c("i", {
+                                            staticClass: "fa fa-check green",
+                                            attrs: { "aria-hidden": "true" }
+                                          })
+                                        : _vm._e()
                                     ])
                                   ])
                                 : _vm._e()
@@ -31302,6 +31357,10 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("add-post-translation", {
+        attrs: { type: _vm.type, tags: _vm.tags, locales: _vm.locales }
+      }),
+      _vm._v(" "),
+      _c("edit-post", {
         attrs: { type: _vm.type, tags: _vm.tags, locales: _vm.locales }
       })
     ],
@@ -31777,7 +31836,7 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _c("label", [_vm._v("نعم")]),
+                    _vm._m(1),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -31807,7 +31866,7 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _c("label", [_vm._v("لا")]),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c("br"),
                     _vm._v(" "),
@@ -31827,7 +31886,7 @@ var render = function() {
                     "div",
                     { staticClass: "form-group" },
                     [
-                      _vm._m(1),
+                      _vm._m(3),
                       _vm._v(" "),
                       _c("v-select", {
                         attrs: {
@@ -31908,6 +31967,30 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("label", [
+      _vm._v("نعم "),
+      _c("i", {
+        staticClass: "fa fa-check green",
+        attrs: { "aria-hidden": "true" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _vm._v("لا "),
+      _c("i", {
+        staticClass: "fa fa-close red",
+        attrs: { "aria-hidden": "true" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("label", { staticClass: "label", attrs: { for: "tags" } }, [
       _vm._v("التصنيفات: "),
       _c("span", { staticStyle: { color: "green" } }, [
@@ -31922,6 +32005,617 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-2804917a", module.exports)
+  }
+}
+
+/***/ }),
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(89)
+/* template */
+var __vue_template__ = __webpack_require__(90)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\admin\\components\\posts\\editPost.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-559b3ebd", Component.options)
+  } else {
+    hotAPI.reload("data-v-559b3ebd", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 89 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_trumbowyg__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_trumbowyg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_trumbowyg__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_trumbowyg_dist_ui_trumbowyg_css__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_trumbowyg_dist_ui_trumbowyg_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_trumbowyg_dist_ui_trumbowyg_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_select__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_select___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_select__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['locales', 'tags', 'type'],
+    data: function data() {
+        return {
+            editPostForm: new Form({
+                type: this.$props.type,
+                locale: '',
+                title: '',
+                content: '',
+                published: 1,
+                tags: []
+            }),
+            post_id: ''
+        };
+    },
+
+    methods: {
+        onPostCreate: function onPostCreate() {
+            this.editPostForm.patch('/admincp/posts/' + this.post_id).then(function (response) {
+                return eventBus.$emit('postAdded', response);
+            });
+        },
+        editPostModal: function editPostModal(post, translation) {
+            this.editPostForm.type = post.type;
+            this.editPostForm.tags = post.tags;
+            this.editPostForm.locale = translation.locale;
+            this.editPostForm.title = translation.title;
+            this.editPostForm.content = translation.content;
+            this.editPostForm.published = translation.published;
+            this.post_id = post.id;
+            $('#editPostForm').modal('show');
+        }
+    },
+    components: {
+        trumbowyg: __WEBPACK_IMPORTED_MODULE_0_vue_trumbowyg___default.a,
+        vSelect: __WEBPACK_IMPORTED_MODULE_2_vue_select___default.a
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        eventBus.$on('editPost', function (post, translation) {
+            return _this.editPostModal(post, translation);
+        });
+    }
+});
+
+/***/ }),
+/* 90 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "editPostForm",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "myModalLabel"
+      }
+    },
+    [
+      _c(
+        "div",
+        { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("span", { staticClass: "form-control-static text-center" }, [
+                _vm.type == 1
+                  ? _c(
+                      "h4",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "myModalLabel" }
+                      },
+                      [_vm._v(" تعديل ترجمة لخبر ")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.type == 2
+                  ? _c(
+                      "h4",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "myModalLabel" }
+                      },
+                      [_vm._v(" تعديل ترجمة لدرس او محاضرة ")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.type == 3
+                  ? _c(
+                      "h4",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "myModalLabel" }
+                      },
+                      [_vm._v(" تعديل ترجمة لقصة ")]
+                    )
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c(
+                "form",
+                {
+                  attrs: { method: "POST", action: "/" },
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      _vm.onPostCreate($event)
+                    },
+                    keydown: function($event) {
+                      _vm.editPostForm.errors.clear($event.target.name)
+                    },
+                    change: function($event) {
+                      _vm.editPostForm.errors.clear($event.target.name)
+                    },
+                    input: function($event) {
+                      _vm.editPostForm.errors.clear($event.target.name)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      { staticClass: "label", attrs: { for: "locale" } },
+                      [_vm._v("اللغة:")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editPostForm.locale,
+                            expression: "editPostForm.locale"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "locale", name: "locale", disabled: "" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.editPostForm,
+                              "locale",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      _vm._l(_vm.locales, function(locale, key) {
+                        return _c("option", { domProps: { value: key } }, [
+                          _vm._v(_vm._s(locale.native))
+                        ])
+                      })
+                    ),
+                    _vm._v(" "),
+                    _vm.editPostForm.errors.has("locale")
+                      ? _c("span", {
+                          staticClass: "alert-danger",
+                          domProps: {
+                            textContent: _vm._s(
+                              _vm.editPostForm.errors.get("locale")
+                            )
+                          }
+                        })
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      { staticClass: "label", attrs: { for: "title" } },
+                      [_vm._v("العنوان:")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.editPostForm.title,
+                          expression: "editPostForm.title"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", id: "name", name: "title" },
+                      domProps: { value: _vm.editPostForm.title },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.editPostForm,
+                            "title",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.editPostForm.errors.has("title")
+                      ? _c("span", {
+                          staticClass: "alert-danger",
+                          domProps: {
+                            textContent: _vm._s(
+                              _vm.editPostForm.errors.get("title")
+                            )
+                          }
+                        })
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c(
+                        "label",
+                        { staticClass: "label", attrs: { for: "content" } },
+                        [_vm._v("المحتوى:")]
+                      ),
+                      _vm._v(" "),
+                      _c("trumbowyg", {
+                        attrs: { name: "editPostForm.content" },
+                        model: {
+                          value: _vm.editPostForm.content,
+                          callback: function($$v) {
+                            _vm.$set(_vm.editPostForm, "content", $$v)
+                          },
+                          expression: "editPostForm.content"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.editPostForm.errors.has("content")
+                        ? _c("span", {
+                            staticClass: "alert-danger",
+                            domProps: {
+                              textContent: _vm._s(
+                                _vm.editPostForm.errors.get("content")
+                              )
+                            }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      { staticClass: "label", attrs: { for: "published" } },
+                      [_vm._v("حالة النشر:")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model.number",
+                          value: _vm.editPostForm.published,
+                          expression: "editPostForm.published",
+                          modifiers: { number: true }
+                        }
+                      ],
+                      attrs: { type: "radio", id: "published", value: "1" },
+                      domProps: {
+                        checked: _vm._q(_vm.editPostForm.published, _vm._n("1"))
+                      },
+                      on: {
+                        change: function($event) {
+                          _vm.$set(_vm.editPostForm, "published", _vm._n("1"))
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model.number",
+                          value: _vm.editPostForm.published,
+                          expression: "editPostForm.published",
+                          modifiers: { number: true }
+                        }
+                      ],
+                      attrs: { type: "radio", id: "published", value: "0" },
+                      domProps: {
+                        checked: _vm._q(_vm.editPostForm.published, _vm._n("0"))
+                      },
+                      on: {
+                        change: function($event) {
+                          _vm.$set(_vm.editPostForm, "published", _vm._n("0"))
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _vm.editPostForm.errors.has("published")
+                      ? _c("span", {
+                          staticClass: "alert-danger",
+                          domProps: {
+                            textContent: _vm._s(
+                              _vm.editPostForm.errors.get("published")
+                            )
+                          }
+                        })
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c("v-select", {
+                        attrs: {
+                          label: "name",
+                          options: _vm.tags,
+                          multiple: "",
+                          id: "tags",
+                          name: "tags[]"
+                        },
+                        on: {
+                          input: function($event) {
+                            _vm.editPostForm.errors.clear("tags")
+                          }
+                        },
+                        model: {
+                          value: _vm.editPostForm.tags,
+                          callback: function($$v) {
+                            _vm.$set(_vm.editPostForm, "tags", $$v)
+                          },
+                          expression: "editPostForm.tags"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.editPostForm.errors.has("tags")
+                        ? _c("span", {
+                            staticClass: "alert-danger",
+                            domProps: {
+                              textContent: _vm._s(
+                                _vm.editPostForm.errors.get("tags")
+                              )
+                            }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group text-center" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "button btn-lg btn-success",
+                        attrs: { disabled: _vm.editPostForm.errors.any() }
+                      },
+                      [_vm._v("تعديل الترجمة")]
+                    )
+                  ])
+                ]
+              )
+            ])
+          ])
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _vm._v("نعم "),
+      _c("i", {
+        staticClass: "fa fa-check green",
+        attrs: { "aria-hidden": "true" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _vm._v("لا "),
+      _c("i", {
+        staticClass: "fa fa-close red",
+        attrs: { "aria-hidden": "true" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "label", attrs: { for: "tags" } }, [
+      _vm._v("التصنيفات: "),
+      _c("span", { staticStyle: { color: "green" } }, [
+        _vm._v("نفس التصنيفات لجميع ترجمات المنشور")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-559b3ebd", module.exports)
   }
 }
 

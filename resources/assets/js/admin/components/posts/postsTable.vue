@@ -19,8 +19,18 @@
                         <span v-for="translation in post.translations" v-if="translation.locale == key">
                             {{ translation.title }}
                             <div class="pull-left">
-                            <button @click="editTranslation(translation)" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                            <button @click="deleteTranslation(translation)" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+
+                                <!-- edit button -->
+                                <button @click="editPost(post, translation)" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+
+                                <!-- delete button -->
+                                <button @click="deleteTranslation(translation)" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+
+                            </div>
+                            <!-- translation publishing status -->
+                            <div>
+                                <i v-if="!translation.published"class="fa fa-close red" aria-hidden="true"></i>
+                                <i v-if="translation.published"class="fa fa-check green" aria-hidden="true"></i>
                             </div>
                         </span>
                         <span v-if="!localeCheck(key, post)">
@@ -35,7 +45,7 @@
         </table>
         <add-post :type="type" :tags="tags" :locales="locales"></add-post>
         <add-post-translation :type="type" :tags="tags" :locales="locales"></add-post-translation>
-        <!-- <edit-post-translation :locales="locales"></edit-post-translation> -->
+        <edit-post :type="type" :tags="tags" :locales="locales"></edit-post>
     </div>
 </template>
 
@@ -44,7 +54,7 @@
 
     import addPost from './addPost';
     import addPostTranslation from './addPostTranslation';
-/*    import editTagTranslation from './editTagTranslation';*/
+    import editPost from './editPost';
 
 	export default {
         props: ['posts', 'locales', 'type', 'tags'],
@@ -60,10 +70,10 @@
             addTranslation(post, key){
                 eventBus.$emit('addPostTranslation', post, key);
             },
-/*            editTranslation(translation){
-                eventBus.$emit('editTagTranslation', translation);
+            editPost(post, translation){
+                eventBus.$emit('editPost', post, translation);
             },
-            deleteTranslation(translation){
+/*            deleteTranslation(translation){
                 if(confirm('هل انت متأكد من حذف هذه الترجمة؟')){
                     axios.delete('/admincp/tagtranslation/' + translation.id)
                         .then(response => eventBus.$emit('tagDeleted', response));
@@ -78,8 +88,8 @@
         },
         components: {
             addPost,
-            addPostTranslation
-            /*editTagTranslation*/
+            addPostTranslation,
+            editPost
         }
     }
 </script>
