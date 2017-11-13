@@ -13,11 +13,6 @@ class Scholar extends Model
 
     protected $guarded = ['id'];
 
-    public function tags()
-    {
-        return $this->morphToMany(Tag::class, 'taggable');
-    }
-
     public function photo()
     {
         return $this->morphOne(Photo::class, 'photoable');

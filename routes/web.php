@@ -38,4 +38,10 @@ route::delete('tagtranslation/{translation}', 'TagController@deleteTranslation')
 route::patch('tags/{tag}', 'TagController@update')->name('tags.update');
 route::resource('tags', 'TagController')->only('index', 'destroy');
 
+// scholars routes
+route::post('scholars/{scholar?}', 'ScholarController@store')->name('scholars.store');
+route::delete('scholartranslation/{translation}', 'ScholarController@deleteTranslation');
+route::patch('scholars/{scholar}', 'ScholarController@update')->name('scholars.update');
+route::resource('scholars', 'ScholarController')->only('index', 'destroy');
+
 });

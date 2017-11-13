@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Photo;
 use App\Scholar;
 use Illuminate\Http\Request;
 
@@ -14,18 +15,11 @@ class ScholarController extends Controller
      */
     public function index()
     {
-        //
+        $scholars = Scholar::with('translations')->latest()->paginate(10);
+
+        return $this->makeResponse('admin/scholars/manageScholars', compact('scholars'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -33,32 +27,21 @@ class ScholarController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Scholar $scholar = null)
     {
-        //
+        if($scholar)
+        {
+            $scholar->translations()
+                    ->create($request->all());
+
+            return ['message' => 'تم اضافة العالم او القارئ بنجاح'];
+        }
+
+        $scholar = Scholar::create([$request->locale => ['name' => $request->name]]);
+
+        return ['message' => 'تم اضافة العالم او القارئ بنجاح'];
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Scholar  $scholar
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Scholar $scholar)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Scholar  $scholar
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Scholar $scholar)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -67,9 +50,11 @@ class ScholarController extends Controller
      * @param  \App\Scholar  $scholar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Scholar $scholar)
+    public function update(Request $request, ScholarTranslation $scholar)
     {
-        //
+        $scholar->update($request->all());
+
+        return ['message' => 'تم تحديث ترجمة العالم او القارئ'];
     }
 
     /**
@@ -80,6 +65,21 @@ class ScholarController extends Controller
      */
     public function destroy(Scholar $scholar)
     {
-        //
+        $scholar->delete();
+
+        return ['message' => 'تم حذف العالم او القارئ!'];
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Scholar  $scholar
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteTranslation(ScholarTranslation $translation)
+    {
+        $translation->delete();
+
+        return ['message' => 'تم حذف ترجمة العالم او القارئ!'];
     }
 }
