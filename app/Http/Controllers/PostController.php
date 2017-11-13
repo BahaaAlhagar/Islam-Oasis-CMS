@@ -94,7 +94,7 @@ class PostController extends Controller
         $post->update([
             $request->locale => ['title' => $request->title, 'content' => $request->content, 'published' => $request->published]
             ]);
-        
+
         $post->tags()->sync($tags);
 
         return ['message' => 'تم التحديث بنجاح'];
@@ -108,6 +108,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return ['message' => 'تم حذف المنشور'];
     }
 }

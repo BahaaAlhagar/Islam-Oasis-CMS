@@ -27747,7 +27747,9 @@ var managePosts = new Vue({
     eventBus.$on('postAdded', function (response) {
       return _this2.afterPostAdded(response);
     });
-    // eventBus.$on('tagDeleted', response => this.afterTagDelete(response));
+    eventBus.$on('postDeleted', function (response) {
+      return _this2.afterPostDelete(response);
+    });
   }
 });
 
@@ -27867,6 +27869,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -27889,6 +27893,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         editPost: function editPost(post, translation) {
             eventBus.$emit('editPost', post, translation);
+        },
+        deleteTranslation: function deleteTranslation(translation) {
+            if (confirm('هل انت متأكد من حذف هذه الترجمة؟')) {
+                axios.delete('/admincp/tagtranslation/' + translation.id).then(function (response) {
+                    return eventBus.$emit('tagDeleted', response);
+                });
+            }
+        },
+        deletePost: function deletePost(post) {
+            if (confirm('هل انت متأكد من حذف هذا المنشور؟')) {
+                axios.delete('/admincp/posts/' + post.id).then(function (response) {
+                    return eventBus.$emit('postDeleted', response);
+                });
+            }
         }
     },
     components: {
@@ -31334,14 +31352,50 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("td", [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-danger",
-                            on: { click: function($event) {} }
-                          },
-                          [_vm._v("حذف التصنيف")]
-                        )
+                        _vm.type == 1
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                on: {
+                                  click: function($event) {
+                                    _vm.deletePost(post)
+                                  }
+                                }
+                              },
+                              [_vm._v("حذف الخبر")]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.type == 2
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                on: {
+                                  click: function($event) {
+                                    _vm.deletePost(post)
+                                  }
+                                }
+                              },
+                              [_vm._v("حذف الدرس")]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.type == 3
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                on: {
+                                  click: function($event) {
+                                    _vm.deletePost(post)
+                                  }
+                                }
+                              },
+                              [_vm._v("حذف القصة")]
+                            )
+                          : _vm._e()
                       ])
                     ],
                     2

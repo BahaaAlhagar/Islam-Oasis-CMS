@@ -38,7 +38,9 @@
                         </span>
                     </td>
                     <td>
-                        <button @click="" class="btn btn-danger">حذف التصنيف</button>
+                        <button v-if="type == 1" @click="deletePost(post)" class="btn btn-danger">حذف الخبر</button>
+                        <button v-if="type == 2" @click="deletePost(post)" class="btn btn-danger">حذف الدرس</button>
+                        <button v-if="type == 3" @click="deletePost(post)" class="btn btn-danger">حذف القصة</button>
                     </td>
                 </tr>
             </tbody>
@@ -73,18 +75,18 @@
             editPost(post, translation){
                 eventBus.$emit('editPost', post, translation);
             },
-/*            deleteTranslation(translation){
+            deleteTranslation(translation){
                 if(confirm('هل انت متأكد من حذف هذه الترجمة؟')){
                     axios.delete('/admincp/tagtranslation/' + translation.id)
                         .then(response => eventBus.$emit('tagDeleted', response));
                 }
             },
-            deleteTag(tag){
-                if(confirm('هل انت متأكد من حذف هذا التصنيف؟')){
-                    axios.delete(window.location.pathname + '/' + tag.id)
-                        .then(response => eventBus.$emit('tagDeleted', response));
+            deletePost(post){
+                if(confirm('هل انت متأكد من حذف هذا المنشور؟')){
+                    axios.delete('/admincp/posts/' + post.id)
+                        .then(response => eventBus.$emit('postDeleted', response));
                 }
-            }*/
+            }
         },
         components: {
             addPost,

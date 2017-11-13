@@ -72,7 +72,7 @@ const managePosts = new Vue({
     	this.fetchData();
 
       eventBus.$on('postAdded', response => this.afterPostAdded(response));
-      // eventBus.$on('tagDeleted', response => this.afterTagDelete(response));
+      eventBus.$on('postDeleted', response => this.afterPostDelete(response));
     }
 });
 
