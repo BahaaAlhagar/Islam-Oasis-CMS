@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Photo;
 use App\Scholar;
+use App\Http\Requests\storeScholarRequest;
 use Illuminate\Http\Request;
 
 class ScholarController extends Controller
@@ -27,7 +28,7 @@ class ScholarController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Scholar $scholar = null)
+    public function store(storeScholarRequest $request, Scholar $scholar = null)
     {
         if($scholar)
         {
@@ -50,7 +51,7 @@ class ScholarController extends Controller
      * @param  \App\Scholar  $scholar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ScholarTranslation $scholar)
+    public function update(storeScholarRequest $request, ScholarTranslation $scholar)
     {
         $scholar->update($request->all());
 
