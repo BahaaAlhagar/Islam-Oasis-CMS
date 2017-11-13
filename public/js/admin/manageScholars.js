@@ -27816,6 +27816,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addScholar__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addScholar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__addScholar__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addScholarTranslation__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addScholarTranslation___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__addScholarTranslation__);
 //
 //
 //
@@ -27865,7 +27867,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-// import addScholarTranslation from './addScholarTranslation';
+
 // import editScholarTranslation from './editScholarTranslation';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -27901,9 +27903,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     components: {
-        addScholar: __WEBPACK_IMPORTED_MODULE_0__addScholar___default.a
-        /*addScholarTranslation,
-        editScholarTranslation*/
+        addScholar: __WEBPACK_IMPORTED_MODULE_0__addScholar___default.a,
+        addScholarTranslation: __WEBPACK_IMPORTED_MODULE_1__addScholarTranslation___default.a
+        /*editScholarTranslation*/
     }
 });
 
@@ -28070,7 +28072,9 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c("add-scholar", { attrs: { locales: _vm.locales } })
+      _c("add-scholar", { attrs: { locales: _vm.locales } }),
+      _vm._v(" "),
+      _c("add-scholar-translation", { attrs: { locales: _vm.locales } })
     ],
     1
   )
@@ -28575,6 +28579,540 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-118491da", module.exports)
+  }
+}
+
+/***/ }),
+/* 99 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(100)
+/* template */
+var __vue_template__ = __webpack_require__(101)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\admin\\components\\scholars\\addScholarTranslation.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4c93ffb2", Component.options)
+  } else {
+    hotAPI.reload("data-v-4c93ffb2", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 100 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['locales'],
+    data: function data() {
+        return {
+            addScholarTranslationForm: new Form({
+                locale: '',
+                name: '',
+                biography: '',
+                published: ''
+            }),
+            scholar: ''
+        };
+    },
+
+    methods: {
+        onTranslationCreate: function onTranslationCreate() {
+            this.addScholarTranslationForm.post(window.location.pathname + '/' + this.scholar).then(function (response) {
+                return eventBus.$emit('scholarAdded', response);
+            });
+        },
+        prepareModal: function prepareModal(scholar, key) {
+            this.addScholarTranslationForm.locale = key;
+            this.scholar = scholar.id;
+            $('#addScholarTranslation').modal('show');
+        }
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        eventBus.$on('addScholarTranslation', function (scholar, key) {
+            return _this.prepareModal(scholar, key, locale);
+        });
+    }
+});
+
+/***/ }),
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "addScholarTranslation",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "myModalLabel"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
+            _c(
+              "form",
+              {
+                attrs: { method: "POST", action: "/" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    _vm.onTranslationCreate($event)
+                  },
+                  keydown: function($event) {
+                    _vm.addScholarTranslationForm.errors.clear(
+                      $event.target.name
+                    )
+                  },
+                  change: function($event) {
+                    _vm.addScholarTranslationForm.errors.clear(
+                      $event.target.name
+                    )
+                  },
+                  input: function($event) {
+                    _vm.addScholarTranslationForm.errors.clear(
+                      $event.target.name
+                    )
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "locale" } },
+                    [_vm._v("اللغة:")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.addScholarTranslationForm.locale,
+                          expression: "addScholarTranslationForm.locale"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "locale", name: "locale", disabled: "" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.addScholarTranslationForm,
+                            "locale",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    _vm._l(_vm.locales, function(locale, key) {
+                      return _c("option", { domProps: { value: key } }, [
+                        _vm._v(_vm._s(locale.native))
+                      ])
+                    })
+                  ),
+                  _vm._v(" "),
+                  _vm.addScholarTranslationForm.errors.has("locale")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.addScholarTranslationForm.errors.get("locale")
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "name" } },
+                    [_vm._v("اسم العالم او القارئ:")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.addScholarTranslationForm.name,
+                        expression: "addScholarTranslationForm.name"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "name", name: "name" },
+                    domProps: { value: _vm.addScholarTranslationForm.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.addScholarTranslationForm,
+                          "name",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.addScholarTranslationForm.errors.has("name")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.addScholarTranslationForm.errors.get("name")
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "biography" } },
+                    [_vm._v("السيرة الذاتية:")]
+                  ),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.addScholarTranslationForm.biography,
+                        expression: "addScholarTranslationForm.biography"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "biography",
+                      name: "biography",
+                      rows: "5"
+                    },
+                    domProps: {
+                      value: _vm.addScholarTranslationForm.biography
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.addScholarTranslationForm,
+                          "biography",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.addScholarTranslationForm.errors.has("biography")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.addScholarTranslationForm.errors.get(
+                              "biography"
+                            )
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "published" } },
+                    [_vm._v("حالة النشر:")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.addScholarTranslationForm.published,
+                        expression: "addScholarTranslationForm.published",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    attrs: { type: "radio", id: "published", value: "1" },
+                    domProps: {
+                      checked: _vm._q(
+                        _vm.addScholarTranslationForm.published,
+                        _vm._n("1")
+                      )
+                    },
+                    on: {
+                      change: function($event) {
+                        _vm.$set(
+                          _vm.addScholarTranslationForm,
+                          "published",
+                          _vm._n("1")
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.addScholarTranslationForm.published,
+                        expression: "addScholarTranslationForm.published",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    attrs: { type: "radio", id: "published", value: "0" },
+                    domProps: {
+                      checked: _vm._q(
+                        _vm.addScholarTranslationForm.published,
+                        _vm._n("0")
+                      )
+                    },
+                    on: {
+                      change: function($event) {
+                        _vm.$set(
+                          _vm.addScholarTranslationForm,
+                          "published",
+                          _vm._n("0")
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm.addScholarTranslationForm.errors.has("published")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.addScholarTranslationForm.errors.get(
+                              "published"
+                            )
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group text-center" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "button btn-lg btn-success",
+                      attrs: {
+                        disabled: _vm.addScholarTranslationForm.errors.any()
+                      }
+                    },
+                    [_vm._v("اضافة")]
+                  )
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("span", { staticClass: "form-control-static text-center" }, [
+        _c(
+          "h4",
+          { staticClass: "modal-title", attrs: { id: "myModalLabel" } },
+          [_vm._v(" اضافة ترجمة لعالم او قارئ ")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _vm._v("نعم "),
+      _c("i", {
+        staticClass: "fa fa-check green",
+        attrs: { "aria-hidden": "true" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _vm._v("لا "),
+      _c("i", {
+        staticClass: "fa fa-close red",
+        attrs: { "aria-hidden": "true" }
+      })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4c93ffb2", module.exports)
   }
 }
 

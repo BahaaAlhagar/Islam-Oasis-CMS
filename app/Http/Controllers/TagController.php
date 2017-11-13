@@ -35,7 +35,7 @@ class TagController extends Controller
             $tag->translations()
                     ->create($request->all());
 
-            return ['message' => 'تم اضافة التصنيف بنجاح'];
+            return ['message' => 'تم اضافة ترجمة التصنيف بنجاح'];
         }
 
         $tag = Tag::create([$request->locale => ['name' => $request->name]]);

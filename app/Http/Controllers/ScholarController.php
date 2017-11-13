@@ -34,7 +34,7 @@ class ScholarController extends Controller
             $scholar->translations()
                     ->create($request->all());
 
-            return ['message' => 'تم اضافة العالم او القارئ بنجاح'];
+            return ['message' => 'تم اضافة ترجمة العالم او القارئ بنجاح'];
         }
 
         $scholar = Scholar::create([$request->locale => ['name' => $request->name, 'biography' => $request->biography, 'published' => $request->published]]);
