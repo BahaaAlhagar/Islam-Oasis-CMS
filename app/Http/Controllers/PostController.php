@@ -87,9 +87,17 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(storePostRequest $request, Post $post)
     {
+        $tags = array_column($request->tags, 'tag_id');
+
+        $post->update([
+            $request->locale => ['title' => $request->title, 'content' => $request->content, 'published' => $request->published]
+            ]);
         
+        $post->tags()->sync($tags);
+
+        return ['message' => 'تم التحديث بنجاح'];
     }
 
     /**

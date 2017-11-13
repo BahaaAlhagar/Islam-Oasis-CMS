@@ -14,11 +14,6 @@ class Tag extends Model
 
     protected $guarded = ['id'];
 
-    public function translations()
-    {
-        return $this->hasMany(TagTranslation::class);
-    }
-
     public function posts()
     {
     	return $this->morphedByMany(Post::class, 'taggables');
