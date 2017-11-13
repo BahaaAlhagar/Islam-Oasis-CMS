@@ -27730,7 +27730,7 @@ var manageScholars = new Vue({
       toastr.success(response.message);
       this.reloadData();
     },
-    afterTagDelete: function afterTagDelete(response) {
+    afterScholarDeleted: function afterScholarDeleted(response) {
       toastr.warning(response.data.message);
       this.reloadData();
     },
@@ -27752,7 +27752,9 @@ var manageScholars = new Vue({
     eventBus.$on('scholarAdded', function (response) {
       return _this.refetchData(response);
     });
-    // eventBus.$on('tagDeleted', response => this.afterTagDelete(response));
+    eventBus.$on('scholarDeleted', function (response) {
+      return _this.afterScholarDeleted(response);
+    });
   }
 });
 
@@ -27897,7 +27899,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         deleteScholar: function deleteScholar(scholar) {
-            if (confirm('هل انت متأكد من حذف هذا التصنيف؟')) {
+            if (confirm('هل انت متأكد من حذف هذا العالم')) {
                 axios.delete(window.location.pathname + '/' + scholar.id).then(function (response) {
                     return eventBus.$emit('scholarDeleted', response);
                 });
@@ -28062,7 +28064,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("حذف التصنيف")]
+                          [_vm._v("حذف العــالــم")]
                         )
                       ])
                     ],

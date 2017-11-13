@@ -32,7 +32,7 @@
                         </span>
                     </td>
                     <td>
-                        <button @click="deleteScholar(scholar)" class="btn btn-danger">حذف التصنيف</button>
+                        <button @click="deleteScholar(scholar)" class="btn btn-danger">حذف العــالــم</button>
                     </td>
                 </tr>
             </tbody>
@@ -74,7 +74,7 @@
                 }
             },
             deleteScholar(scholar){
-                if(confirm('هل انت متأكد من حذف هذا التصنيف؟')){
+                if(confirm('هل انت متأكد من حذف هذا العالم')){
                     axios.delete(window.location.pathname + '/' + scholar.id)
                         .then(response => eventBus.$emit('scholarDeleted', response));
                 }

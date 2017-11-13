@@ -38,7 +38,7 @@ const manageScholars = new Vue({
         toastr.success(response.message);
         this.reloadData();
       },
-      afterTagDelete(response){
+      afterScholarDeleted(response){
         toastr.warning(response.data.message);
         this.reloadData();
       },
@@ -55,7 +55,7 @@ const manageScholars = new Vue({
     		.then(response => this.assignData(response));
 
       eventBus.$on('scholarAdded', response => this.refetchData(response));
-      // eventBus.$on('tagDeleted', response => this.afterTagDelete(response));
+      eventBus.$on('scholarDeleted', response => this.afterScholarDeleted(response));
     }
 });
 
