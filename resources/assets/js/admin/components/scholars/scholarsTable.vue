@@ -39,7 +39,7 @@
         </table>
         <add-scholar :locales="locales"></add-scholar>
         <add-scholar-translation :locales="locales"></add-scholar-translation>
-        <!-- <edit-scholar-translation :locales="locales"></edit-scholar-translation> -->
+        <edit-scholar-translation :locales="locales"></edit-scholar-translation>
     </div>
 </template>
 
@@ -48,7 +48,7 @@
 
     import addScholar from './addScholar';
     import addScholarTranslation from './addScholarTranslation';
-    // import editScholarTranslation from './editScholarTranslation';
+    import editScholarTranslation from './editScholarTranslation';
 
 	export default {
         props: ['scholars', 'locales'],
@@ -83,7 +83,7 @@
         components: {
             addScholar,
             addScholarTranslation,
-            /*editScholarTranslation*/
+            editScholarTranslation
         }
     }
 </script>

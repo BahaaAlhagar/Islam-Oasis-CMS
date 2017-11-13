@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Photo;
 use App\Scholar;
+use App\ScholarTranslation;
 use App\Http\Requests\storeScholarRequest;
 use Illuminate\Http\Request;
 
