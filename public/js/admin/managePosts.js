@@ -26730,10 +26730,10 @@ var Form = function () {
     _createClass(Form, [{
         key: 'data',
         value: function data() {
-            var data = {};
+            var data = new FormData();
 
             for (var property in this.originalData) {
-                data[property] = this[property];
+                data.append(property, this[property]);
             }
 
             return data;

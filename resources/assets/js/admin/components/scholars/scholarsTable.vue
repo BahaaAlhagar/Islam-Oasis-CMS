@@ -7,6 +7,9 @@
                         {{ locale.native }}
                     </th>
                     <th>
+                        الصورة الشخصية
+                    </th>
+                    <th>
                         
                     </th>
                 </tr>
@@ -32,6 +35,11 @@
                         </span>
                     </td>
                     <td>
+                        <img v-if="!scholar.photo" src="/storage/scholar.png" width="50" height="50">
+                        <img v-else :src="scholar.photo.thumbnail" width="50" height="50">
+                        <button class="btn btn-success" @click="changeImage(scholar)">تعديل الصورة</button>
+                    </td>
+                    <td>
                         <button @click="deleteScholar(scholar)" class="btn btn-danger">حذف العــالــم</button>
                     </td>
                 </tr>
@@ -40,6 +48,7 @@
         <add-scholar :locales="locales"></add-scholar>
         <add-scholar-translation :locales="locales"></add-scholar-translation>
         <edit-scholar-translation :locales="locales"></edit-scholar-translation>
+        <image-uploader :locales="locales"></image-uploader>
     </div>
 </template>
 
@@ -49,6 +58,7 @@
     import addScholar from './addScholar';
     import addScholarTranslation from './addScholarTranslation';
     import editScholarTranslation from './editScholarTranslation';
+    import imageUploader from './imageUploader';
 
 	export default {
         props: ['scholars', 'locales'],
@@ -78,12 +88,16 @@
                     axios.delete(window.location.pathname + '/' + scholar.id)
                         .then(response => eventBus.$emit('scholarDeleted', response));
                 }
+            },
+            changeImage(scholar){
+                eventBus.$emit('imageUploader', scholar);
             }
         },
         components: {
             addScholar,
             addScholarTranslation,
-            editScholarTranslation
+            editScholarTranslation,
+            imageUploader
         }
     }
 </script>
