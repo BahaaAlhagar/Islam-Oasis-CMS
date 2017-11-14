@@ -43,7 +43,7 @@
 	export default {
         data() {
         return {
-            imageUploaderForm: new Form({
+            imageUploaderForm: new DataForm({
                 	photo: ''
                 }),
             	avatar: '',

@@ -3,8 +3,13 @@ require('../bootstrap');
 import scholarsTable from './components/scholars/scholarsTable';
 import VuePaginator from 'vuejs-paginator';
 
-window.toastr = require('toastr');
 
+import DataForm from '../partials/DataForm';
+window.DataForm = DataForm;
+
+
+
+window.toastr = require('toastr');
 
 window.eventBus = new Vue();
 

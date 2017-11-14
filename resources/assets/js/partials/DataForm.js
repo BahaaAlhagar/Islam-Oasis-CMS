@@ -2,7 +2,7 @@ import Errors from './Errors';
 
 
 
-class Form {
+class DataForm {
     /**
      * Create a new Form instance.
      *
@@ -23,10 +23,10 @@ class Form {
      * Fetch all relevant data for the form.
      */
     data() {
-        let data = {};
+        let data = new FormData();
 
         for (let property in this.originalData) {
-            data[property] = this[property];
+            data.append(property, this[property]);
         }
 
         return data;
@@ -131,5 +131,5 @@ class Form {
 }
 
 
-export default Form;
+export default DataForm;
 
