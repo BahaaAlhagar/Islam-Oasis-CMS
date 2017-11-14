@@ -19,20 +19,18 @@
 	              		<img v-else src="/storage/scholar.png" width="350" height="350">
               		</div>
 
-                    <form method="POST" action="/" class="form-inline" enctype="multipart/form-data" @submit.prevent="onPostCreate" @keydown="imageUploaderForm.errors.clear($event.target.name)"
+                    <form method="POST" action="/" enctype="multipart/form-data" @submit.prevent="onPostCreate" @keydown="imageUploaderForm.errors.clear($event.target.name)"
                     @change="imageUploaderForm.errors.clear($event.target.name)"
                     @input="imageUploaderForm.errors.clear($event.target.name)"
                     >
                         <div class="form-group">
-                            <label for="photo" class="label">الصورة:</label>
-
                             <input class="form-control" type="file" name="photo" accept="image/*" @change="onChange">
 
                             <span class="alert-danger" v-if="imageUploaderForm.errors.has('photo')" v-text="imageUploaderForm.errors.get('photo')"></span>
                         </div>
                         
                         <div class="form-group text-center">
-                            <button class="btn btn-info" :disabled="imageUploaderForm.errors.any()">تحديث</button>
+                            <button class="btn-lg btn-primary" :disabled="imageUploaderForm.errors.any()">تحديث</button>
                         </div>
                     </form>
                 </div>
@@ -48,16 +46,23 @@
             imageUploaderForm: new Form({
                 	photo: ''
                 }),
-            	avatar: ''
+            	avatar: '',
+            	scholar_id: ''
             };
         },
         methods: {
             onPostCreate() {
-                this.imageUploaderForm.post('/admincp/posts')
-                    .then(response => eventBus.$emit('postAdded', response));
+                this.imageUploaderForm.post(`/admincp/scholars/${this.scholar_id}/photo`)
+                    .then(response => eventBus.$emit('scholarAdded', response));
             },
             imageUploaderModal(scholar){
-                this.avatar = scholar.photo;
+                if(scholar.photo){
+                    this.avatar = '/storage/' + scholar.photo.link;
+                } else {
+                    this.avatar = '/storage/scholar.png';
+                }
+
+                this.scholar_id = scholar.id;
                 $('#imageUploaderForm').modal('show');
             },
             onChange(e) {

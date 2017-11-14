@@ -37,7 +37,7 @@
                         </div>
 
                         <div class="form-group text-center">
-                            <button class="button btn-lg btn-primary" :disabled="editTagTranslationForm.errors.any()">تعديل</button>
+                            <button class="btn-lg btn-primary" :disabled="editTagTranslationForm.errors.any()">تعديل</button>
                         </div>
                     </form>
                 </div>

@@ -175,6 +175,10 @@ return [
         // Mcamara Laravel Localization
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
 
+        // intervention image
+        Intervention\Image\ImageServiceProvider::class,
+
+
         /*
          * Application Service Providers...
          */
@@ -234,8 +238,12 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
 
+
         // Mcamara Localization Facade
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
+
+        // intervention image
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

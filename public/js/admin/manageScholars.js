@@ -29588,8 +29588,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -29597,18 +29595,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             imageUploaderForm: new Form({
                 photo: ''
             }),
-            avatar: ''
+            avatar: '',
+            scholar_id: ''
         };
     },
 
     methods: {
         onPostCreate: function onPostCreate() {
-            this.imageUploaderForm.post('/admincp/posts').then(function (response) {
-                return eventBus.$emit('postAdded', response);
+            this.imageUploaderForm.post('/admincp/scholars/' + this.scholar_id + '/photo').then(function (response) {
+                return eventBus.$emit('scholarAdded', response);
             });
         },
         imageUploaderModal: function imageUploaderModal(scholar) {
-            this.avatar = scholar.photo;
+            if (scholar.photo) {
+                this.avatar = '/storage/' + scholar.photo.link;
+            } else {
+                this.avatar = '/storage/scholar.png';
+            }
+
+            this.scholar_id = scholar.id;
             $('#imageUploaderForm').modal('show');
         },
         onChange: function onChange(e) {
@@ -29684,7 +29689,6 @@ var render = function() {
             _c(
               "form",
               {
-                staticClass: "form-inline",
                 attrs: {
                   method: "POST",
                   action: "/",
@@ -29708,12 +29712,6 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "label",
-                    { staticClass: "label", attrs: { for: "photo" } },
-                    [_vm._v("الصورة:")]
-                  ),
-                  _vm._v(" "),
                   _c("input", {
                     staticClass: "form-control",
                     attrs: { type: "file", name: "photo", accept: "image/*" },
@@ -29736,7 +29734,7 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-info",
+                      staticClass: "btn-lg btn-primary",
                       attrs: { disabled: _vm.imageUploaderForm.errors.any() }
                     },
                     [_vm._v("تحديث")]
@@ -29945,7 +29943,7 @@ var render = function() {
                             })
                           : _c("img", {
                               attrs: {
-                                src: scholar.photo.thumbnail,
+                                src: "/storage/" + scholar.photo.thumbnail,
                                 width: "50",
                                 height: "50"
                               }

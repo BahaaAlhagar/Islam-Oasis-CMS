@@ -28485,7 +28485,7 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "button btn-lg btn-success",
+                      staticClass: "btn-lg btn-success",
                       attrs: {
                         disabled: _vm.addTagTranslationForm.errors.any()
                       }
@@ -28830,7 +28830,7 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "button btn-lg btn-primary",
+                      staticClass: "btn-lg btn-primary",
                       attrs: {
                         disabled: _vm.editTagTranslationForm.errors.any()
                       }

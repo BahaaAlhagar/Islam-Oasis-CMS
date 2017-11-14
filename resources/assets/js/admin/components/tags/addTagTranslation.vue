@@ -37,7 +37,7 @@
                         </div>
 
                         <div class="form-group text-center">
-                            <button class="button btn-lg btn-success" :disabled="addTagTranslationForm.errors.any()">اضافة</button>
+                            <button class="btn-lg btn-success" :disabled="addTagTranslationForm.errors.any()">اضافة</button>
                         </div>
                     </form>
                 </div>

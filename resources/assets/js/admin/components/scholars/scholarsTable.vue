@@ -36,7 +36,7 @@
                     </td>
                     <td>
                         <img v-if="!scholar.photo" src="/storage/scholar.png" width="50" height="50">
-                        <img v-else :src="scholar.photo.thumbnail" width="50" height="50">
+                        <img v-else :src="'/storage/' + scholar.photo.thumbnail" width="50" height="50">
                         <button class="btn btn-success" @click="changeImage(scholar)">تعديل الصورة</button>
                     </td>
                     <td>
