@@ -17,4 +17,9 @@ class Scholar extends Model
     {
         return $this->morphOne(Photo::class, 'photoable');
     }
+
+    public function qurans()
+    {
+    	return $this->hasMany(Quran::class);
+    }
 }
