@@ -39,7 +39,7 @@ route::resource('tags', 'TagController')->only('index', 'update', 'destroy');
 
 // scholars routes
 route::post('scholars/{scholar?}', 'ScholarController@store')->name('scholars.store');
-route::post('scholars/{scholar}/photo', 'ScholarController@updatePhoto');
+route::post('scholars/{scholar}/photo', 'PhotoController@updateScholarPhoto');
 route::delete('scholartranslation/{translation}', 'ScholarController@deleteTranslation');
 route::resource('scholars', 'ScholarController')->only('index', 'update', 'destroy');
 

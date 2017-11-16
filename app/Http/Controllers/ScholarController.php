@@ -61,34 +61,6 @@ class ScholarController extends Controller
 
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Scholar  $scholar
-     * @return \Illuminate\Http\Response
-     */
-    public function updatePhoto(Request $request, Scholar $scholar)
-    {
-        $photo = $request->validate(['photo' => 'required|image|max:2040']);
-
-        if($request->hasFile('photo'))
-        {
-            $stored_photo = $this->handlePhoto($request, $scholar, 'scholar_files');
-
-            if($scholar->photo)
-            {
-                $scholar->photo()->update($stored_photo);
-            } else {
-                $scholar->photo()->create($stored_photo);
-            }
-
-
-            return ['message' => 'we have a photo'];
-        }
-    }
-
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Scholar  $scholar
