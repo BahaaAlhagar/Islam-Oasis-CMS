@@ -31,7 +31,7 @@
                 </tr>
             </tbody>
         </table>
-        <!-- <add-recitation :locales="locales"></add-recitation> -->
+        <add-recitation :locales="locales"></add-recitation>
         <!-- <add-recitation-translation :locales="locales"></add-recitation-translation> -->
         <!-- <edit-recitation-translation :locales="locales"></edit-recitation-translation> -->
     </div>
@@ -40,7 +40,7 @@
 
 <script>
 
-    // import addRecitation from './addRecitation';
+    import addRecitation from './addRecitation';
     // import addRecitationTranslation from './addRecitationTranslation';
     // import editRecitationTranslation from './editRecitationTranslation';
 
@@ -70,12 +70,12 @@
             deleteRecitation(recitation){
                 if(confirm('هل انت متأكد من حذف هذه الرواية او القراءة؟')){
                     axios.delete(window.location.pathname + '/' + recitation.id)
-                        .then(response => eventBus.$emit('RecitationDeleted', response));
+                        .then(response => eventBus.$emit('recitationDeleted', response));
                 }
             }
         },
         components: {
-            // addRecitation,
+            addRecitation,
             // addRecitationTranslation,
             // editRecitationTranslation
         }

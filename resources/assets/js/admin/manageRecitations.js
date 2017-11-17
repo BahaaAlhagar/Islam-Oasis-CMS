@@ -43,7 +43,7 @@ const manageRecitations = new Vue({
         this.reloadData();
       },
       showAddRecitation(){
-        $('#addTagModal').modal('show');
+        $('#addRecitationModal').modal('show');
       }
     },
     components: {
@@ -54,7 +54,7 @@ const manageRecitations = new Vue({
     	axios.get(window.location.pathname)
     		.then(response => this.assignData(response));
 
-      // eventBus.$on('recitationAdded', response => this.refetchData(response));
+      eventBus.$on('recitationAdded', response => this.refetchData(response));
       eventBus.$on('recitationDeleted', response => this.afterRecitationDeleted(response));
     }
 });

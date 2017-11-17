@@ -27687,7 +27687,7 @@ module.exports = __webpack_require__(92);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_recitations_recitationsTable__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_recitations_recitationsTable__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_recitations_recitationsTable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_recitations_recitationsTable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_paginator__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_paginator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuejs_paginator__);
@@ -27735,7 +27735,7 @@ var manageRecitations = new Vue({
       this.reloadData();
     },
     showAddRecitation: function showAddRecitation() {
-      $('#addTagModal').modal('show');
+      $('#addRecitationModal').modal('show');
     }
   },
   components: {
@@ -27749,7 +27749,9 @@ var manageRecitations = new Vue({
       return _this.assignData(response);
     });
 
-    // eventBus.$on('recitationAdded', response => this.refetchData(response));
+    eventBus.$on('recitationAdded', function (response) {
+      return _this.refetchData(response);
+    });
     eventBus.$on('recitationDeleted', function (response) {
       return _this.afterRecitationDeleted(response);
     });
@@ -27761,33 +27763,15 @@ toastr.options = {
 };
 
 /***/ }),
-/* 93 */,
-/* 94 */,
-/* 95 */,
-/* 96 */,
-/* 97 */,
-/* 98 */,
-/* 99 */,
-/* 100 */,
-/* 101 */,
-/* 102 */,
-/* 103 */,
-/* 104 */,
-/* 105 */,
-/* 106 */,
-/* 107 */,
-/* 108 */,
-/* 109 */,
-/* 110 */,
-/* 111 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(112)
+var __vue_script__ = __webpack_require__(94)
 /* template */
-var __vue_template__ = __webpack_require__(113)
+var __vue_template__ = __webpack_require__(95)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -27827,7 +27811,330 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 112 */
+/* 94 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addRecitation__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addRecitation___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__addRecitation__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+// import addRecitationTranslation from './addRecitationTranslation';
+// import editRecitationTranslation from './editRecitationTranslation';
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['recitations', 'locales'],
+    methods: {
+        localeCheck: function localeCheck(key, recitation) {
+            var trans = recitation.translations;
+            for (var i = 0; i < trans.length; i++) {
+                if (trans[i].locale == key) {
+                    return true;
+                }
+            }
+        },
+        addTranslation: function addTranslation(recitation, key) {
+            eventBus.$emit('addRecitationTranslation', recitation, key);
+        },
+        editTranslation: function editTranslation(translation) {
+            eventBus.$emit('editRecitationTranslation', translation);
+        },
+        deleteTranslation: function deleteTranslation(translation) {
+            if (confirm('هل انت متأكد من حذف هذه الترجمة؟')) {
+                axios.delete('/admincp/recitationtranslation/' + translation.id).then(function (response) {
+                    return eventBus.$emit('recitationDeleted', response);
+                });
+            }
+        },
+        deleteRecitation: function deleteRecitation(recitation) {
+            if (confirm('هل انت متأكد من حذف هذه الرواية او القراءة؟')) {
+                axios.delete(window.location.pathname + '/' + recitation.id).then(function (response) {
+                    return eventBus.$emit('recitationDeleted', response);
+                });
+            }
+        }
+    },
+    components: {
+        addRecitation: __WEBPACK_IMPORTED_MODULE_0__addRecitation___default.a
+        // addRecitationTranslation,
+        // editRecitationTranslation
+    }
+});
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.recitations.length
+        ? _c(
+            "table",
+            {
+              staticClass: "table table-responsive table-bordered text-center"
+            },
+            [
+              _c("thead", [
+                _c(
+                  "tr",
+                  [
+                    _vm._l(_vm.locales, function(locale) {
+                      return _c("th", [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(locale.native) +
+                            "\n                    "
+                        )
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _c("th")
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.recitations, function(recitation) {
+                  return _c(
+                    "tr",
+                    { key: recitation.id },
+                    [
+                      _vm._l(_vm.locales, function(locale, key) {
+                        return _c(
+                          "td",
+                          [
+                            _vm._l(recitation.translations, function(
+                              translation
+                            ) {
+                              return translation.locale == key
+                                ? _c("span", [
+                                    _vm._v(
+                                      "\n                            " +
+                                        _vm._s(translation.name) +
+                                        "\n                            "
+                                    ),
+                                    _c("div", { staticClass: "pull-left" }, [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-primary",
+                                          on: {
+                                            click: function($event) {
+                                              _vm.editTranslation(translation)
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "fa fa-pencil-square-o",
+                                            attrs: { "aria-hidden": "true" }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-danger",
+                                          on: {
+                                            click: function($event) {
+                                              _vm.deleteTranslation(translation)
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fa fa-trash-o",
+                                            attrs: { "aria-hidden": "true" }
+                                          })
+                                        ]
+                                      )
+                                    ])
+                                  ])
+                                : _vm._e()
+                            }),
+                            _vm._v(" "),
+                            !_vm.localeCheck(key, recitation)
+                              ? _c("span", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-success",
+                                      on: {
+                                        click: function($event) {
+                                          _vm.addTranslation(
+                                            recitation,
+                                            key,
+                                            locale
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("اضافة ترجمة")]
+                                  )
+                                ])
+                              : _vm._e()
+                          ],
+                          2
+                        )
+                      }),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            on: {
+                              click: function($event) {
+                                _vm.deleteRecitation(recitation)
+                              }
+                            }
+                          },
+                          [_vm._v("حذف الرواية او القراءة")]
+                        )
+                      ])
+                    ],
+                    2
+                  )
+                })
+              )
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c("add-recitation", { attrs: { locales: _vm.locales } })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6d4742bc", module.exports)
+  }
+}
+
+/***/ }),
+/* 96 */,
+/* 97 */,
+/* 98 */,
+/* 99 */,
+/* 100 */,
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(115)
+/* template */
+var __vue_template__ = __webpack_require__(116)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\admin\\components\\recitations\\addRecitation.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5d42e1fe", Component.options)
+  } else {
+    hotAPI.reload("data-v-5d42e1fe", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 115 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -27872,203 +28179,230 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
-
-// import addRecitation from './addRecitation';
-// import addRecitationTranslation from './addRecitationTranslation';
-// import editRecitationTranslation from './editRecitationTranslation';
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['recitations', 'locales'],
-    methods: {
-        localeCheck: function localeCheck(key, recitation) {
-            var trans = recitation.translations;
-            for (var i = 0; i < trans.length; i++) {
-                if (trans[i].locale == key) {
-                    return true;
-                }
-            }
-        },
-        addTranslation: function addTranslation(recitation, key) {
-            eventBus.$emit('addRecitationTranslation', recitation, key);
-        },
-        editTranslation: function editTranslation(translation) {
-            eventBus.$emit('editRecitationTranslation', translation);
-        },
-        deleteTranslation: function deleteTranslation(translation) {
-            if (confirm('هل انت متأكد من حذف هذه الترجمة؟')) {
-                axios.delete('/admincp/recitationtranslation/' + translation.id).then(function (response) {
-                    return eventBus.$emit('recitationDeleted', response);
-                });
-            }
-        },
-        deleteRecitation: function deleteRecitation(recitation) {
-            if (confirm('هل انت متأكد من حذف هذه الرواية او القراءة؟')) {
-                axios.delete(window.location.pathname + '/' + recitation.id).then(function (response) {
-                    return eventBus.$emit('RecitationDeleted', response);
-                });
-            }
-        }
+    props: ['locales'],
+    data: function data() {
+        return {
+            form: new Form({
+                locale: '',
+                name: ''
+            })
+        };
     },
-    components: {
-        // addRecitation,
-        // addRecitationTranslation,
-        // editRecitationTranslation
+
+    methods: {
+        onRecitationCreate: function onRecitationCreate() {
+            this.form.post(window.location.pathname).then(function (response) {
+                return eventBus.$emit('recitationAdded', response);
+            });
+        }
     }
 });
 
 /***/ }),
-/* 113 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.recitations.length
-      ? _c(
-          "table",
-          { staticClass: "table table-responsive table-bordered text-center" },
-          [
-            _c("thead", [
-              _c(
-                "tr",
-                [
-                  _vm._l(_vm.locales, function(locale) {
-                    return _c("th", [
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(locale.native) +
-                          "\n                    "
-                      )
-                    ])
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "addRecitationModal",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "myModalLabel"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
+            _c(
+              "form",
+              {
+                attrs: { method: "POST", action: "/" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    _vm.onRecitationCreate($event)
+                  },
+                  keydown: function($event) {
+                    _vm.form.errors.clear($event.target.name)
+                  },
+                  change: function($event) {
+                    _vm.form.errors.clear($event.target.name)
+                  },
+                  input: function($event) {
+                    _vm.form.errors.clear($event.target.name)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "locale" } },
+                    [_vm._v("اللغة:")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.locale,
+                          expression: "form.locale"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "locale", name: "locale" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.form,
+                            "locale",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    _vm._l(_vm.locales, function(locale, key) {
+                      return _c("option", { domProps: { value: key } }, [
+                        _vm._v(_vm._s(locale.native))
+                      ])
+                    })
+                  ),
+                  _vm._v(" "),
+                  _vm.form.errors.has("locale")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(_vm.form.errors.get("locale"))
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "name" } },
+                    [_vm._v("الرواية:")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.name,
+                        expression: "form.name"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "name", name: "name" },
+                    domProps: { value: _vm.form.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "name", $event.target.value)
+                      }
+                    }
                   }),
                   _vm._v(" "),
-                  _c("th")
-                ],
-                2
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.recitations, function(recitation) {
-                return _c(
-                  "tr",
-                  { key: recitation.id },
-                  [
-                    _vm._l(_vm.locales, function(locale, key) {
-                      return _c(
-                        "td",
-                        [
-                          _vm._l(recitation.translations, function(
-                            translation
-                          ) {
-                            return translation.locale == key
-                              ? _c("span", [
-                                  _vm._v(
-                                    "\n                            " +
-                                      _vm._s(translation.name) +
-                                      "\n                            "
-                                  ),
-                                  _c("div", { staticClass: "pull-left" }, [
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-primary",
-                                        on: {
-                                          click: function($event) {
-                                            _vm.editTranslation(translation)
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass: "fa fa-pencil-square-o",
-                                          attrs: { "aria-hidden": "true" }
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-danger",
-                                        on: {
-                                          click: function($event) {
-                                            _vm.deleteTranslation(translation)
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass: "fa fa-trash-o",
-                                          attrs: { "aria-hidden": "true" }
-                                        })
-                                      ]
-                                    )
-                                  ])
-                                ])
-                              : _vm._e()
-                          }),
-                          _vm._v(" "),
-                          !_vm.localeCheck(key, recitation)
-                            ? _c("span", [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-success",
-                                    on: {
-                                      click: function($event) {
-                                        _vm.addTranslation(
-                                          recitation,
-                                          key,
-                                          locale
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("اضافة ترجمة")]
-                                )
-                              ])
-                            : _vm._e()
-                        ],
-                        2
-                      )
-                    }),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger",
-                          on: {
-                            click: function($event) {
-                              _vm.deleteRecitation(recitation)
-                            }
-                          }
-                        },
-                        [_vm._v("حذف الرواية او القراءة")]
-                      )
-                    ])
-                  ],
-                  2
-                )
-              })
+                  _vm.form.errors.has("name")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(_vm.form.errors.get("name"))
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group text-center" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "button btn-lg btn-success",
+                      attrs: { disabled: _vm.form.errors.any() }
+                    },
+                    [_vm._v("اضافة")]
+                  )
+                ])
+              ]
             )
-          ]
-        )
-      : _vm._e()
-  ])
+          ])
+        ])
+      ])
+    ]
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("span", { staticClass: "form-control-static text-center" }, [
+        _c(
+          "h4",
+          { staticClass: "modal-title", attrs: { id: "myModalLabel" } },
+          [_vm._v(" اضافة رواية او قراءة ")]
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6d4742bc", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-5d42e1fe", module.exports)
   }
 }
 
