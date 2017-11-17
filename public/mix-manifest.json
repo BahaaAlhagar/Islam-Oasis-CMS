@@ -1,5 +1,6 @@
 {
     "/js/admin/managePosts.js": "/js/admin/managePosts.js",
     "/js/admin/manageScholars.js": "/js/admin/manageScholars.js",
-    "/js/admin/manageTags.js": "/js/admin/manageTags.js"
+    "/js/admin/manageTags.js": "/js/admin/manageTags.js",
+    "/js/admin/manageRecitations.js": "/js/admin/manageRecitations.js"
 }

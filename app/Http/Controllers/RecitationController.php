@@ -18,7 +18,7 @@ class RecitationController extends Controller
     {
         $recitations = Recitation::with('translations')->latest()->paginate(10);
 
-        return $this->makeResponse('admin/recitations/manageRecitations', compact('recitations'));
+        return $this->makeResponse('admin/quran/manageRecitations', compact('recitations'));
     }
 
 
