@@ -32,7 +32,7 @@
             </tbody>
         </table>
         <add-recitation :locales="locales"></add-recitation>
-        <!-- <add-recitation-translation :locales="locales"></add-recitation-translation> -->
+        <add-recitation-translation :locales="locales"></add-recitation-translation>
         <!-- <edit-recitation-translation :locales="locales"></edit-recitation-translation> -->
     </div>
 </template>
@@ -41,7 +41,7 @@
 <script>
 
     import addRecitation from './addRecitation';
-    // import addRecitationTranslation from './addRecitationTranslation';
+    import addRecitationTranslation from './addRecitationTranslation';
     // import editRecitationTranslation from './editRecitationTranslation';
 
 	export default {
@@ -76,7 +76,7 @@
         },
         components: {
             addRecitation,
-            // addRecitationTranslation,
+            addRecitationTranslation,
             // editRecitationTranslation
         }
     }
