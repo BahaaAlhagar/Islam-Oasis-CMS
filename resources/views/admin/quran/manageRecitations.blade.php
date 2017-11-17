@@ -19,7 +19,7 @@
 			<button @click="showAddRecitation" class="btn btn-success pull-left">اضافة رواية</button>
 		</span>
 		
-		<!-- <recitations-table :recitations="recitations" :locales="{{ json_encode(LaravelLocalization::getSupportedLocales()) }}"></recitations-table> -->
+		<recitations-table :recitations="recitations" :locales="{{ json_encode(LaravelLocalization::getSupportedLocales()) }}"></recitations-table>
 
         <v-paginator class="text-center" v-show="recitations.length" :options="options" ref="VP" :resource_url="resource_url" @update="updateResource"></v-paginator>
 	</div>

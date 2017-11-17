@@ -48,7 +48,7 @@ route::resource('scholars', 'ScholarController')->only('index', 'update', 'destr
 
 // Quran recitations routes
 route::post('recitations/{recitation?}', 'RecitationController@store')->name('recitations.store');
-route::delete('tagtranslation/{translation}', 'RecitationController@deleteTranslation');
+route::delete('recitationtranslation/{translation}', 'RecitationController@deleteTranslation');
 route::resource('recitations', 'RecitationController')->only('index', 'update', 'destroy');
 
 

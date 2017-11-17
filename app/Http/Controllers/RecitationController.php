@@ -35,12 +35,12 @@ class RecitationController extends Controller
             $recitation->translations()
                     ->create($request->all());
 
-            return ['message' => 'تم اضافة ترجمة التصنيف بنجاح'];
+            return ['message' => 'تم اضافة ترجمة الرواية بنجاح'];
         }
 
         $recitation = Recitation::create([$request->locale => ['name' => $request->name]]);
 
-        return ['message' => 'تم اضافة التصنيف بنجاح'];
+        return ['message' => 'تم اضافة الرواية بنجاح'];
     }
 
 
@@ -55,7 +55,7 @@ class RecitationController extends Controller
     {
         $recitation->update($request->all());
 
-        return ['message' => 'تم تحديث ترجمة التصنيف'];
+        return ['message' => 'تم تحديث ترجمة الرواية'];
     }
 
     /**
@@ -68,7 +68,7 @@ class RecitationController extends Controller
     {
         $recitation->delete();
 
-        return ['message' => 'تم حذف التصنيف!'];
+        return ['message' => 'تم حذف الرواية!'];
     }
 
     /**
@@ -81,6 +81,6 @@ class RecitationController extends Controller
     {
         $translation->delete();
 
-        return ['message' => 'تم حذف ترجمة التصنيف!'];
+        return ['message' => 'تم حذف ترجمة الرواية!'];
     }
 }

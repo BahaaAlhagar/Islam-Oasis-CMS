@@ -1,6 +1,6 @@
 require('../bootstrap');
 
-// import recitationsTable from './components/recitations/recitationsTable';
+import recitationsTable from './components/recitations/recitationsTable';
 import VuePaginator from 'vuejs-paginator';
 
 window.toastr = require('toastr');
@@ -38,7 +38,7 @@ const manageRecitations = new Vue({
         toastr.success(response.message);
         this.reloadData();
       },
-      afterTagDelete(response){
+      afterRecitationDeleted(response){
         toastr.warning(response.data.message);
         this.reloadData();
       },
@@ -47,15 +47,15 @@ const manageRecitations = new Vue({
       }
     },
     components: {
-    	// recitationsTable,
+    	  recitationsTable,
         VPaginator: VuePaginator
     },
     mounted(){
     	axios.get(window.location.pathname)
     		.then(response => this.assignData(response));
 
-      // eventBus.$on('tagAdded', response => this.refetchData(response));
-      // eventBus.$on('tagDeleted', response => this.afterTagDelete(response));
+      // eventBus.$on('recitationAdded', response => this.refetchData(response));
+      eventBus.$on('recitationDeleted', response => this.afterRecitationDeleted(response));
     }
 });
 
