@@ -52,23 +52,22 @@ class PhotoController extends Controller
         	$thumbName = 'thumbnail.'.$file->extension();
         	$storePath = $folder.'/'.$owner->id;
 
+            // locations of photos
+            $photo_path = $storePath. '/' .$photoName;
+            $thumb_path = $storePath. '/' .$thumbName;
+
             //check folder availablity
             if(!file_exists(storage_path('app/public/'.$storePath)))
             {
                 mkdir(storage_path('app/public/'.$storePath), 666, true);
             }
 
-            // create a small copy of the image
-            Image::make($file)->fit(200)
-                            ->save(storage_path('app/public/'.$storePath .'/'. $thumbName));
-
             // store the image
             $file->storeAs('public/'.$storePath, $photoName);
 
-            // locations of photos
-            $photo_path = $storePath. '/' .$photoName;
-            $thumb_path = $storePath. '/' .$thumbName;
-
+            // create a small copy of the image
+            Image::make($file)->fit(200)
+                            ->save(storage_path('app/public/'.$thumb_path));
 
             // return the stored file location 
             $storedFiles = [

@@ -32,15 +32,24 @@ route::post('posts/{post?}', 'PostController@store')->name('posts.store');
 route::delete('posttranslation/{translation}', 'PostController@deleteTranslation');
 route::resource('posts', 'PostController')->only('update', 'destroy');
 
+
 // tags routes
 route::post('tags/{tag?}', 'TagController@store')->name('tags.store');
 route::delete('tagtranslation/{translation}', 'TagController@deleteTranslation');
 route::resource('tags', 'TagController')->only('index', 'update', 'destroy');
+
 
 // scholars routes
 route::post('scholars/{scholar?}', 'ScholarController@store')->name('scholars.store');
 route::post('scholars/{scholar}/photo', 'PhotoController@updateScholarPhoto');
 route::delete('scholartranslation/{translation}', 'ScholarController@deleteTranslation');
 route::resource('scholars', 'ScholarController')->only('index', 'update', 'destroy');
+
+
+// Quran recitations routes
+route::post('recitations/{recitation?}', 'RecitationController@store')->name('recitations.store');
+route::delete('tagtranslation/{translation}', 'RecitationController@deleteTranslation');
+route::resource('recitations', 'RecitationController')->only('index', 'update', 'destroy');
+
 
 });

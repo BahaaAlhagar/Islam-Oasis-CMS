@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Recitation;
+use App\RecitationTranslation;
+use App\Http\Requests\storeRecitationRequest;
 use Illuminate\Http\Request;
 
 class RecitationController extends Controller
@@ -14,18 +16,11 @@ class RecitationController extends Controller
      */
     public function index()
     {
-        //
+        $recitations = Recitation::with('translations')->latest()->paginate(10);
+
+        return $this->makeResponse('admin/recitations/manageRecitations', compact('recitations'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -33,32 +28,21 @@ class RecitationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storeRecitationRequest $request, Recitation $recitation = null)
     {
-        //
+        if($recitation)
+        {
+            $recitation->translations()
+                    ->create($request->all());
+
+            return ['message' => 'تم اضافة ترجمة التصنيف بنجاح'];
+        }
+
+        $recitation = Recitation::create([$request->locale => ['name' => $request->name]]);
+
+        return ['message' => 'تم اضافة التصنيف بنجاح'];
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Recitation  $recitation
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Recitation $recitation)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Recitation  $recitation
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Recitation $recitation)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -67,9 +51,11 @@ class RecitationController extends Controller
      * @param  \App\Recitation  $recitation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Recitation $recitation)
+    public function update(storeRecitationRequest $request, RecitationTranslation $recitation)
     {
-        //
+        $recitation->update($request->all());
+
+        return ['message' => 'تم تحديث ترجمة التصنيف'];
     }
 
     /**
@@ -80,6 +66,21 @@ class RecitationController extends Controller
      */
     public function destroy(Recitation $recitation)
     {
-        //
+        $recitation->delete();
+
+        return ['message' => 'تم حذف التصنيف!'];
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Recitation  $recitation
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteTranslation(RecitationTranslation $translation)
+    {
+        $translation->delete();
+
+        return ['message' => 'تم حذف ترجمة التصنيف!'];
     }
 }
