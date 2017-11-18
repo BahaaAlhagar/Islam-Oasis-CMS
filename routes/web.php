@@ -52,4 +52,7 @@ route::delete('recitationtranslation/{translation}', 'RecitationController@delet
 route::resource('recitations', 'RecitationController')->only('index', 'update', 'destroy');
 
 
+// Quran routes
+route::resource('quran', 'QuranController')->except('create', 'edit', 'show');
+
 });

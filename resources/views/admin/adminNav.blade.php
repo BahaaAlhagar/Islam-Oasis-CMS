@@ -29,6 +29,10 @@
 					الروايات والقراءات
 				</a>
 
+				<a href="{{ route('quran.index') }}" class="list-group-item">
+					القران الكريم
+				</a>
+
 
 			</ul>
 	  </div>

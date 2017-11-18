@@ -3,10 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Quran;
+use App\Scholar;
+use App\Recitation;
+use App\ScholarTranslation;
+use App\RecitationTranslation;
 use Illuminate\Http\Request;
 
 class QuranController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +24,19 @@ class QuranController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $qurans = Quran::latest()
+                    ->with('translations', 'link', 'recitation', 'scholar')
+                    ->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $scholars = ScholarTranslation::where('locale', config('translatable.locale'))
+                                        ->orderBy('name')
+                                        ->get();
+
+        $recitations = RecitationTranslation::where('locale', config('translatable.locale'))
+                                        ->orderBy('name')
+                                        ->get();
+
+        return $this->makeResponse('admin/quran/manageQuran');
     }
 
     /**
@@ -34,28 +46,6 @@ class QuranController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Quran  $quran
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Quran $quran)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Quran  $quran
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Quran $quran)
     {
         //
     }
