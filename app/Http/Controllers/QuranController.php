@@ -22,12 +22,19 @@ class QuranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Scholar $scholar = null)
     {
-        $qurans = Quran::latest()
+        if($scholar){
+            $qurans = Quran::latest()
+                    ->where('scholar_id', $scholar)
                     ->with('translations', 'link', 'recitation', 'scholar')
                     ->get();
-
+        } else {
+            $qurans = Quran::latest()
+                    ->with('translations', 'link', 'recitation', 'scholar')
+                    ->get();
+        }
+        
         $scholars = ScholarTranslation::where('locale', config('translatable.locale'))
                                         ->orderBy('name')
                                         ->get();

@@ -53,6 +53,7 @@ route::resource('recitations', 'RecitationController')->only('index', 'update', 
 
 
 // Quran routes
-route::resource('quran', 'QuranController')->except('create', 'edit', 'show');
+route::get('quran/scholar/{scholar?}', 'QuranController@index')->name('quran.index');
+route::resource('quran', 'QuranController')->only('store', 'update', 'destroy');
 
 });
