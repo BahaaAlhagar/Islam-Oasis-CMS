@@ -28,11 +28,11 @@ class QuranController extends Controller
             $qurans = Quran::latest()
                     ->where('scholar_id', $scholar)
                     ->with('translations', 'link', 'recitation', 'scholar')
-                    ->get();
+                    ->paginate(10);
         } else {
             $qurans = Quran::latest()
                     ->with('translations', 'link', 'recitation', 'scholar')
-                    ->get();
+                    ->paginate(10);
         }
         
         $scholars = ScholarTranslation::where('locale', config('translatable.locale'))
@@ -43,7 +43,7 @@ class QuranController extends Controller
                                         ->orderBy('name')
                                         ->get();
 
-        return $this->makeResponse('admin/quran/manageQuran');
+        return $this->makeResponse('admin/quran/manageQuran', compact('qurans', 'scholars', 'recitations'));
     }
 
     /**
