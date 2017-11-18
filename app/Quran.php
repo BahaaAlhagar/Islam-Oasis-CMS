@@ -22,4 +22,9 @@ class Quran extends Model
     {
     	return $this->BelongsTo(Recitation::class);
     }
+
+    public function link()
+    {
+        return $this->morphOne(Link::class, 'linkable');
+    }
 }

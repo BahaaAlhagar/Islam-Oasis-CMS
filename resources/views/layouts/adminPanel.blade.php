@@ -111,8 +111,8 @@
 
 
     <!-- webpack vendor packages -->
-<!--     <script src="{{ URL::asset('js/manifest.js') }}"></script>
-    <script src="{{ URL::asset('js/vendor.js') }}"></script> -->
+    <script src="{{ URL::asset('js/admin/manifest.js') }}"></script>
+    <script src="{{ URL::asset('js/admin/vendor.js') }}"></script>
 
     <script type="text/javascript">
         jQuery(function($) {
