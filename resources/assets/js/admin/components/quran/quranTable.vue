@@ -52,7 +52,7 @@
                 </tr>
             </tbody>
         </table>
-        <!-- <add-quran :locales="locales"></add-quran> -->
+        <add-quran :locales="locales" :recitations="recitations" :scholars="scholars"></add-quran>
         <!-- <edit-quran-translation :locales="locales"></edit-quran-translation> -->
     </div>
 </template>
@@ -60,7 +60,7 @@
 
 <script>
 
-    // import addQuran from './addQuran';
+    import addQuran from './addQuran';
     // import editQuran from './editQuran';
 
 	export default {
@@ -85,7 +85,7 @@
             }
         },
         components: {
-            // addQuran,
+            addQuran,
             // editQuran
         }
     }
