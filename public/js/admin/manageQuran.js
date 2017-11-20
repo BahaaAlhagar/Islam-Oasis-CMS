@@ -1238,7 +1238,7 @@ var manageQuran = new Vue({
       this.reloadData();
     },
     addQuran: function addQuran() {
-      $('#addQuranModal').modal('show');
+      eventBus.$emit('addQuran');
     }
   },
   components: {
@@ -1857,41 +1857,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             form: new Form({
-                name: [],
+                name: {},
                 url: '',
                 scholar_id: '',
-                recitation_id: ''
-            }),
-            scholar: null,
-            recitation: null
+                recitation_id: '',
+                scholar: null,
+                recitation: null
+            })
+
         };
     },
 
     methods: {
         onTagCreate: function onTagCreate() {
-            this.form.post(window.location.pathname).then(function (response) {
+            this.form.post('/admincp/quran').then(function (response) {
                 return eventBus.$emit('tagAdded', response);
             });
-        }
-    },
-    computed: {
-        scholarId: function scholarId() {
-            return this.scholar ? this.scholar['scholar_id'] : null;
         },
-        recitationId: function recitationId() {
-            return this.recitation ? this.recitation['recitation_id'] : null;
+        addQuranModal: function addQuranModal() {
+            this.form.name = {};
+            $('#addQuranModal').modal('show');
         }
     },
     watch: {
-        scholar: function scholar() {
-            this.form.scholar_id = this.scholarId;
+        'form.scholar': function formScholar(val) {
+            val ? this.form.scholar_id = val.scholar_id : this.form.scholar_id = '';
         },
-        recitation: function recitation() {
-            this.form.recitation_id = this.recitationId;
+        'form.recitation': function formRecitation(val) {
+            val ? this.form.recitation_id = val.recitation_id : this.form.recitation_id = '';
         }
     },
     components: {
         vSelect: __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        eventBus.$on('addQuran', function (event) {
+            return _this.addQuranModal();
+        });
     }
 });
 
@@ -2012,11 +2016,11 @@ var render = function() {
                         }
                       },
                       model: {
-                        value: _vm.scholar,
+                        value: _vm.form.scholar,
                         callback: function($$v) {
-                          _vm.scholar = $$v
+                          _vm.$set(_vm.form, "scholar", $$v)
                         },
-                        expression: "scholar"
+                        expression: "form.scholar"
                       }
                     }),
                     _vm._v(" "),
@@ -2057,11 +2061,11 @@ var render = function() {
                         }
                       },
                       model: {
-                        value: _vm.recitation,
+                        value: _vm.form.recitation,
                         callback: function($$v) {
-                          _vm.recitation = $$v
+                          _vm.$set(_vm.form, "recitation", $$v)
                         },
-                        expression: "recitation"
+                        expression: "form.recitation"
                       }
                     }),
                     _vm._v(" "),

@@ -31,7 +31,7 @@
                             <label for="scholar_id" class="label">القارئ:</label>
                             
                             <v-select label="name" 
-                            @input="form.errors.clear('scholar_id')" :options="scholars" id="scholar_id" name="scholar_id" v-model="scholar" ></v-select>
+                            @input="form.errors.clear('scholar_id')" :options="scholars" id="scholar_id" name="scholar_id" v-model="form.scholar" ></v-select>
 
                             <span class="alert-danger" v-if="form.errors.has('scholar_id')" v-text="form.errors.get('scholar_id')"></span>
                         </div>
@@ -40,7 +40,7 @@
                             <label for="recitation_id" class="label">التلاوة:</label>
                             
                             <v-select label="name" 
-                            @input="form.errors.clear('recitation_id')" :options="recitations" id="recitation_id" name="recitation_id" v-model="recitation" ></v-select>
+                            @input="form.errors.clear('recitation_id')" :options="recitations" id="recitation_id" name="recitation_id" v-model="form.recitation" ></v-select>
 
                             <span class="alert-danger" v-if="form.errors.has('recitation_id')" v-text="form.errors.get('recitation_id')"></span>
                         </div>
@@ -71,39 +71,39 @@
         data() {
             return {
                 form: new Form({
-                    name: [],
+                    name: {},
                     url: '',
                     scholar_id: '',
-                    recitation_id: ''
-                    }),
+                    recitation_id: '',
                     scholar: null,
                     recitation: null
+                    }),
+                    
                 };
             },
         methods: {
         onTagCreate() {
-            this.form.post(window.location.pathname)
+            this.form.post('/admincp/quran')
                 .then(response => eventBus.$emit('tagAdded', response));
+            },
+            addQuranModal(){
+                this.form.name = {};
+                $('#addQuranModal').modal('show');
             }
         },
-        computed: {
-            scholarId(){
-                return this.scholar ? this.scholar['scholar_id'] : null;
-            },
-            recitationId(){
-                return this.recitation ? this.recitation['recitation_id'] : null;
-            },
-        },
           watch: {
-            scholar() {
-                this.form.scholar_id = this.scholarId;
+            'form.scholar': function(val) {
+                val ? this.form.scholar_id = val.scholar_id : this.form.scholar_id = '';
             },
-            recitation() {
-                this.form.recitation_id = this.recitationId;
+            'form.recitation': function(val) {
+                val ? this.form.recitation_id = val.recitation_id : this.form.recitation_id = ''
             }
         },
         components: {
             vSelect
+        },
+        mounted() {
+            eventBus.$on('addQuran', event => this.addQuranModal());
         }
     }
 </script>

@@ -63,7 +63,7 @@ const manageQuran = new Vue({
         this.reloadData();
       },
       addQuran(){
-        $('#addQuranModal').modal('show');
+        eventBus.$emit('addQuran');
       }
     },
     components: {

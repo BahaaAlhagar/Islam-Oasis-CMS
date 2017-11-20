@@ -54,7 +54,20 @@ class QuranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $languageData = [];
+
+        foreach(config('translatable.locales') as $locale)
+        {
+            $language = ['locale' => $locale, 'name' => $request->input('name.'.$locale)];
+            $languageData[] = $language;
+        }
+        
+        $quran = Quran::create($request->only('scholar_id', 'recitation_id'));
+
+        $quran->translations()->createMany($languageData);
+        $quran->link()->create($request->only('url'));
+
+        return ['message' => 'تم اضافة السورة بنجاح'];
     }
 
     /**
