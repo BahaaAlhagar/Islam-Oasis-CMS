@@ -19,7 +19,9 @@ class AppServiceProvider extends ServiceProvider
 
         Relation::morphMap([
             'post' => 'App\Post',
-            'user' => 'App\User'
+            'user' => 'App\User',
+            'scholar' => 'App\Scholar',
+            'quran' => 'App\Quran'
         ]);
     }
 

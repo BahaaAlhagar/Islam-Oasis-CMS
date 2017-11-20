@@ -15,7 +15,6 @@ class CreateQuransTable extends Migration
     {
         Schema::create('qurans', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('link');
             $table->integer('scholar_id')->unsigned()->index();
             $table->foreign('scholar_id')->references('id')->on('scholars')->onDelete('cascade');
             $table->integer('recitation_id')->unsigned()->index();

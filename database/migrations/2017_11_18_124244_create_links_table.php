@@ -17,8 +17,8 @@ class CreateLinksTable extends Migration
             $table->increments('id');
             $table->string('url');
             $table->string('locale')->index()->nullable();
-            $table->integer('photoable_id')->index()->nullable();
-            $table->string('photoable_type')->index()->nullable();
+            $table->integer('linkable_id')->index()->nullable();
+            $table->string('linkable_type')->index()->nullable();
             $table->timestamps();
         });
     }

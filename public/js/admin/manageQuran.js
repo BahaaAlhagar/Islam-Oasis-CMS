@@ -114,225 +114,6 @@ module.exports = function normalizeComponent (
 /***/ (function(module, exports) {
 
 /* ========================================================================
- * Bootstrap: collapse.js v3.3.7
- * http://getbootstrap.com/javascript/#collapse
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-/* jshint latedef: false */
-
-+function ($) {
-  'use strict';
-
-  // COLLAPSE PUBLIC CLASS DEFINITION
-  // ================================
-
-  var Collapse = function (element, options) {
-    this.$element      = $(element)
-    this.options       = $.extend({}, Collapse.DEFAULTS, options)
-    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
-                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
-    this.transitioning = null
-
-    if (this.options.parent) {
-      this.$parent = this.getParent()
-    } else {
-      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
-    }
-
-    if (this.options.toggle) this.toggle()
-  }
-
-  Collapse.VERSION  = '3.3.7'
-
-  Collapse.TRANSITION_DURATION = 350
-
-  Collapse.DEFAULTS = {
-    toggle: true
-  }
-
-  Collapse.prototype.dimension = function () {
-    var hasWidth = this.$element.hasClass('width')
-    return hasWidth ? 'width' : 'height'
-  }
-
-  Collapse.prototype.show = function () {
-    if (this.transitioning || this.$element.hasClass('in')) return
-
-    var activesData
-    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
-
-    if (actives && actives.length) {
-      activesData = actives.data('bs.collapse')
-      if (activesData && activesData.transitioning) return
-    }
-
-    var startEvent = $.Event('show.bs.collapse')
-    this.$element.trigger(startEvent)
-    if (startEvent.isDefaultPrevented()) return
-
-    if (actives && actives.length) {
-      Plugin.call(actives, 'hide')
-      activesData || actives.data('bs.collapse', null)
-    }
-
-    var dimension = this.dimension()
-
-    this.$element
-      .removeClass('collapse')
-      .addClass('collapsing')[dimension](0)
-      .attr('aria-expanded', true)
-
-    this.$trigger
-      .removeClass('collapsed')
-      .attr('aria-expanded', true)
-
-    this.transitioning = 1
-
-    var complete = function () {
-      this.$element
-        .removeClass('collapsing')
-        .addClass('collapse in')[dimension]('')
-      this.transitioning = 0
-      this.$element
-        .trigger('shown.bs.collapse')
-    }
-
-    if (!$.support.transition) return complete.call(this)
-
-    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
-
-    this.$element
-      .one('bsTransitionEnd', $.proxy(complete, this))
-      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
-  }
-
-  Collapse.prototype.hide = function () {
-    if (this.transitioning || !this.$element.hasClass('in')) return
-
-    var startEvent = $.Event('hide.bs.collapse')
-    this.$element.trigger(startEvent)
-    if (startEvent.isDefaultPrevented()) return
-
-    var dimension = this.dimension()
-
-    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
-
-    this.$element
-      .addClass('collapsing')
-      .removeClass('collapse in')
-      .attr('aria-expanded', false)
-
-    this.$trigger
-      .addClass('collapsed')
-      .attr('aria-expanded', false)
-
-    this.transitioning = 1
-
-    var complete = function () {
-      this.transitioning = 0
-      this.$element
-        .removeClass('collapsing')
-        .addClass('collapse')
-        .trigger('hidden.bs.collapse')
-    }
-
-    if (!$.support.transition) return complete.call(this)
-
-    this.$element
-      [dimension](0)
-      .one('bsTransitionEnd', $.proxy(complete, this))
-      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
-  }
-
-  Collapse.prototype.toggle = function () {
-    this[this.$element.hasClass('in') ? 'hide' : 'show']()
-  }
-
-  Collapse.prototype.getParent = function () {
-    return $(this.options.parent)
-      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
-      .each($.proxy(function (i, element) {
-        var $element = $(element)
-        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
-      }, this))
-      .end()
-  }
-
-  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
-    var isOpen = $element.hasClass('in')
-
-    $element.attr('aria-expanded', isOpen)
-    $trigger
-      .toggleClass('collapsed', !isOpen)
-      .attr('aria-expanded', isOpen)
-  }
-
-  function getTargetFromTrigger($trigger) {
-    var href
-    var target = $trigger.attr('data-target')
-      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
-
-    return $(target)
-  }
-
-
-  // COLLAPSE PLUGIN DEFINITION
-  // ==========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.collapse')
-      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
-
-      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
-      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
-
-  var old = $.fn.collapse
-
-  $.fn.collapse             = Plugin
-  $.fn.collapse.Constructor = Collapse
-
-
-  // COLLAPSE NO CONFLICT
-  // ====================
-
-  $.fn.collapse.noConflict = function () {
-    $.fn.collapse = old
-    return this
-  }
-
-
-  // COLLAPSE DATA-API
-  // =================
-
-  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
-    var $this   = $(this)
-
-    if (!$this.attr('data-target')) e.preventDefault()
-
-    var $target = getTargetFromTrigger($this)
-    var data    = $target.data('bs.collapse')
-    var option  = data ? 'toggle' : $this.data()
-
-    Plugin.call($target, option)
-  })
-
-}(jQuery);
-
-
-/***/ }),
-
-/***/ 11:
-/***/ (function(module, exports) {
-
-/* ========================================================================
  * Bootstrap: dropdown.js v3.3.7
  * http://getbootstrap.com/javascript/#dropdowns
  * ========================================================================
@@ -501,7 +282,7 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
-/***/ 12:
+/***/ 11:
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -847,149 +628,7 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
-/***/ 123:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(124);
-
-
-/***/ }),
-
-/***/ 124:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_paginator__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_paginator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuejs_paginator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_quran_quranTable__ = __webpack_require__(126);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_quran_quranTable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_quran_quranTable__);
-__webpack_require__(3);
-
-
-
-window.toastr = __webpack_require__(24);
-
-
-
-window.eventBus = new Vue();
-
-var manageQuran = new Vue({
-  el: '#manageQuran',
-  data: {
-    current_view: '',
-    qurans: [],
-    scholars: [],
-    recitations: [],
-    resource_url: window.location.pathname,
-    options: {
-      remote_data: 'qurans.data',
-      remote_current_page: 'qurans.current_page',
-      remote_last_page: 'qurans.last_page',
-      remote_next_page_url: 'qurans.next_page_url',
-      remote_prev_page_url: 'qurans.prev_page_url',
-      next_button_text: 'التالى',
-      previous_button_text: 'السابق'
-    }
-  },
-  methods: {
-    updateResource: function updateResource(data) {
-      this.qurans = data;
-    },
-    fetchData: function fetchData() {
-      var _this = this;
-
-      axios.get(this.resource_url).then(function (response) {
-        return _this.assignData(response);
-      });
-    },
-    refetchData: function refetchData() {
-      if (this.current_page == '') {
-        this.resource_url = window.location.pathname;
-        this.fetchData();
-      } else {
-        this.resource_url = window.location.pathname + '/' + this.current_view;
-        this.fetchData();
-      }
-    },
-    assignData: function assignData(response) {
-      this.qurans = response.data.qurans.data;
-      this.scholars = response.data.scholars;
-      this.recitations = response.data.recitations;
-    },
-    reloadData: function reloadData() {
-      this.$refs.VP.fetchData(this.resource_url + '?page=' + this.$refs.VP.current_page);
-    },
-    afterQuranAdded: function afterQuranAdded(response) {
-      $('.modal.in').modal('hide');
-      toastr.success(response.message);
-      this.reloadData();
-    },
-    afterQuranDelete: function afterQuranDelete(response) {
-      toastr.warning(response.data.message);
-      this.reloadData();
-    },
-    addQuran: function addQuran() {
-      eventBus.$emit('addQuran');
-    }
-  },
-  components: {
-    quranTable: __WEBPACK_IMPORTED_MODULE_1__components_quran_quranTable___default.a,
-    VPaginator: __WEBPACK_IMPORTED_MODULE_0_vuejs_paginator___default.a
-  },
-  mounted: function mounted() {
-    var _this2 = this;
-
-    this.fetchData();
-
-    eventBus.$on('quranAdded', function (response) {
-      return _this2.afterQuranAdded(response);
-    });
-    eventBus.$on('quranDeleted', function (response) {
-      return _this2.afterQuranDelete(response);
-    });
-  }
-});
-
-toastr.options = {
-  "positionClass": "toast-bottom-right"
-};
-
-/***/ }),
-
-/***/ 126:
-/***/ (function(module, exports, __webpack_require__) {
-
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = null
-/* template */
-var __vue_template__ = null
-/* template functional */
-  var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\admin\\components\\quran\\quranTable.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 13:
+/***/ 12:
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -1516,7 +1155,449 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 14:
+/***/ 123:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(124);
+
+
+/***/ }),
+
+/***/ 124:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_paginator__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_paginator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuejs_paginator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_quran_quranTable__ = __webpack_require__(125);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_quran_quranTable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_quran_quranTable__);
+__webpack_require__(3);
+
+
+
+window.toastr = __webpack_require__(24);
+
+
+
+window.eventBus = new Vue();
+
+var manageQuran = new Vue({
+  el: '#manageQuran',
+  data: {
+    current_view: '',
+    qurans: [],
+    scholars: [],
+    recitations: [],
+    resource_url: window.location.pathname,
+    options: {
+      remote_data: 'qurans.data',
+      remote_current_page: 'qurans.current_page',
+      remote_last_page: 'qurans.last_page',
+      remote_next_page_url: 'qurans.next_page_url',
+      remote_prev_page_url: 'qurans.prev_page_url',
+      next_button_text: 'التالى',
+      previous_button_text: 'السابق'
+    }
+  },
+  methods: {
+    updateResource: function updateResource(data) {
+      this.qurans = data;
+    },
+    fetchData: function fetchData() {
+      var _this = this;
+
+      axios.get(this.resource_url).then(function (response) {
+        return _this.assignData(response);
+      });
+    },
+    refetchData: function refetchData() {
+      if (this.current_page == '') {
+        this.resource_url = window.location.pathname;
+        this.fetchData();
+      } else {
+        this.resource_url = window.location.pathname + '/' + this.current_view;
+        this.fetchData();
+      }
+    },
+    assignData: function assignData(response) {
+      this.qurans = response.data.qurans.data;
+      this.scholars = response.data.scholars;
+      this.recitations = response.data.recitations;
+    },
+    reloadData: function reloadData() {
+      this.$refs.VP.fetchData(this.resource_url + '?page=' + this.$refs.VP.current_page);
+    },
+    afterQuranAdded: function afterQuranAdded(response) {
+      $('.modal.in').modal('hide');
+      toastr.success(response.message);
+      this.reloadData();
+    },
+    afterQuranDelete: function afterQuranDelete(response) {
+      toastr.warning(response.data.message);
+      this.reloadData();
+    },
+    addQuran: function addQuran() {
+      eventBus.$emit('addQuran');
+    }
+  },
+  components: {
+    quranTable: __WEBPACK_IMPORTED_MODULE_1__components_quran_quranTable___default.a,
+    VPaginator: __WEBPACK_IMPORTED_MODULE_0_vuejs_paginator___default.a
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    this.fetchData();
+
+    eventBus.$on('quranAdded', function (response) {
+      return _this2.afterQuranAdded(response);
+    });
+    eventBus.$on('quranDeleted', function (response) {
+      return _this2.afterQuranDelete(response);
+    });
+  }
+});
+
+toastr.options = {
+  "positionClass": "toast-bottom-right"
+};
+
+/***/ }),
+
+/***/ 125:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(126)
+/* template */
+var __vue_template__ = __webpack_require__(127)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\admin\\components\\quran\\quranTable.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1c4cebc4", Component.options)
+  } else {
+    hotAPI.reload("data-v-1c4cebc4", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 126:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+// import addQuran from './addQuran';
+// import editQuran from './editQuran';
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['qurans', 'locales', 'scholars', 'recitations'],
+    methods: {
+        localeCheck: function localeCheck(key, quran) {
+            var trans = quran.translations;
+            for (var i = 0; i < trans.length; i++) {
+                if (trans[i].locale == key) {
+                    return true;
+                }
+            }
+        },
+        editQuran: function editQuran(quran) {
+            eventBus.$emit('editQuran', quran);
+        },
+        deleteQuran: function deleteQuran(quran) {
+            if (confirm('هل انت متأكد من حذف السورة؟')) {
+                axios.delete(window.location.pathname + '/' + quran.id).then(function (response) {
+                    return eventBus.$emit('quranDeleted', response);
+                });
+            }
+        }
+    },
+    components: {
+        // addQuran,
+        // editQuran
+    }
+});
+
+/***/ }),
+
+/***/ 127:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.qurans.length
+      ? _c(
+          "table",
+          { staticClass: "table table-responsive table-bordered text-center" },
+          [
+            _c("thead", [
+              _c(
+                "tr",
+                [
+                  _vm._l(_vm.locales, function(locale) {
+                    return _c("th", [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(locale.native) +
+                          "\n                    "
+                      )
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("th", [
+                    _vm._v(
+                      "\n                        رابط السورة\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("th", [
+                    _vm._v(
+                      "\n                        القارئ\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("th", [
+                    _vm._v(
+                      "\n                        نوع التلاوة\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("th")
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.qurans, function(quran) {
+                return _c(
+                  "tr",
+                  { key: quran.id },
+                  [
+                    _vm._l(_vm.locales, function(locale, key) {
+                      return _c(
+                        "td",
+                        [
+                          _vm._l(quran.translations, function(translation) {
+                            return translation.locale == key
+                              ? _c("span", [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(translation.name) +
+                                      "\n                        "
+                                  )
+                                ])
+                              : _vm._e()
+                          }),
+                          _vm._v(" "),
+                          !_vm.localeCheck(key, quran)
+                            ? _c("span", [
+                                _c(
+                                  "button",
+                                  { staticClass: "btn btn-success" },
+                                  [_vm._v("اضافة ترجمة")]
+                                )
+                              ])
+                            : _vm._e()
+                        ],
+                        2
+                      )
+                    }),
+                    _vm._v(" "),
+                    _c("td", [
+                      quran.link
+                        ? _c("span", [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(quran.link.url) +
+                                "\n                        "
+                            )
+                          ])
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      quran.scholar
+                        ? _c("span", [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(quran.scholar.name) +
+                                "\n                        "
+                            )
+                          ])
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      quran.scholar
+                        ? _c("span", [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(quran.recitation.name) +
+                                "\n                        "
+                            )
+                          ])
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          on: {
+                            click: function($event) {
+                              _vm.editQuran(quran)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-pencil-square-o",
+                            attrs: { "aria-hidden": "true" }
+                          })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          on: {
+                            click: function($event) {
+                              _vm.deleteQuran(quran)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-trash-o",
+                            attrs: { "aria-hidden": "true" }
+                          })
+                        ]
+                      )
+                    ])
+                  ],
+                  2
+                )
+              })
+            )
+          ]
+        )
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1c4cebc4", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 13:
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -1631,7 +1712,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 15:
+/***/ 14:
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -1810,7 +1891,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 16:
+/***/ 15:
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -1972,7 +2053,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 17:
+/***/ 16:
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -2141,7 +2222,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 18:
+/***/ 17:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3242,7 +3323,7 @@ var xhrClient = function (request) {
 
 var nodeClient = function (request) {
 
-    var client = __webpack_require__(19);
+    var client = __webpack_require__(18);
 
     return new PromiseObj(function (resolve) {
 
@@ -3719,107 +3800,14 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 /***/ }),
 
-/***/ 19:
+/***/ 18:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 2:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Errors = function () {
-    /**
-     * Create a new Errors instance.
-     */
-    function Errors() {
-        _classCallCheck(this, Errors);
-
-        this.errors = {};
-    }
-
-    /**
-     * Determine if an errors exists for the given field.
-     *
-     * @param {string} field
-     */
-
-
-    _createClass(Errors, [{
-        key: "has",
-        value: function has(field) {
-            return this.errors.hasOwnProperty(field);
-        }
-
-        /**
-         * Determine if we have any errors.
-         */
-
-    }, {
-        key: "any",
-        value: function any() {
-            return Object.keys(this.errors).length > 0;
-        }
-
-        /**
-         * Retrieve the error message for a field.
-         *
-         * @param {string} field
-         */
-
-    }, {
-        key: "get",
-        value: function get(field) {
-            if (this.errors[field]) {
-                return this.errors[field][0];
-            }
-        }
-
-        /**
-         * Record the new errors.
-         *
-         * @param {object} errors
-         */
-
-    }, {
-        key: "record",
-        value: function record(errors) {
-            this.errors = errors.errors;
-        }
-
-        /**
-         * Clear one or all error fields.
-         *
-         * @param {string|null} field
-         */
-
-    }, {
-        key: "clear",
-        value: function clear(field) {
-            if (field) {
-                delete this.errors[field];
-
-                return;
-            }
-
-            this.errors = {};
-        }
-    }]);
-
-    return Errors;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (Errors);
-
-/***/ }),
-
-/***/ 20:
+/***/ 19:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3986,7 +3974,100 @@ var Form = function () {
 
 /***/ }),
 
-/***/ 21:
+/***/ 2:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Errors = function () {
+    /**
+     * Create a new Errors instance.
+     */
+    function Errors() {
+        _classCallCheck(this, Errors);
+
+        this.errors = {};
+    }
+
+    /**
+     * Determine if an errors exists for the given field.
+     *
+     * @param {string} field
+     */
+
+
+    _createClass(Errors, [{
+        key: "has",
+        value: function has(field) {
+            return this.errors.hasOwnProperty(field);
+        }
+
+        /**
+         * Determine if we have any errors.
+         */
+
+    }, {
+        key: "any",
+        value: function any() {
+            return Object.keys(this.errors).length > 0;
+        }
+
+        /**
+         * Retrieve the error message for a field.
+         *
+         * @param {string} field
+         */
+
+    }, {
+        key: "get",
+        value: function get(field) {
+            if (this.errors[field]) {
+                return this.errors[field][0];
+            }
+        }
+
+        /**
+         * Record the new errors.
+         *
+         * @param {object} errors
+         */
+
+    }, {
+        key: "record",
+        value: function record(errors) {
+            this.errors = errors.errors;
+        }
+
+        /**
+         * Clear one or all error fields.
+         *
+         * @param {string|null} field
+         */
+
+    }, {
+        key: "clear",
+        value: function clear(field) {
+            if (field) {
+                delete this.errors[field];
+
+                return;
+            }
+
+            this.errors = {};
+        }
+    }]);
+
+    return Errors;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Errors);
+
+/***/ }),
+
+/***/ 20:
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -4234,12 +4315,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_resource__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__partials_Form__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_resource__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__partials_Form__ = __webpack_require__(19);
 try {
-    window.$ = window.jQuery = __webpack_require__(4);
+    window.$ = window.jQuery = __webpack_require__(21);
 
-    __webpack_require__(5);
+    __webpack_require__(4);
 } catch (e) {}
 
 window.axios = __webpack_require__(22);
@@ -4264,10 +4345,11 @@ window.Form = __WEBPACK_IMPORTED_MODULE_1__partials_Form__["a" /* default */];
 
 /***/ }),
 
-/***/ 5:
+/***/ 4:
 /***/ (function(module, exports, __webpack_require__) {
 
 // This file is autogenerated via the `commonjs` Grunt task. You can require() this file in a CommonJS environment.
+__webpack_require__(5)
 __webpack_require__(6)
 __webpack_require__(7)
 __webpack_require__(8)
@@ -4279,11 +4361,10 @@ __webpack_require__(13)
 __webpack_require__(14)
 __webpack_require__(15)
 __webpack_require__(16)
-__webpack_require__(17)
 
 /***/ }),
 
-/***/ 6:
+/***/ 5:
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -4349,7 +4430,7 @@ __webpack_require__(17)
 
 /***/ }),
 
-/***/ 7:
+/***/ 6:
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -4450,7 +4531,7 @@ __webpack_require__(17)
 
 /***/ }),
 
-/***/ 8:
+/***/ 7:
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -4582,7 +4663,7 @@ __webpack_require__(17)
 
 /***/ }),
 
-/***/ 9:
+/***/ 8:
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -4819,6 +4900,225 @@ __webpack_require__(17)
       var $carousel = $(this)
       Plugin.call($carousel, $carousel.data())
     })
+  })
+
+}(jQuery);
+
+
+/***/ }),
+
+/***/ 9:
+/***/ (function(module, exports) {
+
+/* ========================================================================
+ * Bootstrap: collapse.js v3.3.7
+ * http://getbootstrap.com/javascript/#collapse
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+/* jshint latedef: false */
+
++function ($) {
+  'use strict';
+
+  // COLLAPSE PUBLIC CLASS DEFINITION
+  // ================================
+
+  var Collapse = function (element, options) {
+    this.$element      = $(element)
+    this.options       = $.extend({}, Collapse.DEFAULTS, options)
+    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
+                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+    this.transitioning = null
+
+    if (this.options.parent) {
+      this.$parent = this.getParent()
+    } else {
+      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
+    }
+
+    if (this.options.toggle) this.toggle()
+  }
+
+  Collapse.VERSION  = '3.3.7'
+
+  Collapse.TRANSITION_DURATION = 350
+
+  Collapse.DEFAULTS = {
+    toggle: true
+  }
+
+  Collapse.prototype.dimension = function () {
+    var hasWidth = this.$element.hasClass('width')
+    return hasWidth ? 'width' : 'height'
+  }
+
+  Collapse.prototype.show = function () {
+    if (this.transitioning || this.$element.hasClass('in')) return
+
+    var activesData
+    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
+
+    if (actives && actives.length) {
+      activesData = actives.data('bs.collapse')
+      if (activesData && activesData.transitioning) return
+    }
+
+    var startEvent = $.Event('show.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    if (actives && actives.length) {
+      Plugin.call(actives, 'hide')
+      activesData || actives.data('bs.collapse', null)
+    }
+
+    var dimension = this.dimension()
+
+    this.$element
+      .removeClass('collapse')
+      .addClass('collapsing')[dimension](0)
+      .attr('aria-expanded', true)
+
+    this.$trigger
+      .removeClass('collapsed')
+      .attr('aria-expanded', true)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse in')[dimension]('')
+      this.transitioning = 0
+      this.$element
+        .trigger('shown.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
+
+    this.$element
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+  }
+
+  Collapse.prototype.hide = function () {
+    if (this.transitioning || !this.$element.hasClass('in')) return
+
+    var startEvent = $.Event('hide.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    var dimension = this.dimension()
+
+    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+
+    this.$element
+      .addClass('collapsing')
+      .removeClass('collapse in')
+      .attr('aria-expanded', false)
+
+    this.$trigger
+      .addClass('collapsed')
+      .attr('aria-expanded', false)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.transitioning = 0
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse')
+        .trigger('hidden.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    this.$element
+      [dimension](0)
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+  }
+
+  Collapse.prototype.toggle = function () {
+    this[this.$element.hasClass('in') ? 'hide' : 'show']()
+  }
+
+  Collapse.prototype.getParent = function () {
+    return $(this.options.parent)
+      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
+      .each($.proxy(function (i, element) {
+        var $element = $(element)
+        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
+      }, this))
+      .end()
+  }
+
+  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
+    var isOpen = $element.hasClass('in')
+
+    $element.attr('aria-expanded', isOpen)
+    $trigger
+      .toggleClass('collapsed', !isOpen)
+      .attr('aria-expanded', isOpen)
+  }
+
+  function getTargetFromTrigger($trigger) {
+    var href
+    var target = $trigger.attr('data-target')
+      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+
+    return $(target)
+  }
+
+
+  // COLLAPSE PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.collapse')
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
+      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.collapse
+
+  $.fn.collapse             = Plugin
+  $.fn.collapse.Constructor = Collapse
+
+
+  // COLLAPSE NO CONFLICT
+  // ====================
+
+  $.fn.collapse.noConflict = function () {
+    $.fn.collapse = old
+    return this
+  }
+
+
+  // COLLAPSE DATA-API
+  // =================
+
+  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
+    var $this   = $(this)
+
+    if (!$this.attr('data-target')) e.preventDefault()
+
+    var $target = getTargetFromTrigger($this)
+    var data    = $target.data('bs.collapse')
+    var option  = data ? 'toggle' : $this.data()
+
+    Plugin.call($target, option)
   })
 
 }(jQuery);

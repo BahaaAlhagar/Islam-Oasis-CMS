@@ -22,7 +22,7 @@ class QuranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Scholar $scholar = null)
+    public function index($scholar = null)
     {
         if($scholar){
             $qurans = Quran::latest()
