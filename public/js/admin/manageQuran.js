@@ -1871,12 +1871,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         onTagCreate: function onTagCreate() {
             this.form.post('/admincp/quran').then(function (response) {
-                return eventBus.$emit('tagAdded', response);
+                return eventBus.$emit('quranAdded', response);
             });
         },
         addQuranModal: function addQuranModal() {
             this.form.name = {};
             $('#addQuranModal').modal('show');
+        },
+        nameKey: function nameKey(key) {
+            return 'name.' + key;
         }
     },
     watch: {
@@ -1971,21 +1974,26 @@ var render = function() {
                       },
                       domProps: { value: _vm.form.name[key] },
                       on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                        input: [
+                          function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form.name, key, $event.target.value)
+                          },
+                          function($event) {
+                            _vm.form.errors.clear(_vm.nameKey(key))
                           }
-                          _vm.$set(_vm.form.name, key, $event.target.value)
-                        }
+                        ]
                       }
                     }),
                     _vm._v(" "),
-                    _vm.form.errors.has("name[key]")
+                    _vm.form.errors.has(_vm.nameKey(key))
                       ? _c("span", {
                           staticClass: "alert-danger",
                           domProps: {
                             textContent: _vm._s(
-                              _vm.form.errors.get("name[key]")
+                              _vm.form.errors.get(_vm.nameKey(key))
                             )
                           }
                         })

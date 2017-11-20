@@ -22,9 +22,9 @@
                         <div v-for="(locale, key) in locales" class="form-group">
                             <label for="name[key]" class="label">الاسم بـ {{ locale.native }}:</label>
                             
-                            <input type="text" id="name[key]" name="name[key]" class="form-control" v-model="form.name[key]"> 
+                            <input type="text" id="name[key]" @input="form.errors.clear(nameKey(key))" name="name[key]" class="form-control" v-model="form.name[key]"> 
 
-                            <span class="alert-danger" v-if="form.errors.has('name[key]')" v-text="form.errors.get('name[key]')"></span>
+                            <span class="alert-danger" v-if="form.errors.has(nameKey(key))" v-text="form.errors.get(nameKey(key))"></span>
                         </div>
 
                         <div class="form-group">
@@ -84,11 +84,14 @@
         methods: {
         onTagCreate() {
             this.form.post('/admincp/quran')
-                .then(response => eventBus.$emit('tagAdded', response));
+                .then(response => eventBus.$emit('quranAdded', response));
             },
             addQuranModal(){
                 this.form.name = {};
                 $('#addQuranModal').modal('show');
+            },
+            nameKey(key){
+                return 'name.' + key;
             }
         },
           watch: {

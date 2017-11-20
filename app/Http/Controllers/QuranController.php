@@ -7,6 +7,7 @@ use App\Scholar;
 use App\Recitation;
 use App\ScholarTranslation;
 use App\RecitationTranslation;
+use App\Http\Requests\storeQuranRequest;
 use Illuminate\Http\Request;
 
 class QuranController extends Controller
@@ -52,7 +53,7 @@ class QuranController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storeQuranRequest $request)
     {
         $languageData = [];
 
