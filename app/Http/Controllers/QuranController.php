@@ -100,6 +100,13 @@ class QuranController extends Controller
      */
     public function destroy(Quran $quran)
     {
-        //
+        if($quran->link)
+        {
+            $quran->link->delete();
+        }
+
+        $quran->delete();
+
+        return ['message' => 'تم حذف السورة بنجاح'];
     }
 }

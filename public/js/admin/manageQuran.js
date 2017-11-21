@@ -1393,7 +1393,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         deleteQuran: function deleteQuran(quran) {
             if (confirm('هل انت متأكد من حذف السورة؟')) {
-                axios.delete(window.location.pathname + '/' + quran.id).then(function (response) {
+                axios.delete('/admincp/quran/' + quran.id).then(function (response) {
                     return eventBus.$emit('quranDeleted', response);
                 });
             }

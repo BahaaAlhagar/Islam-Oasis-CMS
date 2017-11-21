@@ -68,7 +68,7 @@
             },
             deleteQuran(quran){
                 if(confirm('هل انت متأكد من حذف السورة؟')){
-                    axios.delete(window.location.pathname + '/' + quran.id)
+                    axios.delete(`/admincp/quran/${quran.id}`)
                         .then(response => eventBus.$emit('quranDeleted', response));
                 }
             }

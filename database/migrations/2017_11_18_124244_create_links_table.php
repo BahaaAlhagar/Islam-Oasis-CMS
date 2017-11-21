@@ -19,7 +19,6 @@ class CreateLinksTable extends Migration
             $table->string('locale')->index()->nullable();
             $table->integer('linkable_id')->index()->nullable();
             $table->string('linkable_type')->index()->nullable();
-            $table->timestamps();
         });
     }
 
