@@ -95,15 +95,16 @@ table {
 }
 
 .table th {
+  width: 100%;
   max-width: 350px;
   text-align: center;
 }
 
 .table td {
+  width: 100%;
   max-width: 350px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  word-wrap: break-word;
+  overflow: auto;
 }
 
 table a {

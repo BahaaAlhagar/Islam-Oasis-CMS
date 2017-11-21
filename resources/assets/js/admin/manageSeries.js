@@ -1,6 +1,6 @@
 require('../bootstrap');
 
-// import seriesTable from './components/series/seriesTable';
+import seriesTable from './components/series/seriesTable';
 import VuePaginator from 'vuejs-paginator';
 
 
@@ -65,7 +65,7 @@ const manageSeries = new Vue({
       }
     },
     components: {
-    	// seriesTable,
+    	seriesTable,
       VPaginator: VuePaginator
     },
     mounted(){
