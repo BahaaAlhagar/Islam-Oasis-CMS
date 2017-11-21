@@ -56,4 +56,12 @@ route::resource('recitations', 'RecitationController')->only('index', 'update', 
 route::get('quran/scholar/{scholar?}', 'QuranController@index')->name('quran.index');
 route::resource('quran', 'QuranController')->only('store', 'update', 'destroy');
 
+
+// series routes
+route::post('series/{series?}', 'SeriesController@store')->name('series.store');
+route::post('series/{series}/photo', 'PhotoController@updateSeriesPhoto');
+route::delete('seriestranslation/{translation}', 'SeriesController@deleteTranslation');
+route::resource('series', 'SeriesController')->only('index', 'update', 'destroy');
+
+
 });
