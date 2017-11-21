@@ -87,6 +87,8 @@
                 .then(response => eventBus.$emit('quranAdded', response));
             },
             editQuranModal(quran){
+                this.editForm.name = {};
+
                 let trans = quran.translations;
                 for (var i = 0; i < trans.length; i++) {
                     this.editForm.name[trans[i].locale] = trans[i].name;
@@ -94,9 +96,11 @@
 
                 this.quran_id = quran.id;
                 this.editForm.scholar = quran.scholar;
+                // this.editForm.scholar_id = quran.scholar.id;
                 this.editForm.recitation = quran.recitation;
+                // this.editForm.recitation_id = quran.recitation.id;
                 quran.link ? this.editForm.url = quran.link.url : this.editForm.url = '';
-                
+
                 $('#editQuranModal').modal('show');
             },
             nameKey(key){
@@ -105,10 +109,10 @@
         },
           watch: {
             'editForm.scholar': function(val) {
-                val ? this.editForm.scholar_id = val.scholar_id : this.editForm.scholar_id = '';
+                val ? this.editForm.scholar_id = val.id : this.editForm.scholar_id = '';
             },
             'editForm.recitation': function(val) {
-                val ? this.editForm.recitation_id = val.recitation_id : this.editForm.recitation_id = ''
+                val ? this.editForm.recitation_id = val.id : this.editForm.recitation_id = ''
             }
         },
         components: {

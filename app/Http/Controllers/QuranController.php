@@ -36,12 +36,10 @@ class QuranController extends Controller
                     ->paginate(10);
         }
         
-        $scholars = ScholarTranslation::where('locale', config('translatable.locale'))
-                                        ->orderBy('name')
+        $scholars = Scholar::translatedIn(config('translatable.locale'))
                                         ->get();
 
-        $recitations = RecitationTranslation::where('locale', config('translatable.locale'))
-                                        ->orderBy('name')
+        $recitations = Recitation::translatedIn(config('translatable.locale'))
                                         ->get();
 
         return $this->makeResponse('admin/quran/manageQuran', compact('qurans', 'scholars', 'recitations'));
@@ -78,9 +76,20 @@ class QuranController extends Controller
      * @param  \App\Quran  $quran
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Quran $quran)
+    public function update(storeQuranRequest $request, Quran $quran)
     {
-        //
+        $data = ['scholar_id' => $request->scholar_id, 'recitation_id' => $request->recitation_id];
+
+        foreach(config('translatable.locales') as $locale)
+        {
+            $data[$locale] = ['name' => $request->input('name.'.$locale)];
+        }
+
+        $quran->update($data);
+
+        $quran->link()->update($request->only('url'));
+
+        return ['message' => 'تم تحديث بيانات السورة بنجاح'];
     }
 
     /**

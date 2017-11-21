@@ -96,10 +96,10 @@
         },
           watch: {
             'form.scholar': function(val) {
-                val ? this.form.scholar_id = val.scholar_id : this.form.scholar_id = '';
+                val ? this.form.scholar_id = val.id : this.form.scholar_id = '';
             },
             'form.recitation': function(val) {
-                val ? this.form.recitation_id = val.recitation_id : this.form.recitation_id = ''
+                val ? this.form.recitation_id = val.id : this.form.recitation_id = ''
             }
         },
         components: {

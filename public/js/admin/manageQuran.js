@@ -1563,10 +1563,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     watch: {
         'form.scholar': function formScholar(val) {
-            val ? this.form.scholar_id = val.scholar_id : this.form.scholar_id = '';
+            val ? this.form.scholar_id = val.id : this.form.scholar_id = '';
         },
         'form.recitation': function formRecitation(val) {
-            val ? this.form.recitation_id = val.recitation_id : this.form.recitation_id = '';
+            val ? this.form.recitation_id = val.id : this.form.recitation_id = '';
         }
     },
     components: {
@@ -2320,6 +2320,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         editQuranModal: function editQuranModal(quran) {
+            this.editForm.name = {};
+
             var trans = quran.translations;
             for (var i = 0; i < trans.length; i++) {
                 this.editForm.name[trans[i].locale] = trans[i].name;
@@ -2327,7 +2329,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.quran_id = quran.id;
             this.editForm.scholar = quran.scholar;
+            // this.editForm.scholar_id = quran.scholar.id;
             this.editForm.recitation = quran.recitation;
+            // this.editForm.recitation_id = quran.recitation.id;
             quran.link ? this.editForm.url = quran.link.url : this.editForm.url = '';
 
             $('#editQuranModal').modal('show');
@@ -2338,10 +2342,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     watch: {
         'editForm.scholar': function editFormScholar(val) {
-            val ? this.editForm.scholar_id = val.scholar_id : this.editForm.scholar_id = '';
+            val ? this.editForm.scholar_id = val.id : this.editForm.scholar_id = '';
         },
         'editForm.recitation': function editFormRecitation(val) {
-            val ? this.editForm.recitation_id = val.recitation_id : this.editForm.recitation_id = '';
+            val ? this.editForm.recitation_id = val.id : this.editForm.recitation_id = '';
         }
     },
     components: {
