@@ -87,7 +87,7 @@ class QuranController extends Controller
 
         $quran->update($data);
 
-        $quran->link()->update($request->only('url'));
+        $quran->link ? $quran->link()->update($request->only('url')) : $quran->link()->create($request->only('url'));
 
         return ['message' => 'تم تحديث بيانات السورة بنجاح'];
     }

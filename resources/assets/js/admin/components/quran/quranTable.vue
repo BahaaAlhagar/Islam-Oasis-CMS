@@ -28,8 +28,11 @@
                         </span>
                     </td>
                     <td>
+
                         <span v-if="quran.link">
-                            {{ quran.link.url }}
+                            <a :href="quran.link.url" target="_blank">
+                             <i class="fa  fa-download" aria-hidden="true"></i>
+                            </a>
                         </span>
                     </td>
                     <td>

@@ -1380,6 +1380,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -2063,10 +2066,20 @@ var render = function() {
                       _c("td", [
                         quran.link
                           ? _c("span", [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(quran.link.url) +
-                                  "\n                        "
+                              _c(
+                                "a",
+                                {
+                                  attrs: {
+                                    href: quran.link.url,
+                                    target: "_blank"
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fa  fa-download",
+                                    attrs: { "aria-hidden": "true" }
+                                  })
+                                ]
                               )
                             ])
                           : _vm._e()

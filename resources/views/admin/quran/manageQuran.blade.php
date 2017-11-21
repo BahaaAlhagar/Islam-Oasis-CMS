@@ -16,7 +16,7 @@
 			عرض 
 			<select v-model="current_view" @change="refetchData()">
 				<option value="">الكل</option>
-			    <option v-for="scholar in scholars" :value="scholar.scholar_id">@{{ scholar.name }}</option>
+			    <option v-for="scholar in scholars" :value="scholar.id">@{{ scholar.name }}</option>
 			</select>
 		</span>
 
