@@ -18,4 +18,9 @@ class Tag extends Model
     {
     	return $this->morphedByMany(Post::class, 'taggables');
     }
+
+    public function series()
+    {
+    	return $this->belongsToMany(Series::class);
+    }
 }

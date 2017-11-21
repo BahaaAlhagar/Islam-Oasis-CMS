@@ -22,4 +22,9 @@ class Scholar extends Model
     {
     	return $this->hasMany(Quran::class);
     }
+
+    public function series()
+    {
+        return $this->belongsToMany(Series::class);
+    }
 }
