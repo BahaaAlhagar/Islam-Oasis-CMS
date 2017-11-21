@@ -33,6 +33,10 @@
 					القران الكريم
 				</a>
 
+				<a href="{{ route('series.index') }}" class="list-group-item">
+					المسلسلات والمجموعات
+				</a>
+
 
 			</ul>
 	  </div>

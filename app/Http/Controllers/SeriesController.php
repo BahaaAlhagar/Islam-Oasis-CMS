@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
 use App\Series;
+use App\Scholar;
 use App\SeriesTranslation;
 use Illuminate\Http\Request;
 
@@ -13,11 +15,15 @@ class SeriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($type = null)
     {
-        $series = Series::with('translations', 'photo')->latest()->paginate(10);
+        $type ? $series = Series::where('type', $type)->with('translations', 'photo', 'tags', 'scholars')->latest()->paginate(10) : $series = Series::with('translations', 'photo', 'tags', 'scholars')->latest()->paginate(10);
 
-        return $this->makeResponse('admin/series/manageSeries', compact('series'));
+        $scholars = Scholar::translatedIn(config('translatable.locale'))->get();
+
+        $tags = Tag::translatedIn(config('translatable.locale'))->get();
+
+        return $this->makeResponse('admin/series/manageSeries', compact('series', 'tags', 'scholars'));
     }
 
 

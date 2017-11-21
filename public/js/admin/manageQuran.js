@@ -1273,7 +1273,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(126)
 /* template */
-var __vue_template__ = __webpack_require__(130)
+var __vue_template__ = __webpack_require__(133)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -1321,7 +1321,7 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addQuran__ = __webpack_require__(127);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addQuran___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__addQuran__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editQuran__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editQuran__ = __webpack_require__(130);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editQuran___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editQuran__);
 //
 //
@@ -1987,214 +1987,12 @@ if (false) {
 /***/ 130:
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm.qurans.length
-        ? _c(
-            "table",
-            {
-              staticClass: "table table-responsive table-bordered text-center"
-            },
-            [
-              _c("thead", [
-                _c(
-                  "tr",
-                  [
-                    _vm._l(_vm.locales, function(locale) {
-                      return _c("th", [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(locale.native) +
-                            "\n                    "
-                        )
-                      ])
-                    }),
-                    _vm._v(" "),
-                    _c("th", [
-                      _vm._v(
-                        "\n                        رابط السورة\n                    "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("th", [
-                      _vm._v(
-                        "\n                        القارئ\n                    "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("th", [
-                      _vm._v(
-                        "\n                        نوع التلاوة\n                    "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("th")
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.qurans, function(quran) {
-                  return _c(
-                    "tr",
-                    { key: quran.id },
-                    [
-                      _vm._l(_vm.locales, function(locale, key) {
-                        return _c(
-                          "td",
-                          _vm._l(quran.translations, function(translation) {
-                            return translation.locale == key
-                              ? _c("span", [
-                                  _vm._v(
-                                    "\n                            " +
-                                      _vm._s(translation.name) +
-                                      "\n                        "
-                                  )
-                                ])
-                              : _vm._e()
-                          })
-                        )
-                      }),
-                      _vm._v(" "),
-                      _c("td", [
-                        quran.link
-                          ? _c("span", [
-                              _c(
-                                "a",
-                                {
-                                  attrs: {
-                                    href: quran.link.url,
-                                    target: "_blank"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fa  fa-download",
-                                    attrs: { "aria-hidden": "true" }
-                                  })
-                                ]
-                              )
-                            ])
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        quran.scholar
-                          ? _c("span", [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(quran.scholar.name) +
-                                  "\n                        "
-                              )
-                            ])
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        quran.scholar
-                          ? _c("span", [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(quran.recitation.name) +
-                                  "\n                        "
-                              )
-                            ])
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary",
-                            on: {
-                              click: function($event) {
-                                _vm.editQuran(quran)
-                              }
-                            }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "fa fa-pencil-square-o",
-                              attrs: { "aria-hidden": "true" }
-                            })
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-danger",
-                            on: {
-                              click: function($event) {
-                                _vm.deleteQuran(quran)
-                              }
-                            }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "fa fa-trash-o",
-                              attrs: { "aria-hidden": "true" }
-                            })
-                          ]
-                        )
-                      ])
-                    ],
-                    2
-                  )
-                })
-              )
-            ]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c("add-quran", {
-        attrs: {
-          locales: _vm.locales,
-          recitations: _vm.recitations,
-          scholars: _vm.scholars
-        }
-      }),
-      _vm._v(" "),
-      _c("edit-quran", {
-        attrs: {
-          locales: _vm.locales,
-          recitations: _vm.recitations,
-          scholars: _vm.scholars
-        }
-      })
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1c4cebc4", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ 132:
-/***/ (function(module, exports, __webpack_require__) {
-
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(133)
+var __vue_script__ = __webpack_require__(131)
 /* template */
-var __vue_template__ = __webpack_require__(134)
+var __vue_template__ = __webpack_require__(132)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -2235,7 +2033,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 133:
+/***/ 131:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2375,7 +2173,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 134:
+/***/ 132:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -2657,6 +2455,208 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-ae8b9154", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 133:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.qurans.length
+        ? _c(
+            "table",
+            {
+              staticClass: "table table-responsive table-bordered text-center"
+            },
+            [
+              _c("thead", [
+                _c(
+                  "tr",
+                  [
+                    _vm._l(_vm.locales, function(locale) {
+                      return _c("th", [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(locale.native) +
+                            "\n                    "
+                        )
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _c("th", [
+                      _vm._v(
+                        "\n                        رابط السورة\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("th", [
+                      _vm._v(
+                        "\n                        القارئ\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("th", [
+                      _vm._v(
+                        "\n                        نوع التلاوة\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("th")
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.qurans, function(quran) {
+                  return _c(
+                    "tr",
+                    { key: quran.id },
+                    [
+                      _vm._l(_vm.locales, function(locale, key) {
+                        return _c(
+                          "td",
+                          _vm._l(quran.translations, function(translation) {
+                            return translation.locale == key
+                              ? _c("span", [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(translation.name) +
+                                      "\n                        "
+                                  )
+                                ])
+                              : _vm._e()
+                          })
+                        )
+                      }),
+                      _vm._v(" "),
+                      _c("td", [
+                        quran.link
+                          ? _c("span", [
+                              _c(
+                                "a",
+                                {
+                                  attrs: {
+                                    href: quran.link.url,
+                                    target: "_blank"
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fa  fa-download",
+                                    attrs: { "aria-hidden": "true" }
+                                  })
+                                ]
+                              )
+                            ])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        quran.scholar
+                          ? _c("span", [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(quran.scholar.name) +
+                                  "\n                        "
+                              )
+                            ])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        quran.scholar
+                          ? _c("span", [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(quran.recitation.name) +
+                                  "\n                        "
+                              )
+                            ])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            on: {
+                              click: function($event) {
+                                _vm.editQuran(quran)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fa fa-pencil-square-o",
+                              attrs: { "aria-hidden": "true" }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            on: {
+                              click: function($event) {
+                                _vm.deleteQuran(quran)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fa fa-trash-o",
+                              attrs: { "aria-hidden": "true" }
+                            })
+                          ]
+                        )
+                      ])
+                    ],
+                    2
+                  )
+                })
+              )
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c("add-quran", {
+        attrs: {
+          locales: _vm.locales,
+          recitations: _vm.recitations,
+          scholars: _vm.scholars
+        }
+      }),
+      _vm._v(" "),
+      _c("edit-quran", {
+        attrs: {
+          locales: _vm.locales,
+          recitations: _vm.recitations,
+          scholars: _vm.scholars
+        }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1c4cebc4", module.exports)
   }
 }
 

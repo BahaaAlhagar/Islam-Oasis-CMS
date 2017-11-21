@@ -16,4 +16,5 @@ mix.js('resources/assets/js/admin/manageTags.js', 'public/js/admin')
 	.js('resources/assets/js/admin/manageRecitations.js', 'public/js/admin')
 	.js('resources/assets/js/admin/manageScholars.js', 'public/js/admin')
 	.js('resources/assets/js/admin/manageQuran.js', 'public/js/admin')
+	.js('resources/assets/js/admin/manageSeries.js', 'public/js/admin')
 	.extract(['jquery', 'vue', 'toastr', 'axios']);
