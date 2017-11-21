@@ -1410,7 +1410,7 @@ var manageSeries = new Vue({
     }
   },
   components: {
-    seriesTable: seriesTable,
+    // seriesTable,
     VPaginator: __WEBPACK_IMPORTED_MODULE_0_vuejs_paginator___default.a
   },
   mounted: function mounted() {

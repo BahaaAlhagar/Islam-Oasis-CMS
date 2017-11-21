@@ -17,12 +17,12 @@
 		تأكد من اضافة المجموعة باللغة لافتراضية ليتم الوصول اليها فى لوحة التحكم<br>
 		عرض 
 			<select v-model="current_view" @change="refetchData()">
-				<option value="1">الكل</option>
-			    <option value="2">مجموعات الكتب</option>
-			    <option value="3">مجموعات الاناشيد</option>
-			    <option value="4">مجموعات الفيديو</option>
-			    <option value="5">مجموعات المحاضرات الصوتية</option>
-			    <option value="6">مجموعات الادعية</option>    
+				<option value="">الكل</option>
+			    <option value="1">مجموعات الكتب</option>
+			    <option value="2">مجموعات الاناشيد</option>
+			    <option value="3">مجموعات الفيديو</option>
+			    <option value="4">مجموعات المحاضرات الصوتية</option>
+			    <option value="5">مجموعات الادعية</option>    
 			</select>
 		</span>
 		<span class="col-md-2 text-center">
@@ -31,7 +31,7 @@
 		
 		<!-- <series-table :series="series" :locales="{{ json_encode(LaravelLocalization::getSupportedLocales()) }}"></series-table> -->
 
-        <!-- <v-paginator class="text-center" v-show="series.length" :options="options" ref="VP" :resource_url="resource_url" @update="updateResource"></v-paginator> -->
+        <v-paginator class="text-center" v-show="series.length" :options="options" ref="VP" :resource_url="resource_url" @update="updateResource"></v-paginator>
 	</div>
 
 @endsection

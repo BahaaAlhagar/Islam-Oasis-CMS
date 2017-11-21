@@ -65,8 +65,8 @@ const manageSeries = new Vue({
       }
     },
     components: {
-    	seriesTable,
-        VPaginator: VuePaginator
+    	// seriesTable,
+      VPaginator: VuePaginator
     },
     mounted(){
     	this.fetchData();
