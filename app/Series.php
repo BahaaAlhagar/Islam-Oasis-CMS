@@ -9,7 +9,7 @@ class Series extends Model
 {
     use Translatable;
 
-    public $translatedAttributes = ['locale', 'name', 'slug', 'published'];
+    public $translatedAttributes = ['locale', 'name', 'slug', 'published', 'description'];
 
     protected $guarded = ['id'];
 
