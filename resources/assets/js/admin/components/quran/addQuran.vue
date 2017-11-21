@@ -14,7 +14,7 @@
               </div>
 
               <div class="modal-body">
-                    <form method="POST" action="/" @submit.prevent="onTagCreate" @keydown="form.errors.clear($event.target.name)"
+                    <form method="POST" action="/" @submit.prevent="onQuranCreate" @keydown="form.errors.clear($event.target.name)"
                     @change="form.errors.clear($event.target.name)"
                     @input="form.errors.clear($event.target.name)"
                     >
@@ -82,7 +82,7 @@
                 };
             },
         methods: {
-        onTagCreate() {
+        onQuranCreate() {
             this.form.post('/admincp/quran')
                 .then(response => eventBus.$emit('quranAdded', response));
             },

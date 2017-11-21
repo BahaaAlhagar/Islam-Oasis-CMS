@@ -26,9 +26,6 @@
                         <span v-for="translation in quran.translations" v-if="translation.locale == key">
                             {{ translation.name }}
                         </span>
-                        <span v-if="!localeCheck(key, quran)">
-                             <button class="btn btn-success">اضافة ترجمة</button>
-                        </span>
                     </td>
                     <td>
                         <span v-if="quran.link">
@@ -53,7 +50,7 @@
             </tbody>
         </table>
         <add-quran :locales="locales" :recitations="recitations" :scholars="scholars"></add-quran>
-        <!-- <edit-quran-translation :locales="locales"></edit-quran-translation> -->
+        <edit-quran :locales="locales" :recitations="recitations" :scholars="scholars"></edit-quran>
     </div>
 </template>
 
@@ -61,19 +58,11 @@
 <script>
 
     import addQuran from './addQuran';
-    // import editQuran from './editQuran';
+    import editQuran from './editQuran';
 
 	export default {
         props: ['qurans', 'locales', 'scholars', 'recitations'],
         methods: {
-            localeCheck(key, quran){
-                let trans = quran.translations;
-                for (var i = 0; i < trans.length; i++) {
-                    if(trans[i].locale == key){
-                        return true;
-                    }
-                }
-            },
             editQuran(quran){
                 eventBus.$emit('editQuran', quran);
             },
@@ -86,7 +75,7 @@
         },
         components: {
             addQuran,
-            // editQuran
+            editQuran
         }
     }
 </script>
