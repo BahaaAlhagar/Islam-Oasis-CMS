@@ -6,6 +6,7 @@ use App\Tag;
 use App\Series;
 use App\Scholar;
 use App\SeriesTranslation;
+use App\Http\Requests\storeSeriesRequest;
 use Illuminate\Http\Request;
 
 class SeriesController extends Controller
@@ -33,7 +34,7 @@ class SeriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Series $series = null)
+    public function store(storeSeriesRequest $request, Series $series = null)
     {
         if($series)
         {
@@ -63,7 +64,7 @@ class SeriesController extends Controller
      * @param  \App\Series  $series
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SeriesTranslation $series)
+    public function update(storeSeriesRequest $request, SeriesTranslation $series)
     {
         $series->update($request->all());
 

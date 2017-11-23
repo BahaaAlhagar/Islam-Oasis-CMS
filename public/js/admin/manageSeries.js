@@ -1822,30 +1822,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 descriprtion: '',
                 published: '',
                 scholars: [],
-                tags: []
-            }),
-
-            notFilteredScholars: [],
-            notFilteredTags: []
+                tags: [],
+                notFilteredScholars: [],
+                notFilteredTags: []
+            })
         };
     },
 
     methods: {
         onScholarCreate: function onScholarCreate() {
             this.addSeriesForm.post(window.location.pathname).then(function (response) {
-                return eventBus.$emit('scholarAdded', response);
+                return eventBus.$emit('seriesAdded', response);
             });
         }
     },
     watch: {
-        notFilteredTags: function notFilteredTags(val) {
+        "addSeriesForm.notFilteredTags": function addSeriesFormNotFilteredTags(val) {
             this.addSeriesForm.tags = [];
+            this.addSeriesForm.errors.clear('tags');
             for (var i = 0; i < val.length; i++) {
                 this.addSeriesForm.tags.unshift(val[i].id);
             }
         },
-        notFilteredScholars: function notFilteredScholars(val) {
+        "addSeriesForm.notFilteredScholars": function addSeriesFormNotFilteredScholars(val) {
             this.addSeriesForm.scholars = [];
+            this.addSeriesForm.errors.clear('scholars');
             for (var i = 0; i < val.length; i++) {
                 this.addSeriesForm.scholars.unshift(val[i].id);
             }
@@ -2086,7 +2087,7 @@ var render = function() {
                   _c(
                     "label",
                     { staticClass: "label", attrs: { for: "type" } },
-                    [_vm._v("نوع المجموع:")]
+                    [_vm._v("نوع المجموعة:")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -2314,7 +2315,7 @@ var render = function() {
                     _c(
                       "label",
                       { staticClass: "label", attrs: { for: "scholars" } },
-                      [_vm._v("مؤلفى او مقدمى المجموعة:")]
+                      [_vm._v("مؤلفى او مقدمى المجموعة (العلماء):")]
                     ),
                     _vm._v(" "),
                     _c("v-select", {
@@ -2325,17 +2326,16 @@ var render = function() {
                         id: "scholars",
                         name: "scholars[]"
                       },
-                      on: {
-                        change: function($event) {
-                          _vm.addSeriesForm.errors.clear("scholars")
-                        }
-                      },
                       model: {
-                        value: _vm.notFilteredScholars,
+                        value: _vm.addSeriesForm.notFilteredScholars,
                         callback: function($$v) {
-                          _vm.notFilteredScholars = $$v
+                          _vm.$set(
+                            _vm.addSeriesForm,
+                            "notFilteredScholars",
+                            $$v
+                          )
                         },
-                        expression: "notFilteredScholars"
+                        expression: "addSeriesForm.notFilteredScholars"
                       }
                     }),
                     _vm._v(" "),
@@ -2371,17 +2371,12 @@ var render = function() {
                         id: "tags",
                         name: "tags[]"
                       },
-                      on: {
-                        change: function($event) {
-                          _vm.addSeriesForm.errors.clear("tags")
-                        }
-                      },
                       model: {
-                        value: _vm.notFilteredTags,
+                        value: _vm.addSeriesForm.notFilteredTags,
                         callback: function($$v) {
-                          _vm.notFilteredTags = $$v
+                          _vm.$set(_vm.addSeriesForm, "notFilteredTags", $$v)
                         },
-                        expression: "notFilteredTags"
+                        expression: "addSeriesForm.notFilteredTags"
                       }
                     }),
                     _vm._v(" "),
@@ -2507,7 +2502,7 @@ var staticRenderFns = [
         _c(
           "h4",
           { staticClass: "modal-title", attrs: { id: "myModalLabel" } },
-          [_vm._v(" اضافة عالم او قارئ ")]
+          [_vm._v(" اضافة مجموعة او مسلسل ")]
         )
       ])
     ])

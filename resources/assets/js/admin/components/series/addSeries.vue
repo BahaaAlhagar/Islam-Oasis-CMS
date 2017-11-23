@@ -9,7 +9,7 @@
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 <span class="form-control-static text-center">
-                    <h4 class="modal-title" id="myModalLabel"> اضافة عالم او قارئ </h4>
+                    <h4 class="modal-title" id="myModalLabel"> اضافة مجموعة او مسلسل </h4>
                 </span>
               </div>
 
@@ -20,7 +20,7 @@
                     >
 
                         <div class="form-group">
-                            <label for="type" class="label">نوع المجموع:</label>
+                            <label for="type" class="label">نوع المجموعة:</label>
                             
                             <select id="type" name="type" class="form-control" v-model="addSeriesForm.type">
                                 <option value="1">مجموعة كتب</option>
@@ -60,10 +60,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="scholars" class="label">مؤلفى او مقدمى المجموعة:</label>
+                            <label for="scholars" class="label">مؤلفى او مقدمى المجموعة (العلماء):</label>
                             
                             <v-select label="name" 
-                            @change="addSeriesForm.errors.clear('scholars')" multiple :options="scholars" id="scholars" name="scholars[]" v-model="notFilteredScholars" ></v-select>
+                             multiple :options="scholars" id="scholars" name="scholars[]" v-model="addSeriesForm.notFilteredScholars" ></v-select>
 
                             <span class="alert-danger" v-if="addSeriesForm.errors.has('scholars')" v-text="addSeriesForm.errors.get('scholars')"></span>
                         </div>
@@ -72,7 +72,7 @@
                             <label for="tags" class="label">تصنيفات المجموعة:</label>
                             
                             <v-select label="name" 
-                            @change="addSeriesForm.errors.clear('tags')" multiple :options="tags" id="tags" name="tags[]" v-model="notFilteredTags" ></v-select>
+                             multiple :options="tags" id="tags" name="tags[]" v-model="addSeriesForm.notFilteredTags" ></v-select>
 
                             <span class="alert-danger" v-if="addSeriesForm.errors.has('tags')" v-text="addSeriesForm.errors.get('tags')"></span>
                         </div>
@@ -114,28 +114,29 @@
                     descriprtion: '',
                     published: '',
                     scholars: [],
-                    tags: []
-                    }),
-
+                    tags: [],
                     notFilteredScholars: [],
                     notFilteredTags: []
+                    }),
                 };
         },
         methods: {
         onScholarCreate() {
             this.addSeriesForm.post(window.location.pathname)
-                .then(response => eventBus.$emit('scholarAdded', response));
+                .then(response => eventBus.$emit('seriesAdded', response));
             }
         },
         watch: {
-            notFilteredTags(val){
+            "addSeriesForm.notFilteredTags"(val){
                 this.addSeriesForm.tags = [];
+                this.addSeriesForm.errors.clear('tags');
                 for(var i = 0; i < val.length; i++){
                     this.addSeriesForm.tags.unshift(val[i].id);
                 }
             },
-            notFilteredScholars(val){
+            "addSeriesForm.notFilteredScholars"(val){
                 this.addSeriesForm.scholars = [];
+                this.addSeriesForm.errors.clear('scholars');
                 for(var i = 0; i < val.length; i++){
                     this.addSeriesForm.scholars.unshift(val[i].id);
                 }
