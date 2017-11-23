@@ -47,12 +47,12 @@
                     </td>
                     <td>
                         <div class="alert-success" v-for="scholar in serie.scholars">
-                            {{ scholar.name }}<br>
+                            {{ scholar.name }}<hr>
                         </div>
                     </td>
                     <td>
                         <div class="alert-success" v-for="tag in serie.tags">
-                            {{ tag.name }}
+                            {{ tag.name }}<hr>
                         </div>
                     </td>
                     <td>
@@ -61,7 +61,7 @@
                 </tr>
             </tbody>
         </table>
-        <!-- <add-series :locales="locales"></add-series> -->
+        <add-series :locales="locales" :tags="tags" :scholars="scholars"></add-series>
         <!-- <add-series-translation :locales="locales"></add-series-translation> -->
         <!-- <edit-series-translation :locales="locales"></edit-series-translation> -->
         <!-- <image-uploader :locales="locales"></image-uploader> -->
@@ -71,7 +71,7 @@
 
 <script>
 
-    // import addSeries from './addSeries';
+    import addSeries from './addSeries';
     // import addSeriesTranslation from './addSeriesTranslation';
     // import editSeriesTranslation from './editSeriesTranslation';
     // import imageUploader from './imageUploader';
@@ -109,11 +109,11 @@
                 eventBus.$emit('imageUploader', serie);
             }
         },
-/*        components: {
-            // addSeries,
+        components: {
+            addSeries,
             // addSeriesTranslation,
             // editSeriesTranslation,
             // imageUploader
-        }*/
+        }
     }
 </script>

@@ -22,7 +22,7 @@
 			    <option value="2">مجموعات الاناشيد</option>
 			    <option value="3">مجموعات الفيديو</option>
 			    <option value="4">مجموعات المحاضرات الصوتية</option>
-			    <option value="5">مجموعات الادعية</option>    
+			    <option value="5">مجموعات الادعية</option>
 			</select>
 		</span>
 		<span class="col-md-2 text-center">
