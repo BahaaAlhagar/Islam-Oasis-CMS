@@ -48,7 +48,7 @@
         <add-scholar :locales="locales"></add-scholar>
         <add-scholar-translation :locales="locales"></add-scholar-translation>
         <edit-scholar-translation :locales="locales"></edit-scholar-translation>
-        <image-uploader :locales="locales"></image-uploader>
+        <image-uploader></image-uploader>
     </div>
 </template>
 

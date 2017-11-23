@@ -70,7 +70,7 @@
         <add-series :locales="locales" :tags="tags" :scholars="scholars"></add-series>
         <add-series-translation :locales="locales" :tags="tags" :scholars="scholars"></add-series-translation>
         <edit-series-translation :locales="locales" :tags="tags" :scholars="scholars"></edit-series-translation>
-        <!-- <image-uploader :locales="locales"></image-uploader> -->
+        <image-uploader></image-uploader>
     </div>
 </template>
 
@@ -80,7 +80,7 @@
     import addSeries from './addSeries';
     import addSeriesTranslation from './addSeriesTranslation';
     import editSeriesTranslation from './editSeriesTranslation';
-    // import imageUploader from './imageUploader';
+    import imageUploader from './imageUploader';
 
 	export default {
         props: ['series', 'locales', 'scholars', 'tags'],
@@ -119,7 +119,7 @@
             addSeries,
             addSeriesTranslation,
             editSeriesTranslation,
-            // imageUploader
+            imageUploader
         }
     }
 </script>

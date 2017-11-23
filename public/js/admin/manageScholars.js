@@ -7235,7 +7235,7 @@ var render = function() {
       _vm._v(" "),
       _c("edit-scholar-translation", { attrs: { locales: _vm.locales } }),
       _vm._v(" "),
-      _c("image-uploader", { attrs: { locales: _vm.locales } })
+      _c("image-uploader")
     ],
     1
   )

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Image;
+use App\Series;
 use App\Scholar;
+use App\Http\Requests\validatePhotoRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -21,10 +23,8 @@ class PhotoController extends Controller
      * @param  \App\Scholar  $scholar
      * @return \Illuminate\Http\Response
      */
-    public function updateScholarPhoto(Request $request, Scholar $scholar)
+    public function updateScholarPhoto(validatePhotoRequest $request, Scholar $scholar)
     {
-    	$photo = $request->validate(['photo' => 'required|image|max:2040']);
-
         if($request->hasFile('photo'))
         {
             $stored_photo = $this->handlePhoto($request, $scholar, 'scholar_files');
@@ -36,9 +36,29 @@ class PhotoController extends Controller
                 $scholar->photo()->create($stored_photo);
             }
 
+            return ['message' => 'تم تحديث الصورة بنجاح'];
+        }
+
+        return ['message' => 'مشكلة فى تحميل الصورة الرجاء المحاولة لاحقا'];
+    }
+
+    public function updateSeriesPhoto(validatePhotoRequest $request, Series $series)
+    {
+        if($request->hasFile('photo'))
+        {
+            $stored_photo = $this->handlePhoto($request, $series, 'series_files');
+
+            if($series->photo)
+            {
+                $series->photo()->update($stored_photo);
+            } else {
+                $series->photo()->create($stored_photo);
+            }
 
             return ['message' => 'تم تحديث الصورة بنجاح'];
         }
+
+        return ['message' => 'مشكلة فى تحميل الصورة الرجاء المحاولة لاحقا'];
     }
 
 
