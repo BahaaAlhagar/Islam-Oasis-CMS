@@ -1527,6 +1527,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addSeries__ = __webpack_require__(138);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addSeries___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__addSeries__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addSeriesTranslation__ = __webpack_require__(143);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addSeriesTranslation___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__addSeriesTranslation__);
 //
 //
 //
@@ -1601,7 +1603,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-// import addSeriesTranslation from './addSeriesTranslation';
+
 // import editSeriesTranslation from './editSeriesTranslation';
 // import imageUploader from './imageUploader';
 
@@ -1625,14 +1627,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         deleteTranslation: function deleteTranslation(translation) {
             if (confirm('هل انت متأكد من حذف هذه الترجمة؟')) {
                 axios.delete('/admincp/seriestranslation/' + translation.id).then(function (response) {
-                    return eventBus.$emit('serieDeleted', response);
+                    return eventBus.$emit('seriesDeleted', response);
                 });
             }
         },
         deleteSeries: function deleteSeries(serie) {
             if (confirm('هل انت متأكد من حذف هذا العالم')) {
                 axios.delete(window.location.pathname + '/' + serie.id).then(function (response) {
-                    return eventBus.$emit('serieDeleted', response);
+                    return eventBus.$emit('seriesDeleted', response);
                 });
             }
         },
@@ -1641,8 +1643,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     components: {
-        addSeries: __WEBPACK_IMPORTED_MODULE_0__addSeries___default.a
-        // addSeriesTranslation,
+        addSeries: __WEBPACK_IMPORTED_MODULE_0__addSeries___default.a,
+        addSeriesTranslation: __WEBPACK_IMPORTED_MODULE_1__addSeriesTranslation___default.a
         // editSeriesTranslation,
         // imageUploader
     }
@@ -2778,6 +2780,10 @@ var render = function() {
       _vm._v(" "),
       _c("add-series", {
         attrs: { locales: _vm.locales, tags: _vm.tags, scholars: _vm.scholars }
+      }),
+      _vm._v(" "),
+      _c("add-series-translation", {
+        attrs: { locales: _vm.locales, tags: _vm.tags, scholars: _vm.scholars }
       })
     ],
     1
@@ -2790,6 +2796,772 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-33d3a43c", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 143:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(144)
+/* template */
+var __vue_template__ = __webpack_require__(145)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\admin\\components\\series\\addSeriesTranslation.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-60875044", Component.options)
+  } else {
+    hotAPI.reload("data-v-60875044", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 144:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_select__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_select___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_select__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['locales', 'tags', 'scholars'],
+    data: function data() {
+        return {
+            addSeriesTranslationForm: new Form({
+                type: '',
+                locale: '',
+                name: '',
+                descriprtion: '',
+                published: '',
+                scholars: [],
+                tags: [],
+                notFilteredScholars: [],
+                notFilteredTags: []
+            }),
+            series: ''
+        };
+    },
+
+    methods: {
+        onTranslationCreate: function onTranslationCreate() {
+            this.addSeriesTranslationForm.post(window.location.pathname + '/' + this.series).then(function (response) {
+                return eventBus.$emit('seriesAdded', response);
+            });
+        },
+        prepareModal: function prepareModal(serie, key) {
+            this.addSeriesTranslationForm.locale = key;
+            this.addSeriesTranslationForm.type = serie.type;
+            this.addSeriesTranslationForm.notFilteredScholars = serie.scholars;
+            this.addSeriesTranslationForm.notFilteredTags = serie.tags;
+            this.series = serie.id;
+            $('#addSeriesTranslation').modal('show');
+        }
+    },
+    watch: {
+        "addSeriesTranslationForm.notFilteredTags": function addSeriesTranslationFormNotFilteredTags(val) {
+            this.addSeriesTranslationForm.tags = [];
+            this.addSeriesTranslationForm.errors.clear('tags');
+            for (var i = 0; i < val.length; i++) {
+                this.addSeriesTranslationForm.tags.unshift(val[i].id);
+            }
+        },
+        "addSeriesTranslationForm.notFilteredScholars": function addSeriesTranslationFormNotFilteredScholars(val) {
+            this.addSeriesTranslationForm.scholars = [];
+            this.addSeriesTranslationForm.errors.clear('scholars');
+            for (var i = 0; i < val.length; i++) {
+                this.addSeriesTranslationForm.scholars.unshift(val[i].id);
+            }
+        }
+    },
+    components: {
+        vSelect: __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        eventBus.$on('addSeriesTranslation', function (serie, key) {
+            return _this.prepareModal(serie, key, locale);
+        });
+    }
+});
+
+/***/ }),
+
+/***/ 145:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "addSeriesTranslation",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "myModalLabel"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
+            _c(
+              "form",
+              {
+                attrs: { method: "POST", action: "/" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    _vm.onTranslationCreate($event)
+                  },
+                  keydown: function($event) {
+                    _vm.addSeriesTranslationForm.errors.clear(
+                      $event.target.name
+                    )
+                  },
+                  change: function($event) {
+                    _vm.addSeriesTranslationForm.errors.clear(
+                      $event.target.name
+                    )
+                  },
+                  input: function($event) {
+                    _vm.addSeriesTranslationForm.errors.clear(
+                      $event.target.name
+                    )
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "type" } },
+                    [_vm._v("نوع المجموعة:")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.addSeriesTranslationForm.type,
+                          expression: "addSeriesTranslationForm.type"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "type", name: "type" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.addSeriesTranslationForm,
+                            "type",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "1" } }, [
+                        _vm._v("مجموعة كتب")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "2" } }, [
+                        _vm._v("مجموعة اناشيد")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "3" } }, [
+                        _vm._v("مجموعة فيديو")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "4" } }, [
+                        _vm._v("مجموعة محاضرات صوتية")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "5" } }, [
+                        _vm._v("مجموعة ادعية")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm.addSeriesTranslationForm.errors.has("type")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.addSeriesTranslationForm.errors.get("type")
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "locale" } },
+                    [_vm._v("اللغة:")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.addSeriesTranslationForm.locale,
+                          expression: "addSeriesTranslationForm.locale"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "locale", name: "locale", disabled: "" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.addSeriesTranslationForm,
+                            "locale",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    _vm._l(_vm.locales, function(locale, key) {
+                      return _c("option", { domProps: { value: key } }, [
+                        _vm._v(_vm._s(locale.native))
+                      ])
+                    })
+                  ),
+                  _vm._v(" "),
+                  _vm.addSeriesTranslationForm.errors.has("locale")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.addSeriesTranslationForm.errors.get("locale")
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "name" } },
+                    [_vm._v("اسم المجموعة:")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.addSeriesTranslationForm.name,
+                        expression: "addSeriesTranslationForm.name"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "name", name: "name" },
+                    domProps: { value: _vm.addSeriesTranslationForm.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.addSeriesTranslationForm,
+                          "name",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.addSeriesTranslationForm.errors.has("name")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.addSeriesTranslationForm.errors.get("name")
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "descriprtion" } },
+                    [_vm._v("وصف المجموعة:")]
+                  ),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.addSeriesTranslationForm.descriprtion,
+                        expression: "addSeriesTranslationForm.descriprtion"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "descriprtion",
+                      name: "descriprtion",
+                      rows: "5"
+                    },
+                    domProps: {
+                      value: _vm.addSeriesTranslationForm.descriprtion
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.addSeriesTranslationForm,
+                          "descriprtion",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.addSeriesTranslationForm.errors.has("descriprtion")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.addSeriesTranslationForm.errors.get(
+                              "descriprtion"
+                            )
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c(
+                      "label",
+                      { staticClass: "label", attrs: { for: "scholars" } },
+                      [_vm._v("مؤلفى او مقدمى المجموعة (العلماء):")]
+                    ),
+                    _vm._v(" "),
+                    _c("v-select", {
+                      attrs: {
+                        label: "name",
+                        multiple: "",
+                        options: _vm.scholars,
+                        id: "scholars",
+                        name: "scholars[]"
+                      },
+                      model: {
+                        value: _vm.addSeriesTranslationForm.notFilteredScholars,
+                        callback: function($$v) {
+                          _vm.$set(
+                            _vm.addSeriesTranslationForm,
+                            "notFilteredScholars",
+                            $$v
+                          )
+                        },
+                        expression:
+                          "addSeriesTranslationForm.notFilteredScholars"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.addSeriesTranslationForm.errors.has("scholars")
+                      ? _c("span", {
+                          staticClass: "alert-danger",
+                          domProps: {
+                            textContent: _vm._s(
+                              _vm.addSeriesTranslationForm.errors.get(
+                                "scholars"
+                              )
+                            )
+                          }
+                        })
+                      : _vm._e()
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c(
+                      "label",
+                      { staticClass: "label", attrs: { for: "tags" } },
+                      [_vm._v("تصنيفات المجموعة:")]
+                    ),
+                    _vm._v(" "),
+                    _c("v-select", {
+                      attrs: {
+                        label: "name",
+                        multiple: "",
+                        options: _vm.tags,
+                        id: "tags",
+                        name: "tags[]"
+                      },
+                      model: {
+                        value: _vm.addSeriesTranslationForm.notFilteredTags,
+                        callback: function($$v) {
+                          _vm.$set(
+                            _vm.addSeriesTranslationForm,
+                            "notFilteredTags",
+                            $$v
+                          )
+                        },
+                        expression: "addSeriesTranslationForm.notFilteredTags"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.addSeriesTranslationForm.errors.has("tags")
+                      ? _c("span", {
+                          staticClass: "alert-danger",
+                          domProps: {
+                            textContent: _vm._s(
+                              _vm.addSeriesTranslationForm.errors.get("tags")
+                            )
+                          }
+                        })
+                      : _vm._e()
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "published" } },
+                    [_vm._v("حالة النشر:")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.addSeriesTranslationForm.published,
+                        expression: "addSeriesTranslationForm.published",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    attrs: { type: "radio", id: "published", value: "1" },
+                    domProps: {
+                      checked: _vm._q(
+                        _vm.addSeriesTranslationForm.published,
+                        _vm._n("1")
+                      )
+                    },
+                    on: {
+                      change: function($event) {
+                        _vm.$set(
+                          _vm.addSeriesTranslationForm,
+                          "published",
+                          _vm._n("1")
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.addSeriesTranslationForm.published,
+                        expression: "addSeriesTranslationForm.published",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    attrs: { type: "radio", id: "published", value: "0" },
+                    domProps: {
+                      checked: _vm._q(
+                        _vm.addSeriesTranslationForm.published,
+                        _vm._n("0")
+                      )
+                    },
+                    on: {
+                      change: function($event) {
+                        _vm.$set(
+                          _vm.addSeriesTranslationForm,
+                          "published",
+                          _vm._n("0")
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm.addSeriesTranslationForm.errors.has("published")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.addSeriesTranslationForm.errors.get("published")
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group text-center" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "button btn-lg btn-success",
+                      attrs: {
+                        disabled: _vm.addSeriesTranslationForm.errors.any()
+                      }
+                    },
+                    [_vm._v("اضافة")]
+                  )
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("span", { staticClass: "form-control-static text-center" }, [
+        _c(
+          "h4",
+          { staticClass: "modal-title", attrs: { id: "myModalLabel" } },
+          [_vm._v(" اضافة ترجمة لمجموعة او مسلسل ")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _vm._v("نعم "),
+      _c("i", {
+        staticClass: "fa fa-check green",
+        attrs: { "aria-hidden": "true" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _vm._v("لا "),
+      _c("i", {
+        staticClass: "fa fa-close red",
+        attrs: { "aria-hidden": "true" }
+      })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-60875044", module.exports)
   }
 }
 

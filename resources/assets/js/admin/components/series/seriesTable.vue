@@ -62,7 +62,7 @@
             </tbody>
         </table>
         <add-series :locales="locales" :tags="tags" :scholars="scholars"></add-series>
-        <!-- <add-series-translation :locales="locales"></add-series-translation> -->
+        <add-series-translation :locales="locales" :tags="tags" :scholars="scholars"></add-series-translation>
         <!-- <edit-series-translation :locales="locales"></edit-series-translation> -->
         <!-- <image-uploader :locales="locales"></image-uploader> -->
     </div>
@@ -72,7 +72,7 @@
 <script>
 
     import addSeries from './addSeries';
-    // import addSeriesTranslation from './addSeriesTranslation';
+    import addSeriesTranslation from './addSeriesTranslation';
     // import editSeriesTranslation from './editSeriesTranslation';
     // import imageUploader from './imageUploader';
 
@@ -96,13 +96,13 @@
             deleteTranslation(translation){
                 if(confirm('هل انت متأكد من حذف هذه الترجمة؟')){
                     axios.delete('/admincp/seriestranslation/' + translation.id)
-                        .then(response => eventBus.$emit('serieDeleted', response));
+                        .then(response => eventBus.$emit('seriesDeleted', response));
                 }
             },
             deleteSeries(serie){
                 if(confirm('هل انت متأكد من حذف هذا العالم')){
                     axios.delete(window.location.pathname + '/' + serie.id)
-                        .then(response => eventBus.$emit('serieDeleted', response));
+                        .then(response => eventBus.$emit('seriesDeleted', response));
                 }
             },
             changeImage(serie){
@@ -111,7 +111,7 @@
         },
         components: {
             addSeries,
-            // addSeriesTranslation,
+            addSeriesTranslation,
             // editSeriesTranslation,
             // imageUploader
         }

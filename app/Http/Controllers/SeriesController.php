@@ -41,16 +41,16 @@ class SeriesController extends Controller
             $series->translations()
                     ->create($request->only('locale', 'name', 'description', 'published'));
 
-            $series->tags()->attach($request->tags);
-            $series->scholars()->attach($request->scholars);
+            $series->tags()->sync($request->tags);
+            $series->scholars()->sync($request->scholars);
 
             return ['message' => 'تم اضافة ترجمة المجموعة بنجاح'];
 
         } else {
             $series = Series::create(['type' => $request->type, $request->locale => ['name' => $request->name, 'description' => $request->description, 'published' => $request->published]]);
 
-            $series->tags()->sync($request->tags);
-            $series->scholars()->sync($request->scholars);
+            $series->tags()->attach($request->tags);
+            $series->scholars()->attach($request->scholars);
 
             return ['message' => 'تم اضافة المجموعة بنجاح'];
         }
