@@ -5819,7 +5819,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         eventBus.$on('addScholarTranslation', function (scholar, key) {
-            return _this.prepareModal(scholar, key, locale);
+            return _this.prepareModal(scholar, key);
         });
     }
 });

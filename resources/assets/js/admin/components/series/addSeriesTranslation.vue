@@ -154,7 +154,7 @@
             vSelect
         },
         mounted(){
-            eventBus.$on('addSeriesTranslation', (serie, key) => this.prepareModal(serie, key, locale))
+            eventBus.$on('addSeriesTranslation', (serie, key) => this.prepareModal(serie, key))
         }
     }
 </script>

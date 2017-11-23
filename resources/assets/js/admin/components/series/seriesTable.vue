@@ -26,7 +26,7 @@
                         <span v-for="translation in serie.translations" v-if="translation.locale == key">
                             {{ translation.name }}
                             <div class="pull-left">
-                                <button @click="editTranslation(translation)" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                <button @click="editTranslation(translation, serie)" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                                 <button @click="deleteTranslation(translation)" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                             </div>
 
@@ -56,14 +56,14 @@
                         </div>
                     </td>
                     <td>
-                        <button @click="deleteSeries(serie)" class="btn btn-danger">حذف العــالــم</button>
+                        <button @click="deleteSeries(serie)" class="btn btn-danger">حذف المجموعة</button>
                     </td>
                 </tr>
             </tbody>
         </table>
         <add-series :locales="locales" :tags="tags" :scholars="scholars"></add-series>
         <add-series-translation :locales="locales" :tags="tags" :scholars="scholars"></add-series-translation>
-        <!-- <edit-series-translation :locales="locales"></edit-series-translation> -->
+        <edit-series-translation :locales="locales"></edit-series-translation>
         <!-- <image-uploader :locales="locales"></image-uploader> -->
     </div>
 </template>
@@ -73,7 +73,7 @@
 
     import addSeries from './addSeries';
     import addSeriesTranslation from './addSeriesTranslation';
-    // import editSeriesTranslation from './editSeriesTranslation';
+    import editSeriesTranslation from './editSeriesTranslation';
     // import imageUploader from './imageUploader';
 
 	export default {
@@ -90,8 +90,8 @@
             addTranslation(serie, key){
                 eventBus.$emit('addSeriesTranslation', serie, key);
             },
-            editTranslation(translation){
-                eventBus.$emit('editSeriesTranslation', translation);
+            editTranslation(translation, serie){
+                eventBus.$emit('editSeriesTranslation', translation, serie);
             },
             deleteTranslation(translation){
                 if(confirm('هل انت متأكد من حذف هذه الترجمة؟')){
@@ -100,7 +100,7 @@
                 }
             },
             deleteSeries(serie){
-                if(confirm('هل انت متأكد من حذف هذا العالم')){
+                if(confirm('هل انت متأكد من حذف هذه المجموعة')){
                     axios.delete(window.location.pathname + '/' + serie.id)
                         .then(response => eventBus.$emit('seriesDeleted', response));
                 }
@@ -112,7 +112,7 @@
         components: {
             addSeries,
             addSeriesTranslation,
-            // editSeriesTranslation,
+            editSeriesTranslation,
             // imageUploader
         }
     }

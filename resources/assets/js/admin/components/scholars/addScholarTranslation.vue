@@ -93,7 +93,7 @@
             }
         },
         mounted(){
-            eventBus.$on('addScholarTranslation', (scholar, key) => this.prepareModal(scholar, key, locale))
+            eventBus.$on('addScholarTranslation', (scholar, key) => this.prepareModal(scholar, key))
         }
     }
 </script>
