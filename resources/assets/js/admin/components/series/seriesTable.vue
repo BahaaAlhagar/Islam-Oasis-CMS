@@ -46,13 +46,19 @@
                         <button class="btn btn-success" @click="changeImage(serie)">تعديل الصورة</button>
                     </td>
                     <td>
-                        <div class="alert-success" v-for="scholar in serie.scholars">
-                            {{ scholar.name }}<hr>
+                        <div v-for="scholar in serie.scholars">
+                            <span class="alert-success">
+                                {{ scholar.name }}
+                            </span>
+                            <hr>
                         </div>
                     </td>
                     <td>
-                        <div class="alert-success" v-for="tag in serie.tags">
-                            {{ tag.name }}<hr>
+                        <div v-for="tag in serie.tags">
+                            <span class="alert-success">
+                                {{ tag.name }}
+                            </span>
+                            <hr>
                         </div>
                     </td>
                     <td>
@@ -63,7 +69,7 @@
         </table>
         <add-series :locales="locales" :tags="tags" :scholars="scholars"></add-series>
         <add-series-translation :locales="locales" :tags="tags" :scholars="scholars"></add-series-translation>
-        <edit-series-translation :locales="locales"></edit-series-translation>
+        <edit-series-translation :locales="locales" :tags="tags" :scholars="scholars"></edit-series-translation>
         <!-- <image-uploader :locales="locales"></image-uploader> -->
     </div>
 </template>

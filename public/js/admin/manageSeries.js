@@ -1602,6 +1602,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1823,7 +1829,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 type: '',
                 locale: '',
                 name: '',
-                descriprtion: '',
+                description: '',
                 published: '',
                 scholars: [],
                 tags: [],
@@ -2265,7 +2271,7 @@ var render = function() {
                 _c("div", { staticClass: "form-group" }, [
                   _c(
                     "label",
-                    { staticClass: "label", attrs: { for: "descriprtion" } },
+                    { staticClass: "label", attrs: { for: "description" } },
                     [_vm._v("وصف المجموعة:")]
                   ),
                   _vm._v(" "),
@@ -2274,18 +2280,18 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.addSeriesForm.descriprtion,
-                        expression: "addSeriesForm.descriprtion"
+                        value: _vm.addSeriesForm.description,
+                        expression: "addSeriesForm.description"
                       }
                     ],
                     staticClass: "form-control",
                     attrs: {
                       type: "text",
-                      id: "descriprtion",
-                      name: "descriprtion",
+                      id: "description",
+                      name: "description",
                       rows: "5"
                     },
-                    domProps: { value: _vm.addSeriesForm.descriprtion },
+                    domProps: { value: _vm.addSeriesForm.description },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
@@ -2293,19 +2299,19 @@ var render = function() {
                         }
                         _vm.$set(
                           _vm.addSeriesForm,
-                          "descriprtion",
+                          "description",
                           $event.target.value
                         )
                       }
                     }
                   }),
                   _vm._v(" "),
-                  _vm.addSeriesForm.errors.has("descriprtion")
+                  _vm.addSeriesForm.errors.has("description")
                     ? _c("span", {
                         staticClass: "alert-danger",
                         domProps: {
                           textContent: _vm._s(
-                            _vm.addSeriesForm.errors.get("descriprtion")
+                            _vm.addSeriesForm.errors.get("description")
                           )
                         }
                       })
@@ -2737,11 +2743,15 @@ var render = function() {
                       _c(
                         "td",
                         _vm._l(serie.scholars, function(scholar) {
-                          return _c("div", { staticClass: "alert-success" }, [
-                            _vm._v(
-                              "\n                            " +
-                                _vm._s(scholar.name)
-                            ),
+                          return _c("div", [
+                            _c("span", { staticClass: "alert-success" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(scholar.name) +
+                                  "\n                            "
+                              )
+                            ]),
+                            _vm._v(" "),
                             _c("hr")
                           ])
                         })
@@ -2750,11 +2760,15 @@ var render = function() {
                       _c(
                         "td",
                         _vm._l(serie.tags, function(tag) {
-                          return _c("div", { staticClass: "alert-success" }, [
-                            _vm._v(
-                              "\n                            " +
-                                _vm._s(tag.name)
-                            ),
+                          return _c("div", [
+                            _c("span", { staticClass: "alert-success" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(tag.name) +
+                                  "\n                            "
+                              )
+                            ]),
+                            _vm._v(" "),
                             _c("hr")
                           ])
                         })
@@ -2791,7 +2805,9 @@ var render = function() {
         attrs: { locales: _vm.locales, tags: _vm.tags, scholars: _vm.scholars }
       }),
       _vm._v(" "),
-      _c("edit-series-translation", { attrs: { locales: _vm.locales } })
+      _c("edit-series-translation", {
+        attrs: { locales: _vm.locales, tags: _vm.tags, scholars: _vm.scholars }
+      })
     ],
     1
   )
@@ -2976,7 +2992,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 type: '',
                 locale: '',
                 name: '',
-                descriprtion: '',
+                description: '',
                 published: '',
                 scholars: [],
                 tags: [],
@@ -3265,7 +3281,7 @@ var render = function() {
                 _c("div", { staticClass: "form-group" }, [
                   _c(
                     "label",
-                    { staticClass: "label", attrs: { for: "descriprtion" } },
+                    { staticClass: "label", attrs: { for: "description" } },
                     [_vm._v("وصف المجموعة:")]
                   ),
                   _vm._v(" "),
@@ -3274,19 +3290,19 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.addSeriesTranslationForm.descriprtion,
-                        expression: "addSeriesTranslationForm.descriprtion"
+                        value: _vm.addSeriesTranslationForm.description,
+                        expression: "addSeriesTranslationForm.description"
                       }
                     ],
                     staticClass: "form-control",
                     attrs: {
                       type: "text",
-                      id: "descriprtion",
-                      name: "descriprtion",
+                      id: "description",
+                      name: "description",
                       rows: "5"
                     },
                     domProps: {
-                      value: _vm.addSeriesTranslationForm.descriprtion
+                      value: _vm.addSeriesTranslationForm.description
                     },
                     on: {
                       input: function($event) {
@@ -3295,20 +3311,20 @@ var render = function() {
                         }
                         _vm.$set(
                           _vm.addSeriesTranslationForm,
-                          "descriprtion",
+                          "description",
                           $event.target.value
                         )
                       }
                     }
                   }),
                   _vm._v(" "),
-                  _vm.addSeriesTranslationForm.errors.has("descriprtion")
+                  _vm.addSeriesTranslationForm.errors.has("description")
                     ? _c("span", {
                         staticClass: "alert-danger",
                         domProps: {
                           textContent: _vm._s(
                             _vm.addSeriesTranslationForm.errors.get(
-                              "descriprtion"
+                              "description"
                             )
                           )
                         }
@@ -3742,7 +3758,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 type: '',
                 locale: '',
                 name: '',
-                descriprtion: '',
+                description: '',
                 published: '',
                 scholars: [],
                 tags: [],
@@ -3754,7 +3770,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        onTranslationCreate: function onTranslationCreate() {
+        onTranslationUpdate: function onTranslationUpdate() {
             this.editSeriesTranslationForm.patch(window.location.pathname + '/' + this.series).then(function (response) {
                 return eventBus.$emit('seriesAdded', response);
             });
@@ -3762,8 +3778,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         prepareModal: function prepareModal(translation, serie) {
             this.editSeriesTranslationForm.locale = translation.locale;
             this.editSeriesTranslationForm.name = translation.name;
-            this.editSeriesTranslationForm.descriprtion = translation.descriprtion;
+            this.editSeriesTranslationForm.description = translation.description;
             this.editSeriesTranslationForm.published = translation.published;
+
             this.editSeriesTranslationForm.type = serie.type;
             this.editSeriesTranslationForm.notFilteredScholars = serie.scholars;
             this.editSeriesTranslationForm.notFilteredTags = serie.tags;
@@ -3776,14 +3793,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.editSeriesTranslationForm.tags = [];
             this.editSeriesTranslationForm.errors.clear('tags');
             for (var i = 0; i < val.length; i++) {
-                this.editSeriesTranslationForm.tags.unshift(val[i].id);
+                this.editSeriesTranslationForm.tags.push(val[i].id);
             }
         },
         "editSeriesTranslationForm.notFilteredScholars": function editSeriesTranslationFormNotFilteredScholars(val) {
             this.editSeriesTranslationForm.scholars = [];
             this.editSeriesTranslationForm.errors.clear('scholars');
             for (var i = 0; i < val.length; i++) {
-                this.editSeriesTranslationForm.scholars.unshift(val[i].id);
+                this.editSeriesTranslationForm.scholars.push(val[i].id);
             }
         }
     },
@@ -3832,7 +3849,7 @@ var render = function() {
                 on: {
                   submit: function($event) {
                     $event.preventDefault()
-                    _vm.onTranslationCreate($event)
+                    _vm.onTranslationUpdate($event)
                   },
                   keydown: function($event) {
                     _vm.editSeriesTranslationForm.errors.clear(
@@ -4034,7 +4051,7 @@ var render = function() {
                 _c("div", { staticClass: "form-group" }, [
                   _c(
                     "label",
-                    { staticClass: "label", attrs: { for: "descriprtion" } },
+                    { staticClass: "label", attrs: { for: "description" } },
                     [_vm._v("وصف المجموعة:")]
                   ),
                   _vm._v(" "),
@@ -4043,19 +4060,19 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.editSeriesTranslationForm.descriprtion,
-                        expression: "editSeriesTranslationForm.descriprtion"
+                        value: _vm.editSeriesTranslationForm.description,
+                        expression: "editSeriesTranslationForm.description"
                       }
                     ],
                     staticClass: "form-control",
                     attrs: {
                       type: "text",
-                      id: "descriprtion",
-                      name: "descriprtion",
+                      id: "description",
+                      name: "description",
                       rows: "5"
                     },
                     domProps: {
-                      value: _vm.editSeriesTranslationForm.descriprtion
+                      value: _vm.editSeriesTranslationForm.description
                     },
                     on: {
                       input: function($event) {
@@ -4064,20 +4081,20 @@ var render = function() {
                         }
                         _vm.$set(
                           _vm.editSeriesTranslationForm,
-                          "descriprtion",
+                          "description",
                           $event.target.value
                         )
                       }
                     }
                   }),
                   _vm._v(" "),
-                  _vm.editSeriesTranslationForm.errors.has("descriprtion")
+                  _vm.editSeriesTranslationForm.errors.has("description")
                     ? _c("span", {
                         staticClass: "alert-danger",
                         domProps: {
                           textContent: _vm._s(
                             _vm.editSeriesTranslationForm.errors.get(
-                              "descriprtion"
+                              "description"
                             )
                           )
                         }

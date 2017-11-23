@@ -14,7 +14,7 @@
               </div>
 
               <div class="modal-body">
-                    <form method="POST" action="/" @submit.prevent="onTranslationCreate" @keydown="editSeriesTranslationForm.errors.clear($event.target.name)"
+                    <form method="POST" action="/" @submit.prevent="onTranslationUpdate" @keydown="editSeriesTranslationForm.errors.clear($event.target.name)"
                     @change="editSeriesTranslationForm.errors.clear($event.target.name)"
                     @input="editSeriesTranslationForm.errors.clear($event.target.name)"
                     >
@@ -51,11 +51,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="descriprtion" class="label">وصف المجموعة:</label>
+                            <label for="description" class="label">وصف المجموعة:</label>
                             
-                            <textarea type="text" id="descriprtion" name="descriprtion" class="form-control" v-model="editSeriesTranslationForm.descriprtion" rows="5"></textarea>
+                            <textarea type="text" id="description" name="description" class="form-control" v-model="editSeriesTranslationForm.description" rows="5"></textarea>
 
-                            <span class="alert-danger" v-if="editSeriesTranslationForm.errors.has('descriprtion')" v-text="editSeriesTranslationForm.errors.get('descriprtion')"></span>
+                            <span class="alert-danger" v-if="editSeriesTranslationForm.errors.has('description')" v-text="editSeriesTranslationForm.errors.get('description')"></span>
                         </div>
 
                         <div class="form-group">
@@ -110,7 +110,7 @@
                     type: '',
                     locale: '',
                     name: '',
-                    descriprtion: '',
+                    description: '',
                     published: '',
                     scholars: [],
                     tags: [],
@@ -121,15 +121,16 @@
                 };
         },
         methods: {
-            onTranslationCreate() {
+            onTranslationUpdate() {
                 this.editSeriesTranslationForm.patch(window.location.pathname + '/' + this.series)
                     .then(response => eventBus.$emit('seriesAdded', response));
                 },
             prepareModal(translation, serie){
                 this.editSeriesTranslationForm.locale = translation.locale;
                 this.editSeriesTranslationForm.name = translation.name;
-                this.editSeriesTranslationForm.descriprtion = translation.descriprtion;
+                this.editSeriesTranslationForm.description = translation.description;
                 this.editSeriesTranslationForm.published = translation.published;
+
                 this.editSeriesTranslationForm.type = serie.type;
                 this.editSeriesTranslationForm.notFilteredScholars = serie.scholars;
                 this.editSeriesTranslationForm.notFilteredTags = serie.tags;
@@ -142,14 +143,14 @@
                 this.editSeriesTranslationForm.tags = [];
                 this.editSeriesTranslationForm.errors.clear('tags');
                 for(var i = 0; i < val.length; i++){
-                    this.editSeriesTranslationForm.tags.unshift(val[i].id);
+                    this.editSeriesTranslationForm.tags.push(val[i].id);
                 }
             },
             "editSeriesTranslationForm.notFilteredScholars"(val){
                 this.editSeriesTranslationForm.scholars = [];
                 this.editSeriesTranslationForm.errors.clear('scholars');
                 for(var i = 0; i < val.length; i++){
-                    this.editSeriesTranslationForm.scholars.unshift(val[i].id);
+                    this.editSeriesTranslationForm.scholars.push(val[i].id);
                 }
             },
         },

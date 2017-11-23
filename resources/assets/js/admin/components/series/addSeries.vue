@@ -52,11 +52,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="descriprtion" class="label">وصف المجموعة:</label>
+                            <label for="description" class="label">وصف المجموعة:</label>
                             
-                            <textarea type="text" id="descriprtion" name="descriprtion" class="form-control" v-model="addSeriesForm.descriprtion" rows="5"></textarea>
+                            <textarea type="text" id="description" name="description" class="form-control" v-model="addSeriesForm.description" rows="5"></textarea>
 
-                            <span class="alert-danger" v-if="addSeriesForm.errors.has('descriprtion')" v-text="addSeriesForm.errors.get('descriprtion')"></span>
+                            <span class="alert-danger" v-if="addSeriesForm.errors.has('description')" v-text="addSeriesForm.errors.get('description')"></span>
                         </div>
 
                         <div class="form-group">
@@ -111,7 +111,7 @@
                     type: '',
                     locale: '',
                     name: '',
-                    descriprtion: '',
+                    description: '',
                     published: '',
                     scholars: [],
                     tags: [],

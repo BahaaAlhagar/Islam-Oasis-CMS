@@ -27,7 +27,7 @@ class storeSeriesRequest extends FormRequest
             'type' => 'required|integer',
             'locale' => 'required|string',
             'name' => 'required|string',
-            'description' => 'nullable|integer',
+            'description' => 'nullable|string',
             'published' => 'required|boolean',
             'scholars' => 'required|exists:scholars,id',
             'tags' => 'required|exists:tags,id'

@@ -64,9 +64,12 @@ class SeriesController extends Controller
      * @param  \App\Series  $series
      * @return \Illuminate\Http\Response
      */
-    public function update(storeSeriesRequest $request, SeriesTranslation $series)
+    public function update(storeSeriesRequest $request, Series $series)
     {
-        $series->update($request->all());
+        $series->tags()->sync(request('tags'));
+        $series->scholars()->sync(request('scholars'));
+
+        $series->update(['type' => $request->type, $request->locale => ['name' => $request->name, 'description' => $request->description, 'published' => $request->published]]);
 
         return ['message' => 'تم تحديث ترجمة المجموعة'];
     }
