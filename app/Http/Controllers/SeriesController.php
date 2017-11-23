@@ -38,14 +38,21 @@ class SeriesController extends Controller
         if($series)
         {
             $series->translations()
-                    ->create($request->all());
+                    ->create($request->only('locale', 'name', 'description', 'published'));
 
-            return ['message' => 'تم اضافة ترجمة العالم او القارئ بنجاح'];
+            $series->tags()->attach($request->tags);
+            $series->scholars()->attach($request->scholars);
+
+            return ['message' => 'تم اضافة ترجمة المجموعة بنجاح'];
+
+        } else {
+            $series = Series::create(['type' => $request->type, $request->locale => ['name' => $request->name, 'description' => $request->description, 'published' => $request->published]]);
+
+            $series->tags()->sync($request->tags);
+            $series->scholars()->sync($request->scholars);
+
+            return ['message' => 'تم اضافة المجموعة بنجاح'];
         }
-
-        $series = Series::create([$request->locale => ['name' => $request->name, 'biography' => $request->biography, 'published' => $request->published]]);
-
-        return ['message' => 'تم اضافة العالم او القارئ بنجاح'];
     }
 
 
@@ -60,7 +67,7 @@ class SeriesController extends Controller
     {
         $series->update($request->all());
 
-        return ['message' => 'تم تحديث ترجمة العالم او القارئ'];
+        return ['message' => 'تم تحديث ترجمة المجموعة'];
     }
 
 
@@ -74,7 +81,7 @@ class SeriesController extends Controller
     {
         $series->delete();
 
-        return ['message' => 'تم حذف العالم او القارئ!'];
+        return ['message' => 'تم حذف المجموعة!'];
     }
 
     /**
@@ -87,6 +94,6 @@ class SeriesController extends Controller
     {
         $translation->delete();
 
-        return ['message' => 'تم حذف ترجمة العالم او القارئ!'];
+        return ['message' => 'تم حذف ترجمة المجموعة!'];
     }
 }
