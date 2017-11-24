@@ -11,6 +11,12 @@ use Illuminate\Http\Request;
 
 class SeriesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -91,7 +97,7 @@ class SeriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Series  $series
+     * @param  \App\SeriesTranslation  $translation
      * @return \Illuminate\Http\Response
      */
     public function deleteTranslation(SeriesTranslation $translation)

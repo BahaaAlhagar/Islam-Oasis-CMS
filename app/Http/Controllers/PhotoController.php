@@ -16,6 +16,7 @@ class PhotoController extends Controller
 		$this->middleware('auth');
 		$this->middleware('admin')->only('updateScholarPhoto');
 	}
+    
 	/**
      * Update the specified resource in storage.
      *

@@ -76,7 +76,7 @@ class ScholarController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Scholar  $scholar
+     * @param  \App\ScholarTranslation  $translation
      * @return \Illuminate\Http\Response
      */
     public function deleteTranslation(ScholarTranslation $translation)
