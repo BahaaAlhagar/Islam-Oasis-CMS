@@ -15,7 +15,13 @@ class CreateItemTranslationsTable extends Migration
     {
         Schema::create('item_translations', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->integer('item_id')->unsigned()->index();
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+            $table->string('locale')->index();
+            $table->string('name');
+            $table->string('slug')->unique()->index();
+            $table->string('language');
+            $table->string('description')->nullable();
         });
     }
 
