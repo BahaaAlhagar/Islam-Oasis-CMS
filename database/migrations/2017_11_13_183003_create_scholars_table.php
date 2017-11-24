@@ -19,7 +19,6 @@ class CreateScholarsTable extends Migration
         });
 
         Schema::create('scholarables', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('scholar_id')->unsigned()->index();
             $table->foreign('scholar_id')->references('id')->on('scholars')->onDelete('cascade');
             $table->integer('scholarable_id')->index();

@@ -1,6 +1,6 @@
 require('../bootstrap');
 
-// import itemsTable from './components/series/itemsTable';
+import itemsTable from './components/items/itemsTable';
 import VuePaginator from 'vuejs-paginator';
 
 
@@ -67,7 +67,7 @@ const manageItems = new Vue({
       }
     },
     components: {
-    	// itemsTable,
+    	itemsTable,
       VPaginator: VuePaginator
     },
     mounted(){

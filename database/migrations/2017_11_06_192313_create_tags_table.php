@@ -19,7 +19,6 @@ class CreateTagsTable extends Migration
         });
 
         Schema::create('taggables', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('tag_id')->unsigned()->index();
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
             $table->integer('taggable_id')->index();
