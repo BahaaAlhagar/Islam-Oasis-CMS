@@ -75,7 +75,7 @@
                 </tr>
             </tbody>
         </table>
-        <!-- <add-item :locales="locales" :tags="tags" :scholars="scholars"></add-item> -->
+        <add-item :locales="locales" :tags="tags" :scholars="scholars" :series="series"></add-item>
         <!-- <add-item-translation :locales="locales" :tags="tags" :scholars="scholars"></add-item-translation> -->
         <!-- <edit-item-translation :locales="locales" :tags="tags" :scholars="scholars"></edit-item-translation> -->
         <!-- <image-uploader></image-uploader> -->
@@ -85,7 +85,7 @@
 
 <script>
 
-    // import addItem from './addItem';
+    import addItem from './addItem';
     // import addItemTranslation from './addItemTranslation';
     // import editItemTranslation from './editItemTranslation';
     // import imageUploader from './imageUploader';
@@ -123,11 +123,11 @@
                 eventBus.$emit('imageUploader', item);
             }
         },
-/*        components: {
+        components: {
             addItem,
-            addItemTranslation,
-            editItemTranslation,
-            imageUploader
-        }*/
+            // addItemTranslation,
+            // editItemTranslation,
+            // imageUploader
+        }
     }
 </script>
