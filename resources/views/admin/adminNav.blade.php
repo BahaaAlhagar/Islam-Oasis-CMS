@@ -37,6 +37,10 @@
 					المسلسلات والمجموعات
 				</a>
 
+				<a href="{{ route('items.index') }}" class="list-group-item">
+					ملفات الميديا والكتب
+				</a>
+
 
 			</ul>
 	  </div>

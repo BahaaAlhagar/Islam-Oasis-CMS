@@ -6,5 +6,6 @@
     "/js/admin/manageTags.js": "/js/admin/manageTags.js",
     "/js/admin/manageRecitations.js": "/js/admin/manageRecitations.js",
     "/js/admin/manageQuran.js": "/js/admin/manageQuran.js",
+    "/js/admin/manageItems.js": "/js/admin/manageItems.js",
     "/js/admin/manifest.js": "/js/admin/manifest.js"
 }
