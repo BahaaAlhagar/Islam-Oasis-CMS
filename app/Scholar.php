@@ -25,11 +25,11 @@ class Scholar extends Model
 
     public function series()
     {
-        return $this->belongsToMany(Series::class);
+        return $this->morphedByMany(Series::class, 'scholarables');
     }
 
     public function items()
     {
-        return $this->BelongsToMany(Item::class);
+        return $this->morphedByMany(Item::class, 'scholarables');
     }
 }

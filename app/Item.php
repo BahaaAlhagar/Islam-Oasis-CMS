@@ -15,12 +15,12 @@ class Item extends Model
 
     public function scholars()
     {
-        return $this->BelongsToMany(Scholar::class);
+        return $this->morphToMany(Scholar::class, 'scholarable');
     }
 
     public function tags()
     {
-        return $this->BelongsToMany(Tag::class);
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 
     public function series()

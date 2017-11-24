@@ -17,6 +17,14 @@ class CreateScholarsTable extends Migration
             $table->increments('id');
             $table->timestamps();
         });
+
+        Schema::create('scholarables', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('scholar_id')->unsigned()->index();
+            $table->foreign('scholar_id')->references('id')->on('scholars')->onDelete('cascade');
+            $table->integer('scholarable_id')->index();
+            $table->string('scholarable_type')->index();
+        });
     }
 
     /**
@@ -26,6 +34,7 @@ class CreateScholarsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('scholarables');
         Schema::dropIfExists('scholars');
     }
 }

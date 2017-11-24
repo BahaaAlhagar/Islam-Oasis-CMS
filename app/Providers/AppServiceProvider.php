@@ -21,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
             'post' => 'App\Post',
             'user' => 'App\User',
             'scholar' => 'App\Scholar',
+            'item' => 'App\Item',
+            'series' => 'App\Series',
             'quran' => 'App\Quran'
         ]);
     }

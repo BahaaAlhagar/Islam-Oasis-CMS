@@ -21,20 +21,6 @@ class CreateItemsTable extends Migration
             $table->integer('order')->nullable();
             $table->timestamps();
         });
-
-        Schema::create('item_scholar', function (Blueprint $table) {
-            $table->integer('item_id')->unsigned()->index();
-            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
-            $table->integer('scholar_id')->unsigned()->index();
-            $table->foreign('scholar_id')->references('id')->on('scholars')->onDelete('cascade');
-        });
-
-        Schema::create('item_tag', function (Blueprint $table) {
-            $table->integer('item_id')->unsigned()->index();
-            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
-            $table->integer('tag_id')->unsigned()->index();
-            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
-        });
     }
 
     /**
@@ -44,7 +30,6 @@ class CreateItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('item_tag');
         Schema::dropIfExists('item_scholar');
         Schema::dropIfExists('items');
     }
