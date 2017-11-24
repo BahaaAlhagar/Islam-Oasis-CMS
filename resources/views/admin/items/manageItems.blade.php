@@ -27,9 +27,9 @@
 			<button @click="addSeries()" class="btn btn-success pull-left">اضافة ملف او كتاب</button>
 		</span>
 		
-		<!-- <series-table :series="series" :scholars="scholars" :tags="tags"  :locales="{{ json_encode(LaravelLocalization::getSupportedLocales()) }}"></series-table> -->
+		<!-- <items-table :items="items" :scholars="scholars" :tags="tags"  :locales="{{ json_encode(LaravelLocalization::getSupportedLocales()) }}"></items-table> -->
 
-        <!-- <v-paginator class="text-center" v-show="series.length" :options="options" ref="VP" :resource_url="resource_url" @update="updateResource"></v-paginator> -->
+        <v-paginator class="text-center" v-show="items.length" :options="options" ref="VP" :resource_url="resource_url" @update="updateResource"></v-paginator>
 	</div>
 
 @endsection

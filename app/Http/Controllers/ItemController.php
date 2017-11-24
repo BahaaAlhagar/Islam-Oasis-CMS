@@ -7,6 +7,7 @@ use App\Item;
 use App\Series;
 use App\Scholar;
 use App\ItemTranslation;
+use App\SeriesTranslation;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -24,13 +25,15 @@ class ItemController extends Controller
      */
     public function index($type = null)
     {
-        $type ? $items = Item::where('type', $type)->with('translations', 'photo', 'tags', 'scholars', 'links')->latest()->paginate(10) : $items = Item::with('translations', 'photo', 'tags', 'scholars')->latest()->paginate(10);
+        $type ? $items = Item::where('type', $type)->with('translations', 'photo', 'tags', 'scholars', 'links')->latest()->paginate(10) : $items = Item::with('translations', 'photo', 'tags', 'scholars', 'links')->latest()->paginate(10);
 
         $scholars = Scholar::translatedIn(config('translatable.locale'))->get();
 
         $tags = Tag::translatedIn(config('translatable.locale'))->get();
 
-        return $this->makeResponse('admin/items/manageItems', compact('items', 'tags', 'scholars'));
+        $series = SeriesTranslation::whereLocale(config('translatable.locale'))->get();
+
+        return $this->makeResponse('admin/items/manageItems', compact('items', 'tags', 'scholars', 'series'));
     }
 
 
