@@ -91,7 +91,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "" + ({"0":"\\js\\admin\\managePosts","1":"\\js\\admin\\manageScholars","2":"/js/admin/vendor","3":"\\js\\admin\\manageTags","4":"\\js\\admin\\manageRecitations","5":"\\js\\admin\\manageQuran","6":"\\js\\admin\\manageSeries"}[chunkId]||chunkId) + ".js";
+/******/ 		script.src = __webpack_require__.p + "" + ({"0":"\\js\\admin\\managePosts","1":"\\js\\admin\\manageSeries","2":"\\js\\admin\\manageScholars","3":"/js/admin/vendor","4":"\\js\\admin\\manageTags","5":"\\js\\admin\\manageRecitations","6":"\\js\\admin\\manageQuran"}[chunkId]||chunkId) + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {

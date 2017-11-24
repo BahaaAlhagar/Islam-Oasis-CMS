@@ -23,4 +23,9 @@ class Tag extends Model
     {
     	return $this->belongsToMany(Series::class);
     }
+
+    public function items()
+    {
+        return $this->BelongsToMany(Item::class);
+    }
 }

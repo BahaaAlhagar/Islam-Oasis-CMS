@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use \Dimsav\Translatable\Translatable;
 
-class Series extends Model
+class Item extends Model
 {
     use Translatable;
 
-    public $translatedAttributes = ['locale', 'name', 'slug', 'published', 'description'];
+    public $translatedAttributes = ['locale', 'name', 'slug', 'language', 'description'];
 
     protected $guarded = ['id'];
 
@@ -23,13 +23,18 @@ class Series extends Model
         return $this->BelongsToMany(Tag::class);
     }
 
+    public function series()
+    {
+        return $this->BelongsTo(Series::class);
+    }
+
     public function photo()
     {
         return $this->morphOne(Photo::class, 'photoable');
     }
 
-    public function items()
+    public function links()
     {
-        return $this->hasMany(Item::class);
+        return $this->morphMany(Link::class, 'linkable');
     }
 }

@@ -1,10 +1,10 @@
 {
     "/js/admin/managePosts.js": "/js/admin/managePosts.js",
+    "/js/admin/manageSeries.js": "/js/admin/manageSeries.js",
     "/js/admin/manageScholars.js": "/js/admin/manageScholars.js",
     "/js/admin/vendor.js": "/js/admin/vendor.js",
     "/js/admin/manageTags.js": "/js/admin/manageTags.js",
     "/js/admin/manageRecitations.js": "/js/admin/manageRecitations.js",
     "/js/admin/manageQuran.js": "/js/admin/manageQuran.js",
-    "/js/admin/manageSeries.js": "/js/admin/manageSeries.js",
     "/js/admin/manifest.js": "/js/admin/manifest.js"
 }
