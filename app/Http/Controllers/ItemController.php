@@ -27,11 +27,7 @@ class ItemController extends Controller
     {
         $type ? $items = Item::where('type', $type)->with('translations', 'photo', 'tags', 'scholars', 'links')->latest()->paginate(10) : $items = Item::with('translations', 'photo', 'tags', 'scholars', 'links')->latest()->paginate(10);
 
-        $scholars = Scholar::translatedIn(config('translatable.locale'))->get();
-
-        $tags = Tag::translatedIn(config('translatable.locale'))->get();
-
-        return $this->makeResponse('admin/items/manageItems', compact('items', 'tags', 'scholars'));
+        return $this->makeResponse('admin/items/manageItems', compact('items'));
     }
 
 

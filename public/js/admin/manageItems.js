@@ -1766,8 +1766,6 @@ var manageItems = new Vue({
     },
     assignData: function assignData(response) {
       this.items = response.data.items.data;
-      this.scholars = response.data.scholars;
-      this.tags = response.data.tags;
     },
     reloadData: function reloadData() {
       this.$refs.VP.fetchData(this.resource_url + '?page=' + this.$refs.VP.current_page);
@@ -1958,7 +1956,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 // import imageUploader from './imageUploader';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['items', 'locales', 'scholars', 'tags'],
+    props: ['items', 'locales'],
     methods: {
         localeCheck: function localeCheck(key, item) {
             var trans = item.translations;
@@ -2178,7 +2176,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['locales', 'tags', 'scholars'],
+    props: ['locales'],
     data: function data() {
         return {
             addItemForm: new Form({
@@ -2195,8 +2193,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 notFilteredTags: [],
                 notFilteredSeries: [],
                 typeBasedSeries: []
-            })
-
+            }),
+            tags: [],
+            scholars: []
         };
     },
 
@@ -2218,6 +2217,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 vm.addItemForm.typeBasedSeries = resp.data;
                 loading(false);
             });
+        }, 750),
+        searchScholars: function searchScholars(search, loading) {
+            loading(true);
+            this.getScholars(search, loading, this);
+        },
+
+        getScholars: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.debounce(function (search, loading, vm) {
+            axios.get('/admincp/search/scholars/' + search).then(function (resp) {
+                vm.scholars = resp.data;
+                loading(false);
+            });
+        }, 750),
+        searchTags: function searchTags(search, loading) {
+            loading(true);
+            this.getTags(search, loading, this);
+        },
+
+        getTags: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.debounce(function (search, loading, vm) {
+            axios.get('/admincp/search/tags/' + search).then(function (resp) {
+                vm.tags = resp.data;
+                loading(false);
+            });
         }, 750)
     },
     watch: {
@@ -2225,14 +2246,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.addItemForm.tags = [];
             this.addItemForm.errors.clear('tags');
             for (var i = 0; i < val.length; i++) {
-                this.addItemForm.tags.unshift(val[i].id);
+                this.addItemForm.tags.unshift(val[i].tag_id);
             }
         },
         "addItemForm.notFilteredScholars": function addItemFormNotFilteredScholars(val) {
             this.addItemForm.scholars = [];
             this.addItemForm.errors.clear('scholars');
             for (var i = 0; i < val.length; i++) {
-                this.addItemForm.scholars.unshift(val[i].id);
+                this.addItemForm.scholars.unshift(val[i].scholar_id);
             }
         },
         "addItemForm.notFilteredSeries": function addItemFormNotFilteredSeries(val) {
@@ -2657,6 +2678,8 @@ var render = function() {
                     _c("v-select", {
                       attrs: {
                         label: "name",
+                        placeholder: "اكتب الاسم للبحث",
+                        "on-search": _vm.searchScholars,
                         multiple: "",
                         options: _vm.scholars,
                         id: "scholars",
@@ -2698,6 +2721,8 @@ var render = function() {
                     _c("v-select", {
                       attrs: {
                         label: "name",
+                        placeholder: "اكتب الاسم للبحث",
+                        "on-search": _vm.searchTags,
                         multiple: "",
                         options: _vm.tags,
                         id: "tags",
@@ -3046,9 +3071,7 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c("add-item", {
-        attrs: { locales: _vm.locales, tags: _vm.tags, scholars: _vm.scholars }
-      })
+      _c("add-item", { attrs: { locales: _vm.locales } })
     ],
     1
   )

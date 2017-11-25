@@ -86,7 +86,7 @@
                         <div class="form-group">
                             <label for="scholars" class="label">مؤلفى او مقدمى الملف (العلماء):</label>
                             
-                            <v-select label="name" 
+                            <v-select label="name" placeholder="اكتب الاسم للبحث" :on-search="searchScholars"
                              multiple :options="scholars" id="scholars" name="scholars[]" v-model="addItemForm.notFilteredScholars" ></v-select>
 
                             <span class="alert-danger" v-if="addItemForm.errors.has('scholars')" v-text="addItemForm.errors.get('scholars')"></span>
@@ -95,7 +95,7 @@
                         <div class="form-group">
                             <label for="tags" class="label">تصنيفات الملف:</label>
                             
-                            <v-select label="name" 
+                            <v-select label="name" placeholder="اكتب الاسم للبحث" :on-search="searchTags"
                              multiple :options="tags" id="tags" name="tags[]" v-model="addItemForm.notFilteredTags" ></v-select>
 
                             <span class="alert-danger" v-if="addItemForm.errors.has('tags')" v-text="addItemForm.errors.get('tags')"></span>
@@ -116,7 +116,7 @@
     import vSelect from "vue-select";
 
 	export default {
-        props: ['locales', 'tags', 'scholars'],
+        props: ['locales'],
         data() {
             return {
                 addItemForm: new Form({
@@ -132,9 +132,10 @@
                     notFilteredScholars: [],
                     notFilteredTags: [],
                     notFilteredSeries: [],
-                    typeBasedSeries: []
+                    typeBasedSeries: [],
                     }),
-                    
+                    tags: [],
+                    scholars: []
                 };
         },
         methods: {
@@ -154,21 +155,43 @@
                        vm.addItemForm.typeBasedSeries = resp.data
                        loading(false)
                     })
-            }, 750)
+            }, 750),
+        searchScholars(search, loading){
+            loading(true);
+            this.getScholars(search, loading, this);
+            },
+        getScholars: _.debounce((search, loading, vm) => {
+                axios.get(`/admincp/search/scholars/${search}`)
+                    .then(resp => {
+                       vm.scholars = resp.data
+                       loading(false)
+                    })
+            }, 750),
+        searchTags(search, loading){
+            loading(true);
+            this.getTags(search, loading, this);
+            },
+        getTags: _.debounce((search, loading, vm) => {
+                axios.get(`/admincp/search/tags/${search}`)
+                    .then(resp => {
+                       vm.tags = resp.data
+                       loading(false)
+                    })
+            }, 750),
         },
         watch: {
             "addItemForm.notFilteredTags"(val){
                 this.addItemForm.tags = [];
                 this.addItemForm.errors.clear('tags');
                 for(var i = 0; i < val.length; i++){
-                    this.addItemForm.tags.unshift(val[i].id);
+                    this.addItemForm.tags.unshift(val[i].tag_id);
                 }
             },
             "addItemForm.notFilteredScholars"(val){
                 this.addItemForm.scholars = [];
                 this.addItemForm.errors.clear('scholars');
                 for(var i = 0; i < val.length; i++){
-                    this.addItemForm.scholars.unshift(val[i].id);
+                    this.addItemForm.scholars.unshift(val[i].scholar_id);
                 }
             },
             "addItemForm.notFilteredSeries"(val){

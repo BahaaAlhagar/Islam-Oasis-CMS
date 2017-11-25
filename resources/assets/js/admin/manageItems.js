@@ -45,8 +45,6 @@ const manageItems = new Vue({
       },
     	assignData(response){
         this.items = response.data.items.data;
-        this.scholars = response.data.scholars;
-        this.tags = response.data.tags;
     	},
       reloadData(){
         this.$refs.VP.fetchData(this.resource_url + '?page=' + this.$refs.VP.current_page);
