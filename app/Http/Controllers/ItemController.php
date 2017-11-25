@@ -8,6 +8,7 @@ use App\Series;
 use App\Scholar;
 use App\ItemTranslation;
 use App\SeriesTranslation;
+use App\Http\Requests\storeItemRequest;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -34,10 +35,10 @@ class ItemController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\storeItemRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Item $item = null)
+    public function store(storeItemRequest $request, Item $item = null)
     {
         if($item)
         {

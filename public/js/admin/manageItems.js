@@ -2245,6 +2245,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         "addItemForm.notFilteredTags": function addItemFormNotFilteredTags(val) {
             this.addItemForm.tags = [];
             this.addItemForm.errors.clear('tags');
+            this.addItemForm.errors.clear('series_id');
             for (var i = 0; i < val.length; i++) {
                 this.addItemForm.tags.unshift(val[i].tag_id);
             }
@@ -2252,12 +2253,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         "addItemForm.notFilteredScholars": function addItemFormNotFilteredScholars(val) {
             this.addItemForm.scholars = [];
             this.addItemForm.errors.clear('scholars');
+            this.addItemForm.errors.clear('series_id');
             for (var i = 0; i < val.length; i++) {
                 this.addItemForm.scholars.unshift(val[i].scholar_id);
             }
         },
         "addItemForm.notFilteredSeries": function addItemFormNotFilteredSeries(val) {
             this.addItemForm.errors.clear('series_id');
+            this.addItemForm.errors.clear('scholars');
+            this.addItemForm.errors.clear('tags');
             val ? this.addItemForm.series_id = val.id : this.addItemForm.series_id = '';
         },
         "addItemForm.type": function addItemFormType(val) {
