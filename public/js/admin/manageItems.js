@@ -5296,7 +5296,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         deleteLink: function deleteLink(link) {
             if (confirm('هل انت متأكد من حذف هذا الرابط')) {
-                axios.delete('/links/' + link.id).then(function (response) {
+                axios.delete('/admincp/links/' + link.id).then(function (response) {
                     return eventBus.$emit('itemDeleted', response);
                 });
             }

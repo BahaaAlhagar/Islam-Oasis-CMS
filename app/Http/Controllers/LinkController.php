@@ -22,4 +22,11 @@ class LinkController extends Controller
 
     	return ['message' => 'تم تحديث الرابط بنجاح'];
     }
+
+    public function destroy(Link $link)
+    {
+    	$link->delete();
+
+    	return ['message' => 'تم حذف الرابط بنجاح'];
+    }
 }

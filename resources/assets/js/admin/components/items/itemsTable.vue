@@ -157,7 +157,7 @@
             },
             deleteLink(link){
                 if(confirm('هل انت متأكد من حذف هذا الرابط')){
-                    axios.delete(`/links/${link.id}`)
+                    axios.delete(`/admincp/links/${link.id}`)
                         .then(response => eventBus.$emit('itemDeleted', response));
                 }
             }
