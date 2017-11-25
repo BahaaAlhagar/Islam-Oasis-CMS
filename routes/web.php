@@ -26,6 +26,11 @@ route::group(['prefix' => 'admincp', 'middleware' => ['auth', 'admin', 'adminDef
 route::view('/', 'admin/adminIndex');
 
 
+// search routes
+route::get('search/tags/{q}', 'SearchController@tags');
+route::get('search/series/{q}/{type?}', 'SearchController@series');
+route::get('search/scholars/{q}', 'SearchController@scholars');
+
 // posts routes
 route::get('posts/{type}/{locale?}', 'PostController@index')->name('posts.index');
 route::post('posts/{post?}', 'PostController@store')->name('posts.store');

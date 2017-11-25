@@ -31,9 +31,7 @@ class ItemController extends Controller
 
         $tags = Tag::translatedIn(config('translatable.locale'))->get();
 
-        $series = Series::all();
-
-        return $this->makeResponse('admin/items/manageItems', compact('items', 'tags', 'scholars', 'series'));
+        return $this->makeResponse('admin/items/manageItems', compact('items', 'tags', 'scholars'));
     }
 
 

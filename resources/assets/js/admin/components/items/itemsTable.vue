@@ -75,7 +75,7 @@
                 </tr>
             </tbody>
         </table>
-        <add-item :locales="locales" :tags="tags" :scholars="scholars" :series="series"></add-item>
+        <add-item :locales="locales" :tags="tags" :scholars="scholars"></add-item>
         <!-- <add-item-translation :locales="locales" :tags="tags" :scholars="scholars"></add-item-translation> -->
         <!-- <edit-item-translation :locales="locales" :tags="tags" :scholars="scholars"></edit-item-translation> -->
         <!-- <image-uploader></image-uploader> -->
@@ -91,7 +91,7 @@
     // import imageUploader from './imageUploader';
 
 	export default {
-        props: ['items', 'series', 'locales', 'scholars', 'tags'],
+        props: ['items', 'locales', 'scholars', 'tags'],
         methods: {
             localeCheck(key, item){
                 let trans = item.translations;

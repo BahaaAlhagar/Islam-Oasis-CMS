@@ -19,7 +19,6 @@ const manageItems = new Vue({
         current_view: '',
         tags: [],
         items: [],
-        series: [],
         scholars: [],
         resource_url: window.location.pathname,
             options: {
@@ -46,7 +45,6 @@ const manageItems = new Vue({
       },
     	assignData(response){
         this.items = response.data.items.data;
-        this.series = response.data.series;
         this.scholars = response.data.scholars;
         this.tags = response.data.tags;
     	},

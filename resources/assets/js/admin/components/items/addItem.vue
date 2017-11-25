@@ -68,12 +68,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="series" class="label">المجموعة او المسلسل:</label>
+                            <label for="series_id" class="label">المجموعة او المسلسل:</label>
                             
-                            <v-select label="name" 
-                             :options="addItemForm.typeBasedSeries" id="series" name="series" v-model="addItemForm.notFilteredSeries" ></v-select>
+                            <v-select label="name" :on-search="searchSeries" :options="addItemForm.typeBasedSeries" placeholder="اكتب اسم المجموعة للبحث" id="series_id" name="series_id" v-model="addItemForm.notFilteredSeries" ></v-select>
 
-                            <span class="alert-danger" v-if="addItemForm.errors.has('series')" v-text="addItemForm.errors.get('series')"></span>
+                            <span class="alert-danger" v-if="addItemForm.errors.has('series_id')" v-text="addItemForm.errors.get('series_id')"></span>
                         </div>
 
                         <div class="form-group">
@@ -113,10 +112,11 @@
 </template>
 
 <script>
+    import _ from 'lodash';
     import vSelect from "vue-select";
 
 	export default {
-        props: ['locales', 'tags', 'scholars', 'series'],
+        props: ['locales', 'tags', 'scholars'],
         data() {
             return {
                 addItemForm: new Form({
@@ -127,7 +127,7 @@
                     description: '',
                     scholars: [],
                     tags: [],
-                    series: '',
+                    series_id: '',
                     order: '',
                     notFilteredScholars: [],
                     notFilteredTags: [],
@@ -138,10 +138,23 @@
                 };
         },
         methods: {
-        onItemCreate() {
+        onItemCreate(){
             this.addItemForm.post(window.location.pathname)
                 .then(response => eventBus.$emit('seriesAdded', response));
-            }
+            },
+        searchSeries(search, loading){
+            loading(true);
+            this.getSeries(search, loading, this);
+            },
+        getSeries: _.debounce((search, loading, vm) => {
+                var searchUrl = '';
+                vm.addItemForm.type ? searchUrl = `/admincp/search/series/${search}/${vm.addItemForm.type}` : searchUrl = `/admincp/search/series/${search}`;
+                axios.get(searchUrl)
+                    .then(resp => {
+                       vm.addItemForm.typeBasedSeries = resp.data
+                       loading(false)
+                    })
+            }, 750)
         },
         watch: {
             "addItemForm.notFilteredTags"(val){
@@ -159,19 +172,13 @@
                 }
             },
             "addItemForm.notFilteredSeries"(val){
-                this.addItemForm.errors.clear('series');
-                val ? this.addItemForm.series = val.series_id : this.addItemForm.series = '';
+                this.addItemForm.errors.clear('series_id');
+                val ? this.addItemForm.series_id = val.id : this.addItemForm.series_id = '';
             },
             "addItemForm.type"(val){
-                this.addItemForm.notFilteredSeries = [];
-                this.addItemForm.typeBasedSeries = [];
-                this.addItemForm.errors.clear('series');
-                for(var i = 0; i < this.series.length; i++){
-                    if(this.series[i].type == val){
-                        this.addItemForm.typeBasedSeries.push(this.series[i]);
-                    }
+                if(this.addItemForm.notFilteredSeries && this.addItemForm.notFilteredSeries.type != val){
+                    this.addItemForm.notFilteredSeries = '';
                 }
-                
             }
         },
         components: {

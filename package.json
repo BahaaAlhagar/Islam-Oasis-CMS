@@ -21,6 +21,7 @@
     "vue": "^2.1.10"
   },
   "dependencies": {
+    "lodash": "^4.17.4",
     "toastr": "^2.1.2",
     "vue-select": "github:sagalbot/vue-select",
     "vue-strap": "github:wffranco/vue-strap",

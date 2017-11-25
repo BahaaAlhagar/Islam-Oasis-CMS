@@ -208,7 +208,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_resource__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__partials_Form__ = __webpack_require__(18);
 try {
-    window.$ = window.jQuery = __webpack_require__(21);
+    window.$ = window.jQuery = __webpack_require__(22);
 
     __webpack_require__(3);
 } catch (e) {}
