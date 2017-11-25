@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Image;
+use App\Item;
 use App\Series;
 use App\Scholar;
 use App\Http\Requests\validatePhotoRequest;
@@ -54,6 +55,25 @@ class PhotoController extends Controller
                 $series->photo()->update($stored_photo);
             } else {
                 $series->photo()->create($stored_photo);
+            }
+
+            return ['message' => 'تم تحديث الصورة بنجاح'];
+        }
+
+        return ['message' => 'مشكلة فى تحميل الصورة الرجاء المحاولة لاحقا'];
+    }
+
+    public function updateItemPhoto(validatePhotoRequest $request, Item $item)
+    {
+        if($request->hasFile('photo'))
+        {
+            $stored_photo = $this->handlePhoto($request, $item, 'item_files');
+
+            if($item->photo)
+            {
+                $item->photo()->update($stored_photo);
+            } else {
+                $item->photo()->create($stored_photo);
             }
 
             return ['message' => 'تم تحديث الصورة بنجاح'];

@@ -78,7 +78,7 @@
         <add-item :locales="locales"></add-item>
         <add-item-translation :locales="locales"></add-item-translation>
         <edit-item-translation :locales="locales"></edit-item-translation>
-        <!-- <image-uploader></image-uploader> -->
+        <image-uploader></image-uploader>
     </div>
 </template>
 
@@ -88,7 +88,7 @@
     import addItem from './addItem';
     import addItemTranslation from './addItemTranslation';
     import editItemTranslation from './editItemTranslation';
-    // import imageUploader from './imageUploader';
+    import imageUploader from './imageUploader';
 
 	export default {
         props: ['items', 'locales'],
@@ -127,7 +127,7 @@
             addItem,
             addItemTranslation,
             editItemTranslation,
-            // imageUploader
+            imageUploader
         }
     }
 </script>

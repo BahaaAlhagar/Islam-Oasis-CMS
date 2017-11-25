@@ -70,7 +70,7 @@ class ItemController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Item $item)
+    public function update(storeItemRequest $request, Item $item)
     {
         $item->tags()->sync(request('tags'));
         $item->scholars()->sync(request('scholars'));
