@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Series;
 use App\TagTranslation;
 use App\ScholarTranslation;
+use App\RecitationTranslation;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -36,4 +37,10 @@ class SearchController extends Controller
     	return $series;
     }
 
+    public function recitations($q)
+    {
+        $recitations = RecitationTranslation::where('name', 'LIKE', '%'.$q.'%')->get();
+
+        return $recitations;
+    }
 }

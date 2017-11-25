@@ -30,6 +30,7 @@ route::view('/', 'admin/adminIndex');
 route::get('search/tags/{q}', 'SearchController@tags');
 route::get('search/series/{q}/{type?}', 'SearchController@series');
 route::get('search/scholars/{q}', 'SearchController@scholars');
+route::get('search/recitations/{q}', 'SearchController@recitations');
 
 // posts routes
 route::get('posts/{type}/{locale?}', 'PostController@index')->name('posts.index');

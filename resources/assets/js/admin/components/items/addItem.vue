@@ -70,7 +70,7 @@
                         <div class="form-group">
                             <label for="series_id" class="label">المجموعة او المسلسل:</label>
                             
-                            <v-select label="name" :on-search="searchSeries" :options="addItemForm.typeBasedSeries" placeholder="اكتب اسم المجموعة للبحث" id="series_id" name="series_id" v-model="addItemForm.notFilteredSeries" ></v-select>
+                            <v-select label="name" :on-search="searchSeries" :options="typeBasedSeries" placeholder="اكتب اسم المجموعة للبحث" id="series_id" name="series_id" v-model="addItemForm.notFilteredSeries" ></v-select>
 
                             <span class="alert-danger" v-if="addItemForm.errors.has('series_id')" v-text="addItemForm.errors.get('series_id')"></span>
                         </div>
@@ -131,9 +131,9 @@
                     order: '',
                     notFilteredScholars: [],
                     notFilteredTags: [],
-                    notFilteredSeries: [],
-                    typeBasedSeries: [],
+                    notFilteredSeries: '',
                     }),
+                    typeBasedSeries: [],
                     tags: [],
                     scholars: []
                 };
@@ -141,7 +141,7 @@
         methods: {
         onItemCreate(){
             this.addItemForm.post(window.location.pathname)
-                .then(response => eventBus.$emit('seriesAdded', response));
+                .then(response => eventBus.$emit('itemAdded', response));
             },
         searchSeries(search, loading){
             loading(true);
@@ -152,10 +152,10 @@
                 vm.addItemForm.type ? searchUrl = `/admincp/search/series/${search}/${vm.addItemForm.type}` : searchUrl = `/admincp/search/series/${search}`;
                 axios.get(searchUrl)
                     .then(resp => {
-                       vm.addItemForm.typeBasedSeries = resp.data
+                       vm.typeBasedSeries = resp.data
                        loading(false)
                     })
-            }, 750),
+            }, 1000),
         searchScholars(search, loading){
             loading(true);
             this.getScholars(search, loading, this);
@@ -166,7 +166,7 @@
                        vm.scholars = resp.data
                        loading(false)
                     })
-            }, 750),
+            }, 1000),
         searchTags(search, loading){
             loading(true);
             this.getTags(search, loading, this);
@@ -177,7 +177,7 @@
                        vm.tags = resp.data
                        loading(false)
                     })
-            }, 750),
+            }, 1000),
         },
         watch: {
             "addItemForm.notFilteredTags"(val){

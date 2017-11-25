@@ -25,7 +25,7 @@ class ItemController extends Controller
      */
     public function index($type = null)
     {
-        $type ? $items = Item::where('type', $type)->with('translations', 'photo', 'tags', 'scholars', 'links')->latest()->paginate(10) : $items = Item::with('translations', 'photo', 'tags', 'scholars', 'links')->latest()->paginate(10);
+        $type ? $items = Item::where('type', $type)->with('translations', 'photo', 'tags', 'scholars', 'links', 'series')->latest()->paginate(10) : $items = Item::with('translations', 'photo', 'tags', 'scholars', 'links', 'series')->latest()->paginate(10);
 
         return $this->makeResponse('admin/items/manageItems', compact('items'));
     }
@@ -47,15 +47,15 @@ class ItemController extends Controller
             $item->tags()->sync($request->tags);
             $item->scholars()->sync($request->scholars);
 
-            return ['message' => 'تم اضافة ترجمة المجموعة بنجاح'];
+            return ['message' => 'تم اضافة ترجمة الملف او الكتاب بنجاح'];
 
         } else {
-            $item = Item::create(['type' => $request->type, $request->locale => ['name' => $request->name, 'description' => $request->description, 'published' => $request->published]]);
+            $item = Item::create(['type' => $request->type, 'order' => $request->order, 'series_id' => $request->series_id, $request->locale => ['name' => $request->name, 'description' => $request->description, 'language' => $request->language]]);
 
-            $item->tags()->attach($request->tags);
-            $item->scholars()->attach($request->scholars);
+            $item->tags()->attach(array_unique($request->tags));
+            $item->scholars()->attach(array_unique($request->scholars));
 
-            return ['message' => 'تم اضافة المجموعة بنجاح'];
+            return ['message' => 'تم اضافة الملف او الكتاب بنجاح'];
         }
     }
 
@@ -74,7 +74,7 @@ class ItemController extends Controller
 
         $item->update(['type' => $request->type, $request->locale => ['name' => $request->name, 'description' => $request->description, 'published' => $request->published]]);
 
-        return ['message' => 'تم تحديث ترجمة المجموعة'];
+        return ['message' => 'تم تحديث ترجمة الملف او الكتاب'];
     }
 
 
@@ -88,7 +88,7 @@ class ItemController extends Controller
     {
         $item->delete();
 
-        return ['message' => 'تم حذف المجموعة!'];
+        return ['message' => 'تم حذف الملف او الكتاب!'];
     }
 
     /**
@@ -101,6 +101,6 @@ class ItemController extends Controller
     {
         $translation->delete();
 
-        return ['message' => 'تم حذف ترجمة المجموعة!'];
+        return ['message' => 'تم حذف ترجمة الملف او الكتاب!'];
     }
 }

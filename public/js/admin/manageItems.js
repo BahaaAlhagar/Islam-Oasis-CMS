@@ -2191,9 +2191,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 order: '',
                 notFilteredScholars: [],
                 notFilteredTags: [],
-                notFilteredSeries: [],
-                typeBasedSeries: []
+                notFilteredSeries: ''
             }),
+            typeBasedSeries: [],
             tags: [],
             scholars: []
         };
@@ -2202,7 +2202,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         onItemCreate: function onItemCreate() {
             this.addItemForm.post(window.location.pathname).then(function (response) {
-                return eventBus.$emit('seriesAdded', response);
+                return eventBus.$emit('itemAdded', response);
             });
         },
         searchSeries: function searchSeries(search, loading) {
@@ -2214,10 +2214,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var searchUrl = '';
             vm.addItemForm.type ? searchUrl = '/admincp/search/series/' + search + '/' + vm.addItemForm.type : searchUrl = '/admincp/search/series/' + search;
             axios.get(searchUrl).then(function (resp) {
-                vm.addItemForm.typeBasedSeries = resp.data;
+                vm.typeBasedSeries = resp.data;
                 loading(false);
             });
-        }, 750),
+        }, 1000),
         searchScholars: function searchScholars(search, loading) {
             loading(true);
             this.getScholars(search, loading, this);
@@ -2228,7 +2228,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 vm.scholars = resp.data;
                 loading(false);
             });
-        }, 750),
+        }, 1000),
         searchTags: function searchTags(search, loading) {
             loading(true);
             this.getTags(search, loading, this);
@@ -2239,7 +2239,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 vm.tags = resp.data;
                 loading(false);
             });
-        }, 750)
+        }, 1000)
     },
     watch: {
         "addItemForm.notFilteredTags": function addItemFormNotFilteredTags(val) {
@@ -2596,7 +2596,7 @@ var render = function() {
                       attrs: {
                         label: "name",
                         "on-search": _vm.searchSeries,
-                        options: _vm.addItemForm.typeBasedSeries,
+                        options: _vm.typeBasedSeries,
                         placeholder: "اكتب اسم المجموعة للبحث",
                         id: "series_id",
                         name: "series_id"
