@@ -19,6 +19,9 @@
                         المجموعة
                     </th>
                     <th>
+                        روابط التحميل
+                    </th>
+                    <th>
                         
                     </th>
                 </tr>
@@ -70,7 +73,27 @@
                         </span>
                     </td>
                     <td>
-                        <button @click="deleteItem(item)" class="btn btn-danger">حذف الملف او الكتاب</button>
+                        <div v-if="item.links">
+                            <div v-for="link in item.links" class="row">
+                                <span class="col-md-3">
+                                    <a :href="link.url" target="_blank">
+                                        <i class="fa  fa-download" aria-hidden="true"></i>
+                                    </a>
+                                </span>
+                                <span class="col-md-9 pull-left">
+                                    <button @click="editLink(link, item)" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                    <button @click="deleteLink(link)" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div>
+                            <button @click="createLink(item)" class="btn btn-success">
+                                اضافة رابط
+                            </button>
+                        </div>
+                    </td>
+                    <td>
+                        <button @click="deleteItem(item)" class="btn btn-danger">حذف الملف</button>
                     </td>
                 </tr>
             </tbody>
@@ -79,6 +102,7 @@
         <add-item-translation :locales="locales"></add-item-translation>
         <edit-item-translation :locales="locales"></edit-item-translation>
         <image-uploader></image-uploader>
+        <add-link :locales="locales"></add-link>
     </div>
 </template>
 
@@ -89,6 +113,7 @@
     import addItemTranslation from './addItemTranslation';
     import editItemTranslation from './editItemTranslation';
     import imageUploader from './imageUploader';
+    import addLink from './addLink';
 
 	export default {
         props: ['items', 'locales'],
@@ -121,10 +146,23 @@
             },
             changeImage(item){
                 eventBus.$emit('imageUploader', item);
+            },
+            createLink(item){
+                eventBus.$emit('addLink', item);
+            },
+            editLink(link, item){
+                eventBus.$emit('editLink', link, item);
+            },
+            deleteLink(link){
+                if(confirm('هل انت متأكد من حذف هذا الرابط')){
+                    axios.delete(`/links/${link.id}`)
+                        .then(response => eventBus.$emit('itemDeleted', response));
+                }
             }
         },
         components: {
             addItem,
+            addLink,
             addItemTranslation,
             editItemTranslation,
             imageUploader

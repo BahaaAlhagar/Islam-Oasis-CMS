@@ -5131,6 +5131,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__editItemTranslation___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__editItemTranslation__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__imageUploader__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__imageUploader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__imageUploader__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__addLink__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__addLink___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__addLink__);
 //
 //
 //
@@ -5216,6 +5218,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -5256,10 +5283,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         changeImage: function changeImage(item) {
             eventBus.$emit('imageUploader', item);
+        },
+        createLink: function createLink(item) {
+            eventBus.$emit('addLink', item);
+        },
+        editLink: function editLink(link, item) {
+            eventBus.$emit('editLink', link, item);
+        },
+        deleteLink: function deleteLink(link) {
+            if (confirm('هل انت متأكد من حذف هذا الرابط')) {
+                axios.delete('/links/' + link.id).then(function (response) {
+                    return eventBus.$emit('itemDeleted', response);
+                });
+            }
         }
     },
     components: {
         addItem: __WEBPACK_IMPORTED_MODULE_0__addItem___default.a,
+        addLink: __WEBPACK_IMPORTED_MODULE_4__addLink___default.a,
         addItemTranslation: __WEBPACK_IMPORTED_MODULE_1__addItemTranslation___default.a,
         editItemTranslation: __WEBPACK_IMPORTED_MODULE_2__editItemTranslation___default.a,
         imageUploader: __WEBPACK_IMPORTED_MODULE_3__imageUploader___default.a
@@ -6132,6 +6173,12 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
+                    _c("th", [
+                      _vm._v(
+                        "\n                        روابط التحميل\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
                     _c("th")
                   ],
                   2
@@ -6317,6 +6364,97 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", [
+                        item.links
+                          ? _c(
+                              "div",
+                              _vm._l(item.links, function(link) {
+                                return _c("div", { staticClass: "row" }, [
+                                  _c("span", { staticClass: "col-md-3" }, [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: {
+                                          href: link.url,
+                                          target: "_blank"
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fa  fa-download",
+                                          attrs: { "aria-hidden": "true" }
+                                        })
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    { staticClass: "col-md-9 pull-left" },
+                                    [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-primary",
+                                          on: {
+                                            click: function($event) {
+                                              _vm.editLink(link, item)
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "fa fa-pencil-square-o",
+                                            attrs: { "aria-hidden": "true" }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-danger",
+                                          on: {
+                                            click: function($event) {
+                                              _vm.deleteLink(link)
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fa fa-trash-o",
+                                            attrs: { "aria-hidden": "true" }
+                                          })
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ])
+                              })
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("div", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success",
+                              on: {
+                                click: function($event) {
+                                  _vm.createLink(item)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                اضافة رابط\n                            "
+                              )
+                            ]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
                         _c(
                           "button",
                           {
@@ -6327,7 +6465,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("حذف الملف او الكتاب")]
+                          [_vm._v("حذف الملف")]
                         )
                       ])
                     ],
@@ -6345,7 +6483,9 @@ var render = function() {
       _vm._v(" "),
       _c("edit-item-translation", { attrs: { locales: _vm.locales } }),
       _vm._v(" "),
-      _c("image-uploader")
+      _c("image-uploader"),
+      _vm._v(" "),
+      _c("add-link", { attrs: { locales: _vm.locales } })
     ],
     1
   )
@@ -25097,6 +25237,347 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-ebd3b19a", module.exports)
+  }
+}
+
+/***/ }),
+/* 171 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(172)
+/* template */
+var __vue_template__ = __webpack_require__(173)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\admin\\components\\items\\addLink.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-259aff05", Component.options)
+  } else {
+    hotAPI.reload("data-v-259aff05", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 172 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['locales'],
+    data: function data() {
+        return {
+            addLinkForm: new Form({
+                locale: '',
+                url: ''
+            }),
+            item: ''
+        };
+    },
+
+    methods: {
+        onLinkCreate: function onLinkCreate() {
+            this.addLinkForm.post('/admincp/items/' + this.item + '/links').then(function (response) {
+                return eventBus.$emit('itemAdded', response);
+            });
+        },
+        prepareModal: function prepareModal(item) {
+            this.item = item.id;
+            $('#addLink').modal('show');
+        }
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        eventBus.$on('addLink', function (item) {
+            return _this.prepareModal(item);
+        });
+    }
+});
+
+/***/ }),
+/* 173 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "addLink",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "myModalLabel"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
+            _c(
+              "form",
+              {
+                attrs: { method: "POST", action: "/" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    _vm.onLinkCreate($event)
+                  },
+                  keydown: function($event) {
+                    _vm.addLinkForm.errors.clear($event.target.name)
+                  },
+                  change: function($event) {
+                    _vm.addLinkForm.errors.clear($event.target.name)
+                  },
+                  input: function($event) {
+                    _vm.addLinkForm.errors.clear($event.target.name)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "locale" } },
+                    [_vm._v("اللغة:")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.addLinkForm.locale,
+                          expression: "addLinkForm.locale"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "locale", name: "locale" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.addLinkForm,
+                            "locale",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("كل اللغات")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.locales, function(locale, key) {
+                        return _c("option", { domProps: { value: key } }, [
+                          _vm._v(_vm._s(locale.native))
+                        ])
+                      })
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _vm.addLinkForm.errors.has("locale")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.addLinkForm.errors.get("locale")
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { staticClass: "label", attrs: { for: "url" } }, [
+                    _vm._v("الرابط:")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.addLinkForm.url,
+                        expression: "addLinkForm.url"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "url", name: "url" },
+                    domProps: { value: _vm.addLinkForm.url },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.addLinkForm, "url", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.addLinkForm.errors.has("url")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(_vm.addLinkForm.errors.get("url"))
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group text-center" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn-lg btn-success",
+                      attrs: { disabled: _vm.addLinkForm.errors.any() }
+                    },
+                    [_vm._v("اضافة")]
+                  )
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("span", { staticClass: "form-control-static text-center" }, [
+        _c(
+          "h4",
+          { staticClass: "modal-title", attrs: { id: "myModalLabel" } },
+          [_vm._v(" اضافة رابط تحميل ")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-259aff05", module.exports)
   }
 }
 

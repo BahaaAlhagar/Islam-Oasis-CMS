@@ -72,6 +72,7 @@ route::resource('series', 'SeriesController')->only('update', 'destroy');
 
 
 // items routes
+route::post('items/{item}/links', 'LinkController@storeItemLink');
 route::post('items/{item}', 'ItemController@storeTranslation');
 route::get('items/{type?}', 'ItemController@index')->name('items.index');
 route::post('items/{item}/photo', 'PhotoController@updateItemPhoto');
