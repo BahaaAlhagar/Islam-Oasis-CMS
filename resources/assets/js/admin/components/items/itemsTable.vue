@@ -76,7 +76,7 @@
             </tbody>
         </table>
         <add-item :locales="locales"></add-item>
-        <!-- <add-item-translation :locales="locales" :tags="tags" :scholars="scholars"></add-item-translation> -->
+        <add-item-translation :locales="locales"></add-item-translation>
         <!-- <edit-item-translation :locales="locales" :tags="tags" :scholars="scholars"></edit-item-translation> -->
         <!-- <image-uploader></image-uploader> -->
     </div>
@@ -86,7 +86,7 @@
 <script>
 
     import addItem from './addItem';
-    // import addItemTranslation from './addItemTranslation';
+    import addItemTranslation from './addItemTranslation';
     // import editItemTranslation from './editItemTranslation';
     // import imageUploader from './imageUploader';
 
@@ -125,7 +125,7 @@
         },
         components: {
             addItem,
-            // addItemTranslation,
+            addItemTranslation,
             // editItemTranslation,
             // imageUploader
         }

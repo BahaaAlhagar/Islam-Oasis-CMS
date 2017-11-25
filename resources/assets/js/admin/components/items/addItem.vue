@@ -185,7 +185,7 @@
                 this.addItemForm.errors.clear('tags');
                 this.addItemForm.errors.clear('series_id');
                 for(var i = 0; i < val.length; i++){
-                    this.addItemForm.tags.unshift(val[i].tag_id);
+                    this.addItemForm.tags.unshift(val[i].id);
                 }
             },
             "addItemForm.notFilteredScholars"(val){
@@ -193,7 +193,7 @@
                 this.addItemForm.errors.clear('scholars');
                 this.addItemForm.errors.clear('series_id');
                 for(var i = 0; i < val.length; i++){
-                    this.addItemForm.scholars.unshift(val[i].scholar_id);
+                    this.addItemForm.scholars.unshift(val[i].id);
                 }
             },
             "addItemForm.notFilteredSeries"(val){

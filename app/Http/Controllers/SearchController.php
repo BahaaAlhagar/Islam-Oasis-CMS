@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Series;
-use App\TagTranslation;
-use App\ScholarTranslation;
-use App\RecitationTranslation;
+use App\Tag;
+use App\Scholar;
+use App\Recitation;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -18,14 +18,14 @@ class SearchController extends Controller
 
 	public function tags($q)
     {
-    	$tags = TagTranslation::where('name', 'LIKE', '%'.$q.'%')->get();
+    	$tags = Tag::whereTranslationLike('name', '%'.$q.'%')->get();
 
     	return $tags;
     }
 
     public function scholars($q)
     {
-    	$scholars = ScholarTranslation::where('name', 'LIKE', '%'.$q.'%')->get();
+    	$scholars = Scholar::whereTranslationLike('name', '%'.$q.'%')->get();
 
     	return $scholars;
     }
@@ -39,7 +39,7 @@ class SearchController extends Controller
 
     public function recitations($q)
     {
-        $recitations = RecitationTranslation::where('name', 'LIKE', '%'.$q.'%')->get();
+        $recitations = Recitation::whereTranslationLike('name', '%'.$q.'%')->get();
 
         return $recitations;
     }

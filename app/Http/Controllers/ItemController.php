@@ -9,6 +9,7 @@ use App\Scholar;
 use App\ItemTranslation;
 use App\SeriesTranslation;
 use App\Http\Requests\storeItemRequest;
+use App\Http\Requests\storeItemTranslationRequest;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -38,29 +39,28 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\storeItemRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(storeItemRequest $request, Item $item = null)
+    public function store(storeItemRequest $request)
     {
-        if($item)
-        {
-            $item->translations()
-                    ->create($request->only('locale', 'name', 'description', 'published'));
+        $item = Item::create(['type' => $request->type, 'order' => $request->order, 'series_id' => $request->series_id, $request->locale => ['name' => $request->name, 'description' => $request->description, 'language' => $request->language]]);
 
-            $item->tags()->sync($request->tags);
-            $item->scholars()->sync($request->scholars);
+        $item->tags()->attach(array_unique($request->tags));
+        $item->scholars()->attach(array_unique($request->scholars));
 
-            return ['message' => 'تم اضافة ترجمة الملف او الكتاب بنجاح'];
-
-        } else {
-            $item = Item::create(['type' => $request->type, 'order' => $request->order, 'series_id' => $request->series_id, $request->locale => ['name' => $request->name, 'description' => $request->description, 'language' => $request->language]]);
-
-            $item->tags()->attach(array_unique($request->tags));
-            $item->scholars()->attach(array_unique($request->scholars));
-
-            return ['message' => 'تم اضافة الملف او الكتاب بنجاح'];
-        }
+        return ['message' => 'تم اضافة الملف او الكتاب بنجاح'];
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\storeItemRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeTranslation(storeItemTranslationRequest $request, Item $item)
+    {
+        $item->translations()->create($request->all());
 
+        return ['message' => 'تم اضافة ترجمة الملف او الكتاب بنجاح'];
+    }
     /**
      * Update the specified resource in storage.
      *

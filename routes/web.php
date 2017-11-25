@@ -72,10 +72,10 @@ route::resource('series', 'SeriesController')->only('update', 'destroy');
 
 
 // items routes
-route::post('items/{item?}', 'ItemController@store')->name('items.store');
+route::post('items/{item}', 'ItemController@storeTranslation');
 route::get('items/{type?}', 'ItemController@index')->name('items.index');
 route::post('items/{item}/photo', 'PhotoController@updateItemPhoto');
 route::delete('itemtranslation/{translation}', 'ItemController@deleteTranslation');
-route::resource('items', 'ItemController')->only('update', 'destroy');
+route::resource('items', 'ItemController')->only('store', 'update', 'destroy');
 
 });
