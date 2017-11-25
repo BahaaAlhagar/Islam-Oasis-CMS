@@ -81,7 +81,7 @@
                                     </a>
                                 </span>
                                 <span class="col-md-9 pull-left">
-                                    <button @click="editLink(link, item)" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                    <button @click="editLink(link)" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                                     <button @click="deleteLink(link)" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                 </span>
                             </div>
@@ -103,6 +103,7 @@
         <edit-item-translation :locales="locales"></edit-item-translation>
         <image-uploader></image-uploader>
         <add-link :locales="locales"></add-link>
+        <edit-link :locales="locales"></edit-link>
     </div>
 </template>
 
@@ -114,6 +115,7 @@
     import editItemTranslation from './editItemTranslation';
     import imageUploader from './imageUploader';
     import addLink from './addLink';
+    import editLink from './editLink';
 
 	export default {
         props: ['items', 'locales'],
@@ -150,8 +152,8 @@
             createLink(item){
                 eventBus.$emit('addLink', item);
             },
-            editLink(link, item){
-                eventBus.$emit('editLink', link, item);
+            editLink(link){
+                eventBus.$emit('editLink', link);
             },
             deleteLink(link){
                 if(confirm('هل انت متأكد من حذف هذا الرابط')){
@@ -163,6 +165,7 @@
         components: {
             addItem,
             addLink,
+            editLink,
             addItemTranslation,
             editItemTranslation,
             imageUploader
