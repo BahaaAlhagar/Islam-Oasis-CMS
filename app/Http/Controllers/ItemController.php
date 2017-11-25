@@ -52,7 +52,8 @@ class ItemController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\storeItemRequest  $request
+     * @param  \Illuminate\Http\storeItemTranslationRequest  $request
+     * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
     public function storeTranslation(storeItemTranslationRequest $request, Item $item)
@@ -61,6 +62,7 @@ class ItemController extends Controller
 
         return ['message' => 'تم اضافة ترجمة الملف او الكتاب بنجاح'];
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -73,7 +75,7 @@ class ItemController extends Controller
         $item->tags()->sync(request('tags'));
         $item->scholars()->sync(request('scholars'));
 
-        $item->update(['type' => $request->type, $request->locale => ['name' => $request->name, 'description' => $request->description, 'published' => $request->published]]);
+        $item->update(['type' => $request->type, 'order' => $request->order, 'series_id' => $request->series_id, $request->locale => ['name' => $request->name, 'description' => $request->description, 'language' => $request->language]]);
 
         return ['message' => 'تم تحديث ترجمة الملف او الكتاب'];
     }

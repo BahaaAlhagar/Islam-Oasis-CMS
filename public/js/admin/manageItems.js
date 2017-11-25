@@ -1865,6 +1865,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addItem___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__addItem__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addItemTranslation__ = __webpack_require__(162);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addItemTranslation___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__addItemTranslation__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__editItemTranslation__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__editItemTranslation___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__editItemTranslation__);
 //
 //
 //
@@ -1954,7 +1956,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-// import editItemTranslation from './editItemTranslation';
+
 // import imageUploader from './imageUploader';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1994,8 +1996,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     components: {
         addItem: __WEBPACK_IMPORTED_MODULE_0__addItem___default.a,
-        addItemTranslation: __WEBPACK_IMPORTED_MODULE_1__addItemTranslation___default.a
-        // editItemTranslation,
+        addItemTranslation: __WEBPACK_IMPORTED_MODULE_1__addItemTranslation___default.a,
+        editItemTranslation: __WEBPACK_IMPORTED_MODULE_2__editItemTranslation___default.a
         // imageUploader
     }
 });
@@ -3079,7 +3081,9 @@ var render = function() {
       _vm._v(" "),
       _c("add-item", { attrs: { locales: _vm.locales } }),
       _vm._v(" "),
-      _c("add-item-translation", { attrs: { locales: _vm.locales } })
+      _c("add-item-translation", { attrs: { locales: _vm.locales } }),
+      _vm._v(" "),
+      _c("edit-item-translation", { attrs: { locales: _vm.locales } })
     ],
     1
   )
@@ -22259,6 +22263,870 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-6090b9e3", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 165:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(166)
+/* template */
+var __vue_template__ = __webpack_require__(167)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\admin\\components\\items\\editItemTranslation.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7ff0b57e", Component.options)
+  } else {
+    hotAPI.reload("data-v-7ff0b57e", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 166:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_select__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['locales'],
+    data: function data() {
+        return {
+            editItemTranslationForm: new Form({
+                type: '',
+                locale: '',
+                name: '',
+                language: '',
+                description: '',
+                scholars: [],
+                tags: [],
+                series_id: '',
+                order: '',
+                notFilteredScholars: [],
+                notFilteredTags: [],
+                notFilteredSeries: ''
+            }),
+            typeBasedSeries: [],
+            tags: [],
+            scholars: [],
+            item_id: ''
+        };
+    },
+
+    methods: {
+        onItemCreate: function onItemCreate() {
+            this.editItemTranslationForm.patch(window.location.pathname + '/' + this.item_id).then(function (response) {
+                return eventBus.$emit('itemAdded', response);
+            });
+        },
+        searchSeries: function searchSeries(search, loading) {
+            loading(true);
+            this.getSeries(search, loading, this);
+        },
+
+        getSeries: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.debounce(function (search, loading, vm) {
+            var searchUrl = '';
+            vm.editItemTranslationForm.type ? searchUrl = '/admincp/search/series/' + search + '/' + vm.editItemTranslationForm.type : searchUrl = '/admincp/search/series/' + search;
+            axios.get(searchUrl).then(function (resp) {
+                vm.typeBasedSeries = resp.data;
+                loading(false);
+            });
+        }, 1000),
+        searchScholars: function searchScholars(search, loading) {
+            loading(true);
+            this.getScholars(search, loading, this);
+        },
+
+        getScholars: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.debounce(function (search, loading, vm) {
+            axios.get('/admincp/search/scholars/' + search).then(function (resp) {
+                vm.scholars = resp.data;
+                loading(false);
+            });
+        }, 1000),
+        searchTags: function searchTags(search, loading) {
+            loading(true);
+            this.getTags(search, loading, this);
+        },
+
+        getTags: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.debounce(function (search, loading, vm) {
+            axios.get('/admincp/search/tags/' + search).then(function (resp) {
+                vm.tags = resp.data;
+                loading(false);
+            });
+        }, 1000),
+        prepareModal: function prepareModal(translation, item) {
+            this.editItemTranslationForm.locale = translation.locale;
+            this.editItemTranslationForm.name = translation.name;
+            this.editItemTranslationForm.description = translation.description;
+            this.editItemTranslationForm.language = translation.language;
+
+            this.editItemTranslationForm.type = item.type;
+            this.editItemTranslationForm.order = item.order;
+            this.editItemTranslationForm.notFilteredScholars = item.scholars;
+            this.editItemTranslationForm.notFilteredTags = item.tags;
+            this.editItemTranslationForm.notFilteredSeries = item.series;
+            this.item_id = item.id;
+            $('#editItemTranslation').modal('show');
+        }
+    },
+    watch: {
+        "editItemTranslationForm.notFilteredTags": function editItemTranslationFormNotFilteredTags(val) {
+            this.editItemTranslationForm.tags = [];
+            this.editItemTranslationForm.errors.clear('tags');
+            this.editItemTranslationForm.errors.clear('series_id');
+            for (var i = 0; i < val.length; i++) {
+                this.editItemTranslationForm.tags.unshift(val[i].id);
+            }
+        },
+        "editItemTranslationForm.notFilteredScholars": function editItemTranslationFormNotFilteredScholars(val) {
+            this.editItemTranslationForm.scholars = [];
+            this.editItemTranslationForm.errors.clear('scholars');
+            this.editItemTranslationForm.errors.clear('series_id');
+            for (var i = 0; i < val.length; i++) {
+                this.editItemTranslationForm.scholars.unshift(val[i].id);
+            }
+        },
+        "editItemTranslationForm.notFilteredSeries": function editItemTranslationFormNotFilteredSeries(val) {
+            this.editItemTranslationForm.errors.clear('series_id');
+            this.editItemTranslationForm.errors.clear('scholars');
+            this.editItemTranslationForm.errors.clear('tags');
+            val ? this.editItemTranslationForm.series_id = val.id : this.editItemTranslationForm.series_id = '';
+        },
+        "editItemTranslationForm.type": function editItemTranslationFormType(val) {
+            if (this.editItemTranslationForm.notFilteredSeries && this.editItemTranslationForm.notFilteredSeries.type != val) {
+                this.editItemTranslationForm.notFilteredSeries = '';
+            }
+        }
+    },
+    components: {
+        vSelect: __WEBPACK_IMPORTED_MODULE_1_vue_select___default.a
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        eventBus.$on('editItemTranslation', function (translation, item) {
+            return _this.prepareModal(translation, item);
+        });
+    }
+});
+
+/***/ }),
+
+/***/ 167:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "editItemTranslation",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "myModalLabel"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
+            _c(
+              "form",
+              {
+                attrs: { method: "POST", action: "/" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    _vm.onItemCreate($event)
+                  },
+                  keydown: function($event) {
+                    _vm.editItemTranslationForm.errors.clear($event.target.name)
+                  },
+                  change: function($event) {
+                    _vm.editItemTranslationForm.errors.clear($event.target.name)
+                  },
+                  input: function($event) {
+                    _vm.editItemTranslationForm.errors.clear($event.target.name)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "type" } },
+                    [_vm._v("نوع الملف:")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.editItemTranslationForm.type,
+                          expression: "editItemTranslationForm.type"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "type", name: "type" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.editItemTranslationForm,
+                            "type",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "1" } }, [_vm._v("كتاب")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "2" } }, [_vm._v("نشيد")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "3" } }, [
+                        _vm._v("فيديو")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "4" } }, [
+                        _vm._v("محاضرة صوتية")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "5" } }, [_vm._v("دعاء")])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm.editItemTranslationForm.errors.has("type")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.editItemTranslationForm.errors.get("type")
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "locale" } },
+                    [_vm._v("اللغة:")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.editItemTranslationForm.locale,
+                          expression: "editItemTranslationForm.locale"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "locale", name: "locale", disabled: "" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.editItemTranslationForm,
+                            "locale",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    _vm._l(_vm.locales, function(locale, key) {
+                      return _c("option", { domProps: { value: key } }, [
+                        _vm._v(_vm._s(locale.native))
+                      ])
+                    })
+                  ),
+                  _vm._v(" "),
+                  _vm.editItemTranslationForm.errors.has("locale")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.editItemTranslationForm.errors.get("locale")
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "name" } },
+                    [_vm._v("اسم الملف:")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.editItemTranslationForm.name,
+                        expression: "editItemTranslationForm.name"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "name", name: "name" },
+                    domProps: { value: _vm.editItemTranslationForm.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.editItemTranslationForm,
+                          "name",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.editItemTranslationForm.errors.has("name")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.editItemTranslationForm.errors.get("name")
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "language" } },
+                    [_vm._v("لغة الملف:")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.editItemTranslationForm.language,
+                        expression: "editItemTranslationForm.language"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "language", name: "language" },
+                    domProps: { value: _vm.editItemTranslationForm.language },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.editItemTranslationForm,
+                          "language",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.editItemTranslationForm.errors.has("language")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.editItemTranslationForm.errors.get("language")
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "description" } },
+                    [_vm._v("وصف الملف:")]
+                  ),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.editItemTranslationForm.description,
+                        expression: "editItemTranslationForm.description"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "description",
+                      name: "description",
+                      rows: "5"
+                    },
+                    domProps: {
+                      value: _vm.editItemTranslationForm.description
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.editItemTranslationForm,
+                          "description",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.editItemTranslationForm.errors.has("description")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.editItemTranslationForm.errors.get(
+                              "description"
+                            )
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c(
+                      "label",
+                      { staticClass: "label", attrs: { for: "series_id" } },
+                      [_vm._v("المجموعة او المسلسل:")]
+                    ),
+                    _vm._v(" "),
+                    _c("v-select", {
+                      attrs: {
+                        label: "name",
+                        "on-search": _vm.searchSeries,
+                        options: _vm.typeBasedSeries,
+                        placeholder: "اكتب اسم المجموعة للبحث",
+                        id: "series_id",
+                        name: "series_id"
+                      },
+                      model: {
+                        value: _vm.editItemTranslationForm.notFilteredSeries,
+                        callback: function($$v) {
+                          _vm.$set(
+                            _vm.editItemTranslationForm,
+                            "notFilteredSeries",
+                            $$v
+                          )
+                        },
+                        expression: "editItemTranslationForm.notFilteredSeries"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.editItemTranslationForm.errors.has("series_id")
+                      ? _c("span", {
+                          staticClass: "alert-danger",
+                          domProps: {
+                            textContent: _vm._s(
+                              _vm.editItemTranslationForm.errors.get(
+                                "series_id"
+                              )
+                            )
+                          }
+                        })
+                      : _vm._e()
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "order" } },
+                    [_vm._v("رقم الملف فى المجموعة او المسلسل:")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.editItemTranslationForm.order,
+                        expression: "editItemTranslationForm.order"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "order", name: "order" },
+                    domProps: { value: _vm.editItemTranslationForm.order },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.editItemTranslationForm,
+                          "order",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.editItemTranslationForm.errors.has("order")
+                    ? _c("span", {
+                        staticClass: "alert-danger",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.editItemTranslationForm.errors.get("order")
+                          )
+                        }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c(
+                      "label",
+                      { staticClass: "label", attrs: { for: "scholars" } },
+                      [_vm._v("مؤلفى او مقدمى الملف (العلماء):")]
+                    ),
+                    _vm._v(" "),
+                    _c("v-select", {
+                      attrs: {
+                        label: "name",
+                        placeholder: "اكتب الاسم للبحث",
+                        "on-search": _vm.searchScholars,
+                        multiple: "",
+                        options: _vm.scholars,
+                        id: "scholars",
+                        name: "scholars[]"
+                      },
+                      model: {
+                        value: _vm.editItemTranslationForm.notFilteredScholars,
+                        callback: function($$v) {
+                          _vm.$set(
+                            _vm.editItemTranslationForm,
+                            "notFilteredScholars",
+                            $$v
+                          )
+                        },
+                        expression:
+                          "editItemTranslationForm.notFilteredScholars"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.editItemTranslationForm.errors.has("scholars")
+                      ? _c("span", {
+                          staticClass: "alert-danger",
+                          domProps: {
+                            textContent: _vm._s(
+                              _vm.editItemTranslationForm.errors.get("scholars")
+                            )
+                          }
+                        })
+                      : _vm._e()
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c(
+                      "label",
+                      { staticClass: "label", attrs: { for: "tags" } },
+                      [_vm._v("تصنيفات الملف:")]
+                    ),
+                    _vm._v(" "),
+                    _c("v-select", {
+                      attrs: {
+                        label: "name",
+                        placeholder: "اكتب الاسم للبحث",
+                        "on-search": _vm.searchTags,
+                        multiple: "",
+                        options: _vm.tags,
+                        id: "tags",
+                        name: "tags[]"
+                      },
+                      model: {
+                        value: _vm.editItemTranslationForm.notFilteredTags,
+                        callback: function($$v) {
+                          _vm.$set(
+                            _vm.editItemTranslationForm,
+                            "notFilteredTags",
+                            $$v
+                          )
+                        },
+                        expression: "editItemTranslationForm.notFilteredTags"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.editItemTranslationForm.errors.has("tags")
+                      ? _c("span", {
+                          staticClass: "alert-danger",
+                          domProps: {
+                            textContent: _vm._s(
+                              _vm.editItemTranslationForm.errors.get("tags")
+                            )
+                          }
+                        })
+                      : _vm._e()
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group text-center" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "button btn-lg btn-success",
+                      attrs: {
+                        disabled: _vm.editItemTranslationForm.errors.any()
+                      }
+                    },
+                    [_vm._v("تعديل")]
+                  )
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+      _vm._v(" "),
+      _c("span", { staticClass: "form-control-static text-center" }, [
+        _c(
+          "h4",
+          { staticClass: "modal-title", attrs: { id: "myModalLabel" } },
+          [_vm._v(" تعديل ملف ميديا او كتاب ")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7ff0b57e", module.exports)
   }
 }
 

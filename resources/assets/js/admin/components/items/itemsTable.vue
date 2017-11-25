@@ -77,7 +77,7 @@
         </table>
         <add-item :locales="locales"></add-item>
         <add-item-translation :locales="locales"></add-item-translation>
-        <!-- <edit-item-translation :locales="locales" :tags="tags" :scholars="scholars"></edit-item-translation> -->
+        <edit-item-translation :locales="locales"></edit-item-translation>
         <!-- <image-uploader></image-uploader> -->
     </div>
 </template>
@@ -87,7 +87,7 @@
 
     import addItem from './addItem';
     import addItemTranslation from './addItemTranslation';
-    // import editItemTranslation from './editItemTranslation';
+    import editItemTranslation from './editItemTranslation';
     // import imageUploader from './imageUploader';
 
 	export default {
@@ -126,7 +126,7 @@
         components: {
             addItem,
             addItemTranslation,
-            // editItemTranslation,
+            editItemTranslation,
             // imageUploader
         }
     }
