@@ -23,7 +23,8 @@ class AppServiceProvider extends ServiceProvider
             'scholar' => 'App\Scholar',
             'item' => 'App\Item',
             'series' => 'App\Series',
-            'quran' => 'App\Quran'
+            'quran' => 'App\Quran',
+            'fatwa' => 'App\Fatwa'
         ]);
     }
 

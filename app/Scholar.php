@@ -32,4 +32,9 @@ class Scholar extends Model
     {
         return $this->morphedByMany(Item::class, 'scholarables');
     }
+
+    public function fatwas()
+    {
+        return $this->hasMany(Fatwa::class);
+    }
 }
