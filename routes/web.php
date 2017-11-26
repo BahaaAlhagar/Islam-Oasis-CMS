@@ -83,4 +83,13 @@ route::resource('items', 'ItemController')->only('store', 'update', 'destroy');
 route::post('items/{item}/links', 'LinkController@storeItemLink');
 route::resource('links', 'LinkController')->only('update', 'destroy');
 
+
+// fatwas routes
+route::get('fatwas/{type}/{locale?}', 'FatwaController@index')->name('fatwas.index');
+route::post('fatwa/{fatwa}/photo', 'PhotoController@updateFatwaPhoto');
+route::post('fatwas/{fatwa?}', 'FatwaController@store')->name('fatwas.store');
+route::delete('fatwatranslation/{translation}', 'FatwaController@deleteTranslation');
+route::resource('fatwas', 'FatwaController')->only('update', 'destroy');
+
+
 });

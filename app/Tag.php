@@ -28,4 +28,9 @@ class Tag extends Model
     {
         return $this->morphedByMany(Item::class, 'taggables');
     }
+
+    public function fatwas()
+    {
+        return $this->morphedByMany(Fatwa::class, 'taggables');
+    }
 }
