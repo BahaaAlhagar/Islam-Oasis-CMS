@@ -6,6 +6,12 @@
                     <th v-for="locale in locales">
                         {{ locale.native }}
                     </th>
+                    <th v-if="type == 1">
+                        صاحب الفتوى
+                    </th>
+                    <th>
+                        التصنيفات
+                    </th>
                     <th></th>
                 </tr>
             </thead>
@@ -36,6 +42,19 @@
                         <span v-if="!localeCheck(key, fatwa)">
                              <button @click="addTranslation(fatwa, key)" class="btn btn-success">اضافة ترجمة</button>
                         </span>
+                    </td>
+                    <td v-if="type == 1">
+                        <span v-if="fatwa.scholar">
+                            {{ fatwa.scholar.name }}
+                        </span>
+                    </td>
+                    <td>
+                        <div v-for="tag in fatwa.tags">
+                            <span class="alert-success">
+                                {{ tag.name }}
+                            </span>
+                            <hr>
+                        </div>
                     </td>
                     <td>
                         <button v-if="type == 1" @click="deleteFatwa(fatwa)" class="btn btn-danger">حذف الفتوى</button>

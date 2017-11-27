@@ -48,14 +48,14 @@ class FatwaController extends Controller
     {
         if($fatwa)
         {
-            $fatwa->translations()->create($request->except('type', 'scholar_id', 'tags'));
+            $fatwa->translations()->create($request->only('locale', 'question', 'answer'));
             $fatwa->tags()->sync(array_unique($request->tags));
 
             return ['message' => 'تم اضافة الترجمة بنجاح'];
         }
         
         $fatwa = Fatwa::create($request->only('type'));
-        $fatwa->translations()->create($request->except('type', 'scholar_id', 'tags'));
+        $fatwa->translations()->create($request->only('locale', 'question', 'answer'));
         $fatwa->tags()->attach(array_unique($request->tags));
 
         return ['message' => 'تمت الاضافة بنجاح'];

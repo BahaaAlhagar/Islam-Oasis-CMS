@@ -3701,6 +3701,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3778,6 +3797,20 @@ var render = function() {
                         )
                       ])
                     }),
+                    _vm._v(" "),
+                    _vm.type == 1
+                      ? _c("th", [
+                          _vm._v(
+                            "\n                        صاحب الفتوى\n                    "
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("th", [
+                      _vm._v(
+                        "\n                        التصنيفات\n                    "
+                      )
+                    ]),
                     _vm._v(" "),
                     _c("th")
                   ],
@@ -3882,6 +3915,37 @@ var render = function() {
                           2
                         )
                       }),
+                      _vm._v(" "),
+                      _vm.type == 1
+                        ? _c("td", [
+                            fatwa.scholar
+                              ? _c("span", [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(fatwa.scholar.name) +
+                                      "\n                        "
+                                  )
+                                ])
+                              : _vm._e()
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        _vm._l(fatwa.tags, function(tag) {
+                          return _c("div", [
+                            _c("span", { staticClass: "alert-success" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(tag.name) +
+                                  "\n                            "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("hr")
+                          ])
+                        })
+                      ),
                       _vm._v(" "),
                       _c("td", [
                         _vm.type == 1
@@ -4095,12 +4159,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 question: '',
                 answer: '',
                 scholar_id: '',
-                tags: ''
+                tags: '',
+                notFilteredTags: '',
+                notFilteredScholar: ''
             }),
             tags: [],
-            scholars: [],
-            notFilteredTags: [],
-            notFilteredScholar: ''
+            scholars: []
         };
     },
 
@@ -4138,14 +4202,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }, 1000)
     },
     watch: {
-        notFilteredTags: function notFilteredTags(val) {
+        "addFatwaForm.notFilteredTags": function addFatwaFormNotFilteredTags(val) {
             this.addFatwaForm.tags = [];
             this.addFatwaForm.errors.clear('tags');
             for (var i = 0; i < val.length; i++) {
                 this.addFatwaForm.tags.unshift(val[i].id);
             }
         },
-        notFilteredScholar: function notFilteredScholar(val) {
+        "addFatwaForm.notFilteredScholar": function addFatwaFormNotFilteredScholar(val) {
             this.addFatwaForm.errors.clear('scholar_id');
             val ? this.addFatwaForm.scholar_id = val.id : this.addFatwaForm.scholar_id = '';
         }
@@ -4402,11 +4466,15 @@ var render = function() {
                               name: "scholar_id"
                             },
                             model: {
-                              value: _vm.notFilteredScholar,
+                              value: _vm.addFatwaForm.notFilteredScholar,
                               callback: function($$v) {
-                                _vm.notFilteredScholar = $$v
+                                _vm.$set(
+                                  _vm.addFatwaForm,
+                                  "notFilteredScholar",
+                                  $$v
+                                )
                               },
-                              expression: "notFilteredScholar"
+                              expression: "addFatwaForm.notFilteredScholar"
                             }
                           }),
                           _vm._v(" "),
@@ -4446,11 +4514,11 @@ var render = function() {
                           name: "tags[]"
                         },
                         model: {
-                          value: _vm.notFilteredTags,
+                          value: _vm.addFatwaForm.notFilteredTags,
                           callback: function($$v) {
-                            _vm.notFilteredTags = $$v
+                            _vm.$set(_vm.addFatwaForm, "notFilteredTags", $$v)
                           },
-                          expression: "notFilteredTags"
+                          expression: "addFatwaForm.notFilteredTags"
                         }
                       }),
                       _vm._v(" "),
