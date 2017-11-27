@@ -44,9 +44,9 @@
 			</span>
 		@endif	
 
-		<!-- <fatwas-table :type="{{ $type }}" :fatwas="fatwas" :locales="{{ json_encode(LaravelLocalization::getSupportedLocales()) }}"></fatwas-table> -->
+		<fatwas-table :type="{{ $type }}" :fatwas="fatwas" :locales="{{ json_encode(LaravelLocalization::getSupportedLocales()) }}"></fatwas-table>
 
-        <!-- <v-paginator class="text-center" v-show="fatwas.length" :options="options" ref="VP" :resource_url="resource_url" @update="updateResource"></v-paginator> -->
+        <v-paginator class="text-center" v-show="fatwas.length" :options="options" ref="VP" :resource_url="resource_url" @update="updateResource"></v-paginator>
 
 	</div>
 
