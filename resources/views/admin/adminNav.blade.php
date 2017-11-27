@@ -41,6 +41,13 @@
 					ملفات الميديا والكتب
 				</a>
 
+				<a href="{{ route('fatwas.index', ['type' => 1]) }}" class="list-group-item">
+					الفتاوى
+				</a>
+
+				<a href="{{ route('fatwas.index', ['type' => 2]) }}" class="list-group-item">
+					الاسئلة الشائعة
+				</a>
 
 			</ul>
 	  </div>
