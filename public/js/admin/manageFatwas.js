@@ -3648,11 +3648,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addFatwa__ = __webpack_require__(182);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__addFatwa___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__addFatwa__);
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addFatwaTranslation__ = __webpack_require__(185);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addFatwaTranslation___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__addFatwaTranslation__);
 //
 //
 //
@@ -3723,7 +3720,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-// import addFatwaTranslation from './addFatwaTranslation';
+
 // import editFatwa from './editFatwa';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3759,8 +3756,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     components: {
-        addFatwa: __WEBPACK_IMPORTED_MODULE_0__addFatwa___default.a
-        // addFatwaTranslation,
+        addFatwa: __WEBPACK_IMPORTED_MODULE_0__addFatwa___default.a,
+        addFatwaTranslation: __WEBPACK_IMPORTED_MODULE_1__addFatwaTranslation___default.a
         // editFatwa
     }
 });
@@ -3874,22 +3871,6 @@ var render = function() {
                                           })
                                         ]
                                       )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", [
-                                      !translation.published
-                                        ? _c("i", {
-                                            staticClass: "fa fa-close red",
-                                            attrs: { "aria-hidden": "true" }
-                                          })
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      translation.published
-                                        ? _c("i", {
-                                            staticClass: "fa fa-check green",
-                                            attrs: { "aria-hidden": "true" }
-                                          })
-                                        : _vm._e()
                                     ])
                                   ])
                                 : _vm._e()
@@ -3987,7 +3968,11 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c("add-fatwa", { attrs: { type: _vm.type, locales: _vm.locales } })
+      _c("add-fatwa", { attrs: { type: _vm.type, locales: _vm.locales } }),
+      _vm._v(" "),
+      _c("add-fatwa-translation", {
+        attrs: { type: _vm.type, locales: _vm.locales }
+      })
     ],
     1
   )
@@ -4169,7 +4154,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        onPostCreate: function onPostCreate() {
+        onFatwaCreate: function onFatwaCreate() {
             this.addFatwaForm.post('/admincp/fatwas').then(function (response) {
                 return eventBus.$emit('fatwaAdded', response);
             });
@@ -4289,7 +4274,7 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      _vm.onPostCreate($event)
+                      _vm.onFatwaCreate($event)
                     },
                     keydown: function($event) {
                       _vm.addFatwaForm.errors.clear($event.target.name)
@@ -4580,6 +4565,599 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-bdfe7ed8", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 185:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(186)
+/* template */
+var __vue_template__ = __webpack_require__(187)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\admin\\components\\fatwas\\addFatwaTranslation.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-f0f98da6", Component.options)
+  } else {
+    hotAPI.reload("data-v-f0f98da6", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 186:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_trumbowyg__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_trumbowyg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_trumbowyg__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_trumbowyg_dist_ui_trumbowyg_css__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_trumbowyg_dist_ui_trumbowyg_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_trumbowyg_dist_ui_trumbowyg_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_select__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_select___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vue_select__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['locales', 'type'],
+    data: function data() {
+        return {
+            addTranslationForm: new Form({
+                type: '',
+                locale: '',
+                question: '',
+                answer: '',
+                scholar_id: '',
+                tags: '',
+                notFilteredTags: '',
+                notFilteredScholar: ''
+            }),
+            tags: [],
+            scholars: [],
+            fatwa_id: ''
+        };
+    },
+
+    methods: {
+        onPostCreate: function onPostCreate() {
+            this.addTranslationForm.post('/admincp/fatwas/' + this.fatwa_id).then(function (response) {
+                return eventBus.$emit('fatwaAdded', response);
+            });
+        },
+        addFatwaTranslationModal: function addFatwaTranslationModal(fatwa, key) {
+            this.addTranslationForm.type = fatwa.type;
+            this.addTranslationForm.notFilteredTags = fatwa.tags;
+            this.addTranslationForm.notFilteredScholar = fatwa.scholar;
+            this.fatwa_id = fatwa.id;
+            this.addTranslationForm.locale = key;
+            $('#addTranslationForm').modal('show');
+        },
+        searchScholars: function searchScholars(search, loading) {
+            loading(true);
+            this.getScholars(search, loading, this);
+        },
+
+        getScholars: __WEBPACK_IMPORTED_MODULE_2_lodash___default.a.debounce(function (search, loading, vm) {
+            axios.get('/admincp/search/scholars/' + search).then(function (resp) {
+                vm.scholars = resp.data;
+                loading(false);
+            });
+        }, 1000),
+        searchTags: function searchTags(search, loading) {
+            loading(true);
+            this.getTags(search, loading, this);
+        },
+
+        getTags: __WEBPACK_IMPORTED_MODULE_2_lodash___default.a.debounce(function (search, loading, vm) {
+            axios.get('/admincp/search/tags/' + search).then(function (resp) {
+                vm.tags = resp.data;
+                loading(false);
+            });
+        }, 1000)
+    },
+    watch: {
+        "addTranslationForm.notFilteredTags": function addTranslationFormNotFilteredTags(val) {
+            this.addTranslationForm.tags = [];
+            this.addTranslationForm.errors.clear('tags');
+            for (var i = 0; i < val.length; i++) {
+                this.addTranslationForm.tags.unshift(val[i].id);
+            }
+        },
+        "addTranslationForm.notFilteredScholar": function addTranslationFormNotFilteredScholar(val) {
+            this.addTranslationForm.errors.clear('scholar_id');
+            val ? this.addTranslationForm.scholar_id = val.id : this.addTranslationForm.scholar_id = '';
+        }
+    },
+    components: {
+        trumbowyg: __WEBPACK_IMPORTED_MODULE_0_vue_trumbowyg___default.a,
+        vSelect: __WEBPACK_IMPORTED_MODULE_3_vue_select___default.a
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        eventBus.$on('addFatwaTranslation', function (fatwa, key) {
+            return _this.addFatwaTranslationModal(fatwa, key);
+        });
+    }
+});
+
+/***/ }),
+
+/***/ 187:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "addTranslationForm",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "myModalLabel"
+      }
+    },
+    [
+      _c(
+        "div",
+        { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("span", { staticClass: "form-control-static text-center" }, [
+                _vm.type == 1
+                  ? _c(
+                      "h4",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "myModalLabel" }
+                      },
+                      [_vm._v(" اضافة ترجمة فتوى ")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.type == 2
+                  ? _c(
+                      "h4",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "myModalLabel" }
+                      },
+                      [_vm._v(" اضافة ترجمة سؤال شائع ")]
+                    )
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c(
+                "form",
+                {
+                  attrs: { method: "POST", action: "/" },
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      _vm.onPostCreate($event)
+                    },
+                    keydown: function($event) {
+                      _vm.addTranslationForm.errors.clear($event.target.name)
+                    },
+                    change: function($event) {
+                      _vm.addTranslationForm.errors.clear($event.target.name)
+                    },
+                    input: function($event) {
+                      _vm.addTranslationForm.errors.clear($event.target.name)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      { staticClass: "label", attrs: { for: "locale" } },
+                      [_vm._v("اللغة:")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.addTranslationForm.locale,
+                            expression: "addTranslationForm.locale"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "locale", name: "locale", disabled: "" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.addTranslationForm,
+                              "locale",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      _vm._l(_vm.locales, function(locale, key) {
+                        return _c("option", { domProps: { value: key } }, [
+                          _vm._v(_vm._s(locale.native))
+                        ])
+                      })
+                    ),
+                    _vm._v(" "),
+                    _vm.addTranslationForm.errors.has("locale")
+                      ? _c("span", {
+                          staticClass: "alert-danger",
+                          domProps: {
+                            textContent: _vm._s(
+                              _vm.addTranslationForm.errors.get("locale")
+                            )
+                          }
+                        })
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      { staticClass: "label", attrs: { for: "question" } },
+                      [_vm._v("السؤال:")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.addTranslationForm.question,
+                          expression: "addTranslationForm.question"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", id: "question", name: "question" },
+                      domProps: { value: _vm.addTranslationForm.question },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.addTranslationForm,
+                            "question",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.addTranslationForm.errors.has("question")
+                      ? _c("span", {
+                          staticClass: "alert-danger",
+                          domProps: {
+                            textContent: _vm._s(
+                              _vm.addTranslationForm.errors.get("question")
+                            )
+                          }
+                        })
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c(
+                        "label",
+                        { staticClass: "label", attrs: { for: "answer" } },
+                        [_vm._v("الاجابة:")]
+                      ),
+                      _vm._v(" "),
+                      _c("trumbowyg", {
+                        attrs: { name: "addTranslationForm.answer" },
+                        model: {
+                          value: _vm.addTranslationForm.answer,
+                          callback: function($$v) {
+                            _vm.$set(_vm.addTranslationForm, "answer", $$v)
+                          },
+                          expression: "addTranslationForm.answer"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.addTranslationForm.errors.has("answer")
+                        ? _c("span", {
+                            staticClass: "alert-danger",
+                            domProps: {
+                              textContent: _vm._s(
+                                _vm.addTranslationForm.errors.get("answer")
+                              )
+                            }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _vm.type == 1
+                    ? _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "label",
+                              attrs: { for: "scholar_id" }
+                            },
+                            [_vm._v("صاحب الفتوى (العالم):")]
+                          ),
+                          _vm._v(" "),
+                          _c("v-select", {
+                            attrs: {
+                              label: "name",
+                              "on-search": _vm.searchScholars,
+                              options: _vm.scholars,
+                              placeholder: "اكتب اسم المجموعة للبحث",
+                              id: "scholar_id",
+                              name: "scholar_id"
+                            },
+                            model: {
+                              value: _vm.addTranslationForm.notFilteredScholar,
+                              callback: function($$v) {
+                                _vm.$set(
+                                  _vm.addTranslationForm,
+                                  "notFilteredScholar",
+                                  $$v
+                                )
+                              },
+                              expression:
+                                "addTranslationForm.notFilteredScholar"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.addTranslationForm.errors.has("scholar_id")
+                            ? _c("span", {
+                                staticClass: "alert-danger",
+                                domProps: {
+                                  textContent: _vm._s(
+                                    _vm.addTranslationForm.errors.get(
+                                      "scholar_id"
+                                    )
+                                  )
+                                }
+                              })
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c(
+                        "label",
+                        { staticClass: "label", attrs: { for: "tags" } },
+                        [_vm._v("تصنيفات السؤال:")]
+                      ),
+                      _vm._v(" "),
+                      _c("v-select", {
+                        attrs: {
+                          label: "name",
+                          placeholder: "اكتب الاسم للبحث",
+                          "on-search": _vm.searchTags,
+                          multiple: "",
+                          options: _vm.tags,
+                          id: "tags",
+                          name: "tags[]"
+                        },
+                        model: {
+                          value: _vm.addTranslationForm.notFilteredTags,
+                          callback: function($$v) {
+                            _vm.$set(
+                              _vm.addTranslationForm,
+                              "notFilteredTags",
+                              $$v
+                            )
+                          },
+                          expression: "addTranslationForm.notFilteredTags"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.addTranslationForm.errors.has("tags")
+                        ? _c("span", {
+                            staticClass: "alert-danger",
+                            domProps: {
+                              textContent: _vm._s(
+                                _vm.addTranslationForm.errors.get("tags")
+                              )
+                            }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group text-center" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "button btn-lg btn-success",
+                        attrs: { disabled: _vm.addTranslationForm.errors.any() }
+                      },
+                      [_vm._v("اضافة ترجمة")]
+                    )
+                  ])
+                ]
+              )
+            ])
+          ])
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-f0f98da6", module.exports)
   }
 }
 

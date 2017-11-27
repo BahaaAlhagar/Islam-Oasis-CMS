@@ -25,7 +25,7 @@ class storeFatwaRequest extends FormRequest
     {
         return [
             'type' => 'required|integer',
-            'scholar_id' => 'required_if:type,1|exists:scholars,id',
+            'scholar_id' => 'nullable|required_if:type,1|exists:scholars,id',
             'locale' => 'required|string',
             'question' => 'required|string',
             'answer' => 'required|string',

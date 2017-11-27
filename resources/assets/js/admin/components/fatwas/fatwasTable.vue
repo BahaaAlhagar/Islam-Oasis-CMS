@@ -33,11 +33,6 @@
                                 <button @click="deleteTranslation(translation)" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
 
                             </div>
-                            <!-- translation publishing status -->
-                            <div>
-                                <i v-if="!translation.published"class="fa fa-close red" aria-hidden="true"></i>
-                                <i v-if="translation.published"class="fa fa-check green" aria-hidden="true"></i>
-                            </div>
                         </span>
                         <span v-if="!localeCheck(key, fatwa)">
                              <button @click="addTranslation(fatwa, key)" class="btn btn-success">اضافة ترجمة</button>
@@ -64,7 +59,7 @@
             </tbody>
         </table>
         <add-fatwa :type="type" :locales="locales"></add-fatwa>
-        <!-- <add-fatwa-translation :type="type" :locales="locales"></add-fatwa-translation> -->
+        <add-fatwa-translation :type="type" :locales="locales"></add-fatwa-translation>
         <!-- <edit-fatwa :type="type" :locales="locales"></edit-fatwa> -->
     </div>
 </template>
@@ -73,7 +68,7 @@
 <script>
 
     import addFatwa from './addFatwa';
-    // import addFatwaTranslation from './addFatwaTranslation';
+    import addFatwaTranslation from './addFatwaTranslation';
     // import editFatwa from './editFatwa';
 
 	export default {
@@ -108,7 +103,7 @@
         },
         components: {
             addFatwa,
-            // addFatwaTranslation,
+            addFatwaTranslation,
             // editFatwa
         }
     }

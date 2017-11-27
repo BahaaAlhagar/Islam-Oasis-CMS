@@ -48,6 +48,7 @@ class FatwaController extends Controller
     {
         if($fatwa)
         {
+            $fatwa->update($request->only('scholar_id', 'type'));
             $fatwa->translations()->create($request->only('locale', 'question', 'answer'));
             $fatwa->tags()->sync(array_unique($request->tags));
 
