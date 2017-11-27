@@ -22,9 +22,4 @@ class Fatwa extends Model
     {
         return $this->morphToMany(Tag::class, 'taggable');
     }
-
-    public function photo()
-    {
-        return $this->morphOne(Photo::class, 'photoable');
-    }
 }

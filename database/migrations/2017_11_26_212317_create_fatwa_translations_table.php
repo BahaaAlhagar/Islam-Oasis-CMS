@@ -20,7 +20,7 @@ class CreateFatwaTranslationsTable extends Migration
             $table->string('locale')->index();
             $table->string('question');
             $table->string('slug')->index()->unique();
-            $table->string('answer');
+            $table->text('answer');
         });
     }
 
