@@ -4100,7 +4100,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             tags: [],
             scholars: [],
             notFilteredTags: [],
-            notFilteredScholar: []
+            notFilteredScholar: ''
         };
     },
 

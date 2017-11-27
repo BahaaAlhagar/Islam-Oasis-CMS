@@ -96,7 +96,7 @@
                     tags: [],
                     scholars: [],
                     notFilteredTags: [],
-                    notFilteredScholar: []
+                    notFilteredScholar: ''
                 };
         },
         methods: {

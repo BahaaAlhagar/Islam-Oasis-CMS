@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Fatwa;
 use App\FatwaTranslation;
+use App\Http\Requests\storeFatwaRequest;
 use Illuminate\Http\Request;
 
 class FatwaController extends Controller
@@ -40,24 +41,22 @@ class FatwaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\storeFatwaRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Fatwa $fatwa = null)
+    public function store(storeFatwaRequest $request, Fatwa $fatwa = null)
     {
-        $tags = array_column($request->tags, 'tag_id');
-
         if($fatwa)
         {
-            $fatwa->translations()->create($request->except('type', 'tags'));
-            $fatwa->tags()->sync($tags);
+            $fatwa->translations()->create($request->except('type', 'scholar_id', 'tags'));
+            $fatwa->tags()->sync(array_unique($request->tags));
 
             return ['message' => 'تم اضافة الترجمة بنجاح'];
         }
         
-        $fatwa->create($request->only('type'));
-        $fatwa->translations()->create($request->except('type', 'tags'));
-        $fatwa->tags()->attach($tags);
+        $fatwa = Fatwa::create($request->only('type'));
+        $fatwa->translations()->create($request->except('type', 'scholar_id', 'tags'));
+        $fatwa->tags()->attach(array_unique($request->tags));
 
         return ['message' => 'تمت الاضافة بنجاح'];
     }
@@ -65,11 +64,11 @@ class FatwaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\storeFatwaRequest  $request
      * @param  \App\Fatwa  $fatwa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Fatwa $fatwa)
+    public function update(storeFatwaRequest $request, Fatwa $fatwa)
     {
         $tags = array_column($request->tags, 'tag_id');
 
