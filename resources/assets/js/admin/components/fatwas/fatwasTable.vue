@@ -44,7 +44,7 @@
                 </tr>
             </tbody>
         </table>
-        <!-- <add-fatwa :type="type" :locales="locales"></add-fatwa> -->
+        <add-fatwa :type="type" :locales="locales"></add-fatwa>
         <!-- <add-fatwa-translation :type="type" :locales="locales"></add-fatwa-translation> -->
         <!-- <edit-fatwa :type="type" :locales="locales"></edit-fatwa> -->
     </div>
@@ -53,7 +53,7 @@
 
 <script>
 
-    // import addFatwa from './addFatwa';
+    import addFatwa from './addFatwa';
     // import addFatwaTranslation from './addFatwaTranslation';
     // import editFatwa from './editFatwa';
 
@@ -87,10 +87,10 @@
                 }
             }
         },
-        /*components: {
+        components: {
             addFatwa,
-            addFatwaTranslation,
-            editFatwa
-        }*/
+            // addFatwaTranslation,
+            // editFatwa
+        }
     }
 </script>
