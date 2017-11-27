@@ -71,13 +71,13 @@ class FatwaController extends Controller
      */
     public function update(storeFatwaRequest $request, Fatwa $fatwa)
     {
-        $tags = array_column($request->tags, 'tag_id');
 
         $fatwa->update([
-            $request->locale => ['title' => $request->title, 'content' => $request->content, 'published' => $request->published]
+            'scholar_id' => $request->scholar_id,
+            $request->locale => ['question' => $request->question, 'answer' => $request->answer]
             ]);
 
-        $fatwa->tags()->sync($tags);
+        $fatwa->tags()->sync(array_unique($request->tags));
 
         return ['message' => 'تم التحديث بنجاح'];
     }

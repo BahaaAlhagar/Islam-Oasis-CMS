@@ -60,7 +60,7 @@
         </table>
         <add-fatwa :type="type" :locales="locales"></add-fatwa>
         <add-fatwa-translation :type="type" :locales="locales"></add-fatwa-translation>
-        <!-- <edit-fatwa :type="type" :locales="locales"></edit-fatwa> -->
+        <edit-fatwa :type="type" :locales="locales"></edit-fatwa>
     </div>
 </template>
 
@@ -69,7 +69,7 @@
 
     import addFatwa from './addFatwa';
     import addFatwaTranslation from './addFatwaTranslation';
-    // import editFatwa from './editFatwa';
+    import editFatwa from './editFatwa';
 
 	export default {
         props: ['fatwas', 'locales', 'type'],
@@ -104,7 +104,7 @@
         components: {
             addFatwa,
             addFatwaTranslation,
-            // editFatwa
+            editFatwa
         }
     }
 </script>
