@@ -25,6 +25,10 @@ route::group(['prefix' => 'admincp', 'middleware' => ['auth', 'admin', 'adminDef
 
 route::view('/', 'admin/adminIndex');
 
+// change password
+Route::view('changepassword', 'user\changePassword')->name('password.change');
+Route::post('changepassword', 'Auth\UpdatePasswordController@update');
+
 
 // search routes
 route::get('search/tags/{q}', 'SearchController@tags');

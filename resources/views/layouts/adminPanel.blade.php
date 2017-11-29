@@ -57,6 +57,11 @@
 
                                 <ul class="dropdown-menu">
                                     <li>
+                                        <a href="{{ route('password.change') }}">
+                                            تغير كلمة المرور
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -106,8 +111,6 @@
     
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="{{ URL::asset('js/ie10-viewport-bug-workaround.js') }}"></script>
-
-    <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 
 
     <!-- webpack vendor packages -->
