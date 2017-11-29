@@ -5124,6 +5124,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -5158,6 +5159,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         deleteScholar: function deleteScholar(scholar) {
             if (confirm('هل انت متأكد من حذف هذا العالم')) {
                 axios.delete(window.location.pathname + '/' + scholar.id).then(function (response) {
+                    return eventBus.$emit('scholarDeleted', response);
+                });
+            }
+        },
+        deleteImage: function deleteImage(photo) {
+            if (confirm('هل انت متأكد من حذف هذه الصورة؟ لن تتمكن من استرجاعها.')) {
+                axios.delete('/admincp/photos/' + photo.id).then(function (response) {
                     return eventBus.$emit('scholarDeleted', response);
                 });
             }
@@ -7205,7 +7213,27 @@ var render = function() {
                             }
                           },
                           [_vm._v("تعديل الصورة")]
-                        )
+                        ),
+                        _vm._v(" "),
+                        scholar.photo
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                on: {
+                                  click: function($event) {
+                                    _vm.deleteImage(scholar.photo)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fa fa-trash-o",
+                                  attrs: { "aria-hidden": "true" }
+                                })
+                              ]
+                            )
+                          : _vm._e()
                       ]),
                       _vm._v(" "),
                       _c("td", [

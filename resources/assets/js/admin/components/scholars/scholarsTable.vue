@@ -38,6 +38,7 @@
                         <img v-if="!scholar.photo" src="/storage/scholar.png" width="50" height="50">
                         <img v-else :src="'/storage/' + scholar.photo.thumbnail" width="50" height="50">
                         <button class="btn btn-success" @click="changeImage(scholar)">تعديل الصورة</button>
+                        <button v-if="scholar.photo" class="btn btn-danger" @click="deleteImage(scholar.photo)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                     </td>
                     <td>
                         <button @click="deleteScholar(scholar)" class="btn btn-danger">حذف العــالــم</button>
@@ -86,6 +87,12 @@
             deleteScholar(scholar){
                 if(confirm('هل انت متأكد من حذف هذا العالم')){
                     axios.delete(window.location.pathname + '/' + scholar.id)
+                        .then(response => eventBus.$emit('scholarDeleted', response));
+                }
+            },
+            deleteImage(photo){
+                if(confirm('هل انت متأكد من حذف هذه الصورة؟ لن تتمكن من استرجاعها.')){
+                    axios.delete(`/admincp/photos/${photo.id}`)
                         .then(response => eventBus.$emit('scholarDeleted', response));
                 }
             },

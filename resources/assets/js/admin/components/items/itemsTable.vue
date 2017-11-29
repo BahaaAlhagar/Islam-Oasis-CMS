@@ -49,7 +49,8 @@
                     <td>
                         <img v-if="!item.photo" src="/storage/item.png" width="50" height="50">
                         <img v-else :src="'/storage/' + item.photo.thumbnail" width="50" height="50">
-                        <button class="btn btn-success" @click="changeImage(item)">تعديل الصورة</button>
+                        <button class="btn btn-success" @click="changeImage(item)">تعديل</button>
+                        <button v-if="item.photo" class="btn btn-danger" @click="deleteImage(item.photo)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                     </td>
                     <td>
                         <div v-for="scholar in item.scholars">
@@ -148,6 +149,12 @@
             },
             changeImage(item){
                 eventBus.$emit('imageUploader', item);
+            },
+            deleteImage(photo){
+                if(confirm('هل انت متأكد من حذف هذه الصورة؟ لن تتمكن من استرجاعها.')){
+                    axios.delete(`/admincp/photos/${photo.id}`)
+                        .then(response => eventBus.$emit('itemDeleted', response));
+                }
             },
             createLink(item){
                 eventBus.$emit('addLink', item);

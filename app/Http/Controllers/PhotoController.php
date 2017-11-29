@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Image;
 use App\Item;
+use App\Photo;
 use App\Series;
 use App\Scholar;
 use App\Http\Requests\validatePhotoRequest;
@@ -118,5 +119,15 @@ class PhotoController extends Controller
 
             return $storedFiles;
         }
+    }
+
+    public function destroy(Photo $photo)
+    {
+        storage::delete('public/'.$photo->link);
+        storage::delete('public/'.$photo->thumbnail);
+
+        $photo->delete();
+
+        return ['message' => 'تم حذف الصورة.'];
     }
 }

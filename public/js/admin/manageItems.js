@@ -22365,6 +22365,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -22407,6 +22408,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         changeImage: function changeImage(item) {
             eventBus.$emit('imageUploader', item);
+        },
+        deleteImage: function deleteImage(photo) {
+            if (confirm('هل انت متأكد من حذف هذه الصورة؟ لن تتمكن من استرجاعها.')) {
+                axios.delete('/admincp/photos/' + photo.id).then(function (response) {
+                    return eventBus.$emit('itemDeleted', response);
+                });
+            }
         },
         createLink: function createLink(item) {
             eventBus.$emit('addLink', item);
@@ -25743,8 +25751,28 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("تعديل الصورة")]
-                        )
+                          [_vm._v("تعديل")]
+                        ),
+                        _vm._v(" "),
+                        item.photo
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                on: {
+                                  click: function($event) {
+                                    _vm.deleteImage(item.photo)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fa fa-trash-o",
+                                  attrs: { "aria-hidden": "true" }
+                                })
+                              ]
+                            )
+                          : _vm._e()
                       ]),
                       _vm._v(" "),
                       _c(

@@ -30,6 +30,10 @@ Route::view('changepassword', 'user\changePassword')->name('password.change');
 Route::post('changepassword', 'Auth\UpdatePasswordController@update');
 
 
+// photo
+Route::delete('photos/{photo}', 'PhotoController@destroy');
+
+
 // search routes
 route::get('search/tags/{q}', 'SearchController@tags');
 route::get('search/series/{q}/{type?}', 'SearchController@series');

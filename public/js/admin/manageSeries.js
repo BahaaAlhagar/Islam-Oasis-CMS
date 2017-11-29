@@ -5195,6 +5195,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -5229,6 +5230,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         deleteSeries: function deleteSeries(serie) {
             if (confirm('هل انت متأكد من حذف هذه المجموعة')) {
                 axios.delete(window.location.pathname + '/' + serie.id).then(function (response) {
+                    return eventBus.$emit('seriesDeleted', response);
+                });
+            }
+        },
+        deleteImage: function deleteImage(photo) {
+            if (confirm('هل انت متأكد من حذف هذه الصورة؟ لن تتمكن من استرجاعها.')) {
+                axios.delete('/admincp/photos/' + photo.id).then(function (response) {
                     return eventBus.$emit('seriesDeleted', response);
                 });
             }
@@ -7967,7 +7975,27 @@ var render = function() {
                             }
                           },
                           [_vm._v("تعديل الصورة")]
-                        )
+                        ),
+                        _vm._v(" "),
+                        serie.photo
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                on: {
+                                  click: function($event) {
+                                    _vm.deleteImage(serie.photo)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fa fa-trash-o",
+                                  attrs: { "aria-hidden": "true" }
+                                })
+                              ]
+                            )
+                          : _vm._e()
                       ]),
                       _vm._v(" "),
                       _c(

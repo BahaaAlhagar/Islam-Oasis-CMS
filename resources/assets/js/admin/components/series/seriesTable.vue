@@ -44,6 +44,7 @@
                         <img v-if="!serie.photo" src="/storage/series.jpg" width="50" height="50">
                         <img v-else :src="'/storage/' + serie.photo.thumbnail" width="50" height="50">
                         <button class="btn btn-success" @click="changeImage(serie)">تعديل الصورة</button>
+                        <button v-if="serie.photo" class="btn btn-danger" @click="deleteImage(serie.photo)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                     </td>
                     <td>
                         <div v-for="scholar in serie.scholars">
@@ -108,6 +109,12 @@
             deleteSeries(serie){
                 if(confirm('هل انت متأكد من حذف هذه المجموعة')){
                     axios.delete(window.location.pathname + '/' + serie.id)
+                        .then(response => eventBus.$emit('seriesDeleted', response));
+                }
+            },
+            deleteImage(photo){
+                if(confirm('هل انت متأكد من حذف هذه الصورة؟ لن تتمكن من استرجاعها.')){
+                    axios.delete(`/admincp/photos/${photo.id}`)
                         .then(response => eventBus.$emit('seriesDeleted', response));
                 }
             },
