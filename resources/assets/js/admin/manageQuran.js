@@ -16,7 +16,6 @@ const manageQuran = new Vue({
         current_view: '',
         qurans: [],
         scholars: [],
-        recitations: [],
         resource_url: window.location.pathname,
             options: {
                   remote_data: 'qurans.data',
@@ -48,7 +47,6 @@ const manageQuran = new Vue({
     	assignData(response){
         this.qurans = response.data.qurans.data;
         this.scholars = response.data.scholars;
-    		this.recitations = response.data.recitations;
     	},
       reloadData(){
         this.$refs.VP.fetchData(this.resource_url + '?page=' + this.$refs.VP.current_page);

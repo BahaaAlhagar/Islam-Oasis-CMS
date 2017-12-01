@@ -52,8 +52,8 @@
                 </tr>
             </tbody>
         </table>
-        <add-quran :locales="locales" :recitations="recitations" :scholars="scholars"></add-quran>
-        <edit-quran :locales="locales" :recitations="recitations" :scholars="scholars"></edit-quran>
+        <add-quran :locales="locales"></add-quran>
+        <edit-quran :locales="locales"></edit-quran>
     </div>
 </template>
 
@@ -64,7 +64,7 @@
     import editQuran from './editQuran';
 
 	export default {
-        props: ['qurans', 'locales', 'scholars', 'recitations'],
+        props: ['qurans', 'locales'],
         methods: {
             editQuran(quran){
                 eventBus.$emit('editQuran', quran);

@@ -30,8 +30,7 @@
                         <div class="form-group">
                             <label for="scholar_id" class="label">القارئ:</label>
                             
-                            <v-select label="name" 
-                            @input="form.errors.clear('scholar_id')" :options="scholars" id="scholar_id" name="scholar_id" v-model="form.scholar" ></v-select>
+                            <v-select label="name" :on-search="searchScholars" :options="scholars" placeholder="اكتب اسم للبحث" id="scholar_id" name="scholar_id" v-model="form.notFilteredScholar" ></v-select>
 
                             <span class="alert-danger" v-if="form.errors.has('scholar_id')" v-text="form.errors.get('scholar_id')"></span>
                         </div>
@@ -39,8 +38,7 @@
                         <div class="form-group">
                             <label for="recitation_id" class="label">التلاوة:</label>
                             
-                            <v-select label="name" 
-                            @input="form.errors.clear('recitation_id')" :options="recitations" id="recitation_id" name="recitation_id" v-model="form.recitation" ></v-select>
+                            <v-select label="name" :on-search="searchRecitations" :options="recitations" placeholder="اكتب اسم للبحث" id="recitation_id" name="recitation_id" v-model="form.notFilteredRecitation" ></v-select>
 
                             <span class="alert-danger" v-if="form.errors.has('recitation_id')" v-text="form.errors.get('recitation_id')"></span>
                         </div>
@@ -65,9 +63,10 @@
 
 <script>
     import vSelect from "vue-select";
+    import _ from 'lodash';
 
 	export default {
-        props: ['locales', 'recitations', 'scholars'],
+        props: ['locales'],
         data() {
             return {
                 form: new Form({
@@ -75,16 +74,17 @@
                     url: '',
                     scholar_id: '',
                     recitation_id: '',
-                    scholar: null,
-                    recitation: null
+                    notFilteredScholar: '',
+                    notFilteredRecitation: ''
                     }),
-                    
+                    scholars: [],
+                    recitations: [],
                 };
             },
         methods: {
-        onQuranCreate() {
-            this.form.post('/admincp/quran')
-                .then(response => eventBus.$emit('quranAdded', response));
+            onQuranCreate() {
+                this.form.post('/admincp/quran')
+                    .then(response => eventBus.$emit('quranAdded', response));
             },
             addQuranModal(){
                 this.form.name = {};
@@ -92,13 +92,35 @@
             },
             nameKey(key){
                 return 'name.' + key;
-            }
+            },
+            searchScholars(search, loading){
+                loading(true);
+                this.getScholars(search, loading, this);
+                },
+            getScholars: _.debounce((search, loading, vm) => {
+                    axios.get(`/admincp/search/scholars/${search}`)
+                        .then(resp => {
+                           vm.scholars = resp.data
+                           loading(false)
+                        })
+                }, 1000),
+            searchRecitations(search, loading){
+                loading(true);
+                this.getRecitations(search, loading, this);
+                },
+            getRecitations: _.debounce((search, loading, vm) => {
+                    axios.get(`/admincp/search/recitations/${search}`)
+                        .then(resp => {
+                           vm.recitations = resp.data
+                           loading(false)
+                        })
+                }, 1000)
         },
-          watch: {
-            'form.scholar': function(val) {
+        watch: {
+            'form.notFilteredScholar': function(val) {
                 val ? this.form.scholar_id = val.id : this.form.scholar_id = '';
             },
-            'form.recitation': function(val) {
+            'form.notFilteredRecitation': function(val) {
                 val ? this.form.recitation_id = val.id : this.form.recitation_id = ''
             }
         },

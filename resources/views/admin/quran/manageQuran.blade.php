@@ -26,7 +26,7 @@
 		</span>
 
 
-		<quran-table :qurans="qurans" :scholars="scholars" :recitations="recitations" :locales="{{ json_encode(LaravelLocalization::getSupportedLocales()) }}"></quran-table>
+		<quran-table :qurans="qurans" :locales="{{ json_encode(LaravelLocalization::getSupportedLocales()) }}"></quran-table>
 
         <v-paginator class="text-center" v-show="qurans.length" :options="options" ref="VP" :resource_url="resource_url" @update="updateResource"></v-paginator>
 

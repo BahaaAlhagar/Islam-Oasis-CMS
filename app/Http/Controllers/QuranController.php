@@ -35,14 +35,10 @@ class QuranController extends Controller
                     ->with('translations', 'link', 'recitation', 'scholar')
                     ->paginate(10);
         }
-        
-        $scholars = Scholar::translatedIn(config('translatable.locale'))
-                                        ->get();
 
-        $recitations = Recitation::translatedIn(config('translatable.locale'))
-                                        ->get();
+        $scholars = Scholar::TranslatedIn(config('translatable.locale'))->get();
 
-        return $this->makeResponse('admin/quran/manageQuran', compact('qurans', 'scholars', 'recitations'));
+        return $this->makeResponse('admin/quran/manageQuran', compact('qurans', 'scholars'));
     }
 
     /**

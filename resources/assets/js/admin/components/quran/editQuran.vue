@@ -30,8 +30,7 @@
                         <div class="form-group">
                             <label for="scholar_id" class="label">القارئ:</label>
                             
-                            <v-select label="name" 
-                            @input="editForm.errors.clear('scholar_id')" :options="scholars" id="scholar_id" name="scholar_id" v-model="editForm.scholar" ></v-select>
+                            <v-select label="name" :on-search="searchScholars" :options="scholars" placeholder="اكتب اسم للبحث" id="scholar_id" name="scholar_id" v-model="editForm.notFilteredScholar" ></v-select>
 
                             <span class="alert-danger" v-if="editForm.errors.has('scholar_id')" v-text="editForm.errors.get('scholar_id')"></span>
                         </div>
@@ -39,8 +38,7 @@
                         <div class="form-group">
                             <label for="recitation_id" class="label">التلاوة:</label>
                             
-                            <v-select label="name" 
-                            @input="editForm.errors.clear('recitation_id')" :options="recitations" id="recitation_id" name="recitation_id" v-model="editForm.recitation" ></v-select>
+                            <v-select label="name" :on-search="searchRecitations" :options="recitations" placeholder="اكتب اسم للبحث" id="recitation_id" name="recitation_id" v-model="editForm.notFilteredRecitation" ></v-select>
 
                             <span class="alert-danger" v-if="editForm.errors.has('recitation_id')" v-text="editForm.errors.get('recitation_id')"></span>
                         </div>
@@ -64,10 +62,11 @@
 </template>
 
 <script>
-    import vSelect from "vue-select"
+    import vSelect from "vue-select";
+    import _ from 'lodash';
 
 	export default {
-        props: ['locales', 'recitations', 'scholars'],
+        props: ['locales'],
         data() {
             return {
                 editForm: new Form({
@@ -75,9 +74,11 @@
                     url: '',
                     scholar_id: '',
                     recitation_id: '',
-                    scholar: null,
-                    recitation: null
+                    notFilteredScholar: '',
+                    notFilteredRecitation: ''
                     }),
+                    scholars: [],
+                    recitations: [],
                     quran_id: ''
                 };
             },
@@ -95,9 +96,9 @@
                 }
 
                 this.quran_id = quran.id;
-                this.editForm.scholar = quran.scholar;
+                this.editForm.notFilteredScholar = quran.scholar;
                 // this.editForm.scholar_id = quran.scholar.id;
-                this.editForm.recitation = quran.recitation;
+                this.editForm.notFilteredRecitation = quran.recitation;
                 // this.editForm.recitation_id = quran.recitation.id;
                 quran.link ? this.editForm.url = quran.link.url : this.editForm.url = '';
 
@@ -105,13 +106,35 @@
             },
             nameKey(key){
                 return 'name.' + key;
-            }
+            },
+            searchScholars(search, loading){
+                loading(true);
+                this.getScholars(search, loading, this);
+                },
+            getScholars: _.debounce((search, loading, vm) => {
+                    axios.get(`/admincp/search/scholars/${search}`)
+                        .then(resp => {
+                           vm.scholars = resp.data
+                           loading(false)
+                        })
+                }, 1000),
+            searchRecitations(search, loading){
+                loading(true);
+                this.getRecitations(search, loading, this);
+                },
+            getRecitations: _.debounce((search, loading, vm) => {
+                    axios.get(`/admincp/search/recitations/${search}`)
+                        .then(resp => {
+                           vm.recitations = resp.data
+                           loading(false)
+                        })
+                }, 1000)
         },
           watch: {
-            'editForm.scholar': function(val) {
+            'editForm.notFilteredScholar': function(val) {
                 val ? this.editForm.scholar_id = val.id : this.editForm.scholar_id = '';
             },
-            'editForm.recitation': function(val) {
+            'editForm.notFilteredRecitation': function(val) {
                 val ? this.editForm.recitation_id = val.id : this.editForm.recitation_id = ''
             }
         },
