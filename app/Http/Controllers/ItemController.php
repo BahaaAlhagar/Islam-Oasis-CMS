@@ -56,7 +56,7 @@ class ItemController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function storeTranslation(storeItemTranslationRequest $request, Item $item)
+    public function storeTranslation(storeItemRequest $request, Item $item)
     {
         $item->translations()->create($request->all());
 

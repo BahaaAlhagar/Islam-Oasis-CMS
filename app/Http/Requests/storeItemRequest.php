@@ -24,11 +24,11 @@ class storeItemRequest extends FormRequest
     public function rules()
     {
         return [
-            'type' => 'required|integer',
-            'series_id' => 'nullable|exists:series,id|required_without:scholars,tags',
-            'order' => 'nullable|required_with:series_id|integer',
-            'scholars' => 'required_without:series_id|exists:scholars,id',
-            'tags' => 'required_without:series_id|exists:tags,id',
+            'type' => 'sometimes|required|integer',
+            'series_id' => 'sometimes|nullable|exists:series,id|required_without:scholars,tags',
+            'order' => 'sometimes|nullable|required_with:series_id|integer',
+            'scholars' => 'sometimes|required_without:series_id|exists:scholars,id',
+            'tags' => 'sometimes|required_without:series_id|exists:tags,id',
             'locale' => 'required|string',
             'name' => 'required|string',
             'language' => 'required|string',

@@ -9,3 +9,7 @@
 @section('content')
 مرحبا بك فى لوحة التحكم.
 @endsection
+
+@section('js')
+	<script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+@endsection
