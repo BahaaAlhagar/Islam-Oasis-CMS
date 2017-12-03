@@ -7627,6 +7627,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -9551,6 +9562,12 @@ var render = function() {
                       ])
                     }),
                     _vm._v(" "),
+                    _c("th", [
+                      _vm._v(
+                        "\n                        التصنيفات\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
                     _c("th")
                   ],
                   2
@@ -9654,6 +9671,23 @@ var render = function() {
                           2
                         )
                       }),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        _vm._l(post.tags, function(tag) {
+                          return _c("div", [
+                            _c("span", { staticClass: "alert-success" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(tag.name) +
+                                  "\n                            "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("hr")
+                          ])
+                        })
+                      ),
                       _vm._v(" "),
                       _c("td", [
                         _vm.type == 1

@@ -6,6 +6,9 @@
                     <th v-for="locale in locales">
                         {{ locale.native }}
                     </th>
+                    <th>
+                        التصنيفات
+                    </th>
                     <th></th>
                 </tr>
             </thead>
@@ -36,6 +39,14 @@
                         <span v-if="!localeCheck(key, post)">
                              <button @click="addTranslation(post, key)" class="btn btn-success">اضافة ترجمة</button>
                         </span>
+                    </td>
+                    <td>
+                        <div v-for="tag in post.tags">
+                            <span class="alert-success">
+                                {{ tag.name }}
+                            </span>
+                            <hr>
+                        </div>
                     </td>
                     <td>
                         <button v-if="type == 1" @click="deletePost(post)" class="btn btn-danger">حذف الخبر</button>

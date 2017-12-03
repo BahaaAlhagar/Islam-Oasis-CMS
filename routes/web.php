@@ -11,13 +11,29 @@
 |
 */
 
+Auth::routes();
+
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+route::group(['prefix' => LaravelLocalization::setLocale(), 'namespace' => 'FrontEnd'], function(){
+
+
+// news routes
+route::get('news-events/', 'NewsController@index')->name('news.index');
+route::get('news/{slug}', 'NewsController@show')->name('news.show');
+
+
+
+
+});
+
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
 
 
 

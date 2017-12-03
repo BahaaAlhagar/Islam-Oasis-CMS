@@ -35,4 +35,11 @@ class Post extends Model
     {
         return $this->morphOne(Photo::class, 'photoable');
     }
+
+    public function scopePublished($query)
+    {
+        return $query->whereHas('translations', function($query){
+            $query->whereLocale(app()->getLocale())->where('published', 1);
+        });
+    }
 }

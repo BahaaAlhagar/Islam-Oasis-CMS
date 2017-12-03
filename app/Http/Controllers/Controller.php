@@ -11,6 +11,15 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+
+    public $locale;
+
+    public function __construct()
+    {
+        $this->locale = app()->getLocale();
+    }
+
+
     protected function makeResponse($template, $objects = [])
     {
         if (\Request::ajax())
