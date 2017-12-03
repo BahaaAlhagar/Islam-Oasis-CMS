@@ -16,21 +16,26 @@ class Tag extends Model
 
     public function posts()
     {
-    	return $this->morphedByMany(Post::class, 'taggables');
+    	return $this->morphedByMany(Post::class, 'taggable');
     }
 
     public function series()
     {
-    	return $this->morphedByMany(Series::class, 'taggables');
+    	return $this->morphedByMany(Series::class, 'taggable');
     }
 
     public function items()
     {
-        return $this->morphedByMany(Item::class, 'taggables');
+        return $this->morphedByMany(Item::class, 'taggable');
     }
 
     public function fatwas()
     {
-        return $this->morphedByMany(Fatwa::class, 'taggables');
+        return $this->morphedByMany(Fatwa::class, 'taggable');
+    }
+
+    public function news()
+    {
+        return $this->morphedByMany(Post::class, 'taggable')->whereType(1);
     }
 }

@@ -42,4 +42,19 @@ class Post extends Model
             $query->whereLocale(app()->getLocale())->where('published', 1);
         });
     }
+
+    public function scopefilter($query, $filters)
+    {
+
+        if ($month = $filters['month'])
+        {
+            $query->whereMonth('created_at', Carbon::parse($month)->month);
+        }
+
+        if ($year = $filters['year'])
+        {
+            $query->whereYear('created_at', $year);
+        }
+
+    }
 }
