@@ -1,9 +1,11 @@
+@import url('../cairo.css');
+
 /*
  * Globals
  */
 
 body {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Cairo", serif;
   color: #555;
 }
 
@@ -46,7 +48,7 @@ h6, .h6 {
   position: relative;
   display: inline-block;
   padding: 10px;
-  font-weight: 500;
+  font-weight: bold;
   color: #cdddeb;
 }
 .blog-nav-item:hover,
