@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use \Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -43,7 +44,7 @@ class Post extends Model
         });
     }
 
-    public function scopefilter($query, $filters)
+    public function scopeFilter($query, $filters)
     {
 
         if ($month = $filters['month'])

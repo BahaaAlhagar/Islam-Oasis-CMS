@@ -22,6 +22,17 @@ class NewsController extends Controller
         return view('FrontEnd/news/index', compact('news'));
     }
 
+    public function listBasedInDate()
+    {
+        $news = Post::translatedIn($this->locale)
+                    ->whereType(1)
+                    ->filter(request(['month', 'year']))
+                    ->published()
+                    ->latest()->paginate(5);
+
+        return view('FrontEnd/news/index', compact('news'));
+    }
+
 
     /**
      * Display the specified resource.
@@ -29,7 +40,7 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
         //
     }

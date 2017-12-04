@@ -47,7 +47,7 @@ class newsComposer
                         ->get();
         });
 
-        $this->tags = Cache::remember('tags_'.$this->locale, 60 * 15, function () {
+        $this->tags = Cache::remember('news_tags_'.$this->locale, 60 * 15, function () {
             return Tag::whereHas('news', function($query){
                         $query->published();
                     })->withCount('news')->get();
@@ -62,8 +62,9 @@ class newsComposer
      */
     public function compose(View $view)
     {
-        $view->with('newsArchive', $this->newsArchive);
-        $view->with('tags', $this->tags);
-        $view->with('randomArticles', $this->randomArticles);
+        $newsArchive = $this->newsArchive;
+        $tags = $this->tags;
+        $randomArticles = $this->randomArticles;
+        $view->with(compact('newsArchive', 'tags', 'randomArticles'));
     }
 }
