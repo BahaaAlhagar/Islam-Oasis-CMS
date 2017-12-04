@@ -11,7 +11,8 @@
 		            		{{ $post->title }}
 		            	</a>
 		            </h2>
-		            <p class="blog-post-meta">{{ $post->created_at->diffForHumans() }}</p>
+		            
+		            <p class="blog-post-meta">{{ Date::parse($post->created_at)->diffForHumans() }}</p>
 
 		            {!! str_limit($post->content, 200) !!}
 

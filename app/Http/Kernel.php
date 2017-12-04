@@ -60,6 +60,7 @@ class Kernel extends HttpKernel
         // admin panel middlewares
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'adminDefaultLocale' => \App\Http\Middleware\adminPanelDefaultLocale::class,
+        'date' => \App\Http\Middleware\setDateLocale::class,
 
         // Laravel Localization MiddleWares
         'localize' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,

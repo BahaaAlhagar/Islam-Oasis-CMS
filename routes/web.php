@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-route::group(['prefix' => LaravelLocalization::setLocale(), 'namespace' => 'FrontEnd'], function(){
+route::group(['prefix' => LaravelLocalization::setLocale(), 'namespace' => 'FrontEnd', 'middleware' => ['date']], function(){
 
 
 // news routes

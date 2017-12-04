@@ -178,6 +178,8 @@ return [
         // intervention image
         Intervention\Image\ImageServiceProvider::class,
 
+        // localized date package
+        Jenssegers\Date\DateServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -245,6 +247,9 @@ return [
 
         // intervention image
         'Image' => Intervention\Image\Facades\Image::class,
+
+        // Jenssegers date
+        'Date' => Jenssegers\Date\Date::class,
 
     ],
 
