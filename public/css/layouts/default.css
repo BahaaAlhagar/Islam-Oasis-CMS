@@ -164,6 +164,30 @@ h6, .h6 {
   background-color: #f9f9f9;
   border-top: 1px solid #e5e5e5;
 }
+
+
 .blog-footer p:last-child {
   margin-bottom: 0;
+}
+
+
+.tags-list, .tags-list li {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+.tags-list li {
+    display: inline-block;
+    margin: 5px 2px;
+}
+.tags-list li a {
+    background: #eee none repeat scroll 0 0;
+    border-radius: 3px;
+    color: #666;
+    display: block;
+    padding: 5px 10px;
+}
+.tags-list li:hover a {
+    background: #42aae0 none repeat scroll 0 0;
+    color: #fff;
 }

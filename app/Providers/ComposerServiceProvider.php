@@ -14,7 +14,7 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer(
-            ['FrontEnd/news/_sidebar', 'FrontEnd/news/_tagsArea'], 'App\Http\ViewComposers\newsComposer'
+            'FrontEnd/news/_sidebar', 'App\Http\ViewComposers\newsComposer'
             );
     }
 

@@ -13,8 +13,11 @@ return [
     |
     */
 
-    'more'              => 'Read More',
     'archives'          => 'Archives',
     'title'             => 'Islam Oasis',
     'description'       => 'learn about Islam',
+    'categories'        => 'Categories',
+    'more'              => 'Read More',
+    'also_like'         => 'You may also Like',
+    'archive'           => 'News Archive',
 ];
