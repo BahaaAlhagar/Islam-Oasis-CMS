@@ -22,9 +22,9 @@ route::group(['prefix' => LaravelLocalization::setLocale(), 'namespace' => 'Fron
 
 
 // news routes
-route::get('news-events/{slug}', 'NewsController@show')->name('news.show');
-route::get('news-events?month={month}&year={year}', 'NewsController@listBasedInDate');
-route::get('news-events', 'NewsController@index')->name('news.index');
+route::get('news/{slug}', 'NewsController@show')->name('news.show');
+route::get('news/month/{month}/year/{year}', 'NewsController@listBasedOnDate')->name('news.list');
+route::get('news', 'NewsController@index')->name('news.index');
 
 
 

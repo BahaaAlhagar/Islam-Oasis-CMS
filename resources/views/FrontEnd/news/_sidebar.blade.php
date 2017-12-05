@@ -3,7 +3,7 @@
 			<h4>{{ __('messages.archive') }}</h4>
 			<ol class="list-unstyled">
 				@foreach($newsArchive as $stat)
-			  		<li><a href="#">{{ __('date.month.'.Date::parse($stat['month'])->month) }} {{ $stat['year'] }}</a></li>
+			  		<li><a href="{{ route('news.list', ['month' => $stat['month'], 'year' => $stat['year']]) }}">{{ __('date.month.'.Date::parse($stat['month'])->month) }} {{ $stat['year'] }}</a></li>
 			  	@endforeach
 			</ol>
 		</div>

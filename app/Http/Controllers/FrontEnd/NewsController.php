@@ -22,11 +22,11 @@ class NewsController extends Controller
         return view('FrontEnd/news/index', compact('news'));
     }
 
-    public function listBasedInDate()
+    public function listBasedOnDate($month, $year)
     {
         $news = Post::translatedIn($this->locale)
                     ->whereType(1)
-                    ->filter(request(['month', 'year']))
+                    ->filter(['month' => $month, 'year' => $year])
                     ->published()
                     ->latest()->paginate(5);
 
