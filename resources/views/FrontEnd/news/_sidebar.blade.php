@@ -21,7 +21,7 @@
 		    <h4>{{ __('messages.categories') }}</h4>
 		    <span class="tags-list">
 		    	@foreach($tags as $tag)
-		    		<li><a href="#">#{{ $tag->name }}</a></li>
+		    		<li><a href="{{ route('newsTag.show', $tag->slug) }}">#{{ $tag->name }}</a></li>
 				@endforeach
 			</span>
 	  	</div>

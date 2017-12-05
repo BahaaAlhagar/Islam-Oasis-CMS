@@ -32,6 +32,7 @@ class newsComposer
         $this->newsArchive = Cache::remember('newsArchive_'.$this->locale, 60 * 15, function () {
                     return Post::translatedIn($this->locale)
                         ->where('type', 1)
+                        ->published()
                         ->selectRaw('year(created_at) year, monthname(created_at) month, count(*) published')
                         ->groupBy('year', 'month')
                         ->orderByRaw('min(created_at) desc')

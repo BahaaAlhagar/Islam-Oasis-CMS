@@ -42,6 +42,8 @@ class NewsController extends Controller
      */
     public function show($slug)
     {
-        //
+        $post = Post::whereTranslation('slug', $slug)->with('tags')->firstOrFail();
+
+        return view('FrontEnd/news/show', compact('post'));
     }
 }

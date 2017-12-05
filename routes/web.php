@@ -27,8 +27,8 @@ route::get('news/month/{month}/year/{year}', 'NewsController@listBasedOnDate')->
 route::get('news', 'NewsController@index')->name('news.index');
 
 
-
-
+// tags routes
+route::get('tag/{slug}/news', 'TagsController@newsTag')->name('newsTag.show');
 
 });
 
