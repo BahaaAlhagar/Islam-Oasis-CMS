@@ -38,4 +38,9 @@ class Tag extends Model
     {
         return $this->morphedByMany(Post::class, 'taggable')->whereType(1);
     }
+
+    public function lessons()
+    {
+        return $this->morphedByMany(Post::class, 'taggable')->whereType(2);
+    }
 }

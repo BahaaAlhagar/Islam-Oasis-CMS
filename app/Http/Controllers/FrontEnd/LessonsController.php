@@ -6,7 +6,7 @@ use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class NewsController extends Controller
+class LessonsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,24 +15,12 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = Post::translatedIn($this->locale)
-                    ->whereType(1)->published()
+        $lessons = Post::translatedIn($this->locale)
+                    ->whereType(2)->published()
                     ->latest()->paginate(5);
 
-        return view('FrontEnd/news/index', compact('news'));
+        return view('FrontEnd/lessons/index', compact('lessons'));
     }
-
-    public function listBasedOnDate($month, $year)
-    {
-        $news = Post::translatedIn($this->locale)
-                    ->whereType(1)
-                    ->filter(['month' => $month, 'year' => $year])
-                    ->published()
-                    ->latest()->paginate(5);
-
-        return view('FrontEnd/news/index', compact('news'));
-    }
-
 
     /**
      * Display the specified resource.
@@ -46,6 +34,6 @@ class NewsController extends Controller
             $query->translatedIn($this->locale);
         }])->firstOrFail();
 
-        return view('FrontEnd/news/show', compact('post'));
+        return view('FrontEnd/lessons/show', compact('post'));
     }
 }
