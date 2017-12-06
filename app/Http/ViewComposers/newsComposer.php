@@ -40,7 +40,7 @@ class newsComposer
                         ->toArray();
         });
 
-        $this->randomArticles = Cache::remember('randomArticles_'.$this->locale, 60 * 15, function () {
+        $this->randomArticles = Cache::remember('news_randomArticles_'.$this->locale, 60 * 15, function () {
                     return Post::translatedIn($this->locale)
                         ->where('type', 1)
                         ->inRandomOrder()

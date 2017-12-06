@@ -7,7 +7,7 @@ use App\Post;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Cache;
 
-class lessonsComposer
+class storiesComposer
 {
     /**
      * The user repository implementation.
@@ -21,25 +21,25 @@ class lessonsComposer
     /**
      * Create a new profile composer.
      *
-     * @param  UserRepository  $lessons
+     * @param  UserRepository  $stories
      * @return void
      */
     public function __construct()
     {
         $this->locale = app()->getLocale();
 
-        $this->randomArticles = Cache::remember('lessons_randomArticles_'.$this->locale, 60 * 15, function () {
+        $this->randomArticles = Cache::remember('stories_randomArticles_'.$this->locale, 60 * 15, function () {
                     return Post::translatedIn($this->locale)
-                        ->where('type', 2)
+                        ->where('type', 3)
                         ->inRandomOrder()
                         ->take(10)
                         ->get();
         });
 
-        $this->tags = Cache::remember('lessons_tags_'.$this->locale, 60 * 15, function () {
-            return Tag::translatedIn($this->locale)->whereHas('lessons', function($query){
+        $this->tags = Cache::remember('stories_tags_'.$this->locale, 60 * 15, function () {
+            return Tag::translatedIn($this->locale)->whereHas('stories', function($query){
                         $query->published();
-                    })->with('translations')->withCount('lessons')->get();
+                    })->with('translations')->withCount('stories')->get();
         });
     }
 

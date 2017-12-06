@@ -20,6 +20,10 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer(
             'FrontEnd/lessons/_sidebar', 'App\Http\ViewComposers\lessonsComposer'
             );
+
+        view()->composer(
+            'FrontEnd/stories/_sidebar', 'App\Http\ViewComposers\storiesComposer'
+            );
     }
 
     /**
