@@ -16,6 +16,10 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer(
             'FrontEnd/news/_sidebar', 'App\Http\ViewComposers\newsComposer'
             );
+
+        view()->composer(
+            'FrontEnd/lessons/_sidebar', 'App\Http\ViewComposers\lessonsComposer'
+            );
     }
 
     /**
