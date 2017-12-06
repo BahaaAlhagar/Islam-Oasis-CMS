@@ -1,6 +1,10 @@
 @extends('FrontEnd/layouts/default')
 
 
+@section('title')
+	 - {{ $post->title }}
+@endsection
+
 @section('content')
 
 				<div class="blog-post">
@@ -15,6 +19,7 @@
 		            {!! $post->content !!}
 		        </div>
 
+		        <div class="addthis_inline_share_toolbox pull-left"></div>
 
 		        <br><hr>
 			    <div class="tags-list">

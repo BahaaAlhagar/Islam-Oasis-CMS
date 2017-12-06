@@ -77,6 +77,9 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="{{ URL::asset('js/ie10-viewport-bug-workaround.js') }}"></script>
 
+    <!-- addthis javascript sharing toolbox -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a2812d8cbd67e3a"></script> 
+
     <script type="text/javascript">
         jQuery(function($) {
          var path = window.location.href; // because the 'href' property of the DOM element is the absolute path

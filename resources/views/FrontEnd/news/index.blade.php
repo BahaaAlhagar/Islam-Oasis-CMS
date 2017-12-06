@@ -1,6 +1,10 @@
 @extends('FrontEnd/layouts/default')
 
 
+@section('title')
+	 - {{ __('navbar.news') }}
+@endsection
+
 @section('content')
 
 
