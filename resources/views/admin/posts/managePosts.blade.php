@@ -4,7 +4,7 @@
 @if($type == 1)
 	@section('title', 'ادارة الاخبار')
 @elseif($type == 2)
-	@section('title', 'ادارة الدروس والمحاضرات')
+	@section('title', 'ادارة الدروس والمقالات')
 @elseif($type == 3)
 	@section('title', 'ادارة قصص الاسلام')
 @endif
@@ -15,7 +15,7 @@
 	@if($type == 1)
 		ادارة الاخبار
 	@elseif($type == 2)
-		ادارة الدروس والمحاضرات
+		ادارة الدروس والمقالات
 	@elseif($type == 3)
 		ادارة قصص الاسلام
 	@endif

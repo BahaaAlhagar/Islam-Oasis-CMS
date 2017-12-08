@@ -190,4 +190,11 @@ h6, .h6 {
 .tags-list li:hover a {
     background: #42aae0 none repeat scroll 0 0;
     color: #fff;
+    text-decoration: none;
+}
+
+.btn-round-xs{
+border-radius: 11px;
+padding-left: 10px;
+padding-right: 10px;
 }

@@ -10,7 +10,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 <span class="form-control-static text-center">
                     <h4 v-if="type == 1" class="modal-title" id="myModalLabel"> اضافة ترجمة لخبر </h4>
-                    <h4 v-if="type == 2" class="modal-title" id="myModalLabel"> اضافة ترجمة لدرس او محاضرة </h4>
+                    <h4 v-if="type == 2" class="modal-title" id="myModalLabel"> اضافة ترجمة لدرس او مقالة </h4>
                     <h4 v-if="type == 3" class="modal-title" id="myModalLabel"> اضافة ترجمة لقصة </h4>
                 </span>
               </div>

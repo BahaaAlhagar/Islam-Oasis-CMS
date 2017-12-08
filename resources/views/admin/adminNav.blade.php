@@ -10,7 +10,7 @@
 				</a>
 
 				<a href="{{ route('posts.index', ['type' => 2]) }}" class="list-group-item">
-					الدروس - المحاضرات
+					الدروس - المقالات
 				</a>
 
 				<a href="{{ route('posts.index', ['type' => 3]) }}" class="list-group-item">

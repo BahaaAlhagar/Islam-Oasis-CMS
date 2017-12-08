@@ -31,7 +31,7 @@ class StoriesController extends Controller
     public function show($slug)
     {
         $post = Post::whereTranslation('slug', $slug)->with(['tags' => function($query){
-            $query->translatedIn($this->locale);
+            $query->translatedIn($this->locale)->with('translations')->withCount('stories');
         }])->firstOrFail();
 
         return view('FrontEnd/stories/show', compact('post'));
