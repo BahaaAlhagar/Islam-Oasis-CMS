@@ -34,6 +34,8 @@ class LessonsController extends Controller
             $query->translatedIn($this->locale)->with('translations')->withCount('lessons');
         }])->firstOrFail();
 
-        return view('FrontEnd/lessons/show', compact('post'));
+        $relatedPosts = $post->relatedPostsByTag();
+
+        return view('FrontEnd/lessons/show', compact('post', 'relatedPosts'));
     }
 }

@@ -28,7 +28,17 @@
 					@endforeach
 				</div>
 
-
+				<hr><br>
+				<div class="sidebar-module sidebar-module-inset">
+		            <h4>{{ __('messages.relatedPosts') }}</h4>
+		            @foreach($relatedPosts as $post)
+			            <p>
+				            <a href="{{ route('lessons.show', $post->slug) }}">
+				            	{{ $post->title }}
+				            </a>
+			            </p>
+		            @endforeach
+		        </div>
 @endsection
 
 @section('sidebar')

@@ -15,7 +15,7 @@ return [
 
     'home'          => 'Home',
     'news'          => 'News & Events',
-    'lessons'       => 'Lessons',
+    'lessons'       => 'Articles & Lessons',
     'stories'       => 'Stories',
     'scholars'      => 'Scholars',
     'quran'         => 'Quran',

@@ -3,8 +3,9 @@
 namespace App;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use \Dimsav\Translatable\Translatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
@@ -57,5 +58,18 @@ class Post extends Model
             $query->whereYear('created_at', $year);
         }
 
+    }
+
+    public function relatedPostsByTag()
+    {
+        $relatedPosts = Cache::remember('related_posts_' .$this->id. '_' .app()->getLocale(), 60 * 15, function (){
+                return Post::translatedIn(app()->getLocale())
+                        ->whereType($this->type)
+                        ->whereHas('tags', function ($query){
+                            $query->whereIn('id', $this->tags()->pluck('id')->toArray());
+                        })->where('id', '<>', $this->id)->get();
+            });
+
+        return $relatedPosts;
     }
 }

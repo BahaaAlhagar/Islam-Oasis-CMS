@@ -46,6 +46,8 @@ class NewsController extends Controller
             $query->translatedIn($this->locale)->with('translations')->withCount('news');
         }])->firstOrFail();
 
-        return view('FrontEnd/news/show', compact('post'));
+        $relatedPosts = $post->relatedPostsByTag();
+        
+        return view('FrontEnd/news/show', compact('post', 'relatedPosts'));
     }
 }

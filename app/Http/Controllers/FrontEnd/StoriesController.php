@@ -34,6 +34,8 @@ class StoriesController extends Controller
             $query->translatedIn($this->locale)->with('translations')->withCount('stories');
         }])->firstOrFail();
 
-        return view('FrontEnd/stories/show', compact('post'));
+        $relatedPosts = $post->relatedPostsByTag();
+
+        return view('FrontEnd/stories/show', compact('post', 'relatedPosts'));
     }
 }

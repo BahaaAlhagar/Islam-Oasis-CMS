@@ -20,4 +20,5 @@ return [
     'more'              => 'Read More',
     'also_like'         => 'You may also Like',
     'archive'           => 'News Archive',
+    'relatedPosts'      => 'related Articles',
 ];
