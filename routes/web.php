@@ -38,9 +38,9 @@ route::get('stories', 'StoriesController@index')->name('stories.index');
 
 
 // tags routes
-route::get('tag/{slug}/news', 'TagsController@newsTag')->name('newsTag.show');
-route::get('tag/{slug}/lessons', 'TagsController@lessonsTag')->name('lessonsTag.show');
-route::get('tag/{slug}/stories', 'TagsController@storiesTag')->name('storiesTag.show');
+route::get('tag/news/{slug}', 'TagController@newsTag')->name('newsTag.show');
+route::get('tag/lessons/{slug}', 'TagController@lessonsTag')->name('lessonsTag.show');
+route::get('tag/stories/{slug}', 'TagController@storiesTag')->name('storiesTag.show');
 
 
 });

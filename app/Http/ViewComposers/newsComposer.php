@@ -49,9 +49,7 @@ class newsComposer
         });
 
         $this->tags = Cache::remember('news_tags_'.$this->locale, 60 * 15, function () {
-            return Tag::translatedIn($this->locale)->whereHas('news', function($query){
-                        $query->published();
-                    })->with('translations')->withCount('news')->get();
+            return Tag::translatedIn($this->locale)->has('news')->with('translations')->withCount('news')->get();
         });
     }
 

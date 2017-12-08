@@ -110,6 +110,7 @@ h6, .h6 {
 .sidebar-module {
   padding: 15px;
   margin: 0 -15px 15px;
+  font-size: 18px;
 }
 .sidebar-module-inset {
   padding: 15px;
@@ -145,11 +146,12 @@ h6, .h6 {
 }
 .blog-post-title {
   margin-bottom: 5px;
-  font-size: 40px;
+  font-size: 36px;
 }
 .blog-post-meta {
   margin-bottom: 20px;
   color: #999;
+  font-size: 16px;
 }
 
 

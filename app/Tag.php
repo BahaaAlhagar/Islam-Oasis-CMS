@@ -36,16 +36,16 @@ class Tag extends Model
 
     public function news()
     {
-        return $this->morphedByMany(Post::class, 'taggable')->whereType(1)->translatedIn(app()->getLocale());
+        return $this->morphedByMany(Post::class, 'taggable')->whereType(1)->published();
     }
 
     public function lessons()
     {
-        return $this->morphedByMany(Post::class, 'taggable')->whereType(2)->translatedIn(app()->getLocale());
+        return $this->morphedByMany(Post::class, 'taggable')->whereType(2)->published();
     }
 
     public function stories()
     {
-        return $this->morphedByMany(Post::class, 'taggable')->whereType(2)->translatedIn(app()->getLocale());
+        return $this->morphedByMany(Post::class, 'taggable')->whereType(2)->published();
     }
 }

@@ -65,6 +65,7 @@ class Post extends Model
         $relatedPosts = Cache::remember('related_posts_' .$this->id. '_' .app()->getLocale(), 60 * 15, function (){
                 return Post::translatedIn(app()->getLocale())
                         ->whereType($this->type)
+                        ->published()
                         ->whereHas('tags', function ($query){
                             $query->whereIn('id', $this->tags()->pluck('id')->toArray());
                         })->where('id', '<>', $this->id)->get();

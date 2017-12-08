@@ -37,9 +37,7 @@ class lessonsComposer
         });
 
         $this->tags = Cache::remember('lessons_tags_'.$this->locale, 60 * 15, function () {
-            return Tag::translatedIn($this->locale)->whereHas('lessons', function($query){
-                        $query->published();
-                    })->with('translations')->withCount('lessons')->get();
+            return Tag::translatedIn($this->locale)->has('lessons')->with('translations')->withCount('lessons')->get();
         });
     }
 

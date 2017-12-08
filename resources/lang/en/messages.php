@@ -21,4 +21,5 @@ return [
     'also_like'         => 'You may also Like',
     'archive'           => 'News Archive',
     'relatedPosts'      => 'related Articles',
+    'tag'               => 'Category',
 ];
