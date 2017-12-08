@@ -34,4 +34,17 @@ class TagController extends Controller
     	
     	return view('FrontEnd/tags/lessonsIndex', compact('tag', 'posts', 'tags'));
     }
+
+    public function storiesTag($slug)
+    {
+    	$tag = Tag::whereTranslation('slug', $slug)->firstOrFail();
+
+    	$posts = $tag->stories()->paginate(5);
+
+    	$tags = Cache::remember('ctr_stories_tags_'.$this->locale, 60 * 15, function () {
+    		return Tag::has('stories')->withCount('stories')->get();
+    	});
+    	
+    	return view('FrontEnd/tags/storiesIndex', compact('tag', 'posts', 'tags'));
+    }
 }
