@@ -46,6 +46,6 @@ class Tag extends Model
 
     public function stories()
     {
-        return $this->morphedByMany(Post::class, 'taggable')->whereType(2)->published();
+        return $this->morphedByMany(Post::class, 'taggable')->whereType(3)->published();
     }
 }
