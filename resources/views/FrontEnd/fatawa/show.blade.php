@@ -2,13 +2,10 @@
 
 
 @section('title')
-	 - {{ __('navbar.fatwa') }}
+	 - {{ __('navbar.fatwa') }} - {{ $fatwa->question }}
 @endsection
 
 @section('content')
-
-
-			@foreach($fatawa as $fatwa)
 
 				<div class="panel panel-default">
 	                <div class="panel-heading">
@@ -33,16 +30,32 @@
 				            	</a>
 				            </h2>
 
-				            {!! str_limit($fatwa->answer, 200) !!}
+				            {!! $fatwa->answer !!}
 
-				            <a href="{{ route('fatawa.show', $fatwa->slug) }}">{{ __('messages.more')}}</a>
 				        </div>
+				        <div class="addthis_inline_share_toolbox pull-left"></div>
+
+				        <br><hr>
+					    <div class="tags-list">
+					    	@foreach($fatwa->tags as $tag)
+					    		<li><a href="{{ route('fatawaTag.show', $tag->slug) }}">{{ $tag->translate(app()->getLocale())->name }} <button type="button" class="btn btn-warning btn-round-xs btn-xs"> {{ $tag->fatawa_count }}</button></a></li>
+							@endforeach
+						</div>
 	                </div>
 	            </div>
-			@endforeach
 
-			{{ $fatawa->links() }}
-
+				@if(count($relatedFatawa))
+					<div class="sidebar-module sidebar-module-inset">
+			            <h4>{{ __('messages.relatedPosts') }}</h4>
+			            @foreach($relatedFatawa as $fatwa)
+				            <p>
+					            <a href="{{ route('fatawa.show', $fatwa->slug) }}">
+					            	{{ $fatwa->question }}
+					            </a>
+				            </p>
+			            @endforeach
+			        </div>
+			    @endif
 @endsection
 
 @section('sidebar')

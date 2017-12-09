@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
 use \Dimsav\Translatable\Translatable;
 
@@ -21,5 +22,19 @@ class Fatwa extends Model
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');
+    }
+
+    public function relatedFatawaByTag()
+    {
+        $relatedFatawa = Cache::remember('related_fatawa_' .$this->id. '_' .app()->getLocale(), 60 * 15, function (){
+                return Fatwa::translatedIn(app()->getLocale())
+                        ->whereType($this->type)
+                        ->whereHas('tags', function ($query){
+                            $query->whereIn('id', $this->tags()->pluck('id')->toArray());
+                        })->where('id', '<>', $this->id)
+                        ->take(10)->inRandomOrder()->get();
+            });
+
+        return $relatedFatawa;
     }
 }
