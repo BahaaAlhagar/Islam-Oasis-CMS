@@ -37,10 +37,20 @@ route::get('stories/{slug}', 'StoriesController@show')->name('stories.show');
 route::get('stories', 'StoriesController@index')->name('stories.index');
 
 
+// fatawa routes
+route::get('fatawa/{slug}', 'FatwaController@show')->name('fatawa.show');
+route::get('fatawa', 'FatwaController@index')->name('fatawa.index');
+
+
 // tags routes
 route::get('tag/news/{slug}', 'TagController@newsTag')->name('newsTag.show');
 route::get('tag/lessons/{slug}', 'TagController@lessonsTag')->name('lessonsTag.show');
 route::get('tag/stories/{slug}', 'TagController@storiesTag')->name('storiesTag.show');
+route::get('tag/fatawa/{slug}', 'TagController@fatawaTag')->name('fatawaTag.show');
+
+
+//scholars routes
+route::get('scholar/fatawa/{slug}', 'TagController@scholarFatawa')->name('scholarFatawa.show');
 
 
 });

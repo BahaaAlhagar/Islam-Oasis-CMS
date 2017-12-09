@@ -10,7 +10,7 @@
           <a class="blog-nav-item" href="#">{{ __('navbar.books') }}</a>
           <a class="blog-nav-item" href="#">{{ __('navbar.audio') }}</a>
           <a class="blog-nav-item" href="#">{{ __('navbar.media') }}</a>
-          <a class="blog-nav-item" href="#">{{ __('navbar.fatwa') }}</a>
+          <a class="blog-nav-item" href="{{ route('fatawa.index') }}">{{ __('navbar.fatwa') }}</a>
           <a class="blog-nav-item" href="#">{{ __('navbar.faq') }}</a>
         </nav>
       </div>
