@@ -24,6 +24,10 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer(
             'FrontEnd/stories/_sidebar', 'App\Http\ViewComposers\storiesComposer'
             );
+
+        view()->composer(
+            'FrontEnd/fatawa/_sidebar', 'App\Http\ViewComposers\FatwaComposer'
+            );
     }
 
     /**

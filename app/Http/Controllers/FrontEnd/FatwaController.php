@@ -10,11 +10,11 @@ class FatwaController extends Controller
 {
     public function index()
     {
-
+    	return view('FrontEnd/fatawa/index');
     }
 
     public function show($slug)
     {
-    	
+
     }
 }
