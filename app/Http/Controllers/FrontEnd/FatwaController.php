@@ -21,7 +21,7 @@ class FatwaController extends Controller
     {
         $fatwa = Fatwa::whereTranslation('slug', $slug)->with(['tags' => function($query){
             $query->translatedIn($this->locale)->with('translations')->withCount('fatawa');
-        }, 'scholar'])->firstOrFail();
+        }, 'scholar.photo'])->firstOrFail();
 
         $relatedFatawa = $fatwa->relatedFatawaByTag();
         

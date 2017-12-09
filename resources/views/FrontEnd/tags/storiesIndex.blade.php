@@ -11,7 +11,7 @@
 		            <h2 class="blog-post-title">
 		            	{{ __('messages.tag') }} : 
 		            	<a href="{{ route('storiesTag.show', $tag->slug) }}">
-		            		{{ $tag->name }}
+		            		{{ $tag->translate(app()->getLocale())->name }}
 		            	</a>
 		            </h2>
 		            @include('FrontEnd/tags/_navbar')

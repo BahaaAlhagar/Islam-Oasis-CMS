@@ -11,7 +11,7 @@ class TagController extends Controller
 {
     public function newsTag($slug)
     {
-    	$tag = Tag::whereTranslation('slug', $slug)->firstOrFail();
+    	$tag = Tag::whereTranslation('slug', $slug)->with('translations')->firstOrFail();
 
     	$posts = $tag->news()->paginate(5);
 
@@ -24,7 +24,7 @@ class TagController extends Controller
 
     public function lessonsTag($slug)
     {
-    	$tag = Tag::whereTranslation('slug', $slug)->firstOrFail();
+    	$tag = Tag::whereTranslation('slug', $slug)->with('translations')->firstOrFail();
 
     	$posts = $tag->lessons()->paginate(5);
 
@@ -37,7 +37,7 @@ class TagController extends Controller
 
     public function storiesTag($slug)
     {
-    	$tag = Tag::whereTranslation('slug', $slug)->firstOrFail();
+    	$tag = Tag::whereTranslation('slug', $slug)->with('translations')->firstOrFail();
 
     	$posts = $tag->stories()->paginate(5);
 
@@ -46,5 +46,18 @@ class TagController extends Controller
     	});
     	
     	return view('FrontEnd/tags/storiesIndex', compact('tag', 'posts', 'tags'));
+    }
+
+    public function fatawaTag($slug)
+    {
+        $tag = Tag::whereTranslation('slug', $slug)->with('translations')->firstOrFail();
+
+        $fatawa = $tag->fatawa()->with('scholar.photo')->paginate(5);
+
+        $tags = Cache::remember('ctr_fatawa_tags_'.$this->locale, 60 * 15, function () {
+            return Tag::has('fatawa')->withCount('fatawa')->get();
+        });
+        
+        return view('FrontEnd/tags/fatawaIndex', compact('tag', 'fatawa', 'tags'));
     }
 }

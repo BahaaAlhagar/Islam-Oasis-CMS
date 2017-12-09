@@ -2,7 +2,7 @@
 
 
 @section('title')
-	 - {{ $post->title }}
+	 - {{ __('navbar.stories') }} - {{ $post->title }}
 @endsection
 
 @section('content')

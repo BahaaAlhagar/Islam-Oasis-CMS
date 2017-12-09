@@ -46,11 +46,11 @@ class Tag extends Model
 
     public function fatawa()
     {
-        return $this->morphedByMany(Fatwa::class, 'taggable')->whereType(1);
+        return $this->morphedByMany(Fatwa::class, 'taggable')->whereType(1)->translatedIn(app()->getLocale());
     }
 
     public function FAQ()
     {
-        return $this->morphedByMany(Fatwa::class, 'taggable')->whereType(2);
+        return $this->morphedByMany(Fatwa::class, 'taggable')->whereType(2)->translatedIn(app()->getLocale());
     }
 }
