@@ -37,7 +37,7 @@ class FatwaComposer
         });
 
         $this->tags = Cache::remember('fatawa_tags_'.$this->locale, 60 * 15, function () {
-            return Tag::translatedIn($this->locale)->has('publishedFatawa')->with('translations')->withCount('publishedFatawa')->get();
+            return Tag::translatedIn($this->locale)->has('fatawa')->with('translations')->withCount('fatawa')->get();
         });
     }
 

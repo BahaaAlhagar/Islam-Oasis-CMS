@@ -29,11 +29,6 @@ class Tag extends Model
         return $this->morphedByMany(Item::class, 'taggable');
     }
 
-    public function fatawa()
-    {
-        return $this->morphedByMany(Fatwa::class, 'taggable');
-    }
-
     public function news()
     {
         return $this->morphedByMany(Post::class, 'taggable')->whereType(1)->published();
@@ -49,13 +44,13 @@ class Tag extends Model
         return $this->morphedByMany(Post::class, 'taggable')->whereType(3)->published();
     }
 
-    public function publishedFatawa()
+    public function fatawa()
     {
-        return $this->morphedByMany(Fatwa::class, 'taggable')->whereType(1)->published();
+        return $this->morphedByMany(Fatwa::class, 'taggable')->whereType(1);
     }
 
-    public function publishedFAQ()
+    public function FAQ()
     {
-        return $this->morphedByMany(Fatwa::class, 'taggable')->whereType(2)->published();
+        return $this->morphedByMany(Fatwa::class, 'taggable')->whereType(2);
     }
 }

@@ -48,7 +48,7 @@
                         <div v-if="type == 1" class="form-group">
                             <label for="scholar_id" class="label">صاحب الفتوى (العالم):</label>
                             
-                            <v-select label="name" :on-search="searchScholars" :options="scholars" placeholder="اكتب اسم المجموعة للبحث" id="scholar_id" name="scholar_id" v-model="addTranslationForm.notFilteredScholar" ></v-select>
+                            <v-select label="name" :on-search="searchScholars" :options="scholars" placeholder="اكتب اسم العالم للبحث" id="scholar_id" name="scholar_id" v-model="addTranslationForm.notFilteredScholar" ></v-select>
 
                             <span class="alert-danger" v-if="addTranslationForm.errors.has('scholar_id')" v-text="addTranslationForm.errors.get('scholar_id')"></span>
                         </div>

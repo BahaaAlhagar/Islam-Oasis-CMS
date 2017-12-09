@@ -22,11 +22,4 @@ class Fatwa extends Model
     {
         return $this->morphToMany(Tag::class, 'taggable');
     }
-
-    public function scopePublished($query)
-    {
-        return $query->whereHas('translations', function($query){
-            $query->whereLocale(app()->getLocale())->where('published', 1);
-        });
-    }
 }

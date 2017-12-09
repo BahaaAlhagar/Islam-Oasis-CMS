@@ -55,7 +55,7 @@ class FatwaController extends Controller
             return ['message' => 'تم اضافة الترجمة بنجاح'];
         }
         
-        $fatwa = Fatwa::create($request->only('type'));
+        $fatwa = Fatwa::create($request->only('type', 'scholar_id'));
         $fatwa->translations()->create($request->only('locale', 'question', 'answer'));
         $fatwa->tags()->attach(array_unique($request->tags));
 
