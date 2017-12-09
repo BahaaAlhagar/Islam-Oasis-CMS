@@ -29,9 +29,17 @@
   <body>
 
     <div class="container">
+        <span>
+              <ul class="pull-left">
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                  <a href="/{{ $localeCode }}">{{ $properties['native'] }}</a>
+                @endforeach
+              </ul>
+        </span>
       <div class="blog-header">
         <h1 class="blog-title">{{ __('messages.title') }}</h1>
-        <p class="lead blog-description">{{ __('messages.description') }}</p>
+        <p class="lead blog-description">{{ __('messages.description') }}
+        </p>
       </div>
     </div>
 

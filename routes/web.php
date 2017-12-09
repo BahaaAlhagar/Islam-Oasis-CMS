@@ -14,11 +14,11 @@
 Auth::routes();
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 route::group(['prefix' => LaravelLocalization::setLocale(), 'namespace' => 'FrontEnd', 'middleware' => ['date']], function(){
+
+
+//home page
+route::view('/', 'FrontEnd/home');
 
 
 // news routes
