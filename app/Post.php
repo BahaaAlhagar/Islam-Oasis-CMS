@@ -69,7 +69,7 @@ class Post extends Model
                         ->whereHas('tags', function ($query){
                             $query->whereIn('id', $this->tags()->pluck('id')->toArray());
                         })->where('id', '<>', $this->id)
-                        ->take(10)->inRandomOrder()->get();
+                        ->take(10)->inRandomOrder()->withCurrentLocale()->get()->toArray();
             });
 
         return $relatedPosts;

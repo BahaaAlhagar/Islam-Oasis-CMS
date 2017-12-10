@@ -43,7 +43,7 @@ class NewsController extends Controller
     public function show($slug)
     {
         $post = Post::whereTranslation('slug', $slug)->with(['tags' => function($query){
-            $query->translatedIn($this->locale)->with('translations')->withCount('news');
+            $query->translatedIn($this->locale)->withCurrentLocale()->withCount('news');
         }])->firstOrFail();
 
         $relatedPosts = $post->relatedPostsByTag();

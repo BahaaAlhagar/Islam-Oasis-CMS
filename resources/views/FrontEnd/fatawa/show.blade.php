@@ -49,8 +49,8 @@
 			            <h4>{{ __('messages.relatedPosts') }}</h4>
 			            @foreach($relatedFatawa as $fatwa)
 				            <p>
-					            <a href="{{ route('fatawa.show', $fatwa->slug) }}">
-					            	{{ $fatwa->question }}
+					            <a href="{{ route('fatawa.show', $fatwa['slug']) }}">
+					            	{{ $fatwa['question'] }}
 					            </a>
 				            </p>
 			            @endforeach

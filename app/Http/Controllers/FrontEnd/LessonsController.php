@@ -31,7 +31,7 @@ class LessonsController extends Controller
     public function show($slug)
     {
         $post = Post::whereTranslation('slug', $slug)->with(['tags' => function($query){
-            $query->translatedIn($this->locale)->with('translations')->withCount('lessons');
+            $query->translatedIn($this->locale)->withCurrentLocale()->withCount('lessons');
         }])->firstOrFail();
 
         $relatedPosts = $post->relatedPostsByTag();
