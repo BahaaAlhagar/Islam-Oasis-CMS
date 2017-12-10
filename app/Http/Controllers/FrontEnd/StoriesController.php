@@ -32,7 +32,7 @@ class StoriesController extends Controller
     {
         $post = Post::whereTranslation('slug', $slug)->with(['tags' => function($query){
             $query->translatedIn($this->locale)->withCurrentLocale()->withCount('stories');
-        }])->firstOrFail();
+        }])->withCurrentLocale()->firstOrFail();
 
         $relatedPosts = $post->relatedPostsByTag();
 

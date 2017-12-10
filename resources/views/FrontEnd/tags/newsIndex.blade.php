@@ -2,7 +2,7 @@
 
 
 @section('title')
-	 - {{ __('navbar.news') }} - {{ $tag->translate(app()->getLocale())->name }} 
+	 - {{ __('navbar.news') }} - {{ $tag['name'] }} 
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
 		            <h2 class="blog-post-title">
 		            	{{ __('messages.tag') }} : 
 		            	<a href="{{ route('newsTag.show', $tag->slug) }}">
-		            		{{ $tag->translate(app()->getLocale())->name }}
+		            		{{ $tag['name'] }}
 		            	</a>
 		            </h2>
 		            @include('FrontEnd/tags/_navbar')
@@ -40,7 +40,7 @@
 
 				<div class="tags-list">
 			    	@foreach($tags as $tag)
-			    		<li><a href="{{ route('newsTag.show', $tag->slug) }}">{{ $tag->translate(app()->getLocale())->name }} <button type="button" class="btn btn-warning btn-round-xs btn-xs"> {{ $tag->news_count }}</button></a></li>
+			    		<li><a href="{{ route('newsTag.show', $tag['slug']) }}">{{ $tag['name'] }} <button type="button" class="btn btn-warning btn-round-xs btn-xs"> {{ $tag['news_count'] }}</button></a></li>
 					@endforeach
 				</div>
 				

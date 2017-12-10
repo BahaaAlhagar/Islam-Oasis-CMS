@@ -22,6 +22,6 @@ return [
     'books'         => 'Books',
     'audio'         => 'Sound Files',
     'media'         => 'Multimedia',
-    'fatwa'         => 'Fatwas',
+    'fatwa'         => 'Fatawa',
     'faq'           => 'F.A.Q',
 ];

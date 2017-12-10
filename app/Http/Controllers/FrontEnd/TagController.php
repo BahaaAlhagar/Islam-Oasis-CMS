@@ -11,12 +11,12 @@ class TagController extends Controller
 {
     public function newsTag($slug)
     {
-    	$tag = Tag::whereTranslation('slug', $slug)->with('translations')->firstOrFail();
+    	$tag = Tag::whereTranslation('slug', $slug)->withCurrentLocale()->firstOrFail();
 
-    	$posts = $tag->news()->paginate(5);
+    	$posts = $tag->news()->withCurrentLocale()->paginate(5);
 
     	$tags = Cache::remember('ctr_news_tags_'.$this->locale, 60 * 15, function () {
-    		return Tag::has('news')->withCount('news')->get();
+    		return Tag::translatedIn($this->locale)->has('news')->withCurrentLocale()->withCount('news')->get()->toArray();
     	});
     	
     	return view('FrontEnd/tags/newsIndex', compact('tag', 'posts', 'tags'));
@@ -24,12 +24,12 @@ class TagController extends Controller
 
     public function lessonsTag($slug)
     {
-    	$tag = Tag::whereTranslation('slug', $slug)->with('translations')->firstOrFail();
+    	$tag = Tag::whereTranslation('slug', $slug)->withCurrentLocale()->firstOrFail();
 
-    	$posts = $tag->lessons()->paginate(5);
+    	$posts = $tag->lessons()->withCurrentLocale()->paginate(5);
 
     	$tags = Cache::remember('ctr_lessons_tags_'.$this->locale, 60 * 15, function () {
-    		return Tag::has('lessons')->withCount('lessons')->get();
+    		return Tag::translatedIn($this->locale)->has('lessons')->withCurrentLocale()->withCount('lessons')->get()->toArray();
     	});
     	
     	return view('FrontEnd/tags/lessonsIndex', compact('tag', 'posts', 'tags'));
@@ -37,12 +37,12 @@ class TagController extends Controller
 
     public function storiesTag($slug)
     {
-    	$tag = Tag::whereTranslation('slug', $slug)->with('translations')->firstOrFail();
+    	$tag = Tag::whereTranslation('slug', $slug)->withCurrentLocale()->firstOrFail();
 
-    	$posts = $tag->stories()->paginate(5);
+    	$posts = $tag->stories()->withCurrentLocale()->paginate(5);
 
     	$tags = Cache::remember('ctr_stories_tags_'.$this->locale, 60 * 15, function () {
-    		return Tag::has('stories')->withCount('stories')->get();
+    		return Tag::translatedIn($this->locale)->has('stories')->withCurrentLocale()->withCount('stories')->get()->toArray();
     	});
     	
     	return view('FrontEnd/tags/storiesIndex', compact('tag', 'posts', 'tags'));
@@ -50,12 +50,12 @@ class TagController extends Controller
 
     public function fatawaTag($slug)
     {
-        $tag = Tag::whereTranslation('slug', $slug)->with('translations')->firstOrFail();
+        $tag = Tag::whereTranslation('slug', $slug)->withCurrentLocale()->firstOrFail();
 
-        $fatawa = $tag->fatawa()->with('scholar.photo')->paginate(5);
+        $fatawa = $tag->fatawa()->with('scholar.photo')->withCurrentLocale()->paginate(5);
 
         $tags = Cache::remember('ctr_fatawa_tags_'.$this->locale, 60 * 15, function () {
-            return Tag::has('fatawa')->withCount('fatawa')->get();
+            return Tag::translatedIn($this->locale)->has('fatawa')->withCurrentLocale()->withCount('fatawa')->get()->toArray();
         });
         
         return view('FrontEnd/tags/fatawaIndex', compact('tag', 'fatawa', 'tags'));
