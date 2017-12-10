@@ -24,7 +24,7 @@
 		        <br><hr>
 			    <div class="tags-list">
 			    	@foreach($post->tags as $tag)
-			    		<li><a href="{{ route('newsTag.show', $tag->slug) }}">{{ $tag->translate(app()->getLocale())->name }} <button type="button" class="btn btn-warning btn-round-xs btn-xs"> {{ $tag->news_count }}</button></a></li>
+			    		<li><a href="{{ route('newsTag.show', $tag->slug) }}">{{ $tag->name }} <button type="button" class="btn btn-warning btn-round-xs btn-xs"> {{ $tag->news_count }}</button></a></li>
 					@endforeach
 				</div>
 

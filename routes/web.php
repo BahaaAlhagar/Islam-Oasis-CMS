@@ -50,6 +50,7 @@ route::get('tag/news/{slug}', 'TagController@newsTag')->name('newsTag.show');
 route::get('tag/lessons/{slug}', 'TagController@lessonsTag')->name('lessonsTag.show');
 route::get('tag/stories/{slug}', 'TagController@storiesTag')->name('storiesTag.show');
 route::get('tag/fatawa/{slug}', 'TagController@fatawaTag')->name('fatawaTag.show');
+route::get('tag/faq/{slug}', 'TagController@faqTag')->name('faqTag.show');
 
 
 //scholars routes
