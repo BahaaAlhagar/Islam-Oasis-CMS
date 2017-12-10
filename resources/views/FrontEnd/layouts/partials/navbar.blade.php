@@ -11,7 +11,7 @@
           <a class="blog-nav-item" href="#">{{ __('navbar.audio') }}</a>
           <a class="blog-nav-item" href="#">{{ __('navbar.media') }}</a>
           <a class="blog-nav-item" href="{{ route('fatawa.index') }}">{{ __('navbar.fatwa') }}</a>
-          <a class="blog-nav-item" href="#">{{ __('navbar.faq') }}</a>
+          <a class="blog-nav-item" href="{{ route('faq.index') }}">{{ __('navbar.faq') }}</a>
         </nav>
       </div>
     </div>

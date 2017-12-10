@@ -22,4 +22,5 @@ return [
     'archive'           => 'News Archive',
     'relatedPosts'      => 'related Articles',
     'tag'               => 'Category',
+    'faq'               => 'Frequently asked questions',
 ];
