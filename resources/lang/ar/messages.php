@@ -21,6 +21,8 @@ return [
     'also_like'         => 'قد يعجبك ايضا',
     'archive'           => 'ارشيف الاخبار',
     'relatedPosts'      => 'مواضيع متعلقة',
+    'relatedQuestions'  => 'اسئلة متعلقة',
+    'relatedFatawa'     => 'فتاوى اخرى',
     'tag'               => 'التصنيف',
     'faq'               => 'الاسئلة الشائعة',
 ];

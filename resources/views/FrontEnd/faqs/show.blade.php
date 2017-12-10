@@ -31,7 +31,7 @@
 				@if(count($relatedFAQ))
 					<hr><br>
 					<div class="sidebar-module sidebar-module-inset">
-			            <h4>{{ __('messages.relatedPosts') }}</h4>
+			            <h4>{{ __('messages.relatedQuestions') }}</h4>
 			            @foreach($relatedFAQ as $faq)
 				            <p>
 					            <a href="{{ route('faq.show', $faq['slug']) }}">
@@ -44,5 +44,5 @@
 @endsection
 
 @section('sidebar')
-	@include('FrontEnd/lessons/_sidebar')
+	@include('FrontEnd/faqs/_sidebar')
 @endsection

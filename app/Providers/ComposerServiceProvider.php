@@ -28,6 +28,10 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer(
             'FrontEnd/fatawa/_sidebar', 'App\Http\ViewComposers\FatwaComposer'
             );
+
+        view()->composer(
+            'FrontEnd/faqs/_sidebar', 'App\Http\ViewComposers\FAQComposer'
+            );
     }
 
     /**

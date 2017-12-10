@@ -46,7 +46,7 @@
 
 				@if(count($relatedFatawa))
 					<div class="sidebar-module sidebar-module-inset">
-			            <h4>{{ __('messages.relatedPosts') }}</h4>
+			            <h4>{{ __('messages.relatedFatawa') }}</h4>
 			            @foreach($relatedFatawa as $fatwa)
 				            <p>
 					            <a href="{{ route('fatawa.show', $fatwa['slug']) }}">

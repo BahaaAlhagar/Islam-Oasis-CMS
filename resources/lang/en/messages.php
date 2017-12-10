@@ -20,7 +20,9 @@ return [
     'more'              => 'Read More',
     'also_like'         => 'You may also Like',
     'archive'           => 'News Archive',
-    'relatedPosts'      => 'related Articles',
+    'relatedPosts'      => 'Related articles',
+    'relatedQuestions'  => 'Related questions',
+    'relatedFatawa'     => 'Related fatawa',
     'tag'               => 'Category',
     'faq'               => 'Frequently asked questions',
 ];
