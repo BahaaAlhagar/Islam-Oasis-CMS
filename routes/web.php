@@ -14,7 +14,7 @@
 Auth::routes();
 
 
-route::group(['prefix' => LaravelLocalization::setLocale(), 'namespace' => 'FrontEnd', 'middleware' => ['date']], function(){
+route::group(['prefix' => LaravelLocalization::setLocale(), 'namespace' => 'FrontEnd', 'middleware' => ['date', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function(){
 
 
 //home page

@@ -28,7 +28,7 @@ class storiesComposer
     {
         $this->locale = app()->getLocale();
 
-        $this->randomArticles = Cache::remember('stories_randomArticles_'.$this->locale, 60 * 15, function () {
+        $this->randomArticles = Cache::remember('stories_randomArticles_'.$this->locale, 15, function () {
                     return Post::translatedIn($this->locale)
                         ->where('type', 3)
                         ->inRandomOrder()
@@ -36,7 +36,7 @@ class storiesComposer
                         ->get();
         });
 
-        $this->tags = Cache::remember('stories_tags_'.$this->locale, 60 * 15, function () {
+        $this->tags = Cache::remember('stories_tags_'.$this->locale, 15, function () {
             return Tag::translatedIn($this->locale)->has('stories')->with('translations')->withCount('stories')->get();
         });
     }

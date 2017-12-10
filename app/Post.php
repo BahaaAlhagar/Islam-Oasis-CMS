@@ -62,7 +62,7 @@ class Post extends Model
 
     public function relatedPostsByTag()
     {
-        $relatedPosts = Cache::remember('related_posts_' .$this->id. '_' .app()->getLocale(), 60 * 15, function (){
+        $relatedPosts = Cache::remember('related_posts_' .$this->id. '_' .app()->getLocale(), 15, function (){
                 return Post::translatedIn(app()->getLocale())
                         ->whereType($this->type)
                         ->published()
@@ -73,5 +73,12 @@ class Post extends Model
             });
 
         return $relatedPosts;
+    }
+
+    public function scopeWithCurrentLocale($query)
+    {
+        return $query->with(['translations' => function($query){
+                $query->whereLocale(app()->getLocale());
+            }]);
     }
 }

@@ -2,7 +2,7 @@
 
 
 @section('title')
-	 - {{ __('navbar.fatwa') }} - {{ $tag->name }} 
+	 - {{ __('navbar.fatwa') }} - {{ $tag->translate(app()->getLocale())->name }} 
 @endsection
 
 @section('content')

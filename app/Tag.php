@@ -53,4 +53,11 @@ class Tag extends Model
     {
         return $this->morphedByMany(Fatwa::class, 'taggable')->whereType(2)->translatedIn(app()->getLocale());
     }
+
+    public function scopeWithCurrentLocale($query)
+    {
+        return $query->with(['translations' => function($query){
+                $query->whereLocale(app()->getLocale());
+            }]);
+    }
 }

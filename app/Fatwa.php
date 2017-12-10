@@ -26,7 +26,7 @@ class Fatwa extends Model
 
     public function relatedFatawaByTag()
     {
-        $relatedFatawa = Cache::remember('related_fatawa_' .$this->id. '_' .app()->getLocale(), 60 * 15, function (){
+        $relatedFatawa = Cache::remember('related_fatawa_' .$this->id. '_' .app()->getLocale(), 15, function (){
                 return Fatwa::translatedIn(app()->getLocale())
                         ->whereType($this->type)
                         ->whereHas('tags', function ($query){
@@ -36,5 +36,12 @@ class Fatwa extends Model
             });
 
         return $relatedFatawa;
+    }
+
+    public function scopeWithCurrentLocale($query)
+    {
+        return $query->with(['translations' => function($query){
+                $query->whereLocale(app()->getLocale());
+            }]);
     }
 }

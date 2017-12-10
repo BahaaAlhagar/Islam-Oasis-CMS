@@ -2,7 +2,7 @@
 
 
 @section('title')
-	 - {{ __('navbar.stories') }} - {{ $tag->name }} 
+	 - {{ __('navbar.stories') }} - {{ $tag->translate(app()->getLocale())->name }} 
 @endsection
 
 @section('content')

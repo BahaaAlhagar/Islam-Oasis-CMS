@@ -169,11 +169,11 @@ return [
          */
 
 
-        // Dimsav Translation Package
-        Dimsav\Translatable\TranslatableServiceProvider::class,
-
         // Mcamara Laravel Localization
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
+
+        // Dimsav Translation Package
+        Dimsav\Translatable\TranslatableServiceProvider::class,
 
         // intervention image
         Intervention\Image\ImageServiceProvider::class,

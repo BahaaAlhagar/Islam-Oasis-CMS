@@ -28,7 +28,7 @@ class lessonsComposer
     {
         $this->locale = app()->getLocale();
 
-        $this->randomArticles = Cache::remember('lessons_randomArticles_'.$this->locale, 60 * 15, function () {
+        $this->randomArticles = Cache::remember('lessons_randomArticles_'.$this->locale, 15, function () {
                     return Post::translatedIn($this->locale)
                         ->where('type', 2)
                         ->inRandomOrder()
@@ -36,7 +36,7 @@ class lessonsComposer
                         ->get();
         });
 
-        $this->tags = Cache::remember('lessons_tags_'.$this->locale, 60 * 15, function () {
+        $this->tags = Cache::remember('lessons_tags_'.$this->locale, 15, function () {
             return Tag::translatedIn($this->locale)->has('lessons')->with('translations')->withCount('lessons')->get();
         });
     }

@@ -29,7 +29,7 @@ class newsComposer
     {
         $this->locale = app()->getLocale();
 
-        $this->newsArchive = Cache::remember('newsArchive_'.$this->locale, 60 * 15, function () {
+        $this->newsArchive = Cache::remember('newsArchive_'.$this->locale, 15, function () {
                     return Post::translatedIn($this->locale)
                         ->where('type', 1)
                         ->published()
@@ -40,16 +40,18 @@ class newsComposer
                         ->toArray();
         });
 
-        $this->randomArticles = Cache::remember('news_randomArticles_'.$this->locale, 60 * 15, function () {
+        $this->randomArticles = Cache::remember('news_randomArticles_'.$this->locale, 15, function () {
                     return Post::translatedIn($this->locale)
                         ->where('type', 1)
                         ->inRandomOrder()
                         ->take(10)
-                        ->get();
+                        ->withCurrentLocale()
+                        ->get()
+                        ->toArray();
         });
 
-        $this->tags = Cache::remember('news_tags_'.$this->locale, 60 * 15, function () {
-            return Tag::translatedIn($this->locale)->has('news')->with('translations')->withCount('news')->get();
+        $this->tags = Cache::remember('news_tags_'.$this->locale, 15, function () {
+            return Tag::translatedIn($this->locale)->has('news')->withCurrentLocale()->withCount('news')->get()->toArray();
         });
     }
 
