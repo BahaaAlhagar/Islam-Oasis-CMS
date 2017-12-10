@@ -37,4 +37,11 @@ class Scholar extends Model
     {
         return $this->hasMany(Fatwa::class);
     }
+
+    public function scopeWithCurrentLocale($query)
+    {
+        return $query->with(['translations' => function($query){
+                $query->whereLocale(app()->getLocale());
+            }]);
+    }
 }

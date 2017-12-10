@@ -33,11 +33,13 @@ class storiesComposer
                         ->where('type', 3)
                         ->inRandomOrder()
                         ->take(10)
-                        ->get();
+                        ->withCurrentLocale()
+                        ->get()
+                        ->toArray();
         });
 
         $this->tags = Cache::remember('stories_tags_'.$this->locale, 15, function () {
-            return Tag::translatedIn($this->locale)->has('stories')->with('translations')->withCount('stories')->get();
+            return Tag::translatedIn($this->locale)->has('stories')->withCurrentLocale()->withCount('stories')->get()->toArray();
         });
     }
 

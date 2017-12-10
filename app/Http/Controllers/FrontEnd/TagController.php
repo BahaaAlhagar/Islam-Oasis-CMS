@@ -13,7 +13,7 @@ class TagController extends Controller
     {
     	$tag = Tag::whereTranslation('slug', $slug)->withCurrentLocale()->firstOrFail();
 
-    	$posts = $tag->news()->withCurrentLocale()->paginate(5);
+    	$posts = $tag->news()->withCurrentLocale()->latest()->paginate(5);
 
     	$tags = Cache::remember('ctr_news_tags_'.$this->locale, 60 * 15, function () {
     		return Tag::translatedIn($this->locale)->has('news')->withCurrentLocale()->withCount('news')->get()->toArray();
@@ -26,7 +26,7 @@ class TagController extends Controller
     {
     	$tag = Tag::whereTranslation('slug', $slug)->withCurrentLocale()->firstOrFail();
 
-    	$posts = $tag->lessons()->withCurrentLocale()->paginate(5);
+    	$posts = $tag->lessons()->withCurrentLocale()->latest()->paginate(5);
 
     	$tags = Cache::remember('ctr_lessons_tags_'.$this->locale, 60 * 15, function () {
     		return Tag::translatedIn($this->locale)->has('lessons')->withCurrentLocale()->withCount('lessons')->get()->toArray();
@@ -39,7 +39,7 @@ class TagController extends Controller
     {
     	$tag = Tag::whereTranslation('slug', $slug)->withCurrentLocale()->firstOrFail();
 
-    	$posts = $tag->stories()->withCurrentLocale()->paginate(5);
+    	$posts = $tag->stories()->withCurrentLocale()->latest()->paginate(5);
 
     	$tags = Cache::remember('ctr_stories_tags_'.$this->locale, 60 * 15, function () {
     		return Tag::translatedIn($this->locale)->has('stories')->withCurrentLocale()->withCount('stories')->get()->toArray();
@@ -52,7 +52,9 @@ class TagController extends Controller
     {
         $tag = Tag::whereTranslation('slug', $slug)->withCurrentLocale()->firstOrFail();
 
-        $fatawa = $tag->fatawa()->with('scholar.photo')->withCurrentLocale()->paginate(5);
+        $fatawa = $tag->fatawa()->with(['scholar' => function($query){
+                    $query->withCurrentLocale()->with('photo');
+                }])->withCurrentLocale()->latest()->paginate(5);
 
         $tags = Cache::remember('ctr_fatawa_tags_'.$this->locale, 60 * 15, function () {
             return Tag::translatedIn($this->locale)->has('fatawa')->withCurrentLocale()->withCount('fatawa')->get()->toArray();

@@ -33,11 +33,13 @@ class lessonsComposer
                         ->where('type', 2)
                         ->inRandomOrder()
                         ->take(10)
-                        ->get();
+                        ->withCurrentLocale()
+                        ->get()
+                        ->toArray();
         });
 
         $this->tags = Cache::remember('lessons_tags_'.$this->locale, 15, function () {
-            return Tag::translatedIn($this->locale)->has('lessons')->with('translations')->withCount('lessons')->get();
+            return Tag::translatedIn($this->locale)->has('lessons')->withCurrentLocale()->withCount('lessons')->get()->toArray();
         });
     }
 

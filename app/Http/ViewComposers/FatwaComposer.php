@@ -33,11 +33,13 @@ class FatwaComposer
                         ->where('type', 1)
                         ->inRandomOrder()
                         ->take(10)
-                        ->get();
+                        ->withCurrentLocale()
+                        ->get()
+                        ->toArray();
         });
 
         $this->tags = Cache::remember('fatawa_tags_'.$this->locale, 15, function () {
-            return Tag::translatedIn($this->locale)->has('fatawa')->with('translations')->withCount('fatawa')->get();
+            return Tag::translatedIn($this->locale)->has('fatawa')->withCurrentLocale()->withCount('fatawa')->get()->toArray();
         });
     }
 

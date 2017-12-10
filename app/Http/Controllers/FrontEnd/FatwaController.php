@@ -12,7 +12,9 @@ class FatwaController extends Controller
     {
     	$fatawa = Fatwa::translatedIn($this->locale)
                     ->whereType(1)->latest()
-                    ->with('scholar.photo')->paginate(5);
+                    ->with(['scholar' => function($query){
+                    $query->withCurrentLocale()->with('photo');
+                }])->withCurrentLocale()->paginate(5);
 
     	return view('FrontEnd/fatawa/index', compact('fatawa'));
     }
@@ -21,7 +23,9 @@ class FatwaController extends Controller
     {
         $fatwa =  Fatwa::whereTranslation('slug', $slug)->with(['tags' => function($query){
                     $query->translatedIn($this->locale)->withCurrentLocale()->withCount('fatawa');
-                }, 'scholar.photo'])->withCurrentLocale()->firstOrFail();
+                }, 'scholar' => function($query){
+                    $query->withCurrentLocale()->with('photo');
+                }])->withCurrentLocale()->firstOrFail();
 
         $relatedFatawa = $fatwa->relatedFatawaByTag();
         

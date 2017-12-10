@@ -17,7 +17,8 @@ class LessonsController extends Controller
     {
         $lessons = Post::translatedIn($this->locale)
                     ->whereType(2)->published()
-                    ->latest()->paginate(5);
+                    ->latest()->withCurrentLocale()
+                    ->paginate(5);
 
         return view('FrontEnd/lessons/index', compact('lessons'));
     }

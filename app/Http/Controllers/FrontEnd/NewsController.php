@@ -17,7 +17,8 @@ class NewsController extends Controller
     {
         $news = Post::translatedIn($this->locale)
                     ->whereType(1)->published()
-                    ->latest()->paginate(5);
+                    ->latest()->withCurrentLocale()
+                    ->paginate(5);
 
         return view('FrontEnd/news/index', compact('news'));
     }
@@ -27,8 +28,8 @@ class NewsController extends Controller
         $news = Post::translatedIn($this->locale)
                     ->whereType(1)
                     ->filter(['month' => $month, 'year' => $year])
-                    ->published()
-                    ->latest()->paginate(5);
+                    ->published()->latest()
+                    ->withCurrentLocale()->paginate(5);
 
         return view('FrontEnd/news/index', compact('news'));
     }

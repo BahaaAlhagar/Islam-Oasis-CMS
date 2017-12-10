@@ -17,7 +17,8 @@ class StoriesController extends Controller
     {
         $stories = Post::translatedIn($this->locale)
                     ->whereType(3)->published()
-                    ->latest()->paginate(5);
+                    ->latest()->withCurrentLocale()
+                    ->paginate(5);
 
         return view('FrontEnd/stories/index', compact('stories'));
     }
