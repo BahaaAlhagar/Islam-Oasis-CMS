@@ -62,4 +62,17 @@ class TagController extends Controller
         
         return view('FrontEnd/tags/fatawaIndex', compact('tag', 'fatawa', 'tags'));
     }
+
+    public function faqTag($slug)
+    {
+        $tag = Tag::whereTranslation('slug', $slug)->withCurrentLocale()->firstOrFail();
+
+        $FAQ = $tag->FAQ()->withCurrentLocale()->latest()->paginate(5);
+
+        $tags = Cache::remember('ctr_faq_tags_'.$this->locale, 60 * 15, function () {
+            return Tag::translatedIn($this->locale)->has('FAQ')->withCurrentLocale()->withCount('FAQ')->get()->toArray();
+        });
+        
+        return view('FrontEnd/tags/faqIndex', compact('tag', 'FAQ', 'tags'));
+    }
 }
