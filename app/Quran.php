@@ -18,6 +18,13 @@ class Quran extends Model
         return $this->BelongsTo(Scholar::class);
     }
 
+    public function publishedScholar()
+    {
+        return $this->BelongsTo(Scholar::class)
+                    ->translatedIn(app()->getLocale())
+                    ->published();
+    }
+
     public function recitation()
     {
     	return $this->BelongsTo(Recitation::class);
