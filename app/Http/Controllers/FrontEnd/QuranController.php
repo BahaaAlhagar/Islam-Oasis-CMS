@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\FrontEnd;
 
 use App\Quran;
+use Cache;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -10,28 +11,47 @@ class QuranController extends Controller
 {
     public function index($scholar = null, $recitation = null, $name = null)
     {
-    	$Quran = Quran::translatedIn($this->locale)
-    					->has('link', 'publishedScholar')
-    					->latest()
-    					->paginate(10);
+        $currentPage = request()->has('page') ? request('page') : 1;
 
-    	if($scholar)
-    	{
-    		$Quran = $Quran->where('scholar_id', $scholar)->paginate(10);
-    	}
+        $cacheKey = md5('quran_index_page_' . $this->locale . '_' . $currentPage . '_' . $scholar . '_' . $recitation);
 
-    	if($recitation)
-    	{
-    		$Quran = $Quran->where('recitation_id', $recitation)->paginate(10);
-    	}
+        $Quran = Cache::remember($cacheKey, 15, function() use($scholar, $recitation, $name){
 
-    	if($name)
-    	{
-    		$Quran = $Quran->whereHas('translations', function($query) use($name){
-    				 		$query->whereLocale($this->locale)
-    							->whereName($name);
-    		})->paginate(10);
-    	}
+            $data = Quran::translatedIn($this->locale)
+                            ->whereHas('scholar', function($query){
+                                $query->published();
+                            });
+
+            if($scholar)
+            {
+                $data = $data->where('scholar_id', $scholar);
+            }
+
+            if($recitation)
+            {
+                $data = $data->where('recitation_id', $recitation);
+            }
+
+            if($name)
+            {
+                $data = $data->whereHas('translations', function($query) use($name){
+                                $query->whereLocale($this->locale)
+                                    ->whereName($name);
+                });
+            }
+
+
+            $data = $data->with(['scholar' => function($query){
+                                $query->withCurrentLocale()->with('photo');
+                            }, 'recitation' => function($query){
+                                $query->withCurrentLocale();
+                            }, 'link'])
+                            ->withCurrentLocale()
+                            ->latest()
+                            ->paginate(10)->toArray();
+
+            return $data;
+        });
 
     	return view('FrontEnd/quran/index', compact('Quran'));
     }

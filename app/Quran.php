@@ -18,13 +18,6 @@ class Quran extends Model
         return $this->BelongsTo(Scholar::class);
     }
 
-    public function publishedScholar()
-    {
-        return $this->BelongsTo(Scholar::class)
-                    ->translatedIn(app()->getLocale())
-                    ->published();
-    }
-
     public function recitation()
     {
     	return $this->BelongsTo(Recitation::class);
@@ -33,5 +26,12 @@ class Quran extends Model
     public function link()
     {
         return $this->morphOne(Link::class, 'linkable');
+    }
+
+    public function scopeWithCurrentLocale($query)
+    {
+        return $query->with(['translations' => function($query){
+                $query->whereLocale(app()->getLocale());
+            }]);
     }
 }

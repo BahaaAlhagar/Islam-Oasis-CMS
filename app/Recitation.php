@@ -18,4 +18,11 @@ class Recitation extends Model
     {
         return $this->hasMany(Quran::class);
     }
+
+    public function scopeWithCurrentLocale($query)
+    {
+        return $query->with(['translations' => function($query){
+                $query->whereLocale(app()->getLocale());
+            }]);
+    }
 }

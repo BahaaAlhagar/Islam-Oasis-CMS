@@ -46,7 +46,7 @@ route::get('faq/{slug}', 'FAQController@show')->name('faq.show');
 route::get('faq', 'FAQController@index')->name('faq.index');
 
 // Holy Quran routes
-route::get('quran/{recitation?}/{scholar?}/{name?}', 'QuranController@index')->name('quran.index');
+route::get('quran/{recitation?}/{scholar?}/{name?}', 'QuranController@index')->name('FrontEndQuran.index');
 
 // tags routes
 route::get('tag/news/{slug}', 'TagController@newsTag')->name('newsTag.show');
