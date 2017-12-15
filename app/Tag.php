@@ -60,4 +60,13 @@ class Tag extends Model
                 $query->whereLocale(app()->getLocale());
             }]);
     }
+
+    public function publishedFatawa()
+    {
+        return $this->morphedByMany(Fatwa::class, 'taggable')->whereType(1)
+                    ->translatedIn(app()->getLocale())
+                    ->whereHas('scholar', function($query){
+                        $query->published();
+                    });
+    }
 }

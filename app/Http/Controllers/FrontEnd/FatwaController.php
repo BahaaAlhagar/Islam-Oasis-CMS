@@ -11,7 +11,11 @@ class FatwaController extends Controller
     public function index()
     {
     	$fatawa = Fatwa::translatedIn($this->locale)
-                    ->whereType(1)->latest()
+                    ->whereType(1)
+                    ->whereHas('scholar', function($query){
+                        $query->published();
+                    })
+                    ->latest()
                     ->with(['scholar' => function($query){
                     $query->withCurrentLocale()->with('photo');
                 }])->withCurrentLocale()->paginate(5);

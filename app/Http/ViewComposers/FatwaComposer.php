@@ -31,6 +31,9 @@ class FatwaComposer
         $this->randomFatawa = Cache::remember('random_fatawa_'.$this->locale, 15, function () {
                     return Fatwa::translatedIn($this->locale)
                         ->where('type', 1)
+                        ->whereHas('scholar', function($query){
+                            $query->published();
+                        })
                         ->inRandomOrder()
                         ->take(10)
                         ->withCurrentLocale()
@@ -39,7 +42,7 @@ class FatwaComposer
         });
 
         $this->tags = Cache::remember('fatawa_tags_'.$this->locale, 15, function () {
-            return Tag::translatedIn($this->locale)->has('fatawa')->withCurrentLocale()->withCount('fatawa')->get()->toArray();
+            return Tag::translatedIn($this->locale)->has('publishedFatawa')->withCurrentLocale()->withCount('publishedFatawa')->get()->toArray();
         });
     }
 

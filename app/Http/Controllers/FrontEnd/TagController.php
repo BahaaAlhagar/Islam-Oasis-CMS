@@ -52,12 +52,12 @@ class TagController extends Controller
     {
         $tag = Tag::whereTranslation('slug', $slug)->withCurrentLocale()->firstOrFail();
 
-        $fatawa = $tag->fatawa()->with(['scholar' => function($query){
+        $fatawa = $tag->publishedFatawa()->with(['scholar' => function($query){
                     $query->withCurrentLocale()->with('photo');
                 }])->withCurrentLocale()->latest()->paginate(5);
 
         $tags = Cache::remember('ctr_fatawa_tags_'.$this->locale, 60 * 15, function () {
-            return Tag::translatedIn($this->locale)->has('fatawa')->withCurrentLocale()->withCount('fatawa')->get()->toArray();
+            return Tag::translatedIn($this->locale)->has('publishedFatawa')->withCurrentLocale()->withCount('publishedFatawa')->get()->toArray();
         });
         
         return view('FrontEnd/tags/fatawaIndex', compact('tag', 'fatawa', 'tags'));
