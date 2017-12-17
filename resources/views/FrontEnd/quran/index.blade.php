@@ -9,33 +9,35 @@
 
 
 			@foreach($Quran as $quran)
-			{{ $quran['name'] }}
+
 				<div class="panel panel-default">
 	                <div class="panel-heading">
 		                <span>
-		                	@if($quran->scholar['photo'])
-		                		<img src="{{ Storage::url($quran->scholar['photo']['thumbnail']) }}" width="60" height="60" border="1" class="img-circle">
+		                	@if(isset($quran['scholar']['photo']))
+		                		<img src="{{ Storage::url($quran['scholar']['photo']['thumbnail']) }}" width="60" height="60" border="1" class="img-circle">
 		                	@else
 		                		<img src="{{ Storage::url('scholar.png') }}" width="60" height="60" border="1" class="img-circle">
 		                	@endif
-		                	<a href="{{ route('scholarFatawa.show', $quran->scholar['slug']) }}">
-		                		{{ $quran->scholar['name'] }}
+		                	<a href="{{ route('scholarQuran.show', $quran->scholar->slug) }}">
+		                		{{ $quran->scholar->name }}
 		                	</a>
-		                	<p class="blog-post-meta">{{ Date::parse($quran->created_at)->diffForHumans() }}</p>
+		                	<p class="blog-post-meta">{{ Date::parse($quran['created_at'])->diffForHumans() }}</p>
 		                </span>
 	                </div>
 
 	                <div class="panel-body">
 	                    <div class="blog-post">
 				            <h2 class="blog-post-title alert-info">
-				            	<a href="{{ route('fatawa.show', $quran->slug) }}">
-				            		{{ $quran->question }}
-				            	</a>
+				            		{{ $quran->name }}
+				            		<small class="blog-post-meta">{{ $quran->recitation->name }}</small>
 				            </h2>
-
-				            {!! str_limit($quran->answer, 200) !!}
-
-				            <a href="{{ route('fatawa.show', $quran->slug) }}">{{ __('messages.more')}}</a>
+			            	<audio controls style="width: 100%">
+				            	<source src="{{ $quran->link->url }}" type="audio/mp3">
+				            	<source src="{{ $quran->link->url }}" type="audio/wav">
+				            	<source src="{{ $quran->link->url }}" type="audio/mpeg">
+				            	<source src="{{ $quran->link->url }}" type="audio/ogg">
+				            	{{ __('messages.audio_support') }}
+				            </audio>
 				        </div>
 	                </div>
 	            </div>

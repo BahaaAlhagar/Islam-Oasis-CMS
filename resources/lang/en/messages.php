@@ -25,4 +25,5 @@ return [
     'relatedFatawa'     => 'Related fatawa',
     'tag'               => 'Category',
     'faq'               => 'Frequently asked questions',
+    'audio_support'     => 'audio element is not supported in ur browser',
 ];

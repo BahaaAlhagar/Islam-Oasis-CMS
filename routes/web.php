@@ -58,6 +58,7 @@ route::get('tag/faq/{slug}', 'TagController@faqTag')->name('faqTag.show');
 
 //scholars routes
 route::get('scholar/fatawa/{slug}', 'TagController@scholarFatawa')->name('scholarFatawa.show');
+route::get('scholar/quran/{slug}', 'TagController@scholarQuran')->name('scholarQuran.show');
 
 
 });
