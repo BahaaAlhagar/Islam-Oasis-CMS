@@ -32,4 +32,18 @@ class Series extends Model
     {
         return $this->hasMany(Item::class);
     }
+
+    public function scopePublished($query)
+    {
+        return $query->whereHas('translations', function($query){
+            $query->whereLocale(app()->getLocale())->where('published', 1);
+        });
+    }
+
+    public function scopeWithCurrentLocale($query)
+    {
+        return $query->with(['translations' => function($query){
+                $query->whereLocale(app()->getLocale());
+            }]);
+    }
 }

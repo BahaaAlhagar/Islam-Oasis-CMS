@@ -37,4 +37,16 @@ class Item extends Model
     {
         return $this->morphMany(Link::class, 'linkable');
     }
+
+    public function translatedLinks()
+    {
+        return $this->morphMany(Link::class, 'linkable')->whereIn('locale', [app()->getLocale(), null]);
+    }
+
+    public function scopeWithCurrentLocale($query)
+    {
+        return $query->with(['translations' => function($query){
+                $query->whereLocale(app()->getLocale());
+            }]);
+    }
 }
