@@ -64,4 +64,9 @@ class Tag extends Model
                         $query->published();
                     });
     }
+
+    public function books()
+    {
+        return $this->morphedByMany(Item::class, 'taggable')->whereType(1)->translatedIn(app()->getLocale());
+    }
 }

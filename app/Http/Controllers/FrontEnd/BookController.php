@@ -42,7 +42,16 @@ class BookController extends Controller
      */
     public function show($slug)
     {
-        $book = Item::whereTranslation('slug', $slug)->withCurrentLocale()->firstOrFail();
+        $book = Item::whereTranslation('slug', $slug)
+        			->withCurrentLocale()
+        			->with(['scholars.translations', 'tags' => function($query){
+        			        				$query->withCurrentLocale()->withCount('books');
+        			        			}, 'series' => function($query){
+        			        				$query->withCurrentLocale()->with(['photo', 'scholars.translations', 'items.translations', 'tags' => function($query){
+        			        					$query->withCurrentLocale()->withCount('books');
+        			        				}]);
+        			        			}])
+        			->firstOrFail();
 
         return view('FrontEnd/books/show', compact('book'));
     }
