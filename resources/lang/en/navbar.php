@@ -18,7 +18,7 @@ return [
     'lessons'       => 'Articles & Lessons',
     'stories'       => 'Stories',
     'scholars'      => 'Scholars',
-    'quran'         => 'Quran (newest)',
+    'quran'         => 'Quran',
     'books'         => 'Books',
     'audio'         => 'Sound Files',
     'media'         => 'Multimedia',
