@@ -46,7 +46,11 @@ route::get('faq/{slug}', 'FAQController@show')->name('faq.show');
 route::get('faq', 'FAQController@index')->name('faq.index');
 
 // Holy Quran routes
-route::get('quran/{recitation?}/{scholar?}/{name?}', 'QuranController@index')->name('FrontEndQuran.index');
+route::get('quran', 'QuranController@index')->name('FrontEndQuran.index');
+
+// Books routes
+route::get('books', 'BookController@index')->name('books.index');
+route::get('books/{slug}', 'BookController@show')->name('books.show');
 
 // tags routes
 route::get('tag/news/{slug}', 'TagController@newsTag')->name('newsTag.show');
@@ -54,11 +58,13 @@ route::get('tag/lessons/{slug}', 'TagController@lessonsTag')->name('lessonsTag.s
 route::get('tag/stories/{slug}', 'TagController@storiesTag')->name('storiesTag.show');
 route::get('tag/fatawa/{slug}', 'TagController@fatawaTag')->name('fatawaTag.show');
 route::get('tag/faq/{slug}', 'TagController@faqTag')->name('faqTag.show');
+route::get('tag/books/{slug}', 'TagController@booksTag')->name('booksTag.show');
 
 
 //scholars routes
 route::get('scholar/fatawa/{slug}', 'TagController@scholarFatawa')->name('scholarFatawa.show');
 route::get('scholar/quran/{slug}', 'TagController@scholarQuran')->name('scholarQuran.show');
+route::get('scholar/books/{slug}', 'TagController@scholarBooks')->name('scholarQuran.show');
 
 
 });

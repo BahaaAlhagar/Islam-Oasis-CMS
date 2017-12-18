@@ -33,6 +33,11 @@ class Scholar extends Model
         return $this->morphedByMany(Item::class, 'scholarables');
     }
 
+    public function books()
+    {
+        return $this->morphedByMany(Item::class, 'scholarables')->whereType(1);
+    }
+
     public function fatawa()
     {
         return $this->hasMany(Fatwa::class);
